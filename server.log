@@ -1,0 +1,423 @@
+
+> english-platform@0.1.0 dev
+> next dev --turbopack
+
+   ▲ Next.js 15.3.3 (Turbopack)
+   - Local:        http://localhost:3000
+   - Network:      http://192.168.1.245:3000
+   - Environments: .env.local, .env
+
+ ✓ Starting...
+ ✓ Ready in 812ms
+ ○ Compiling /dashboard ...
+ ✓ Compiled /dashboard in 1568ms
+ GET /dashboard/ 200 in 1827ms
+ ○ Compiling /trilha/[slug]/praticar ...
+ ✓ Compiled /trilha/[slug]/praticar in 689ms
+ GET /trilha/amigos/praticar/ 200 in 1046ms
+ ✓ Compiled /trilha/[slug]/exercicios in 486ms
+ GET /trilha/amigos/exercicios/ 200 in 758ms
+ GET /dashboard/ 200 in 48ms
+ ✓ Compiled / in 469ms
+ GET / 200 in 524ms
+ GET /dashboard/ 200 in 80ms
+ GET /trilha/viagens/praticar/ 200 in 40ms
+ ✓ Compiled /trilha/[slug] in 377ms
+ GET /trilha/viagens/ 200 in 643ms
+ GET /dashboard/ 200 in 50ms
+ ✓ Compiled in 66ms
+ GET /dashboard/ 200 in 235ms
+ GET /dashboard/ 200 in 69ms
+ ✓ Compiled in 85ms
+ GET /dashboard/ 200 in 158ms
+ GET /dashboard/ 200 in 112ms
+ GET /dashboard/ 200 in 77ms
+ GET /dashboard/ 200 in 90ms
+ GET /dashboard/ 200 in 70ms
+ ✓ Compiled in 75ms
+ GET /dashboard/ 200 in 158ms
+ GET /dashboard/ 200 in 65ms
+ GET /dashboard/ 200 in 66ms
+ GET /dashboard/ 200 in 76ms
+ GET /dashboard/ 200 in 44ms
+ GET / 200 in 87ms
+ GET /dashboard/ 200 in 51ms
+ ✓ Compiled in 72ms
+DEBUG Dashboard - User: null
+DEBUG Dashboard - User Plan: free
+ GET /dashboard/ 200 in 176ms
+DEBUG Dashboard - User: null
+DEBUG Dashboard - User Plan: free
+ GET /dashboard/ 200 in 72ms
+ ⚠ Fast Refresh had to perform a full reload when ./src/contexts/AuthContext.tsx changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+ ✓ Compiled in 14ms
+DEBUG Dashboard - User: null
+DEBUG Dashboard - User Plan: free
+ GET /dashboard/ 200 in 134ms
+DEBUG Dashboard - User: null
+DEBUG Dashboard - User Plan: free
+ GET /dashboard/ 200 in 68ms
+ GET /trilha/mercado/praticar/ 200 in 61ms
+ GET /trilha/mercado/exercicios/ 200 in 42ms
+ GET /dashboard/ 200 in 53ms
+DEBUG Dashboard - User: null
+DEBUG Dashboard - User Plan: free
+ GET /dashboard/ 200 in 72ms
+ ✓ Compiled in 71ms
+ ○ Compiling /chat ...
+ ✓ Compiled /chat in 503ms
+ GET /chat/ 200 in 544ms
+ GET /dashboard/ 200 in 100ms
+ ✓ Compiled in 11ms
+ GET /trilha/trabalho/praticar/ 200 in 43ms
+ ✓ Compiled in 8ms
+ GET /trilha/trabalho/exercicios/ 200 in 60ms
+ GET /dashboard/ 200 in 33ms
+ ✓ Compiled in 8ms
+ ✓ Compiled in 83ms
+ ⚠ Fast Refresh had to perform a full reload when ./src/contexts/AuthContext.tsx changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+ ✓ Compiled in 20ms
+ GET /dashboard/ 200 in 217ms
+ GET /chat/ 200 in 90ms
+ ✓ Compiled in 62ms
+ ✓ Compiled in 63ms
+ ✓ Compiled in 67ms
+ GET /chat/ 200 in 216ms
+ GET /chat/ 200 in 82ms
+ ✓ Compiled in 68ms
+ GET /chat/ 200 in 165ms
+ ✓ Compiled in 84ms
+ ✓ Compiled in 59ms
+ GET /dashboard/ 200 in 54ms
+ ✓ Compiled in 62ms
+ ✓ Compiled in 84ms
+ ✓ Compiled in 60ms
+ ✓ Compiled in 61ms
+ ✓ Compiled in 75ms
+ ✓ Compiled in 58ms
+ GET /dashboard/ 200 in 259ms
+ GET /trilha/trabalho/praticar/ 200 in 57ms
+ GET /trilha/trabalho/ 200 in 103ms
+ GET /dashboard/ 200 in 33ms
+ ✓ Compiled in 21ms
+ ✓ Compiled in 10ms
+ GET /dashboard/ 200 in 209ms
+ GET /trilha/trabalho/praticar/ 200 in 52ms
+ GET /trilha/trabalho/ 200 in 114ms
+ GET /trilha/trabalho/praticar/ 200 in 50ms
+ GET /trilha/trabalho/exercicios/ 200 in 113ms
+ GET /dashboard/ 200 in 56ms
+ GET /chat/ 200 in 88ms
+ ✓ Compiled /api/chat in 405ms
+ POST /api/chat/ 200 in 1884ms
+ POST /api/chat/ 200 in 1261ms
+ GET /dashboard/ 200 in 40ms
+ GET /dashboard/ 200 in 93ms
+ ✓ Compiled in 11ms
+ ✓ Compiled in 80ms
+ ✓ Compiled in 73ms
+ ✓ Compiled in 10ms
+ ✓ Compiled in 60ms
+ GET /dashboard/ 200 in 106ms
+ GET / 200 in 96ms
+ GET /dashboard/ 200 in 42ms
+ GET /trilha/amigos/praticar/ 200 in 55ms
+ GET /trilha/amigos/ 200 in 103ms
+ GET /dashboard/ 200 in 50ms
+ ✓ Compiled in 73ms
+ GET / 200 in 159ms
+ GET /dashboard/ 200 in 91ms
+ GET /dashboard/ 200 in 51ms
+ GET / 200 in 115ms
+ GET /dashboard/ 200 in 54ms
+ ✓ Compiled in 107ms
+ ✓ Compiled in 83ms
+ GET /dashboard/ 200 in 276ms
+ GET /dashboard/ 200 in 101ms
+ GET / 200 in 103ms
+ GET /dashboard/ 200 in 91ms
+ GET / 200 in 46ms
+ GET /dashboard/ 200 in 47ms
+ GET /trilha/trabalho/praticar/ 200 in 53ms
+ GET /dashboard/ 200 in 47ms
+ GET /trilha/mercado/praticar/ 200 in 45ms
+ GET /trilha/mercado/ 200 in 54ms
+ GET /dashboard/ 200 in 54ms
+ GET /trilha/eventos/praticar/ 200 in 45ms
+ GET /trilha/eventos/ 200 in 50ms
+ GET /trilha/eventos/ 200 in 211ms
+ GET /trilha/eventos/praticar/ 200 in 45ms
+ GET /trilha/eventos/ 200 in 108ms
+ GET /dashboard/ 200 in 43ms
+ GET / 200 in 118ms
+ GET /dashboard/ 200 in 48ms
+ GET /trilha/trabalho/praticar/ 200 in 46ms
+ GET /trilha/trabalho/ 200 in 42ms
+ GET /dashboard/ 200 in 43ms
+ GET /trilha/eventos/praticar/ 200 in 55ms
+ GET /trilha/eventos/ 200 in 48ms
+ ✓ Compiled /trilha/[slug] in 28ms
+ GET /trilha/eventos/ 200 in 228ms
+ GET / 200 in 229ms
+ GET /dashboard/ 200 in 52ms
+ GET /dashboard/ 200 in 51ms
+ GET / 200 in 124ms
+ GET /dashboard/ 200 in 49ms
+ GET /dashboard/ 200 in 57ms
+ GET / 200 in 115ms
+ GET / 200 in 167ms
+ ✓ Compiled in 138ms
+ ✓ Compiled in 81ms
+ ✓ Compiled in 100ms
+ ✓ Compiled in 100ms
+ GET / 200 in 328ms
+ ✓ Compiled in 76ms
+ ✓ Compiled in 70ms
+ ✓ Compiled in 80ms
+ ✓ Compiled in 109ms
+ ✓ Compiled in 98ms
+ ✓ Compiled in 89ms
+ ✓ Compiled in 73ms
+ ✓ Compiled in 121ms
+ ✓ Compiled in 76ms
+ ✓ Compiled in 79ms
+ ✓ Compiled in 95ms
+ ✓ Compiled in 89ms
+ ✓ Compiled in 90ms
+ GET / 200 in 245ms
+ GET /dashboard/ 200 in 79ms
+ GET / 200 in 101ms
+ GET /dashboard/ 200 in 47ms
+ GET / 200 in 94ms
+ GET / 200 in 177ms
+ ○ Compiling /_not-found/page ...
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 687ms
+ ✓ Compiled /_not-found/page in 871ms
+ GET / 200 in 100ms
+ GET / 200 in 101ms
+ GET / 200 in 127ms
+ GET / 200 in 114ms
+ GET /favicon.svg 404 in 175ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 248ms
+ GET /favicon.svg 404 in 85ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 227ms
+ GET / 200 in 161ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 307ms
+ GET /dashboard/ 200 in 66ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 251ms
+ GET /trilha/viagens/praticar/ 200 in 52ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 251ms
+ GET /trilha/viagens/ 200 in 57ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 234ms
+ GET /dashboard/ 200 in 44ms
+ GET /chat/ 200 in 110ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 232ms
+ POST /api/chat/ 200 in 728ms
+ POST /api/chat/ 200 in 729ms
+ GET /dashboard/ 200 in 51ms
+ GET /dashboard/ 200 in 123ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 274ms
+ GET / 200 in 128ms
+ ✓ Compiled in 116ms
+ ✓ Compiled in 100ms
+ ✓ Compiled in 142ms
+ ✓ Compiled in 124ms
+ GET / 200 in 344ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 328ms
+ ✓ Compiled in 75ms
+ ✓ Compiled in 110ms
+ ✓ Compiled in 75ms
+ GET / 200 in 322ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 336ms
+ ✓ Compiled in 87ms
+ ✓ Compiled in 85ms
+ ✓ Compiled in 77ms
+ ✓ Compiled in 98ms
+ ✓ Compiled in 100ms
+ ✓ Compiled in 85ms
+ ✓ Compiled in 72ms
+ GET / 200 in 367ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 297ms
+ ✓ Compiled in 80ms
+ GET / 200 in 189ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 297ms
+ ✓ Compiled in 93ms
+ GET / 200 in 216ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 303ms
+ ✓ Compiled in 90ms
+ ✓ Compiled in 81ms
+ ✓ Compiled in 69ms
+ ✓ Compiled in 85ms
+ ✓ Compiled in 87ms
+ GET /dashboard/ 200 in 54ms
+ ✓ Compiled in 14ms
+ ✓ Compiled in 20ms
+ GET /trilha/trabalho/praticar/ 200 in 55ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 257ms
+ GET /trilha/trabalho/exercicios/ 200 in 129ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 314ms
+ GET /dashboard/ 200 in 84ms
+ GET / 200 in 166ms
+ GET /dashboard/ 200 in 44ms
+ GET /trilha/viagens/praticar/ 200 in 50ms
+ GET /trilha/viagens/ 200 in 131ms
+ GET /dashboard/ 200 in 58ms
+ GET / 200 in 120ms
+ GET /dashboard/ 200 in 71ms
+ GET /trilha/viagens/praticar/ 200 in 59ms
+ GET /trilha/viagens/ 200 in 81ms
+ GET /trilha/viagens/praticar/ 200 in 51ms
+ GET /trilha/viagens/ 200 in 55ms
+ ✓ Compiled in 104ms
+ ⚠ Found a change in next.config.js. Restarting the server to apply the changes...
+   ▲ Next.js 15.3.3 (Turbopack)
+   - Local:        http://localhost:3000
+   - Network:      http://192.168.1.245:3000
+   - Environments: .env.local, .env
+
+ ✓ Starting...
+ ✓ Ready in 847ms
+ ○ Compiling / ...
+ ✓ Compiled / in 1364ms
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/denis/Desktop/AI Projects/English Project/english-platform/.next/static/development/_buildManifest.js.tmp.h13lut0sl2h'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/denis/Desktop/AI Projects/English Project/english-platform/.next/static/development/_buildManifest.js.tmp.h13lut0sl2h'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/denis/Desktop/AI Projects/English Project/english-platform/.next/static/development/_buildManifest.js.tmp.axyjlvxqmf7'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/denis/Desktop/AI Projects/English Project/english-platform/.next/static/development/_buildManifest.js.tmp.axyjlvxqmf7'
+}
+ ○ Compiling /_error ...
+ ✓ Compiled /_error in 654ms
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/denis/Desktop/AI Projects/English Project/english-platform/.next/static/development/_buildManifest.js.tmp.z03xbw4cahn'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/denis/Desktop/AI Projects/English Project/english-platform/.next/static/development/_buildManifest.js.tmp.z03xbw4cahn'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/denis/Desktop/AI Projects/English Project/english-platform/.next/static/development/_buildManifest.js.tmp.qzm7acmfpb'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/denis/Desktop/AI Projects/English Project/english-platform/.next/static/development/_buildManifest.js.tmp.qzm7acmfpb'
+}
+[Error: ENOENT: no such file or directory, open '/Users/denis/Desktop/AI Projects/English Project/english-platform/.next/static/development/_buildManifest.js.tmp.h13lut0sl2h'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/denis/Desktop/AI Projects/English Project/english-platform/.next/static/development/_buildManifest.js.tmp.h13lut0sl2h'
+}
+[Error: ENOENT: no such file or directory, open '/Users/denis/Desktop/AI Projects/English Project/english-platform/.next/static/development/_buildManifest.js.tmp.axyjlvxqmf7'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/denis/Desktop/AI Projects/English Project/english-platform/.next/static/development/_buildManifest.js.tmp.axyjlvxqmf7'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/denis/Desktop/AI Projects/English Project/english-platform/.next/static/development/_buildManifest.js.tmp.m1hqo8ev7l'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/denis/Desktop/AI Projects/English Project/english-platform/.next/static/development/_buildManifest.js.tmp.m1hqo8ev7l'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/denis/Desktop/AI Projects/English Project/english-platform/.next/static/development/_buildManifest.js.tmp.kic6af3wd2e'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/denis/Desktop/AI Projects/English Project/english-platform/.next/static/development/_buildManifest.js.tmp.kic6af3wd2e'
+}
+[Error: ENOENT: no such file or directory, open '/Users/denis/Desktop/AI Projects/English Project/english-platform/.next/static/development/_buildManifest.js.tmp.p31queyjv3l'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/denis/Desktop/AI Projects/English Project/english-platform/.next/static/development/_buildManifest.js.tmp.p31queyjv3l'
+}
+[Error: ENOENT: no such file or directory, open '/Users/denis/Desktop/AI Projects/English Project/english-platform/.next/static/development/_buildManifest.js.tmp.b31j6tbxmhw'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/denis/Desktop/AI Projects/English Project/english-platform/.next/static/development/_buildManifest.js.tmp.b31j6tbxmhw'
+}
+ ✓ Compiled /favicon.ico in 270ms
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/denis/Desktop/AI Projects/English Project/english-platform/.next/static/development/_buildManifest.js.tmp.yvaeh7ixb'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/denis/Desktop/AI Projects/English Project/english-platform/.next/static/development/_buildManifest.js.tmp.yvaeh7ixb'
+}
+ ✓ Compiled /trilha/[slug] in 461ms
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/denis/Desktop/AI Projects/English Project/english-platform/.next/static/development/_buildManifest.js.tmp.mwl9hnet51p'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/denis/Desktop/AI Projects/English Project/english-platform/.next/static/development/_buildManifest.js.tmp.mwl9hnet51p'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/denis/Desktop/AI Projects/English Project/english-platform/.next/static/development/_buildManifest.js.tmp.600r2eu6nti'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/denis/Desktop/AI Projects/English Project/english-platform/.next/static/development/_buildManifest.js.tmp.600r2eu6nti'
+}
+[Error: ENOENT: no such file or directory, open '/Users/denis/Desktop/AI Projects/English Project/english-platform/.next/static/development/_buildManifest.js.tmp.mwl9hnet51p'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/denis/Desktop/AI Projects/English Project/english-platform/.next/static/development/_buildManifest.js.tmp.mwl9hnet51p'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/denis/Desktop/AI Projects/English Project/english-platform/.next/static/development/_buildManifest.js.tmp.hqv6p7dloeo'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/denis/Desktop/AI Projects/English Project/english-platform/.next/static/development/_buildManifest.js.tmp.hqv6p7dloeo'
+}
+[Error: ENOENT: no such file or directory, open '/Users/denis/Desktop/AI Projects/English Project/english-platform/.next/static/development/_buildManifest.js.tmp.2s004xpapia'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/denis/Desktop/AI Projects/English Project/english-platform/.next/static/development/_buildManifest.js.tmp.2s004xpapia'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/denis/Desktop/AI Projects/English Project/english-platform/.next/static/development/_buildManifest.js.tmp.gsb56rxv0d'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/denis/Desktop/AI Projects/English Project/english-platform/.next/static/development/_buildManifest.js.tmp.gsb56rxv0d'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/denis/Desktop/AI Projects/English Project/english-platform/.next/static/development/_buildManifest.js.tmp.7lkjthkouip'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/denis/Desktop/AI Projects/English Project/english-platform/.next/static/development/_buildManifest.js.tmp.7lkjthkouip'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/denis/Desktop/AI Projects/English Project/english-platform/.next/static/development/_buildManifest.js.tmp.7i6gsfu6ujd'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/denis/Desktop/AI Projects/English Project/english-platform/.next/static/development/_buildManifest.js.tmp.7i6gsfu6ujd'
+}
+[Error: ENOENT: no such file or directory, open '/Users/denis/Desktop/AI Projects/English Project/english-platform/.next/static/development/_buildManifest.js.tmp.7lkjthkouip'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/denis/Desktop/AI Projects/English Project/english-platform/.next/static/development/_buildManifest.js.tmp.7lkjthkouip'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/denis/Desktop/AI Projects/English Project/english-platform/.next/static/development/_buildManifest.js.tmp.htb57jl6mz'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/denis/Desktop/AI Projects/English Project/english-platform/.next/static/development/_buildManifest.js.tmp.htb57jl6mz'
+}
+[Error: ENOENT: no such file or directory, open '/Users/denis/Desktop/AI Projects/English Project/english-platform/.next/static/development/_buildManifest.js.tmp.ly2wsmlcs5e'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/denis/Desktop/AI Projects/English Project/english-platform/.next/static/development/_buildManifest.js.tmp.ly2wsmlcs5e'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/denis/Desktop/AI Projects/English Project/english-platform/.next/static/development/_buildManifest.js.tmp.jglqwdy5yw'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/denis/Desktop/AI Projects/English Project/english-platform/.next/static/development/_buildManifest.js.tmp.jglqwdy5yw'
+}
