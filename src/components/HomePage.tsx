@@ -76,7 +76,7 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto flex justify-between items-center flex-wrap gap-2">
           {/* Logo - always on the left */}
           <div className="text-lg md:text-2xl font-bold text-white flex items-center gap-2 md:gap-3">
-            <Logo size="sm" className="md:w-8 md:h-8" />
+<Logo size="sm" className="md:w-10 md:h-10" />
             <span>Inglês pra Já</span>
           </div>
 
@@ -132,6 +132,17 @@ export default function HomePage() {
         <div className="max-w-7xl w-full grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
           {/* Left Content */}
           <div className="text-center lg:text-left space-y-3 lg:space-y-4">
+            {/* Slogan Mobile - Antes do título */}
+            <div className="block md:hidden pb-6">
+              <div className="max-w-md mx-auto text-center">
+                <p className="text-white text-base font-medium leading-relaxed">
+                  Nada de <span className="text-red-400 line-through italic font-bold" style={{textShadow: '0 0 8px #ef4444, 0 0 16px #ef4444'}}>"The book is on the table"</span>
+                  <br />
+                  Fale como nativo <span className="gradient-text font-bold">MAIS RÁPIDO</span> que você imagina
+                </p>
+              </div>
+            </div>
+
             {/* Main Heading */}
             <div className="space-y-3">
               <h1 className="text-5xl sm:text-6xl lg:text-8xl font-black leading-tight">
@@ -173,16 +184,6 @@ export default function HomePage() {
               </button>
             </div>
 
-            {/* Slogan Mobile - Aparece após os botões */}
-            <div className="block md:hidden pt-20 pb-8">
-              <div className="max-w-md mx-auto text-center">
-                <p className="text-white text-lg font-medium leading-relaxed">
-                  Nada de <span className="text-red-400 line-through italic font-bold" style={{textShadow: '0 0 8px #ef4444, 0 0 16px #ef4444'}}>"The book is on the table"</span>
-                  <br />
-                  Fale como nativo <span className="gradient-text font-bold">MAIS RÁPIDO</span> que você imagina
-                </p>
-              </div>
-            </div>
 
           </div>
 

@@ -82,7 +82,7 @@ export default function DashboardContent() {
               onClick={handleLogoClick}
               className="flex items-center gap-3 hover:opacity-80 transition-opacity"
             >
-              <Logo size="sm" />
+<Logo size="md" />
               <span className="text-white font-bold">Inglês pra Já</span>
             </button>
             <AuthButton />

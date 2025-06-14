@@ -18,7 +18,7 @@ body {
 }
 
 :root {
-  --background: #0f0f11;
+  --background: #1a1a2e;
   --foreground: #ffffff;
   --primary: #7c3aed;
   --primary-foreground: #ffffff;
@@ -26,10 +26,10 @@ body {
   --secondary-foreground: #ffffff;
   --accent: #06b6d4;
   --accent-foreground: #ffffff;
-  --muted: #1f1f23;
+  --muted: #2a2a3e;
   --muted-foreground: #a1a1aa;
-  --border: #27272a;
-  --input: #27272a;
+  --border: #3a3a4e;
+  --input: #3a3a4e;
   --ring: #7c3aed;
 }
 

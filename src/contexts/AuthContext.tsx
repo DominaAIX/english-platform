@@ -69,8 +69,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         const { data: authUser } = await supabase.auth.getUser()
         const email = authUser.user?.email || ''
         
-        // Determinar plano baseado no email
-        const plan = email === 'estebdenis@gmail.com' ? 'premium' : 'free'
+        // Todas as contas são free por padrão até implementar pagamento
+        const plan = 'free'
         
         const defaultProfile: UserProfile = {
           id: userId,
