@@ -3492,7 +3492,220 @@ const trailsData = {
         context: 'Agradecimento'
       },
 
-      // ========== FRASES PREMIUM ==========
+      // ========== FRASES PREMIUM (100+ frases adicionais) ==========
+      // BÁSICO (35 frases)
+      {
+        english: "How's it going?",
+        portuguese: "Como vai?",
+        level: 'básico',
+        context: 'Cumprimento'
+      },
+      {
+        english: "Long time no see!",
+        portuguese: "Quanto tempo sem nos ver!",
+        level: 'básico',
+        context: 'Reencontro'
+      },
+      {
+        english: "What's up?",
+        portuguese: "E aí?",
+        level: 'básico',
+        context: 'Cumprimento'
+      },
+      {
+        english: "Let's hang out later.",
+        portuguese: "Vamos sair mais tarde.",
+        level: 'básico',
+        context: 'Convites'
+      },
+      {
+        english: "See you around!",
+        portuguese: "Te vejo por aí!",
+        level: 'básico',
+        context: 'Despedida'
+      },
+      {
+        english: "Take care!",
+        portuguese: "Se cuida!",
+        level: 'básico',
+        context: 'Despedida'
+      },
+      {
+        english: "How's your family?",
+        portuguese: "Como está sua família?",
+        level: 'básico',
+        context: 'Conversa'
+      },
+      {
+        english: "Nice to see you again.",
+        portuguese: "Legal te ver de novo.",
+        level: 'básico',
+        context: 'Reencontro'
+      },
+      {
+        english: "You look great!",
+        portuguese: "Você está ótimo!",
+        level: 'básico',
+        context: 'Elogio'
+      },
+      {
+        english: "Let's get together sometime.",
+        portuguese: "Vamos nos reunir alguma hora.",
+        level: 'básico',
+        context: 'Planos'
+      },
+      {
+        english: "I missed you!",
+        portuguese: "Senti sua falta!",
+        level: 'básico',
+        context: 'Sentimento'
+      },
+      {
+        english: "What do you think?",
+        portuguese: "O que você acha?",
+        level: 'básico',
+        context: 'Opinião'
+      },
+      {
+        english: "That sounds fun!",
+        portuguese: "Isso parece divertido!",
+        level: 'básico',
+        context: 'Entusiasmo'
+      },
+      {
+        english: "Count me in!",
+        portuguese: "Pode contar comigo!",
+        level: 'básico',
+        context: 'Aceitação'
+      },
+      {
+        english: "I'm in!",
+        portuguese: "Eu topo!",
+        level: 'básico',
+        context: 'Aceitação'
+      },
+      {
+        english: "No way!",
+        portuguese: "De jeito nenhum!",
+        level: 'básico',
+        context: 'Surpresa'
+      },
+      {
+        english: "Are you serious?",
+        portuguese: "Você está falando sério?",
+        level: 'básico',
+        context: 'Surpresa'
+      },
+      {
+        english: "That's awesome!",
+        portuguese: "Isso é incrível!",
+        level: 'básico',
+        context: 'Entusiasmo'
+      },
+      {
+        english: "Cool!",
+        portuguese: "Legal!",
+        level: 'básico',
+        context: 'Aprovação'
+      },
+      {
+        english: "Sounds good to me.",
+        portuguese: "Parece bom para mim.",
+        level: 'básico',
+        context: 'Concordância'
+      },
+      {
+        english: "I'm down for that.",
+        portuguese: "Eu topo isso.",
+        level: 'básico',
+        context: 'Aceitação'
+      },
+      {
+        english: "Let me know!",
+        portuguese: "Me avisa!",
+        level: 'básico',
+        context: 'Comunicação'
+      },
+      {
+        english: "Text me later.",
+        portuguese: "Me manda mensagem depois.",
+        level: 'básico',
+        context: 'Comunicação'
+      },
+      {
+        english: "Call me!",
+        portuguese: "Me liga!",
+        level: 'básico',
+        context: 'Comunicação'
+      },
+      {
+        english: "What time works for you?",
+        portuguese: "Que horas funciona para você?",
+        level: 'básico',
+        context: 'Planejamento'
+      },
+      {
+        english: "I can't make it.",
+        portuguese: "Não vou conseguir ir.",
+        level: 'básico',
+        context: 'Cancelamento'
+      },
+      {
+        english: "Maybe next time.",
+        portuguese: "Talvez na próxima.",
+        level: 'básico',
+        context: 'Adiamento'
+      },
+      {
+        english: "Rain check?",
+        portuguese: "Fica para outra?",
+        level: 'básico',
+        context: 'Adiamento'
+      },
+      {
+        english: "You bet!",
+        portuguese: "Com certeza!",
+        level: 'básico',
+        context: 'Confirmação'
+      },
+      {
+        english: "Absolutely!",
+        portuguese: "Absolutamente!",
+        level: 'básico',
+        context: 'Confirmação'
+      },
+      {
+        english: "For sure!",
+        portuguese: "Com certeza!",
+        level: 'básico',
+        context: 'Confirmação'
+      },
+      {
+        english: "Good to see you!",
+        portuguese: "Bom te ver!",
+        level: 'básico',
+        context: 'Cumprimento'
+      },
+      {
+        english: "How have you been?",
+        portuguese: "Como você tem estado?",
+        level: 'básico',
+        context: 'Conversa'
+      },
+      {
+        english: "What's the plan?",
+        portuguese: "Qual é o plano?",
+        level: 'básico',
+        context: 'Planejamento'
+      },
+      {
+        english: "I'm excited!",
+        portuguese: "Estou animado!",
+        level: 'básico',
+        context: 'Entusiasmo'
+      },
+
+      // MÉDIO (40 frases)
       {
         english: "What's been keeping you busy?",
         portuguese: "O que tem te deixado ocupado?",
@@ -3508,7 +3721,7 @@ const trailsData = {
       {
         english: "How do you know each other?",
         portuguese: "Como vocês se conhecem?",
-        level: 'básico',
+        level: 'médio',
         context: 'Apresentação'
       },
       {
@@ -3528,18 +3741,6 @@ const trailsData = {
         portuguese: "Do que você está com vontade?",
         level: 'médio',
         context: 'Preferência'
-      },
-      {
-        english: "Let's take a selfie!",
-        portuguese: "Vamos tirar uma selfie!",
-        level: 'básico',
-        context: 'Foto'
-      },
-      {
-        english: "This place brings back memories.",
-        portuguese: "Este lugar traz memórias.",
-        level: 'avançado',
-        context: 'Nostalgia'
       },
       {
         english: "I can't believe it's been so long!",
@@ -3566,6 +3767,194 @@ const trailsData = {
         context: 'Mudança'
       },
       {
+        english: "I completely forgot about that!",
+        portuguese: "Esqueci completamente disso!",
+        level: 'médio',
+        context: 'Memória'
+      },
+      {
+        english: "I'll keep you posted.",
+        portuguese: "Te manterei informado.",
+        level: 'médio',
+        context: 'Comunicação'
+      },
+      {
+        english: "It's been forever!",
+        portuguese: "Faz uma eternidade!",
+        level: 'médio',
+        context: 'Reencontro'
+      },
+      {
+        english: "How's life treating you?",
+        portuguese: "Como a vida está te tratando?",
+        level: 'médio',
+        context: 'Conversa'
+      },
+      {
+        english: "I've been meaning to call you.",
+        portuguese: "Tenho querido te ligar.",
+        level: 'médio',
+        context: 'Desculpa'
+      },
+      {
+        english: "You should come by sometime.",
+        portuguese: "Você deveria aparecer algum dia.",
+        level: 'médio',
+        context: 'Convite'
+      },
+      {
+        english: "Let's not be strangers.",
+        portuguese: "Não vamos ser estranhos.",
+        level: 'médio',
+        context: 'Compromisso'
+      },
+      {
+        english: "I've been swamped with work.",
+        portuguese: "Tenho estado atolado de trabalho.",
+        level: 'médio',
+        context: 'Desculpa'
+      },
+      {
+        english: "Things have been crazy lately.",
+        portuguese: "As coisas têm estado loucas ultimamente.",
+        level: 'médio',
+        context: 'Vida'
+      },
+      {
+        english: "I could really use a break.",
+        portuguese: "Eu realmente preciso de uma pausa.",
+        level: 'médio',
+        context: 'Cansaço'
+      },
+      {
+        english: "What have you been up to lately?",
+        portuguese: "O que você tem feito ultimamente?",
+        level: 'médio',
+        context: 'Conversa'
+      },
+      {
+        english: "I heard through the grapevine that...",
+        portuguese: "Ouvi dizer que...",
+        level: 'médio',
+        context: 'Fofoca'
+      },
+      {
+        english: "Speaking of which...",
+        portuguese: "Falando nisso...",
+        level: 'médio',
+        context: 'Transição'
+      },
+      {
+        english: "That rings a bell.",
+        portuguese: "Isso me soa familiar.",
+        level: 'médio',
+        context: 'Memória'
+      },
+      {
+        english: "I'm all ears.",
+        portuguese: "Sou todo ouvidos.",
+        level: 'médio',
+        context: 'Atenção'
+      },
+      {
+        english: "You crack me up!",
+        portuguese: "Você me faz rir!",
+        level: 'médio',
+        context: 'Humor'
+      },
+      {
+        english: "I'm feeling a bit under the weather.",
+        portuguese: "Estou me sentindo meio mal.",
+        level: 'médio',
+        context: 'Saúde'
+      },
+      {
+        english: "I'm on cloud nine!",
+        portuguese: "Estou nas nuvens!",
+        level: 'médio',
+        context: 'Felicidade'
+      },
+      {
+        english: "Let's play it by ear.",
+        portuguese: "Vamos ver como as coisas vão.",
+        level: 'médio',
+        context: 'Flexibilidade'
+      },
+      {
+        english: "I'm keeping my fingers crossed.",
+        portuguese: "Estou torcendo.",
+        level: 'médio',
+        context: 'Esperança'
+      },
+      {
+        english: "It's a small world!",
+        portuguese: "O mundo é pequeno!",
+        level: 'médio',
+        context: 'Coincidência'
+      },
+      {
+        english: "Better late than never.",
+        portuguese: "Antes tarde do que nunca.",
+        level: 'médio',
+        context: 'Atraso'
+      },
+      {
+        english: "I'm running late.",
+        portuguese: "Estou atrasado.",
+        level: 'médio',
+        context: 'Pontualidade'
+      },
+      {
+        english: "My schedule is packed.",
+        portuguese: "Minha agenda está lotada.",
+        level: 'médio',
+        context: 'Ocupação'
+      },
+      {
+        english: "I need to bounce.",
+        portuguese: "Preciso vazar.",
+        level: 'médio',
+        context: 'Partida'
+      },
+      {
+        english: "Time flies when you're having fun.",
+        portuguese: "O tempo voa quando você se diverte.",
+        level: 'médio',
+        context: 'Tempo'
+      },
+      {
+        english: "I'm having second thoughts.",
+        portuguese: "Estou repensando.",
+        level: 'médio',
+        context: 'Dúvida'
+      },
+      {
+        english: "Let's call it a night.",
+        portuguese: "Vamos encerrar a noite.",
+        level: 'médio',
+        context: 'Finalização'
+      },
+      {
+        english: "I'm beat.",
+        portuguese: "Estou exausto.",
+        level: 'médio',
+        context: 'Cansaço'
+      },
+      {
+        english: "Let's touch base soon.",
+        portuguese: "Vamos nos falar em breve.",
+        level: 'médio',
+        context: 'Comunicação'
+      },
+
+      // AVANÇADO (35 frases)
+      {
+        english: "This place brings back memories.",
+        portuguese: "Este lugar traz memórias.",
+        level: 'avançado',
+        context: 'Nostalgia'
+      },
+      {
         english: "You should definitely give it a try.",
         portuguese: "Você definitivamente deveria tentar.",
         level: 'avançado',
@@ -3584,34 +3973,190 @@ const trailsData = {
         context: 'História'
       },
       {
-        english: "I completely forgot about that!",
-        portuguese: "Esqueci completamente disso!",
-        level: 'médio',
-        context: 'Memória'
-      },
-      {
-        english: "We need to stay in touch.",
-        portuguese: "Precisamos manter contato.",
-        level: 'básico',
-        context: 'Despedida'
-      },
-      {
-        english: "It was so good to see you.",
-        portuguese: "Foi tão bom te ver.",
-        level: 'básico',
-        context: 'Despedida'
-      },
-      {
         english: "Let's make this a regular thing.",
         portuguese: "Vamos fazer disso algo regular.",
         level: 'avançado',
         context: 'Compromisso'
       },
       {
-        english: "I'll keep you posted.",
-        portuguese: "Te manterei informado.",
-        level: 'médio',
-        context: 'Comunicação'
+        english: "I hate to be the bearer of bad news, but...",
+        portuguese: "Odeio ser o portador de más notícias, mas...",
+        level: 'avançado',
+        context: 'Má notícia'
+      },
+      {
+        english: "I'm completely in awe of what you've accomplished.",
+        portuguese: "Estou completamente impressionado com o que você conquistou.",
+        level: 'avançado',
+        context: 'Admiração'
+      },
+      {
+        english: "You've really outdone yourself this time.",
+        portuguese: "Você realmente se superou desta vez.",
+        level: 'avançado',
+        context: 'Elogio'
+      },
+      {
+        english: "I couldn't agree with you more.",
+        portuguese: "Não poderia concordar mais com você.",
+        level: 'avançado',
+        context: 'Concordância'
+      },
+      {
+        english: "That's a tough pill to swallow.",
+        portuguese: "Isso é difícil de engolir.",
+        level: 'avançado',
+        context: 'Dificuldade'
+      },
+      {
+        english: "I'm torn between two options.",
+        portuguese: "Estou dividido entre duas opções.",
+        level: 'avançado',
+        context: 'Indecisão'
+      },
+      {
+        english: "It's worth keeping in mind that...",
+        portuguese: "Vale a pena ter em mente que...",
+        level: 'avançado',
+        context: 'Consideração'
+      },
+      {
+        english: "I'm inclined to think that...",
+        portuguese: "Estou inclinado a pensar que...",
+        level: 'avançado',
+        context: 'Opinião'
+      },
+      {
+        english: "That's food for thought.",
+        portuguese: "Isso dá o que pensar.",
+        level: 'avançado',
+        context: 'Reflexão'
+      },
+      {
+        english: "I'm at a crossroads in my life.",
+        portuguese: "Estou numa encruzilhada da minha vida.",
+        level: 'avançado',
+        context: 'Decisão'
+      },
+      {
+        english: "It's a blessing in disguise.",
+        portuguese: "É uma bênção disfarçada.",
+        level: 'avançado',
+        context: 'Otimismo'
+      },
+      {
+        english: "You hit the nail on the head.",
+        portuguese: "Você acertou em cheio.",
+        level: 'avançado',
+        context: 'Precisão'
+      },
+      {
+        english: "I'm walking on air!",
+        portuguese: "Estou flutuando!",
+        level: 'avançado',
+        context: 'Euforia'
+      },
+      {
+        english: "That's the tip of the iceberg.",
+        portuguese: "Isso é só a ponta do iceberg.",
+        level: 'avançado',
+        context: 'Revelação'
+      },
+      {
+        english: "I'm keeping my options open.",
+        portuguese: "Estou mantendo minhas opções em aberto.",
+        level: 'avançado',
+        context: 'Flexibilidade'
+      },
+      {
+        english: "It's been weighing on my mind.",
+        portuguese: "Isso tem pesado na minha mente.",
+        level: 'avançado',
+        context: 'Preocupação'
+      },
+      {
+        english: "I'm grappling with some difficult decisions.",
+        portuguese: "Estou lutando com algumas decisões difíceis.",
+        level: 'avançado',
+        context: 'Dilema'
+      },
+      {
+        english: "It's a matter of perspective.",
+        portuguese: "É uma questão de perspectiva.",
+        level: 'avançado',
+        context: 'Análise'
+      },
+      {
+        english: "I'm contemplating a major life change.",
+        portuguese: "Estou contemplando uma grande mudança de vida.",
+        level: 'avançado',
+        context: 'Transformação'
+      },
+      {
+        english: "That experience was truly eye-opening.",
+        portuguese: "Essa experiência foi realmente reveladora.",
+        level: 'avançado',
+        context: 'Aprendizado'
+      },
+      {
+        english: "I'm having an existential crisis.",
+        portuguese: "Estou tendo uma crise existencial.",
+        level: 'avançado',
+        context: 'Introspecção'
+      },
+      {
+        english: "It's a double-edged sword.",
+        portuguese: "É uma faca de dois gumes.",
+        level: 'avançado',
+        context: 'Ambiguidade'
+      },
+      {
+        english: "I'm cautiously optimistic about the outcome.",
+        portuguese: "Estou cautelosamente otimista sobre o resultado.",
+        level: 'avançado',
+        context: 'Expectativa'
+      },
+      {
+        english: "That's quite a paradigm shift.",
+        portuguese: "Essa é uma grande mudança de paradigma.",
+        level: 'avançado',
+        context: 'Transformação'
+      },
+      {
+        english: "I'm trying to read between the lines.",
+        portuguese: "Estou tentando ler nas entrelinhas.",
+        level: 'avançado',
+        context: 'Interpretação'
+      },
+      {
+        english: "It's all about finding the right balance.",
+        portuguese: "É tudo sobre encontrar o equilíbrio certo.",
+        level: 'avançado',
+        context: 'Harmonia'
+      },
+      {
+        english: "I'm swimming against the current.",
+        portuguese: "Estou nadando contra a corrente.",
+        level: 'avançado',
+        context: 'Resistência'
+      },
+      {
+        english: "That's a watershed moment.",
+        portuguese: "Esse é um momento decisivo.",
+        level: 'avançado',
+        context: 'Marco'
+      },
+      {
+        english: "I'm trying to bridge the gap between us.",
+        portuguese: "Estou tentando diminuir a distância entre nós.",
+        level: 'avançado',
+        context: 'Reconciliação'
+      },
+      {
+        english: "It's time to turn over a new leaf.",
+        portuguese: "É hora de virar uma nova página.",
+        level: 'avançado',
+        context: 'Renovação'
       }
     ],
     exercises: [
