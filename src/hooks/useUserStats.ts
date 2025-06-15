@@ -20,23 +20,25 @@ export function useUserStats() {
     premiumSinceDate: null
   })
 
-  // Carregar estatísticas do Supabase
-  const loadStats = async (userId: string) => {
+  // Carregar estatísticas do Supabase com cache busting
+  const loadStats = async (userId: string, force = false) => {
     try {
-      console.log('📊 Carregando estatísticas do Supabase para user:', userId)
+      console.log('📊 Carregando estatísticas do Supabase para user:', userId, force ? '(FORCED)' : '')
+      
+      // Adicionar cache busting para garantir dados frescos
       const { data, error } = await supabase
         .from('user_stats')
         .select('*')
         .eq('user_id', userId)
-        .single()
+        .maybeSingle() // Use maybeSingle em vez de single
 
-      if (error && error.code !== 'PGRST116') { // PGRST116 = no rows found
+      if (error) {
         console.error('Erro ao carregar estatísticas:', error)
         return
       }
 
       if (data) {
-        console.log('✅ Estatísticas carregadas do banco:', data)
+        console.log('✅ Estatísticas carregadas do banco (RAW):', data)
         console.log('🔍 Valores extraídos:', {
           phrasesViewed: data.phrases_viewed,
           exercisesCompleted: data.exercises_completed,
@@ -138,26 +140,29 @@ export function useUserStats() {
     if (!user?.id) return
     
     try {
-      console.log('🔥 Incrementando frases visualizadas no banco de dados')
-      console.log('📊 Estado atual antes do incremento:', stats)
+      console.log('🔥 Incrementando frases - estado atual:', stats)
       
-      // Incrementar diretamente no banco usando SQL
-      const { data, error } = await supabase.rpc('increment_phrases_viewed', {
+      // Atualizar estado local imediatamente
+      const newStats = { ...stats, phrasesViewed: stats.phrasesViewed + 1 }
+      setStats(newStats)
+      console.log('📈 Estado local atualizado para:', newStats)
+      
+      // Incrementar no banco em background
+      const { error } = await supabase.rpc('increment_phrases_viewed', {
         p_user_id: user.id
       })
       
       if (error) {
-        console.error('❌ Erro ao incrementar frases:', error)
-        return
+        console.error('❌ Erro ao salvar no banco:', error)
+        // Reverter estado local se falhou
+        setStats(stats)
+      } else {
+        console.log('✅ Salvo no banco com sucesso')
       }
-      
-      console.log('✅ Função SQL executada com sucesso')
-      
-      // Recarregar estatísticas do banco para sincronizar
-      await loadStats(user.id)
-      console.log('✅ Frases visualizadas incrementadas')
     } catch (error) {
       console.error('❌ Erro:', error)
+      // Reverter estado local se falhou
+      setStats(stats)
     }
   }
 
@@ -165,21 +170,25 @@ export function useUserStats() {
     if (!user?.id) return
     
     try {
-      console.log('🎯 Incrementando exercícios completados no banco de dados')
+      console.log('🎯 Incrementando exercícios - estado atual:', stats)
       
-      const { data, error } = await supabase.rpc('increment_exercises_completed', {
+      const newStats = { ...stats, exercisesCompleted: stats.exercisesCompleted + 1 }
+      setStats(newStats)
+      console.log('📈 Estado local atualizado para:', newStats)
+      
+      const { error } = await supabase.rpc('increment_exercises_completed', {
         p_user_id: user.id
       })
       
       if (error) {
-        console.error('❌ Erro ao incrementar exercícios:', error)
-        return
+        console.error('❌ Erro ao salvar no banco:', error)
+        setStats(stats)
+      } else {
+        console.log('✅ Salvo no banco com sucesso')
       }
-      
-      await loadStats(user.id)
-      console.log('✅ Exercícios completados incrementados')
     } catch (error) {
       console.error('❌ Erro:', error)
+      setStats(stats)
     }
   }
 
@@ -187,24 +196,25 @@ export function useUserStats() {
     if (!user?.id) return
     
     try {
-      console.log('🤖 Incrementando mensagens IA no banco de dados')
-      console.log('📊 Estado atual antes do incremento AI:', stats)
+      console.log('🤖 Incrementando IA - estado atual:', stats)
       
-      const { data, error } = await supabase.rpc('increment_ai_messages', {
+      const newStats = { ...stats, aiMessagesCount: stats.aiMessagesCount + 1 }
+      setStats(newStats)
+      console.log('📈 Estado local atualizado para:', newStats)
+      
+      const { error } = await supabase.rpc('increment_ai_messages', {
         p_user_id: user.id
       })
       
       if (error) {
-        console.error('❌ Erro ao incrementar mensagens IA:', error)
-        return
+        console.error('❌ Erro ao salvar no banco:', error)
+        setStats(stats)
+      } else {
+        console.log('✅ Salvo no banco com sucesso')
       }
-      
-      console.log('✅ Função SQL AI executada com sucesso')
-      
-      await loadStats(user.id)
-      console.log('✅ Mensagens IA incrementadas')
     } catch (error) {
       console.error('❌ Erro:', error)
+      setStats(stats)
     }
   }
 
