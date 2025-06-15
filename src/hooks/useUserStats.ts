@@ -136,7 +136,7 @@ export function useUserStats() {
       
       // Incrementar diretamente no banco usando SQL
       const { data, error } = await supabase.rpc('increment_phrases_viewed', {
-        user_id: user.id
+        p_user_id: user.id
       })
       
       if (error) {
@@ -159,7 +159,7 @@ export function useUserStats() {
       console.log('🎯 Incrementando exercícios completados no banco de dados')
       
       const { data, error } = await supabase.rpc('increment_exercises_completed', {
-        user_id: user.id
+        p_user_id: user.id
       })
       
       if (error) {
@@ -181,7 +181,7 @@ export function useUserStats() {
       console.log('🤖 Incrementando mensagens IA no banco de dados')
       
       const { data, error } = await supabase.rpc('increment_ai_messages', {
-        user_id: user.id
+        p_user_id: user.id
       })
       
       if (error) {
