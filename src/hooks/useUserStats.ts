@@ -37,12 +37,18 @@ export function useUserStats() {
 
       if (data) {
         console.log('✅ Estatísticas carregadas do banco:', data)
+        console.log('🔍 Valores extraídos:', {
+          phrasesViewed: data.phrases_viewed,
+          exercisesCompleted: data.exercises_completed,
+          aiMessagesCount: data.ai_messages_count
+        })
         const loadedStats: UserStats = {
           phrasesViewed: data.phrases_viewed || 0,
           exercisesCompleted: data.exercises_completed || 0,
           aiMessagesCount: data.ai_messages_count || 0,
           premiumSinceDate: data.premium_since_date || null
         }
+        console.log('📋 Estado sendo aplicado:', loadedStats)
         setStats(loadedStats)
       } else {
         console.log('🆕 Primeira vez do usuário - criando registro inicial')
@@ -133,6 +139,7 @@ export function useUserStats() {
     
     try {
       console.log('🔥 Incrementando frases visualizadas no banco de dados')
+      console.log('📊 Estado atual antes do incremento:', stats)
       
       // Incrementar diretamente no banco usando SQL
       const { data, error } = await supabase.rpc('increment_phrases_viewed', {
@@ -143,6 +150,8 @@ export function useUserStats() {
         console.error('❌ Erro ao incrementar frases:', error)
         return
       }
+      
+      console.log('✅ Função SQL executada com sucesso')
       
       // Recarregar estatísticas do banco para sincronizar
       await loadStats(user.id)
@@ -179,6 +188,7 @@ export function useUserStats() {
     
     try {
       console.log('🤖 Incrementando mensagens IA no banco de dados')
+      console.log('📊 Estado atual antes do incremento AI:', stats)
       
       const { data, error } = await supabase.rpc('increment_ai_messages', {
         p_user_id: user.id
@@ -188,6 +198,8 @@ export function useUserStats() {
         console.error('❌ Erro ao incrementar mensagens IA:', error)
         return
       }
+      
+      console.log('✅ Função SQL AI executada com sucesso')
       
       await loadStats(user.id)
       console.log('✅ Mensagens IA incrementadas')
