@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { useAuth } from '@/contexts/AuthContext'
+import { supabase } from '@/lib/supabase'
 
 interface UserStats {
   phrasesViewed: number
@@ -19,96 +20,120 @@ export function useUserStats() {
     premiumSinceDate: null
   })
 
-  // Chave única para cada usuário no localStorage
-  const getStorageKey = () => user?.id ? `user_stats_${user.id}` : null
+  // Carregar estatísticas do Supabase
+  const loadStats = async (userId: string) => {
+    try {
+      const { data, error } = await supabase
+        .from('user_stats')
+        .select('*')
+        .eq('user_id', userId)
+        .single()
+
+      if (error && error.code !== 'PGRST116') { // PGRST116 = no rows found
+        console.error('Erro ao carregar estatísticas:', error)
+        return
+      }
+
+      if (data) {
+        const loadedStats: UserStats = {
+          phrasesViewed: data.phrases_viewed || 0,
+          exercisesCompleted: data.exercises_completed || 0,
+          aiMessagesCount: data.ai_messages_count || 0,
+          premiumSinceDate: data.premium_since_date || null
+        }
+        setStats(loadedStats)
+      } else {
+        // Primeira vez do usuário - criar registro inicial
+        await createInitialStats(userId)
+      }
+    } catch (error) {
+      console.error('Erro ao carregar estatísticas:', error)
+    }
+  }
+
+  // Criar registro inicial de estatísticas
+  const createInitialStats = async (userId: string) => {
+    try {
+      const initialStats = {
+        user_id: userId,
+        phrases_viewed: 0,
+        exercises_completed: 0,
+        ai_messages_count: 0,
+        premium_since_date: userProfile?.plan === 'premium' ? new Date().toISOString() : null
+      }
+
+      const { error } = await supabase
+        .from('user_stats')
+        .insert(initialStats)
+
+      if (!error) {
+        setStats({
+          phrasesViewed: 0,
+          exercisesCompleted: 0,
+          aiMessagesCount: 0,
+          premiumSinceDate: initialStats.premium_since_date
+        })
+      }
+    } catch (error) {
+      console.error('Erro ao criar estatísticas iniciais:', error)
+    }
+  }
+
+  // Salvar estatísticas no Supabase
+  const saveStats = async (newStats: UserStats) => {
+    if (!user?.id) return
+
+    try {
+      const { error } = await supabase
+        .from('user_stats')
+        .upsert({
+          user_id: user.id,
+          phrases_viewed: newStats.phrasesViewed,
+          exercises_completed: newStats.exercisesCompleted,
+          ai_messages_count: newStats.aiMessagesCount,
+          premium_since_date: newStats.premiumSinceDate
+        })
+
+      if (error) {
+        console.error('Erro ao salvar estatísticas:', error)
+      }
+    } catch (error) {
+      console.error('Erro ao salvar estatísticas:', error)
+    }
+  }
 
   useEffect(() => {
     if (!user?.id) return
+    loadStats(user.id)
+  }, [user?.id])
 
-    const storageKey = getStorageKey()
-    if (!storageKey) return
-
-    // Carregar stats do localStorage sempre preservando dados existentes
-    const savedStats = localStorage.getItem(storageKey)
-    let currentStats: UserStats = {
-      phrasesViewed: 0,
-      exercisesCompleted: 0,
-      aiMessagesCount: 0,
-      premiumSinceDate: null
-    }
-
-    if (savedStats) {
-      try {
-        const parsedStats: UserStats = JSON.parse(savedStats)
-        // Sempre preservar os dados existentes, nunca resetar
-        currentStats = {
-          phrasesViewed: parsedStats.phrasesViewed || 0,
-          exercisesCompleted: parsedStats.exercisesCompleted || 0,
-          aiMessagesCount: parsedStats.aiMessagesCount || 0,
-          premiumSinceDate: parsedStats.premiumSinceDate || null
-        }
-      } catch (error) {
-        console.error('Erro ao carregar estatísticas:', error)
-      }
-    }
-
-    // Se usuário é premium e não tem data de início, definir agora
-    if (userProfile?.plan === 'premium' && !currentStats.premiumSinceDate) {
-      currentStats.premiumSinceDate = new Date().toISOString()
-    }
-
-    // Atualizar estado e salvar
-    setStats(currentStats)
-    saveStats(currentStats)
-  }, [user?.id]) // Apenas depender do user.id, não do userProfile completo
-
-  // Efeito separado para atualizar data premium sem interferir nos dados
+  // Efeito para atualizar data premium quando necessário
   useEffect(() => {
     if (!user?.id || !userProfile?.plan) return
     
-    if (userProfile.plan === 'premium') {
-      const storageKey = getStorageKey()
-      if (!storageKey) return
-      
-      const savedStats = localStorage.getItem(storageKey)
-      if (savedStats) {
-        try {
-          const parsedStats = JSON.parse(savedStats)
-          if (!parsedStats.premiumSinceDate) {
-            const updatedStats = { ...parsedStats, premiumSinceDate: new Date().toISOString() }
-            setStats(updatedStats)
-            saveStats(updatedStats)
-          }
-        } catch (error) {
-          console.error('Erro ao atualizar data premium:', error)
-        }
-      }
+    if (userProfile.plan === 'premium' && !stats.premiumSinceDate) {
+      const updatedStats = { ...stats, premiumSinceDate: new Date().toISOString() }
+      setStats(updatedStats)
+      saveStats(updatedStats)
     }
-  }, [userProfile?.plan])
+  }, [userProfile?.plan, stats.premiumSinceDate])
 
-  const saveStats = (newStats: UserStats) => {
-    const storageKey = getStorageKey()
-    if (!storageKey) return
-
-    localStorage.setItem(storageKey, JSON.stringify(newStats))
-  }
-
-  const incrementPhrasesViewed = () => {
+  const incrementPhrasesViewed = async () => {
     const newStats = { ...stats, phrasesViewed: stats.phrasesViewed + 1 }
     setStats(newStats)
-    saveStats(newStats)
+    await saveStats(newStats)
   }
 
-  const incrementExercisesCompleted = () => {
+  const incrementExercisesCompleted = async () => {
     const newStats = { ...stats, exercisesCompleted: stats.exercisesCompleted + 1 }
     setStats(newStats)
-    saveStats(newStats)
+    await saveStats(newStats)
   }
 
-  const incrementAiMessages = () => {
+  const incrementAiMessages = async () => {
     const newStats = { ...stats, aiMessagesCount: stats.aiMessagesCount + 1 }
     setStats(newStats)
-    saveStats(newStats)
+    await saveStats(newStats)
   }
 
   const getTotalPhrasesPracticed = () => {
