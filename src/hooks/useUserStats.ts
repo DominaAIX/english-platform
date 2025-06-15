@@ -19,6 +19,7 @@ export function useUserStats() {
     aiMessagesCount: 0,
     premiumSinceDate: null
   })
+  const [isLoaded, setIsLoaded] = useState(false)
 
   // Carregar estatísticas do Supabase com cache busting
   const loadStats = async (userId: string, force = false) => {
@@ -52,6 +53,7 @@ export function useUserStats() {
         }
         console.log('📋 Estado sendo aplicado:', loadedStats)
         setStats(loadedStats)
+        setIsLoaded(true)
       } else {
         console.log('🆕 Primeira vez do usuário - criando registro inicial')
         // Primeira vez do usuário - criar registro inicial
@@ -84,6 +86,7 @@ export function useUserStats() {
           aiMessagesCount: 0,
           premiumSinceDate: initialStats.premium_since_date
         })
+        setIsLoaded(true)
       }
     } catch (error) {
       console.error('Erro ao criar estatísticas iniciais:', error)
@@ -120,10 +123,24 @@ export function useUserStats() {
     }
   }
 
+  // Reset isLoaded quando usuário muda
   useEffect(() => {
-    if (!user?.id) return
-    loadStats(user.id)
+    if (!user?.id) {
+      setIsLoaded(false)
+      setStats({
+        phrasesViewed: 0,
+        exercisesCompleted: 0,
+        aiMessagesCount: 0,
+        premiumSinceDate: null
+      })
+    }
   }, [user?.id])
+
+  useEffect(() => {
+    if (!user?.id || isLoaded) return
+    console.log('🚀 Carregando estatísticas pela primeira vez')
+    loadStats(user.id)
+  }, [user?.id, isLoaded])
 
   // Efeito para atualizar data premium quando necessário
   useEffect(() => {
