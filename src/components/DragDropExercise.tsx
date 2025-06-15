@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { useUserStats } from '@/hooks/useUserStats'
+import { useStats } from '@/contexts/StatsContext'
 
 interface DragDropExerciseProps {
   exercise: {
@@ -24,7 +24,7 @@ const shuffleArray = (array: string[]) => {
 }
 
 export default function DragDropExercise({ exercise, onComplete }: DragDropExerciseProps) {
-  const { incrementExercisesCompleted } = useUserStats()
+  const { incrementExercisesCompleted } = useStats()
   const [draggedWord, setDraggedWord] = useState<string | null>(null)
   const [droppedWords, setDroppedWords] = useState<string[]>([])
   const [availableWords, setAvailableWords] = useState<string[]>(() => shuffleArray(exercise.words))

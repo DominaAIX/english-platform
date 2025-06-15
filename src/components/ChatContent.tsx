@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation'
 import Logo from './Logo'
 import { useAuth } from '@/contexts/AuthContext'
 import { useFreePlanLimits } from '@/hooks/useFreePlanLimits'
-import { useUserStats } from '@/hooks/useUserStats'
+import { useStats } from '@/contexts/StatsContext'
 import FreePlanLimitMessage from './FreePlanLimitMessage'
 import PageTransition from './PageTransition'
 
@@ -27,7 +27,7 @@ export default function ChatContent() {
     timeUntilReset, 
     incrementMessageCount 
   } = useFreePlanLimits()
-  const { incrementAiMessages } = useUserStats()
+  const { incrementAiMessages } = useStats()
   
   const [messages, setMessages] = useState<Message[]>([
     {

@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation'
 import Logo from './Logo'
 import AuthButton from './AuthButton'
 import { useAuth } from '@/contexts/AuthContext'
-import { useUserStats } from '@/hooks/useUserStats'
+import { useStats } from '@/contexts/StatsContext'
 import PageTransition from './PageTransition'
 import AnimatedContainer from './AnimatedContainer'
 
@@ -14,7 +14,7 @@ export default function DashboardContent() {
   const { user, userProfile } = useAuth()
   const router = useRouter()
   const [hoveredCard, setHoveredCard] = useState<string | null>(null)
-  const { stats, getTotalPhrasesPracticed, getPremiumTimeFormatted } = useUserStats()
+  const { stats, getTotalPhrasesPracticed, getPremiumTimeFormatted } = useStats()
   
   // Usar o plano real do usuário autenticado do userProfile
   const userPlan = userProfile?.plan || 'free'
