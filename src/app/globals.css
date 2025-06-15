@@ -214,6 +214,12 @@ html {
 
 /* Mobile optimizations */
 @media (max-width: 768px) {
+  /* Fix mobile viewport and overflow */
+  html, body {
+    overflow-x: hidden;
+    height: 100%;
+  }
+  
   /* Reduce motion for better mobile performance */
   .card-hover:hover {
     transform: translateY(-4px);
@@ -235,6 +241,30 @@ html {
   body::before {
     opacity: 0.02;
   }
+  
+  /* Mobile-specific height controls */
+  .mobile-full-height {
+    min-height: 100vh;
+    min-height: 100dvh; /* Dynamic viewport height for mobile */
+  }
+}
+
+/* Cascading fade-in animation for HomePage */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeInUp {
+  animation: fadeInUp 0.8s ease-out forwards;
+  animation-fill-mode: both;
+  opacity: 0;
 }
 
 /* Improved mobile typography */

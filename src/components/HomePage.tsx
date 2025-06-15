@@ -42,7 +42,7 @@ export default function HomePage() {
     "See you at 7 p.m.!",
     "I'm swamped with work right now.",
     "Let's circle back on this tomorrow.",
-    "Could you walk me through the process?"
+    "I'll handle that ASAP!"
   ]
 
   return (
@@ -69,9 +69,9 @@ export default function HomePage() {
           }
         }
       `}</style>
-      <AnimatedContainer className="min-h-screen">
+<AnimatedContainer className="min-h-screen mobile-full-height flex flex-col">
       {/* Header */}
-      <PageTransition delay={0}>
+      <PageTransition className="animate-fadeInUp" style={{ animationDelay: '0ms' }}>
         <header className="relative z-[9999] p-3 md:p-6" style={{ pointerEvents: 'auto' }}>
         <div className="max-w-7xl mx-auto flex justify-between items-center flex-wrap gap-2">
           {/* Logo - always on the left */}
@@ -109,26 +109,26 @@ export default function HomePage() {
             </div>
           </button>
         </div>
-
       </header>
+
       </PageTransition>
 
       {/* Slogan Principal - Desktop only */}
-      <PageTransition delay={100}>
+      <PageTransition className="animate-fadeInUp" style={{ animationDelay: '200ms' }}>
         <section className="py-2 px-4 hidden md:block">
           <div className="max-w-4xl mx-auto text-center">
             <p className="text-white text-lg md:text-2xl font-medium leading-relaxed">
               Nada de <span className="text-red-400 line-through italic font-bold" style={{textShadow: '0 0 10px #ef4444, 0 0 20px #ef4444, 0 0 30px #ef4444'}}>"The book is on the table"</span>
               <br />
-              Fale como nativo <span className="gradient-text font-bold">MAIS RÁPIDO</span> que você imagina
+              Fale como nativo <span className="gradient-text font-bold">MAIS RÁPIDO</span> que você imagina!
             </p>
           </div>
         </section>
       </PageTransition>
 
       {/* Hero Section */}
-      <PageTransition delay={200}>
-        <section className="relative min-h-screen flex items-start md:items-center justify-center px-4 pt-40 pb-16 md:py-2">
+      <PageTransition className="animate-fadeInUp" style={{ animationDelay: '400ms' }}>
+<section className="relative flex-1 flex items-center justify-center px-4 pt-20 pb-4 md:min-h-screen md:py-2">
         <div className="max-w-7xl w-full grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
           {/* Left Content */}
           <div className="text-center lg:text-left space-y-3 lg:space-y-4">
@@ -138,7 +138,7 @@ export default function HomePage() {
                 <p className="text-white text-base font-medium leading-relaxed">
                   Nada de <span className="text-red-400 line-through italic font-bold" style={{textShadow: '0 0 8px #ef4444, 0 0 16px #ef4444'}}>"The book is on the table"</span>
                   <br />
-                  Fale como nativo <span className="gradient-text font-bold">MAIS RÁPIDO</span> que você imagina
+                  Fale como nativo <span className="gradient-text font-bold">MAIS RÁPIDO</span> que você imagina!
                 </p>
               </div>
             </div>
@@ -183,7 +183,6 @@ export default function HomePage() {
                 Testar o Tutor AI
               </button>
             </div>
-
 
           </div>
 
@@ -241,7 +240,7 @@ export default function HomePage() {
       </PageTransition>
 
       {/* Platform Benefits - Hidden on mobile */}
-      <PageTransition delay={400}>
+      <PageTransition className="animate-fadeInUp" style={{ animationDelay: '600ms' }}>
         <section className="py-20 px-4 hidden lg:block">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
@@ -364,7 +363,7 @@ export default function HomePage() {
       </PageTransition>
 
       {/* CTA Footer - Hidden on mobile */}
-      <PageTransition delay={600}>
+      <PageTransition className="animate-fadeInUp" style={{ animationDelay: '800ms' }}>
         <section className="bg-gradient-to-r from-purple-900/50 to-cyan-900/50 py-16 px-4 hidden lg:block">
         <div className="max-w-4xl mx-auto text-center">
           <h3 className="text-3xl lg:text-4xl font-bold mb-6">
@@ -384,6 +383,7 @@ export default function HomePage() {
         </div>
         </section>
       </PageTransition>
+
 
       {/* Mobile Menu Buttons - Fixed Position */}
       {showMobileMenu && (

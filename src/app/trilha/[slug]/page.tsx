@@ -4388,7 +4388,7 @@ export default async function TrailPage({ params }: TrailPageProps) {
   }
 
   return (
-    <div className="min-h-screen bg-gray-950">
+    <div className="min-h-screen">
       <TrailContent 
         trail={trailData as any}
         userPlan="free" // Fallback - será substituído pelo plano real do usuário

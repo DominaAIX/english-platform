@@ -107,7 +107,7 @@ export default async function PracticePage({ params }: PracticePageProps) {
 
   if (!trailData) {
     return (
-      <div className="min-h-screen bg-gray-950 flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-white mb-4">Trilha não encontrada</h1>
           <p className="text-gray-400 mb-6">Esta trilha não existe ou ainda não foi criada.</p>
@@ -142,7 +142,7 @@ function PracticePageClient({ trailData, slug }: { trailData: Trail, slug: strin
   }
 
   return (
-    <AnimatedContainer className="min-h-screen bg-gray-950">
+    <AnimatedContainer className="min-h-screen">
       {/* Header */}
       <PageTransition delay={0}>
         <header className="bg-gray-900/50 border-b border-gray-700 p-4">

@@ -75,7 +75,7 @@ export default function DashboardContent() {
   return (
     <AnimatedContainer className="min-h-screen">
       {/* Header */}
-      <PageTransition delay={0}>
+      <PageTransition>
         <header className="bg-gray-900/50 border-b border-gray-700 p-4">
           <div className="max-w-6xl mx-auto flex justify-between items-center">
             <button 
@@ -92,7 +92,7 @@ export default function DashboardContent() {
 
       <div className="max-w-6xl mx-auto p-6">
         {/* Welcome Section */}
-        <PageTransition delay={200}>
+        <PageTransition>
           <div className="text-center mb-12">
             <div className="flex justify-center mb-6">
               <img 
@@ -111,7 +111,7 @@ export default function DashboardContent() {
         </PageTransition>
 
         {/* Main Options */}
-        <PageTransition delay={400}>
+        <PageTransition>
           <div className="grid md:grid-cols-2 gap-8 mb-12 items-stretch">
             {/* Chat com Tutor AI */}
             <Link href="/chat" className="h-full">
@@ -186,19 +186,35 @@ export default function DashboardContent() {
             </div>
 
             {/* Grid de Trilhas */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
               {trails.map((trail, index) => (
                 <Link key={index} href={`/trilha/${trail.slug}/praticar`}>
-                  <div className={`bg-gradient-to-br ${trail.color} p-4 rounded-xl hover:scale-105 transition-all duration-300 text-center group`}>
-                    <div className="text-2xl mb-2 group-hover:scale-110 transition-transform duration-300">
-                      {trail.icon}
+                  <div className="relative group">
+                    {/* Background com gradiente translúcido */}
+                    <div className={`absolute inset-0 bg-gradient-to-br ${trail.color} opacity-20 rounded-2xl transition-all duration-300 group-hover:opacity-30`}></div>
+                    
+                    {/* Border com gradiente */}
+                    <div className={`absolute inset-0 bg-gradient-to-br ${trail.color} opacity-40 rounded-2xl p-[1px] transition-all duration-300 group-hover:opacity-60`}>
+                      <div className="bg-gray-900/40 backdrop-blur-sm rounded-2xl h-full w-full"></div>
                     </div>
-                    <h3 className="text-white font-semibold text-sm mb-1">
-                      {trail.title}
-                    </h3>
-                    <p className="text-white/80 text-xs">
-                      {trail.desc.split(',')[0]}
-                    </p>
+                    
+                    {/* Conteúdo */}
+                    <div className="relative p-5 text-center backdrop-blur-sm rounded-2xl transition-all duration-300 group-hover:transform group-hover:scale-105">
+                      <div className="text-3xl mb-3 group-hover:scale-110 transition-transform duration-300 filter drop-shadow-lg">
+                        {trail.icon}
+                      </div>
+                      <h3 className="text-white font-semibold text-sm mb-2 drop-shadow-sm">
+                        {trail.title}
+                      </h3>
+                      <p className="text-white/70 text-xs leading-relaxed">
+                        {trail.desc.split(',')[0]}
+                      </p>
+                    </div>
+                    
+                    {/* Efeito de brilho no hover */}
+                    <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                      <div className={`absolute inset-0 bg-gradient-to-br ${trail.color} opacity-10 rounded-2xl blur-xl`}></div>
+                    </div>
                   </div>
                 </Link>
               ))}
@@ -208,7 +224,7 @@ export default function DashboardContent() {
         </PageTransition>
 
         {/* Stats Section */}
-        <PageTransition delay={600}>
+        <PageTransition>
           <div className="bg-gray-900/50 border border-gray-700 rounded-2xl p-6">
           <h3 className="text-xl font-bold text-white mb-6 text-center">
             Seu Progresso Total
@@ -241,7 +257,7 @@ export default function DashboardContent() {
 
         {/* Upgrade to Premium - Só aparece para usuários Free */}
         {userPlan === 'free' && (
-        <PageTransition delay={800}>
+        <PageTransition>
           <div className="bg-gradient-to-r from-purple-900/30 to-cyan-900/30 border-2 border-purple-500/50 rounded-2xl p-6 mt-8">
           <div className="text-center">
             <div className="text-4xl mb-4">🚀</div>
@@ -289,7 +305,7 @@ export default function DashboardContent() {
 
         {/* Premium User Benefits - Só aparece para usuários Premium */}
         {userPlan === 'premium' && (
-        <PageTransition delay={800}>
+        <PageTransition>
           <div className="bg-gradient-to-r from-yellow-900/30 to-orange-900/30 border-2 border-yellow-500/50 rounded-2xl p-6 mt-8">
           <div className="text-center">
             <div className="text-4xl mb-4">⭐</div>
@@ -345,34 +361,52 @@ export default function DashboardContent() {
         )}
 
         {/* Quick Actions */}
-        <PageTransition delay={1000}>
+        <PageTransition>
           <div className="mt-8 text-center">
           <p className="text-gray-400 mb-4">Ações Rápidas</p>
           <div className="flex flex-wrap gap-4 justify-center">
             <Link 
               href="/trilha/trabalho"
-              className="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-full text-white font-semibold transition-colors"
+              className="relative group"
             >
-              💼 Inglês para Trabalho
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-blue-600 opacity-20 rounded-full transition-all duration-300 group-hover:opacity-30"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-blue-600 opacity-40 rounded-full p-[1px] transition-all duration-300 group-hover:opacity-60">
+                <div className="bg-gray-900/40 backdrop-blur-sm rounded-full h-full w-full"></div>
+              </div>
+              <span className="relative px-6 py-3 text-white font-semibold transition-all duration-300 group-hover:scale-105 inline-block backdrop-blur-sm rounded-full">
+                💼 Inglês para Trabalho
+              </span>
             </Link>
             <Link 
               href="/trilha/viagens"
-              className="bg-green-600 hover:bg-green-700 px-6 py-3 rounded-full text-white font-semibold transition-colors"
+              className="relative group"
             >
-              ✈️ Inglês para Viagens
+              <div className="absolute inset-0 bg-gradient-to-r from-green-500 to-green-600 opacity-20 rounded-full transition-all duration-300 group-hover:opacity-30"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-green-500 to-green-600 opacity-40 rounded-full p-[1px] transition-all duration-300 group-hover:opacity-60">
+                <div className="bg-gray-900/40 backdrop-blur-sm rounded-full h-full w-full"></div>
+              </div>
+              <span className="relative px-6 py-3 text-white font-semibold transition-all duration-300 group-hover:scale-105 inline-block backdrop-blur-sm rounded-full">
+                ✈️ Inglês para Viagens
+              </span>
             </Link>
             <Link 
               href="/chat"
-              className="bg-purple-600 hover:bg-purple-700 px-6 py-3 rounded-full text-white font-semibold transition-colors"
+              className="relative group"
             >
-              🤖 Conversar com IA
+              <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-purple-600 opacity-20 rounded-full transition-all duration-300 group-hover:opacity-30"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-purple-600 opacity-40 rounded-full p-[1px] transition-all duration-300 group-hover:opacity-60">
+                <div className="bg-gray-900/40 backdrop-blur-sm rounded-full h-full w-full"></div>
+              </div>
+              <span className="relative px-6 py-3 text-white font-semibold transition-all duration-300 group-hover:scale-105 inline-block backdrop-blur-sm rounded-full">
+                🤖 Conversar com IA
+              </span>
             </Link>
           </div>
         </div>
         </PageTransition>
 
         {/* Footer - Gerenciar Assinatura */}
-        <PageTransition delay={1200}>
+        <PageTransition>
           <div className="mt-12 pt-8 border-t border-gray-700">
           <div className="text-center">
             <p className="text-gray-400 text-sm mb-4">

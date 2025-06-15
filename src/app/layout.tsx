@@ -32,7 +32,11 @@ export default function RootLayout({
   return (
     <html lang="pt-br">
       <head>
-        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+        <link rel="icon" href="/logo.png" type="image/png" sizes="any" />
+        <link rel="icon" href="/logo.png" type="image/png" sizes="32x32" />
+        <link rel="icon" href="/logo.png" type="image/png" sizes="16x16" />
+        <link rel="apple-touch-icon" href="/logo.png" sizes="180x180" />
+        <meta name="theme-color" content="#1a1a2e" />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
