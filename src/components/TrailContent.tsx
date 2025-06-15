@@ -10,6 +10,7 @@ import PageTransition from './PageTransition'
 import AnimatedContainer from './AnimatedContainer'
 import DragDropExercise from './DragDropExercise'
 import { getUserFavorites, addToFavorites, removeFromFavorites } from '@/lib/favorites'
+import { WorkIcon, TravelIcon, ShoppingIcon, CasualIcon, BusinessIcon, RestaurantIcon, SpeakerIcon, StarIcon, FlagIcon, LocationIcon, SendIcon, RobotIcon, LockIcon, LightBulbIcon } from './ModernIcons'
 
 interface Phrase {
   english: string
@@ -37,6 +38,16 @@ interface TrailContentProps {
   trail: Trail
   userPlan: 'free' | 'premium'
   slug?: string
+}
+
+// Mapeamento de ícones por slug
+const iconMapping: { [key: string]: { component: React.ComponentType<{ size?: number; className?: string }>, color: string } } = {
+  trabalho: { component: WorkIcon, color: 'text-cyan-400' },
+  viagens: { component: TravelIcon, color: 'text-emerald-400' },
+  mercado: { component: ShoppingIcon, color: 'text-orange-400' },
+  passeios: { component: CasualIcon, color: 'text-pink-400' },
+  amigos: { component: BusinessIcon, color: 'text-purple-400' },
+  eventos: { component: RestaurantIcon, color: 'text-rose-400' }
 }
 
 export default function TrailContent({ trail, userPlan, slug }: TrailContentProps) {
@@ -241,7 +252,14 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
         {/* Trail Header */}
         <PageTransition delay={200}>
           <div className="text-center mb-8">
-          <div className="text-6xl mb-4">{trail.icon}</div>
+          <div className="mb-4 flex justify-center">
+            {slug && iconMapping[slug] ? (() => {
+              const IconComponent = iconMapping[slug].component;
+              return <IconComponent size={72} className={iconMapping[slug].color} />;
+            })() : (
+              <div className="text-6xl">{trail.icon}</div>
+            )}
+          </div>
           <h1 className="text-3xl font-bold text-white mb-2">{trail.title}</h1>
           <p className="text-gray-400 mb-6">{trail.description}</p>
           
@@ -341,8 +359,9 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
           <div className="bg-gray-900/50 border border-gray-700 rounded-2xl p-8 mb-6">
           {/* Context & Level */}
           <div className="flex justify-between items-center mb-4">
-            <span className="text-purple-400 text-sm font-medium">
-              📍 {currentPhrase.context}
+            <span className="text-purple-400 text-sm font-medium flex items-center gap-2">
+              <LocationIcon size={16} className="text-purple-400" />
+              {currentPhrase.context}
             </span>
             <span className={`px-3 py-1 rounded-full text-xs font-medium ${getLevelColor(currentPhrase.level)}`}>
               {currentPhrase.level}
@@ -361,9 +380,10 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
                 }`}
                 title={favoritePhrases.includes(currentPhraseIndex) ? 'Remover dos favoritos' : 'Guardar esta frase'}
               >
-                <span className="text-lg">
-                  {favoritePhrases.includes(currentPhraseIndex) ? '⭐' : '☆'}
-                </span>
+                <StarIcon 
+                  size={20} 
+                  className={favoritePhrases.includes(currentPhraseIndex) ? 'text-yellow-400' : 'text-gray-400'} 
+                />
                 {favoritePhrases.includes(currentPhraseIndex) ? (
                   <span className="text-green-400 text-lg">✓</span>
                 ) : (
@@ -376,13 +396,15 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
           {/* English Phrase */}
           <div className="mb-6">
             <div className="flex items-center gap-3 mb-3">
-              <h2 className="text-2xl font-bold text-white">🇺🇸 English</h2>
+              <h2 className="text-2xl font-bold text-white flex items-center gap-2">
+                🇺🇸 English
+              </h2>
               <button
                 onClick={() => speakPhrase(currentPhrase.english)}
-                className="bg-purple-600 hover:bg-purple-700 p-2 rounded-full transition-colors"
+                className="bg-purple-600 hover:bg-purple-700 p-2 rounded-full transition-colors flex items-center justify-center"
                 title="Ouvir pronúncia"
               >
-                🔊
+                <SpeakerIcon size={16} className="text-white" />
               </button>
             </div>
             <p className="text-xl text-white leading-relaxed bg-gray-800/50 p-4 rounded-lg">
@@ -393,7 +415,9 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
           {/* Translation */}
           <div className="mb-8">
             <div className="flex items-center gap-3 mb-3">
-              <h3 className="text-xl font-semibold text-white">🇧🇷 Português</h3>
+              <h3 className="text-xl font-semibold text-white">
+                Português
+              </h3>
               <button
                 onClick={() => setShowTranslation(!showTranslation)}
                 className="bg-cyan-600 hover:bg-cyan-700 px-4 py-2 rounded-full text-sm transition-colors"
@@ -438,8 +462,9 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
             <p className="text-gray-300 mb-4">
               Desbloqueie {trail.phrases.length - 10} frases adicionais e acesso ilimitado
             </p>
-            <button className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 px-8 py-3 rounded-full text-white font-bold transition-all duration-300">
-              Upgrade para Premium 🚀
+            <button className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 px-8 py-3 rounded-full text-white font-bold transition-all duration-300 flex items-center justify-center gap-2">
+              <SendIcon size={18} className="text-white" />
+              Upgrade para Premium
             </button>
             </div>
           </PageTransition>
@@ -451,7 +476,8 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
           <PageTransition delay={800}>
             <div className="mt-8">
               <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-                ⭐ Frases Favoritadas ({favoritePhrases.length})
+                <StarIcon size={24} className="text-yellow-400" />
+                Frases Favoritadas ({favoritePhrases.length})
               </h3>
               <div className="grid gap-3">
                 {favoritePhrases.map((phraseIndex) => {
@@ -481,7 +507,7 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
                           {completedPhrases.includes(phraseIndex) && (
                             <span className="text-green-400 text-xl">✓</span>
                           )}
-                          <span className="text-yellow-400 text-lg">⭐</span>
+                          <StarIcon size={18} className="text-yellow-400" />
                         </div>
                       </div>
                     </div>
@@ -497,19 +523,21 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
           <PageTransition delay={800}>
             <div className="mt-8">
               <div className="bg-gradient-to-r from-yellow-900/20 to-orange-900/20 border border-yellow-500/30 rounded-xl p-6 text-center">
-                <h3 className="text-lg font-semibold text-white mb-3">
-                  ⭐ Suas Frases Favoritas
+                <h3 className="text-lg font-semibold text-white mb-3 flex items-center justify-center gap-2">
+                  <StarIcon size={20} className="text-yellow-400" />
+                  Suas Frases Favoritas
                 </h3>
                 <p className="text-gray-300 mb-4">
                   <strong>Guarde frases</strong> enquanto estuda para criar sua lista personalizada de estudos!
                 </p>
                 <div className="bg-gray-800/50 rounded-lg p-4 mb-4">
-                  <p className="text-yellow-300 text-sm font-medium mb-2">
-                    💡 Como guardar uma frase:
+                  <p className="text-yellow-300 text-sm font-medium mb-2 flex items-center justify-center gap-2">
+                    <LightBulbIcon size={16} className="text-yellow-400" />
+                    Como guardar uma frase:
                   </p>
                   <p className="text-gray-400 text-sm">
-                    Clique em "Guardar essa frase" <span className="text-yellow-400">☆</span> e ela será salva.
-                    Aparecerá assim: <span className="text-yellow-400">⭐</span> <span className="text-green-400">✓</span>
+                    Clique em "Guardar essa frase" <StarIcon size={14} className="text-gray-400 inline" /> e ela será salva.
+                    Aparecerá assim: <StarIcon size={14} className="text-yellow-400 inline" /> <span className="text-green-400">✓</span>
                   </p>
                 </div>
                 <p className="text-gray-500 text-xs">
@@ -572,7 +600,8 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
                   onClick={() => router.push(`/trilha/${slug || 'eventos'}/praticar`)}
                   className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 px-8 py-4 rounded-xl text-white font-bold text-lg transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
                 >
-                  🚀 Começar a Praticar
+                  <SendIcon size={18} className="mr-2 text-white" />
+                  Começar a Praticar
                 </button>
               </div>
             </div>
@@ -583,14 +612,16 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
         {actualUserPlan === 'free' && (
           <PageTransition delay={800}>
             <div className="mt-8 bg-gradient-to-r from-purple-900/50 to-cyan-900/50 border border-purple-500/30 rounded-xl p-6 text-center">
-            <h3 className="text-xl font-bold text-white mb-2">
-              🔒 Área Premium
+            <h3 className="text-xl font-bold text-white mb-2 flex items-center justify-center gap-2">
+              <LockIcon size={24} className="text-purple-400" />
+              Área Premium
             </h3>
             <p className="text-gray-300 mb-4">
               Acesse a lista completa de frases, navegação avançada e muito mais conteúdo exclusivo!
             </p>
-            <button className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 px-8 py-3 rounded-full text-white font-bold transition-all duration-300">
-              Upgrade para Premium 🚀
+            <button className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 px-8 py-3 rounded-full text-white font-bold transition-all duration-300 flex items-center justify-center">
+              <SendIcon size={18} className="mr-2 text-white" />
+              Upgrade para Premium
             </button>
             </div>
           </PageTransition>

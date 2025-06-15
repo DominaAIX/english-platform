@@ -9,6 +9,7 @@ import { useAuth } from '@/contexts/AuthContext'
 import { useStats } from '@/contexts/StatsContext'
 import PageTransition from './PageTransition'
 import AnimatedContainer from './AnimatedContainer'
+import { WorkIcon, InterviewIcon, TravelIcon, BusinessIcon, CasualIcon, RestaurantIcon, ShoppingIcon, RobotIcon, LearningTrailIcon, ConversationIcon, TargetIcon, AudioIcon } from './ModernIcons'
 
 export default function DashboardContent() {
   const { user, userProfile } = useAuth()
@@ -64,12 +65,54 @@ export default function DashboardContent() {
   }
 
   const trails = [
-    { icon: '💼', title: 'Trabalho', desc: 'Reuniões, e-mails, feedbacks', slug: 'trabalho', color: 'from-blue-500 to-cyan-500' },
-    { icon: '✈️', title: 'Viagens', desc: 'Aeroporto, hotel, restaurante', slug: 'viagens', color: 'from-green-500 to-emerald-500' },
-    { icon: '🛒', title: 'Mercado', desc: 'Preços, formas de pagamento', slug: 'mercado', color: 'from-yellow-500 to-orange-500' },
-    { icon: '🚶‍♂️', title: 'Passeios', desc: 'Tickets, atrações, direções', slug: 'passeios', color: 'from-purple-500 to-pink-500' },
-    { icon: '👥', title: 'Amigos', desc: 'Convites, conversas casuais', slug: 'amigos', color: 'from-indigo-500 to-purple-500' },
-    { icon: '🎉', title: 'Eventos', desc: 'Networking, palestras + Exercícios', slug: 'eventos', color: 'from-pink-500 to-rose-500' }
+    { 
+      icon: WorkIcon, 
+      title: 'Trabalho', 
+      desc: 'Reuniões, e-mails, feedbacks', 
+      slug: 'trabalho', 
+      color: 'from-blue-500 to-cyan-500',
+      iconColor: 'text-cyan-400'
+    },
+    { 
+      icon: TravelIcon, 
+      title: 'Viagens', 
+      desc: 'Aeroporto, hotel, restaurante', 
+      slug: 'viagens', 
+      color: 'from-green-500 to-emerald-500',
+      iconColor: 'text-emerald-400'
+    },
+    { 
+      icon: ShoppingIcon, 
+      title: 'Mercado', 
+      desc: 'Preços, formas de pagamento', 
+      slug: 'mercado', 
+      color: 'from-yellow-500 to-orange-500',
+      iconColor: 'text-orange-400'
+    },
+    { 
+      icon: CasualIcon, 
+      title: 'Passeios', 
+      desc: 'Tickets, atrações, direções', 
+      slug: 'passeios', 
+      color: 'from-purple-500 to-pink-500',
+      iconColor: 'text-pink-400'
+    },
+    { 
+      icon: BusinessIcon, 
+      title: 'Amigos', 
+      desc: 'Convites, conversas casuais', 
+      slug: 'amigos', 
+      color: 'from-indigo-500 to-purple-500',
+      iconColor: 'text-purple-400'
+    },
+    { 
+      icon: RestaurantIcon, 
+      title: 'Eventos', 
+      desc: 'Networking, palestras + Exercícios', 
+      slug: 'eventos', 
+      color: 'from-pink-500 to-rose-500',
+      iconColor: 'text-rose-400'
+    }
   ]
 
   return (
@@ -122,8 +165,8 @@ export default function DashboardContent() {
               >
               <div className="text-center flex-1 flex flex-col justify-between">
                 <div>
-                  <div className="text-6xl mb-6 group-hover:scale-110 transition-transform duration-300">
-                    🤖
+                  <div className="mb-6 group-hover:scale-110 transition-transform duration-300 flex justify-center">
+                    <RobotIcon size={72} className="text-purple-400" />
                   </div>
                   <h2 className="text-2xl font-bold text-white mb-4">
                     Conversar com Tutor AI
@@ -160,8 +203,8 @@ export default function DashboardContent() {
             >
               <div className="text-center flex-1 flex flex-col justify-between">
                 <div>
-                  <div className="text-6xl mb-6 group-hover:scale-110 transition-transform duration-300">
-                    🎯
+                  <div className="mb-6 group-hover:scale-110 transition-transform duration-300 flex justify-center">
+                    <LearningTrailIcon size={72} className="text-green-400" />
                   </div>
                   <h2 className="text-2xl font-bold text-white mb-4">
                     Trilhas de Aprendizado
@@ -200,8 +243,8 @@ export default function DashboardContent() {
                     
                     {/* Conteúdo */}
                     <div className="relative p-5 text-center backdrop-blur-sm rounded-2xl transition-all duration-300 group-hover:transform group-hover:scale-105">
-                      <div className="text-3xl mb-3 group-hover:scale-110 transition-transform duration-300 filter drop-shadow-lg">
-                        {trail.icon}
+                      <div className="mb-3 group-hover:scale-110 transition-transform duration-300 filter drop-shadow-lg flex justify-center">
+                        <trail.icon size={32} className={trail.iconColor} />
                       </div>
                       <h3 className="text-white font-semibold text-sm mb-2 drop-shadow-sm">
                         {trail.title}
@@ -270,20 +313,32 @@ export default function DashboardContent() {
             </p>
             
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-              <div className="bg-gray-900/50 rounded-lg p-3">
-                <div className="text-purple-400 text-sm font-semibold">💬 Conversas</div>
+              <div className="bg-gray-900/50 rounded-lg p-3 flex flex-col items-center">
+                <div className="flex items-center text-purple-400 text-sm font-semibold mb-1">
+                  <ConversationIcon size={16} className="mr-2 text-purple-400" />
+                  Conversas
+                </div>
                 <div className="text-white font-bold">Ilimitadas</div>
               </div>
-              <div className="bg-gray-900/50 rounded-lg p-3">
-                <div className="text-cyan-400 text-sm font-semibold">🎯 Trilhas</div>
+              <div className="bg-gray-900/50 rounded-lg p-3 flex flex-col items-center">
+                <div className="flex items-center text-cyan-400 text-sm font-semibold mb-1">
+                  <LearningTrailIcon size={16} className="mr-2 text-cyan-400" />
+                  Trilhas
+                </div>
                 <div className="text-white font-bold">Todas</div>
               </div>
-              <div className="bg-gray-900/50 rounded-lg p-3">
-                <div className="text-green-400 text-sm font-semibold">📊 Relatórios</div>
+              <div className="bg-gray-900/50 rounded-lg p-3 flex flex-col items-center">
+                <div className="flex items-center text-green-400 text-sm font-semibold mb-1">
+                  <TargetIcon size={16} className="mr-2 text-green-400" />
+                  Relatórios
+                </div>
                 <div className="text-white font-bold">Detalhados</div>
               </div>
-              <div className="bg-gray-900/50 rounded-lg p-3">
-                <div className="text-orange-400 text-sm font-semibold">🎧 Áudio</div>
+              <div className="bg-gray-900/50 rounded-lg p-3 flex flex-col items-center">
+                <div className="flex items-center text-orange-400 text-sm font-semibold mb-1">
+                  <AudioIcon size={16} className="mr-2 text-orange-400" />
+                  Áudio
+                </div>
                 <div className="text-white font-bold">Premium</div>
               </div>
             </div>

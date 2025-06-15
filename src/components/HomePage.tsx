@@ -6,6 +6,7 @@ import AuthModal from '@/components/AuthModal'
 import Logo from '@/components/Logo'
 import PageTransition from '@/components/PageTransition'
 import AnimatedContainer from '@/components/AnimatedContainer'
+import { ConversationIcon, SendIcon, AIIcon, TargetIcon, AudioIcon, SignUpIcon } from '@/components/ModernIcons'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useAuth } from '@/contexts/AuthContext'
@@ -256,25 +257,29 @@ export default function HomePage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
               { 
-                icon: '🤖', 
+                icon: AIIcon, 
+                iconColor: 'text-purple-400',
                 title: 'Tutor IA Avançado', 
                 desc: 'Conversas em tempo real com o melhor tutor de inglês IA do mercado, powered by GPT-4',
                 highlight: 'Correção instantânea'
               },
               { 
-                icon: '💬', 
+                icon: ConversationIcon, 
+                iconColor: 'text-cyan-400',
                 title: 'Mais de 2.000 Frases', 
                 desc: 'Frases e expressões autênticas usadas no dia a dia por falantes nativos em situações reais',
                 highlight: '100% autêntico'
               },
               { 
-                icon: '🎯', 
+                icon: TargetIcon, 
+                iconColor: 'text-green-400',
                 title: 'Trilhas Especializadas', 
                 desc: 'Trabalho, viagens, mercado, eventos e muito mais - organize seu aprendizado por contexto',
                 highlight: '6 trilhas completas'
               },
               { 
-                icon: '🎧', 
+                icon: AudioIcon, 
+                iconColor: 'text-orange-400',
                 title: 'Áudios Profissionais', 
                 desc: 'Pronúncia nativa com síntese de voz avançada para treinar seu listening e speaking',
                 highlight: 'Voz nativa'
@@ -315,7 +320,13 @@ export default function HomePage() {
                   className="bg-gray-900/50 border border-gray-700 rounded-xl p-6 hover:border-purple-500/50 card-hover glow-on-hover group transition-all duration-300 h-full flex flex-col" 
                   style={{animationDelay: `${index * 0.1}s`}}
                 >
-                  <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">{item.icon}</div>
+                  <div className="mb-4 group-hover:scale-110 transition-transform duration-300">
+                    {typeof item.icon === 'string' ? (
+                      <span className="text-4xl">{item.icon}</span>
+                    ) : (
+                      <item.icon size={40} className={item.iconColor} />
+                    )}
+                  </div>
                   <h4 className="text-xl font-semibold text-white mb-3" style={{color: '#ffffff'}}>{item.title}</h4>
                   <p className="text-gray-300 mb-4 flex-1 leading-relaxed">{item.desc}</p>
                   
@@ -350,7 +361,8 @@ export default function HomePage() {
                   className="px-8 py-4 rounded-xl text-lg font-bold transition-all duration-300 bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 text-white shadow-lg hover:shadow-xl hover:scale-105 group"
                   onClick={() => handleButtonClick('/dashboard')}
                 >
-                  🚀 Começar Gratuitamente
+                  <SendIcon size={20} className="inline mr-2 text-white" />
+                  Começar Gratuitamente
                 </button>
                 <div className="text-gray-400 text-sm text-center">
                   Sem cartão de crédito • Acesso imediato • Cancele quando quiser
@@ -413,7 +425,8 @@ export default function HomePage() {
                 setShowAuthModal(true)
               }}
             >
-              🚀 Entrar / Sign In
+              <SendIcon size={16} className="inline mr-2 text-white" />
+              Entrar / Sign In
             </button>
             <button 
               className="px-6 py-3 rounded-xl text-sm font-medium transition-all duration-300 backdrop-blur-sm border bg-white/5 border-white/10 text-gray-300 hover:bg-white/10 hover:border-white/20 hover:text-white hover:scale-102 w-full max-w-xs"
@@ -430,7 +443,8 @@ export default function HomePage() {
                 setShowAuthModal(true)
               }}
             >
-              📝 Cadastrar / Sign Up
+              <SignUpIcon size={16} className="inline mr-2 text-gray-300" />
+              Cadastrar / Sign Up
             </button>
           </div>
         </div>

@@ -9,6 +9,7 @@ import { useFreePlanLimits } from '@/hooks/useFreePlanLimits'
 import { useStats } from '@/contexts/StatsContext'
 import FreePlanLimitMessage from './FreePlanLimitMessage'
 import PageTransition from './PageTransition'
+import { PronunciationIcon, GrammarIcon, ConversationIcon, SendIcon } from './ModernIcons'
 
 interface Message {
   id: string
@@ -434,28 +435,31 @@ export default function ChatContent() {
                 className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 disabled:opacity-50 disabled:cursor-not-allowed px-6 py-3 rounded-xl text-white font-semibold transition-all duration-300 flex items-center gap-2"
               >
                 <span>Enviar</span>
-                <span>🚀</span>
+                <SendIcon size={18} className="text-white" />
               </button>
             </div>
             
             <div className="flex flex-wrap gap-2 mt-3">
               <button
                 onClick={() => setInputMessage("Can you help me practice pronunciation?")}
-                className="bg-gray-700 hover:bg-gray-600 px-3 py-1 rounded-full text-sm text-gray-300 transition-colors"
+                className="bg-gray-700/50 hover:bg-gray-600/60 backdrop-blur-sm border border-gray-600/30 px-3 py-1 rounded-full text-sm text-gray-300 transition-all duration-300 flex items-center gap-2"
               >
-                🗣️ Pronúncia
+                <PronunciationIcon size={16} className="text-purple-400" />
+                Pronúncia
               </button>
               <button
                 onClick={() => setInputMessage("I need help with grammar")}
-                className="bg-gray-700 hover:bg-gray-600 px-3 py-1 rounded-full text-sm text-gray-300 transition-colors"
+                className="bg-gray-700/50 hover:bg-gray-600/60 backdrop-blur-sm border border-gray-600/30 px-3 py-1 rounded-full text-sm text-gray-300 transition-all duration-300 flex items-center gap-2"
               >
-                📝 Gramática
+                <GrammarIcon size={16} className="text-cyan-400" />
+                Gramática
               </button>
               <button
                 onClick={() => setInputMessage("Can we practice a conversation?")}
-                className="bg-gray-700 hover:bg-gray-600 px-3 py-1 rounded-full text-sm text-gray-300 transition-colors"
+                className="bg-gray-700/50 hover:bg-gray-600/60 backdrop-blur-sm border border-gray-600/30 px-3 py-1 rounded-full text-sm text-gray-300 transition-all duration-300 flex items-center gap-2"
               >
-                💬 Conversação
+                <ConversationIcon size={16} className="text-green-400" />
+                Conversação
               </button>
             </div>
             </div>

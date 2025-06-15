@@ -7,10 +7,13 @@ import Logo from '@/components/Logo'
 import { useAuth } from '@/contexts/AuthContext'
 import PageTransition from '@/components/PageTransition'
 import AnimatedContainer from '@/components/AnimatedContainer'
+import { WorkIcon, TravelIcon, ShoppingIcon, CasualIcon, BusinessIcon, RestaurantIcon, PuzzleIcon, ConversationIcon } from '@/components/ModernIcons'
 
 interface Trail {
   title: string
   icon: string
+  iconComponent: React.ComponentType<{ size?: number; className?: string }>
+  iconColor: string
   description: string
   exercises?: any[]
   phrases?: any[]
@@ -24,6 +27,8 @@ const trailsData: { [key: string]: Trail } = {
   trabalho: {
     title: 'Inglês para Trabalho',
     icon: '💼',
+    iconComponent: WorkIcon,
+    iconColor: 'text-cyan-400',
     description: 'Frases essenciais para reuniões, e-mails e apresentações profissionais',
     exercises: [
       {
@@ -37,6 +42,8 @@ const trailsData: { [key: string]: Trail } = {
   viagens: {
     title: 'Inglês para Viagens',
     icon: '✈️',
+    iconComponent: TravelIcon,
+    iconColor: 'text-emerald-400',
     description: 'Frases essenciais para aeroporto, hotel, restaurante e turismo',
     exercises: [
       {
@@ -50,6 +57,8 @@ const trailsData: { [key: string]: Trail } = {
   mercado: {
     title: 'Inglês para Mercado/Compras',
     icon: '🛒',
+    iconComponent: ShoppingIcon,
+    iconColor: 'text-orange-400',
     description: 'Frases para compras, preços e formas de pagamento',
     exercises: [
       {
@@ -63,6 +72,8 @@ const trailsData: { [key: string]: Trail } = {
   passeios: {
     title: 'Inglês para Passeios',
     icon: '🚶‍♂️',
+    iconComponent: CasualIcon,
+    iconColor: 'text-pink-400',
     description: 'Frases para passeios, tickets e atrações turísticas',
     exercises: [
       {
@@ -76,6 +87,8 @@ const trailsData: { [key: string]: Trail } = {
   amigos: {
     title: 'Inglês para Amigos',
     icon: '👥',
+    iconComponent: BusinessIcon,
+    iconColor: 'text-purple-400',
     description: 'Convites, conversas casuais e socialização',
     exercises: [
       {
@@ -89,6 +102,8 @@ const trailsData: { [key: string]: Trail } = {
   eventos: {
     title: 'Inglês para Eventos',
     icon: '🎉',
+    iconComponent: RestaurantIcon,
+    iconColor: 'text-rose-400',
     description: 'Domine frases essenciais para networking, palestras e eventos profissionais',
     exercises: [
       {
@@ -176,7 +191,9 @@ function PracticePageClient({ trailData, slug }: { trailData: Trail, slug: strin
         {/* Header */}
         <PageTransition delay={200}>
           <div className="text-center mb-12">
-            <div className="text-6xl mb-4">{trailData.icon}</div>
+            <div className="mb-4 flex justify-center">
+              <trailData.iconComponent size={72} className={trailData.iconColor} />
+            </div>
             <h1 className="text-3xl font-bold text-white mb-4">
               Como você quer praticar?
             </h1>
@@ -195,8 +212,8 @@ function PracticePageClient({ trailData, slug }: { trailData: Trail, slug: strin
             >
               <div className="text-center flex-1 flex flex-col justify-between">
                 <div>
-                  <div className="text-6xl mb-6">
-                    🧩
+                  <div className="mb-6 flex justify-center">
+                    <PuzzleIcon size={72} className="text-purple-400" />
                   </div>
                   <h3 className="text-2xl font-bold text-white mb-6">
                     Exercícios de Construção
@@ -259,8 +276,8 @@ function PracticePageClient({ trailData, slug }: { trailData: Trail, slug: strin
             >
               <div className="text-center flex-1 flex flex-col justify-between">
                 <div>
-                  <div className="text-6xl mb-6 group-hover:scale-110 transition-transform duration-300">
-                    💬
+                  <div className="mb-6 group-hover:scale-110 transition-transform duration-300 flex justify-center">
+                    <ConversationIcon size={72} className="text-cyan-400" />
                   </div>
                   <h3 className="text-2xl font-bold text-white mb-4">
                     Frases Mais Usadas
