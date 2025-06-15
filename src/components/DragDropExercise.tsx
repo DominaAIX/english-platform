@@ -80,7 +80,7 @@ export default function DragDropExercise({ exercise, onComplete }: DragDropExerc
     }
   }
 
-  const checkAnswer = () => {
+  const checkAnswer = async () => {
     const userSentence = droppedWords.join(' ').trim()
     const correct = userSentence.toLowerCase() === exercise.correctSentence.toLowerCase()
     setIsCorrect(correct)
@@ -88,7 +88,7 @@ export default function DragDropExercise({ exercise, onComplete }: DragDropExerc
     
     // Se o exercício estiver correto, incrementar contador
     if (correct) {
-      incrementExercisesCompleted()
+      await incrementExercisesCompleted()
     }
     
     onComplete(correct)

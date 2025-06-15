@@ -23,6 +23,7 @@ export function useUserStats() {
   // Carregar estatísticas do Supabase
   const loadStats = async (userId: string) => {
     try {
+      console.log('📊 Carregando estatísticas do Supabase para user:', userId)
       const { data, error } = await supabase
         .from('user_stats')
         .select('*')
@@ -35,6 +36,7 @@ export function useUserStats() {
       }
 
       if (data) {
+        console.log('✅ Estatísticas carregadas do banco:', data)
         const loadedStats: UserStats = {
           phrasesViewed: data.phrases_viewed || 0,
           exercisesCompleted: data.exercises_completed || 0,
@@ -43,6 +45,7 @@ export function useUserStats() {
         }
         setStats(loadedStats)
       } else {
+        console.log('🆕 Primeira vez do usuário - criando registro inicial')
         // Primeira vez do usuário - criar registro inicial
         await createInitialStats(userId)
       }
@@ -84,6 +87,7 @@ export function useUserStats() {
     if (!user?.id) return
 
     try {
+      console.log('💾 Salvando estatísticas no Supabase:', newStats)
       const { error } = await supabase
         .from('user_stats')
         .upsert({
@@ -95,10 +99,12 @@ export function useUserStats() {
         })
 
       if (error) {
-        console.error('Erro ao salvar estatísticas:', error)
+        console.error('❌ Erro ao salvar estatísticas:', error)
+      } else {
+        console.log('✅ Estatísticas salvas com sucesso!')
       }
     } catch (error) {
-      console.error('Erro ao salvar estatísticas:', error)
+      console.error('❌ Erro ao salvar estatísticas:', error)
     }
   }
 
@@ -119,18 +125,21 @@ export function useUserStats() {
   }, [userProfile?.plan, stats.premiumSinceDate])
 
   const incrementPhrasesViewed = async () => {
+    console.log('🔥 Incrementando frases visualizadas:', stats.phrasesViewed + 1)
     const newStats = { ...stats, phrasesViewed: stats.phrasesViewed + 1 }
     setStats(newStats)
     await saveStats(newStats)
   }
 
   const incrementExercisesCompleted = async () => {
+    console.log('🎯 Incrementando exercícios completados:', stats.exercisesCompleted + 1)
     const newStats = { ...stats, exercisesCompleted: stats.exercisesCompleted + 1 }
     setStats(newStats)
     await saveStats(newStats)
   }
 
   const incrementAiMessages = async () => {
+    console.log('🤖 Incrementando mensagens IA:', stats.aiMessagesCount + 1)
     const newStats = { ...stats, aiMessagesCount: stats.aiMessagesCount + 1 }
     setStats(newStats)
     await saveStats(newStats)

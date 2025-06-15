@@ -112,11 +112,11 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
   
   const progress = ((completedPhrases.length) / availablePhrases.length) * 100
 
-  const handleNext = () => {
+  const handleNext = async () => {
     if (!completedPhrases.includes(currentPhraseIndex)) {
       setCompletedPhrases([...completedPhrases, currentPhraseIndex])
       // Incrementar contador de frases visualizadas
-      incrementPhrasesViewed()
+      await incrementPhrasesViewed()
     }
     
     if (currentPhraseIndex < availablePhrases.length - 1) {

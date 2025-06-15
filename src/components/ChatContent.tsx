@@ -111,7 +111,7 @@ export default function ChatContent() {
     setIsLoading(true)
     
     // Incrementar contador de mensagens para IA
-    incrementAiMessages()
+    await incrementAiMessages()
 
     try {
       // Preparar histórico da conversa para a API
