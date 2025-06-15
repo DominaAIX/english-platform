@@ -17,6 +17,16 @@ export const metadata: Metadata = {
   title: "Inglês pra Já - Aprenda Inglês do Dia a Dia",
   description: "Aprenda inglês para situações do dia a dia com IA. Nada de 'The book is on the table'. Foque em frases que você usaria HOJE.",
   keywords: ["inglês", "english", "AI", "aprender inglês", "conversação", "english tutor", "inglês pra já"],
+  icons: {
+    icon: [
+      { url: '/logo.png', sizes: '32x32', type: 'image/png' },
+      { url: '/logo.png', sizes: '16x16', type: 'image/png' },
+    ],
+    apple: [
+      { url: '/logo.png', sizes: '180x180', type: 'image/png' },
+    ],
+    shortcut: '/logo.png',
+  },
   openGraph: {
     title: "Inglês pra Já - Aprenda Inglês do Dia a Dia",
     description: "Aprenda inglês para situações do dia a dia com IA",
