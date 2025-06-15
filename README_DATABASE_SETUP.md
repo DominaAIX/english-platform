@@ -46,6 +46,43 @@ CREATE POLICY "Users can insert their own stats" ON user_stats
 
 CREATE POLICY "Users can delete their own stats" ON user_stats
     FOR DELETE USING (auth.uid() = user_id);
+
+-- Funções para incremento atômico das estatísticas
+CREATE OR REPLACE FUNCTION increment_phrases_viewed(user_id UUID)
+RETURNS void AS $$
+BEGIN
+  INSERT INTO user_stats (user_id, phrases_viewed, exercises_completed, ai_messages_count)
+  VALUES (user_id, 1, 0, 0)
+  ON CONFLICT (user_id)
+  DO UPDATE SET 
+    phrases_viewed = user_stats.phrases_viewed + 1,
+    updated_at = NOW();
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER;
+
+CREATE OR REPLACE FUNCTION increment_exercises_completed(user_id UUID)
+RETURNS void AS $$
+BEGIN
+  INSERT INTO user_stats (user_id, phrases_viewed, exercises_completed, ai_messages_count)
+  VALUES (user_id, 0, 1, 0)
+  ON CONFLICT (user_id)
+  DO UPDATE SET 
+    exercises_completed = user_stats.exercises_completed + 1,
+    updated_at = NOW();
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER;
+
+CREATE OR REPLACE FUNCTION increment_ai_messages(user_id UUID)
+RETURNS void AS $$
+BEGIN
+  INSERT INTO user_stats (user_id, phrases_viewed, exercises_completed, ai_messages_count)
+  VALUES (user_id, 0, 0, 1)
+  ON CONFLICT (user_id)
+  DO UPDATE SET 
+    ai_messages_count = user_stats.ai_messages_count + 1,
+    updated_at = NOW();
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER;
 ```
 
 ## Como Executar

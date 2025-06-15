@@ -129,24 +129,71 @@ export function useUserStats() {
   }, [userProfile?.plan, stats.premiumSinceDate])
 
   const incrementPhrasesViewed = async () => {
-    console.log('🔥 Incrementando frases visualizadas:', stats.phrasesViewed + 1)
-    const newStats = { ...stats, phrasesViewed: stats.phrasesViewed + 1 }
-    setStats(newStats)
-    await saveStats(newStats)
+    if (!user?.id) return
+    
+    try {
+      console.log('🔥 Incrementando frases visualizadas no banco de dados')
+      
+      // Incrementar diretamente no banco usando SQL
+      const { data, error } = await supabase.rpc('increment_phrases_viewed', {
+        user_id: user.id
+      })
+      
+      if (error) {
+        console.error('❌ Erro ao incrementar frases:', error)
+        return
+      }
+      
+      // Recarregar estatísticas do banco para sincronizar
+      await loadStats(user.id)
+      console.log('✅ Frases visualizadas incrementadas')
+    } catch (error) {
+      console.error('❌ Erro:', error)
+    }
   }
 
   const incrementExercisesCompleted = async () => {
-    console.log('🎯 Incrementando exercícios completados:', stats.exercisesCompleted + 1)
-    const newStats = { ...stats, exercisesCompleted: stats.exercisesCompleted + 1 }
-    setStats(newStats)
-    await saveStats(newStats)
+    if (!user?.id) return
+    
+    try {
+      console.log('🎯 Incrementando exercícios completados no banco de dados')
+      
+      const { data, error } = await supabase.rpc('increment_exercises_completed', {
+        user_id: user.id
+      })
+      
+      if (error) {
+        console.error('❌ Erro ao incrementar exercícios:', error)
+        return
+      }
+      
+      await loadStats(user.id)
+      console.log('✅ Exercícios completados incrementados')
+    } catch (error) {
+      console.error('❌ Erro:', error)
+    }
   }
 
   const incrementAiMessages = async () => {
-    console.log('🤖 Incrementando mensagens IA:', stats.aiMessagesCount + 1)
-    const newStats = { ...stats, aiMessagesCount: stats.aiMessagesCount + 1 }
-    setStats(newStats)
-    await saveStats(newStats)
+    if (!user?.id) return
+    
+    try {
+      console.log('🤖 Incrementando mensagens IA no banco de dados')
+      
+      const { data, error } = await supabase.rpc('increment_ai_messages', {
+        user_id: user.id
+      })
+      
+      if (error) {
+        console.error('❌ Erro ao incrementar mensagens IA:', error)
+        return
+      }
+      
+      await loadStats(user.id)
+      console.log('✅ Mensagens IA incrementadas')
+    } catch (error) {
+      console.error('❌ Erro:', error)
+    }
   }
 
   const getTotalPhrasesPracticed = () => {
