@@ -88,6 +88,7 @@ export function useUserStats() {
 
     try {
       console.log('💾 Salvando estatísticas no Supabase:', newStats)
+      
       const { error } = await supabase
         .from('user_stats')
         .upsert({
@@ -96,6 +97,9 @@ export function useUserStats() {
           exercises_completed: newStats.exercisesCompleted,
           ai_messages_count: newStats.aiMessagesCount,
           premium_since_date: newStats.premiumSinceDate
+        }, {
+          onConflict: 'user_id',
+          ignoreDuplicates: false
         })
 
       if (error) {
