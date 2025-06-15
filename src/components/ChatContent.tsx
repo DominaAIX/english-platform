@@ -41,6 +41,8 @@ export default function ChatContent() {
   const [isLoading, setIsLoading] = useState(false)
   const [selectedScenario, setSelectedScenario] = useState<string | null>(null)
   const [playingAudio, setPlayingAudio] = useState<string | null>(null)
+  const [showVerbConjugator, setShowVerbConjugator] = useState(false)
+  const [verbToConjugate, setVerbToConjugate] = useState('')
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
 
@@ -66,6 +68,84 @@ export default function ChatContent() {
     // Por enquanto, apenas mostrar um alerta
     // Futuramente será redirecionado para página de upgrade
     alert('Funcionalidade de upgrade será implementada em breve! 🚀')
+  }
+
+  const handleVerbConjugation = async () => {
+    if (!verbToConjugate.trim()) return
+
+    const verb = verbToConjugate.trim()
+    setShowVerbConjugator(false)
+    setVerbToConjugate('')
+
+    // Adicionar mensagem do usuário
+    const userMessage: Message = {
+      id: Date.now().toString(),
+      role: 'user',
+      content: `Conjugar verbo: ${verb}`,
+      timestamp: new Date()
+    }
+    setMessages(prev => [...prev, userMessage])
+    setIsLoading(true)
+
+    try {
+      const conjugationPrompt = `Please conjugate the English verb "${verb}" in the main tenses. Present the conjugation in a clear, organized format showing:
+
+1. **Present Simple** (I/you/we/they ${verb}, he/she/it...)
+2. **Past Simple** (I/you/he/she/it/we/they...)
+3. **Present Perfect** (I/you/we/they have..., he/she/it has...)
+4. **Future Simple** (I/you/he/she/it/we/they will...)
+5. **Present Continuous** (I am..., you/we/they are..., he/she/it is...)
+6. **Past Continuous** (I/he/she/it was..., you/we/they were...)
+
+Please also include:
+- If the verb is regular or irregular
+- Common usage examples
+- Any important notes about pronunciation or spelling changes
+
+Present everything in both English and Portuguese for better understanding.`
+
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ 
+          message: conjugationPrompt,
+          conversationHistory: []
+        }),
+      })
+
+      if (!response.ok) {
+        throw new Error('Failed to get conjugation')
+      }
+
+      const data = await response.json()
+      
+      const assistantMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        role: 'assistant',
+        content: data.response,
+        timestamp: new Date()
+      }
+      
+      setMessages(prev => [...prev, assistantMessage])
+      
+      // Incrementar contador de mensagens IA
+      await incrementAiMessages()
+      await incrementMessageCount()
+      
+    } catch (error) {
+      console.error('Erro ao obter conjugação:', error)
+      const errorMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        role: 'assistant',
+        content: 'Desculpe, ocorreu um erro ao conjugar o verbo. Tente novamente.',
+        timestamp: new Date()
+      }
+      setMessages(prev => [...prev, errorMessage])
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   const handleLogoClick = () => {
@@ -398,8 +478,21 @@ export default function ChatContent() {
             />
           )}
 
+          {/* Verb Conjugator Button */}
+          <div className="border-t border-gray-700 px-4 pt-4 bg-gray-900/30">
+            <div className="flex justify-center mb-4">
+              <button
+                onClick={() => setShowVerbConjugator(true)}
+                className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 px-4 py-2 rounded-lg text-white font-medium transition-all duration-300 flex items-center gap-2 text-sm md:text-base"
+              >
+                <span>📚</span>
+                <span>Conjugador de Verbos</span>
+              </button>
+            </div>
+          </div>
+
           {/* Input Area */}
-          <div className="border-t border-gray-700 p-4 bg-gray-900/30">
+          <div className="border-gray-700 px-4 pb-4 bg-gray-900/30">
             {/* Indicador de mensagens restantes para usuários gratuitos */}
             {!isBlocked && remainingMessages < 3 && (
               <div className="mb-3 text-center">
@@ -461,6 +554,74 @@ export default function ChatContent() {
             </div>
         </div>
         </PageTransition>
+
+        {/* Modal do Conjugador de Verbos */}
+        {showVerbConjugator && (
+          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+            <div className="bg-gray-800 rounded-xl p-6 w-full max-w-md border border-gray-700">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-xl font-bold text-white flex items-center gap-2">
+                  <span>📚</span>
+                  Conjugador de Verbos
+                </h3>
+                <button
+                  onClick={() => {
+                    setShowVerbConjugator(false)
+                    setVerbToConjugate('')
+                  }}
+                  className="text-gray-400 hover:text-white transition-colors"
+                >
+                  ✕
+                </button>
+              </div>
+              
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-300 mb-2">
+                    Digite o verbo em inglês que deseja conjugar:
+                  </label>
+                  <input
+                    type="text"
+                    value={verbToConjugate}
+                    onChange={(e) => setVerbToConjugate(e.target.value)}
+                    onKeyPress={(e) => {
+                      if (e.key === 'Enter' && verbToConjugate.trim()) {
+                        handleVerbConjugation()
+                      }
+                    }}
+                    placeholder="Ex: run, speak, be, have..."
+                    className="w-full bg-gray-700 border border-gray-600 rounded-lg px-3 py-2 text-white placeholder-gray-400 focus:outline-none focus:border-green-500 transition-colors"
+                    autoFocus
+                  />
+                </div>
+                
+                <div className="flex gap-3">
+                  <button
+                    onClick={() => {
+                      setShowVerbConjugator(false)
+                      setVerbToConjugate('')
+                    }}
+                    className="flex-1 bg-gray-600 hover:bg-gray-700 px-4 py-2 rounded-lg text-white font-medium transition-colors"
+                  >
+                    Cancelar
+                  </button>
+                  <button
+                    onClick={handleVerbConjugation}
+                    disabled={!verbToConjugate.trim() || isLoading}
+                    className="flex-1 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 disabled:opacity-50 disabled:cursor-not-allowed px-4 py-2 rounded-lg text-white font-medium transition-all duration-300"
+                  >
+                    {isLoading ? 'Conjugando...' : 'Conjugar'}
+                  </button>
+                </div>
+                
+                <div className="text-xs text-gray-400 text-center">
+                  <p>💡 Dica: Digite apenas o verbo no infinitivo sem "to"</p>
+                  <p>Exemplo: "run" em vez de "to run"</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   )
