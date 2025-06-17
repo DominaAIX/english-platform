@@ -146,19 +146,25 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
   
   const progress = ((completedPhrases.length) / availablePhrases.length) * 100
 
+  // DEBUG: Forçar modo free para teste (remover depois)
+  const debugForceFree = false // Mude para true para testar
+  const testIsPremium = debugForceFree ? false : isPremium
+  const testUserPlan = debugForceFree ? 'free' : actualUserPlan
+
   const handleNext = async () => {
     console.log('🔄 HandleNext called:', {
       currentPhraseIndex,
       availablePhrases: availablePhrases.length,
-      isPremium,
-      actualUserPlan,
+      isPremium: testIsPremium,
+      actualUserPlan: testUserPlan,
       isPhrasesBlocked,
-      isLastPhrase: currentPhraseIndex === availablePhrases.length - 1
+      isLastPhrase: currentPhraseIndex === availablePhrases.length - 1,
+      debugForceFree
     })
     
     if (!completedPhrases.includes(currentPhraseIndex)) {
       // Verificar limite global antes de permitir próxima frase
-      if (!isPremium) {
+      if (!testIsPremium) {
         const canView = incrementPhrases()
         console.log('🔍 CanView result:', canView)
         if (!canView) {
@@ -180,13 +186,20 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
       setShowPronunciation(false)
     } else {
       console.log('🏁 Chegou ao final das frases')
+      console.log('🔍 Verificando condições de redirecionamento:', {
+        isPremium,
+        actualUserPlan,
+        testIsPremium,
+        testUserPlan,
+        shouldRedirect: !testIsPremium && testUserPlan === 'free'
+      })
       // Se chegou ao final das frases disponíveis
-      if (!isPremium && actualUserPlan === 'free') {
+      if (!testIsPremium && testUserPlan === 'free') {
         console.log('🔄 Redirecionando usuário free para dashboard')
         // Para usuários free, sempre redirecionar ao dashboard quando chegarem ao final
         router.push('/dashboard')
       } else {
-        console.log('💎 Usuário premium, não redirecionando')
+        console.log('💎 Usuário premium ou condição não atendida, não redirecionando')
       }
     }
   }
@@ -510,7 +523,15 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
             </button>
             
             <button
-              onClick={handleNext}
+              onClick={(e) => {
+                console.log('🖱️ Botão clicado!', { 
+                  currentPhraseIndex, 
+                  availablePhrases: availablePhrases.length,
+                  isLastPhrase: currentPhraseIndex === availablePhrases.length - 1 
+                })
+                e.preventDefault()
+                handleNext()
+              }}
               className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 px-6 py-3 rounded-full text-white font-semibold transition-all duration-300"
             >
               {currentPhraseIndex === availablePhrases.length - 1 ? 
