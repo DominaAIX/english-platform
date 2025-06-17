@@ -508,7 +508,7 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
         </PageTransition>
 
         {/* Free Plan Limit Notice */}
-        {actualUserPlan === 'free' && currentPhraseIndex >= 9 && (
+        {actualUserPlan === 'free' && isPhrasesBlocked && (
           <PageTransition delay={600}>
             <div className="bg-gradient-to-r from-purple-900/50 to-cyan-900/50 border border-purple-500/30 rounded-xl p-6 text-center">
             <h3 className="text-xl font-bold text-white mb-2">
@@ -517,10 +517,23 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
             <p className="text-gray-300 mb-4">
               Desbloqueie mais de 1.100 frases adicionais e acesso ilimitado
             </p>
-            <button className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 px-8 py-3 rounded-full text-white font-bold transition-all duration-300 flex items-center justify-center gap-2">
-              <SendIcon size={18} className="text-white" />
-              Upgrade para Premium
-            </button>
+            <div className="flex flex-col gap-3 justify-center">
+              <button 
+                onClick={handleUpgrade}
+                className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 px-8 py-3 rounded-full text-white font-bold transition-all duration-300 flex items-center justify-center gap-2"
+              >
+                <SendIcon size={18} className="text-white" />
+                Upgrade para Premium
+              </button>
+              
+              {getTimeUntilReset() && (
+                <div className="bg-gray-800/50 px-4 py-3 rounded-lg border border-gray-600">
+                  <span className="text-gray-300 text-sm">
+                    ⏰ Reset em: <span className="text-white font-semibold">{getTimeUntilReset()}</span>
+                  </span>
+                </div>
+              )}
+            </div>
             </div>
           </PageTransition>
         )}
