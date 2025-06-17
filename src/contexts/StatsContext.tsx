@@ -115,7 +115,11 @@ export function StatsProvider({ children }: { children: ReactNode }) {
 
   // Carregar dados apenas uma vez por usuário - com detecção de ambiente
   useEffect(() => {
-    const isLocalDev = process.env.NEXT_PUBLIC_IS_LOCAL_DEV === 'true'
+    // Detectar se está em ambiente local (localhost) vs staging/produção
+    const isLocalhost = typeof window !== 'undefined' && 
+                       (window.location.hostname === 'localhost' || 
+                        window.location.hostname === '127.0.0.1')
+    const isLocalDev = process.env.NEXT_PUBLIC_IS_LOCAL_DEV === 'true' && isLocalhost
     
     if (isLocalDev) {
       console.log('🚀 CONTEXT: Modo desenvolvimento local - stats desabilitado')

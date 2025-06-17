@@ -71,15 +71,18 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   }
 
   useEffect(() => {
-    // Detectar se está em ambiente local
-    const isLocalDev = process.env.NEXT_PUBLIC_IS_LOCAL_DEV === 'true'
+    // Detectar se está em ambiente local (localhost) vs staging/produção
+    const isLocalhost = typeof window !== 'undefined' && 
+                       (window.location.hostname === 'localhost' || 
+                        window.location.hostname === '127.0.0.1')
+    const isLocalDev = process.env.NEXT_PUBLIC_IS_LOCAL_DEV === 'true' && isLocalhost
     
     const initializeAuth = async () => {
       try {
-        console.log('Inicializando auth context...', { isLocalDev })
+        console.log('Inicializando auth context...', { isLocalDev, hostname: typeof window !== 'undefined' ? window.location.hostname : 'server' })
         
         if (isLocalDev) {
-          // Em desenvolvimento local, não conectar com Supabase
+          // Apenas em desenvolvimento local (localhost), não conectar com Supabase
           console.log('Modo desenvolvimento local - auth desabilitado')
           setSession(null)
           setUser(null)
