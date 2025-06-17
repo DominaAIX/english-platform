@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { useAuth } from '@/contexts/AuthContext'
 import AuthModal from './AuthModal'
+import UserAvatar from './UserAvatar'
 
 export default function AuthButton() {
   const { user, loading, signOut } = useAuth()
@@ -27,9 +28,7 @@ export default function AuthButton() {
     return (
       <div className="flex items-center gap-2 md:gap-4">
         <div className="flex items-center gap-2 md:gap-3">
-          <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-gradient-to-r from-purple-500 to-cyan-500 flex items-center justify-center text-white text-xs md:text-sm font-bold">
-            {userName.charAt(0).toUpperCase()}
-          </div>
+          <UserAvatar user={user} size="sm" />
           <span className="text-white text-xs md:text-sm hidden sm:inline">
             Olá, {userName.split(' ')[0]}!
           </span>
@@ -46,26 +45,14 @@ export default function AuthButton() {
 
   return (
     <>
-      <div className="flex gap-2">
-        <button
-          onClick={handleOpenModal}
-          className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 px-3 py-2 md:px-6 md:py-3 rounded-full text-white font-semibold transition-all duration-300 text-sm md:text-base shadow-lg hover:shadow-xl cursor-pointer z-[9999] relative"
-          style={{ cursor: 'pointer', zIndex: 9999, position: 'relative' }}
-        >
-          <span className="hidden sm:inline">Entrar / Cadastrar</span>
-          <span className="sm:hidden">Entrar</span>
-        </button>
-        
-        {/* Botão Demo temporário */}
-        <button
-          onClick={() => {
-            window.location.href = '/dashboard'
-          }}
-          className="bg-gray-700 hover:bg-gray-600 px-3 py-2 md:px-6 md:py-3 rounded-full text-white font-semibold transition-all duration-300 text-sm md:text-base border border-gray-600"
-        >
-          Demo
-        </button>
-      </div>
+      <button
+        onClick={handleOpenModal}
+        className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 px-3 py-2 md:px-6 md:py-3 rounded-full text-white font-semibold transition-all duration-300 text-sm md:text-base shadow-lg hover:shadow-xl cursor-pointer z-[9999] relative"
+        style={{ cursor: 'pointer', zIndex: 9999, position: 'relative' }}
+      >
+        <span className="hidden sm:inline">Entrar / Cadastrar</span>
+        <span className="sm:hidden">Entrar</span>
+      </button>
       
       <AuthModal 
         isOpen={showAuthModal} 
