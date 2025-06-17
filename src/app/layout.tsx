@@ -54,10 +54,17 @@ export default function RootLayout({
       >
         <AuthProvider>
           <StatsProvider>
+            {/* Environment Indicator */}
+            {process.env.NEXT_PUBLIC_IS_STAGING === 'true' && (
+              <div className="fixed top-0 left-0 right-0 bg-orange-600 text-white text-center py-1 text-sm font-semibold z-50">
+                🔧 AMBIENTE DE HOMOLOGAÇÃO - Para validação antes da produção
+              </div>
+            )}
+            
             <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-purple-600 text-white px-4 py-2 rounded-md z-50">
               Pular para o conteúdo principal
             </a>
-            <main id="main-content">
+            <main id="main-content" style={{ paddingTop: process.env.NEXT_PUBLIC_IS_STAGING === 'true' ? '2rem' : '0' }}>
               {children}
             </main>
           </StatsProvider>
