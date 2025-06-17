@@ -616,42 +616,6 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
           </PageTransition>
         )}
 
-        {/* Lista Completa - Para usuários premium sem favoritos ou com favoritos desabilitados */}
-        {actualUserPlan === 'premium' && favoritePhrases.length === 0 && (
-          <PageTransition delay={800}>
-            <div className="mt-8">
-            <h3 className="text-xl font-bold text-white mb-4">Todas as Frases ({availablePhrases.length})</h3>
-            <div className="grid gap-3">
-              {availablePhrases.map((phrase, index) => (
-                <div 
-                  key={index}
-                  onClick={() => setCurrentPhraseIndex(index)}
-                  className={`p-4 rounded-lg border cursor-pointer transition-all duration-200 ${
-                    index === currentPhraseIndex 
-                      ? 'border-purple-500 bg-purple-900/20' 
-                      : 'border-gray-700 bg-gray-800/30 hover:border-gray-600'
-                  } ${completedPhrases.includes(index) ? 'opacity-75' : ''}`}
-                >
-                  <div className="flex items-center justify-between">
-                    <div className="flex-1">
-                      <p className="text-white font-medium mb-1">{phrase.english}</p>
-                      <div className="flex items-center gap-2">
-                        <span className={`px-2 py-1 rounded text-xs ${getLevelColor(phrase.level)}`}>
-                          {phrase.level}
-                        </span>
-                        <span className="text-gray-400 text-sm">{phrase.context}</span>
-                      </div>
-                    </div>
-                    {completedPhrases.includes(index) && (
-                      <span className="text-green-400 text-xl">✓</span>
-                    )}
-                  </div>
-                </div>
-              ))}
-            </div>
-            </div>
-          </PageTransition>
-        )}
 
         {/* Botão para Praticar - Para todas as trilhas com exercícios (premium) */}
         {trail.exercises && trail.exercises.length > 0 && actualUserPlan === 'premium' && (
@@ -664,13 +628,15 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
                 <p className="text-gray-300 mb-4">
                   Escolha como você quer praticar: exercícios interativos ou frases do dia a dia
                 </p>
-                <button 
-                  onClick={() => router.push(`/trilha/${slug || 'eventos'}/praticar`)}
-                  className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 px-8 py-4 rounded-xl text-white font-bold text-lg transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
-                >
-                  <SendIcon size={18} className="mr-2 text-white" />
-                  Começar a Praticar
-                </button>
+                <div className="flex justify-center">
+                  <button 
+                    onClick={() => router.push(`/trilha/${slug || 'eventos'}/praticar`)}
+                    className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 px-8 py-4 rounded-xl text-white font-bold text-lg transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 flex items-center justify-center gap-2"
+                  >
+                    <SendIcon size={18} className="text-white" />
+                    Começar a Praticar
+                  </button>
+                </div>
               </div>
             </div>
           </PageTransition>
