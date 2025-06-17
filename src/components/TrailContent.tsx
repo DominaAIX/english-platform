@@ -293,7 +293,6 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
 
       <div className="max-w-4xl mx-auto p-6">
         {/* Mensagem de limite global para usuários free */}
-        {console.log('Limite Debug:', { actualUserPlan, isPremium, isPhrasesBlocked, totalPhrasesViewed })}
         {actualUserPlan === 'free' && !isPremium && (isPhrasesBlocked || totalPhrasesViewed >= 10) && (
           <GlobalLimitMessage 
             type="phrases"
