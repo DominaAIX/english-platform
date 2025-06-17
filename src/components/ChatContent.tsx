@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import Logo from './Logo'
 import { useAuth } from '@/contexts/AuthContext'
-import { useFreePlanLimits } from '@/hooks/useFreePlanLimits'
+import { useGlobalLimits } from '@/hooks/useGlobalLimits'
 import { useStats } from '@/contexts/StatsContext'
 import FreePlanLimitMessage from './FreePlanLimitMessage'
 import PageTransition from './PageTransition'
@@ -21,13 +21,20 @@ interface Message {
 export default function ChatContent() {
   const { user } = useAuth()
   const router = useRouter()
-  const { 
-    messageCount, 
-    isBlocked, 
-    remainingMessages, 
-    timeUntilReset, 
-    incrementMessageCount 
-  } = useFreePlanLimits()
+  const {
+    totalPhrasesViewed,
+    isPhrasesBlocked, 
+    getTimeUntilReset,
+    isPremium,
+    incrementPhrases
+  } = useGlobalLimits()
+  
+  // Para compatibilidade com o código existente
+  const messageCount = totalPhrasesViewed
+  const isBlocked = isPhrasesBlocked && !isPremium
+  const remainingMessages = Math.max(0, 3 - totalPhrasesViewed)
+  const timeUntilReset = getTimeUntilReset()
+  const incrementMessageCount = incrementPhrases
   const { incrementAiMessages } = useStats()
   
   const [messages, setMessages] = useState<Message[]>([
