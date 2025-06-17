@@ -304,10 +304,6 @@ function ExercisePageClient({ trailData, slug }: { trailData: Trail, slug: strin
     alert('Funcionalidade de upgrade será implementada em breve! 🚀')
   }
 
-  const handleBackToDashboard = () => {
-    router.push('/dashboard')
-  }
-
   return (
     <AnimatedContainer className="min-h-screen">
       {/* Header */}
@@ -348,7 +344,6 @@ function ExercisePageClient({ trailData, slug }: { trailData: Trail, slug: strin
             type="exercises"
             timeUntilReset={getTimeUntilReset()}
             onUpgradeClick={handleUpgrade}
-            onBackToDashboard={handleBackToDashboard}
           />
         )}
 

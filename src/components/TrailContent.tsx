@@ -213,10 +213,6 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
     alert('Funcionalidade de upgrade será implementada em breve! 🚀')
   }
 
-  const handleBackToDashboard = () => {
-    router.push('/dashboard')
-  }
-
   const handleLevelChange = (level: 'todas' | 'básico' | 'médio' | 'avançado') => {
     setSelectedLevel(level)
     setCurrentPhraseIndex(0)
@@ -302,7 +298,6 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
             type="phrases"
             timeUntilReset={getTimeUntilReset()}
             onUpgradeClick={handleUpgrade}
-            onBackToDashboard={handleBackToDashboard}
           />
         )}
 
