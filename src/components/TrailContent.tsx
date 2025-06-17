@@ -146,30 +146,14 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
   
   const progress = ((completedPhrases.length) / availablePhrases.length) * 100
 
-  // DEBUG: Forçar modo free para teste (remover depois)
-  const debugForceFree = false // Mude para true para testar
-  const testIsPremium = debugForceFree ? false : isPremium
-  const testUserPlan = debugForceFree ? 'free' : actualUserPlan
-
   const handleNext = async () => {
-    console.log('🔄 HandleNext called:', {
-      currentPhraseIndex,
-      availablePhrases: availablePhrases.length,
-      isPremium: testIsPremium,
-      actualUserPlan: testUserPlan,
-      isPhrasesBlocked,
-      isLastPhrase: currentPhraseIndex === availablePhrases.length - 1,
-      debugForceFree
-    })
     
     if (!completedPhrases.includes(currentPhraseIndex)) {
       // Verificar limite global antes de permitir próxima frase
-      if (!testIsPremium) {
+      if (!isPremium) {
         const canView = incrementPhrases()
-        console.log('🔍 CanView result:', canView)
         if (!canView) {
           // Limite atingido, não permitir visualizar mais frases
-          console.log('🚫 Limite atingido, bloqueando visualização')
           return
         }
       }
@@ -180,26 +164,14 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
     }
     
     if (currentPhraseIndex < availablePhrases.length - 1) {
-      console.log('➡️ Avançando para próxima frase')
       setCurrentPhraseIndex(currentPhraseIndex + 1)
       setShowTranslation(false)
       setShowPronunciation(false)
     } else {
-      console.log('🏁 Chegou ao final das frases')
-      console.log('🔍 Verificando condições de redirecionamento:', {
-        isPremium,
-        actualUserPlan,
-        testIsPremium,
-        testUserPlan,
-        shouldRedirect: !testIsPremium && testUserPlan === 'free'
-      })
       // Se chegou ao final das frases disponíveis
-      if (!testIsPremium && testUserPlan === 'free') {
-        console.log('🔄 Redirecionando usuário free para dashboard')
+      if (!isPremium && actualUserPlan === 'free') {
         // Para usuários free, sempre redirecionar ao dashboard quando chegarem ao final
         router.push('/dashboard')
-      } else {
-        console.log('💎 Usuário premium ou condição não atendida, não redirecionando')
       }
     }
   }
@@ -239,6 +211,10 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
 
   const handleUpgrade = () => {
     alert('Funcionalidade de upgrade será implementada em breve! 🚀')
+  }
+
+  const handleBackToDashboard = () => {
+    router.push('/dashboard')
   }
 
   const handleLevelChange = (level: 'todas' | 'básico' | 'médio' | 'avançado') => {
@@ -326,6 +302,7 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
             type="phrases"
             timeUntilReset={getTimeUntilReset()}
             onUpgradeClick={handleUpgrade}
+            onBackToDashboard={handleBackToDashboard}
           />
         )}
 
@@ -523,15 +500,7 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
             </button>
             
             <button
-              onClick={(e) => {
-                console.log('🖱️ Botão clicado!', { 
-                  currentPhraseIndex, 
-                  availablePhrases: availablePhrases.length,
-                  isLastPhrase: currentPhraseIndex === availablePhrases.length - 1 
-                })
-                e.preventDefault()
-                handleNext()
-              }}
+              onClick={handleNext}
               className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 px-6 py-3 rounded-full text-white font-semibold transition-all duration-300"
             >
               {currentPhraseIndex === availablePhrases.length - 1 ? 

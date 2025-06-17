@@ -4,9 +4,10 @@ interface GlobalLimitMessageProps {
   type: 'phrases' | 'exercises'
   timeUntilReset: string | null
   onUpgradeClick: () => void
+  onBackToDashboard?: () => void
 }
 
-export default function GlobalLimitMessage({ type, timeUntilReset, onUpgradeClick }: GlobalLimitMessageProps) {
+export default function GlobalLimitMessage({ type, timeUntilReset, onUpgradeClick, onBackToDashboard }: GlobalLimitMessageProps) {
   const isPhrase = type === 'phrases'
   
   return (
@@ -38,6 +39,15 @@ export default function GlobalLimitMessage({ type, timeUntilReset, onUpgradeClic
           >
             ⚡ Upgrade para Pro
           </button>
+          
+          {onBackToDashboard && (
+            <button
+              onClick={onBackToDashboard}
+              className="bg-gray-700 hover:bg-gray-600 px-6 py-3 rounded-lg text-white font-semibold transition-all duration-300"
+            >
+              🏠 Voltar ao Dashboard
+            </button>
+          )}
           
           {timeUntilReset && (
             <div className="bg-gray-800/50 px-4 py-3 rounded-lg border border-gray-600">
