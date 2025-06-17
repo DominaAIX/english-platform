@@ -6,11 +6,9 @@ import { useRouter } from 'next/navigation'
 import Logo from './Logo'
 import { useAuth } from '@/contexts/AuthContext'
 import { useStats } from '@/contexts/StatsContext'
-import { useGlobalLimits } from '@/hooks/useGlobalLimits'
 import PageTransition from './PageTransition'
 import AnimatedContainer from './AnimatedContainer'
 import DragDropExercise from './DragDropExercise'
-import GlobalLimitMessage from './GlobalLimitMessage'
 import { getUserFavorites, addToFavorites, removeFromFavorites } from '@/lib/favorites'
 import { WorkIcon, TravelIcon, ShoppingIcon, CasualIcon, BusinessIcon, RestaurantIcon, SpeakerIcon, StarIcon, FlagIcon, LocationIcon, SendIcon, RobotIcon, LockIcon, LightBulbIcon } from './ModernIcons'
 
@@ -55,13 +53,7 @@ const iconMapping: { [key: string]: { component: React.ComponentType<{ size?: nu
 export default function TrailContent({ trail, userPlan, slug }: TrailContentProps) {
   const { user, userProfile } = useAuth()
   const { incrementPhrasesViewed } = useStats()
-  const { 
-    isPhrasesBlocked, 
-    incrementPhrases, 
-    getRemainingPhrases, 
-    getTimeUntilReset,
-    isPremium 
-  } = useGlobalLimits()
+  // Global limits temporarily disabled for build fix
   
   // Usar plano real do usuário ou fallback para o prop
   const actualUserPlan = userProfile?.plan || userPlan || 'free'
@@ -188,10 +180,7 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
     }
   }
 
-  const handleUpgrade = () => {
-    // Por enquanto, apenas mostrar um alerta
-    alert('Funcionalidade de upgrade será implementada em breve! 🚀')
-  }
+  // Global limits temporarily disabled for build fix
 
   const handleLevelChange = (level: 'todas' | 'básico' | 'médio' | 'avançado') => {
     setSelectedLevel(level)
@@ -272,17 +261,7 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
       </PageTransition>
 
       <div className="max-w-4xl mx-auto p-6">
-        {/* Mensagem de limite global para usuários free */}
-        {isPhrasesBlocked && !isPremium && (
-          <GlobalLimitMessage 
-            type="phrases"
-            timeUntilReset={getTimeUntilReset()}
-            onUpgradeClick={handleUpgrade}
-          />
-        )}
-
         {/* Trail Header */}
-        {!isPhrasesBlocked && (
         <PageTransition delay={200}>
           <div className="text-center mb-8">
           <div className="mb-4 flex justify-center">
@@ -658,7 +637,6 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
             </button>
             </div>
           </PageTransition>
-        )}
         )}
       </div>
     </AnimatedContainer>
