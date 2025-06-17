@@ -212,6 +212,19 @@ export default function ChatContent() {
   }
 
   const speakMessage = async (text: string, messageId: string) => {
+    // Verificar se usuário excedeu limite para áudio
+    if (isBlocked) {
+      // Mostrar mensagem de limite excedido
+      const limitAudioMessage: Message = {
+        id: Date.now().toString(),
+        role: 'assistant',
+        content: '🔊 Limite de áudio excedido para conta gratuita. Para ouvir as mensagens, você precisa aguardar 24 horas ou fazer upgrade para o plano Pro! ⏰',
+        timestamp: new Date()
+      }
+      setMessages(prev => [...prev, limitAudioMessage])
+      return
+    }
+
     try {
       setPlayingAudio(messageId)
 
@@ -356,15 +369,23 @@ export default function ChatContent() {
                         {message.role === 'assistant' && (
                           <button
                             onClick={() => speakMessage(message.content, message.id)}
-                            disabled={playingAudio === message.id}
+                            disabled={playingAudio === message.id || isBlocked}
                             className={`p-2 rounded-full transition-colors text-sm ${
                               playingAudio === message.id 
                                 ? 'bg-green-600 animate-pulse cursor-not-allowed' 
+                                : isBlocked
+                                ? 'bg-gray-600 opacity-50 cursor-not-allowed'
                                 : 'bg-blue-600 hover:bg-blue-700'
                             }`}
-                            title={playingAudio === message.id ? "Reproduzindo..." : "Ouvir com voz IA"}
+                            title={
+                              playingAudio === message.id 
+                                ? "Reproduzindo..." 
+                                : isBlocked 
+                                ? "Limite de áudio excedido - Aguarde 24h ou faça upgrade" 
+                                : "Ouvir com voz IA"
+                            }
                           >
-                            {playingAudio === message.id ? '🎵' : '🔊'}
+                            {playingAudio === message.id ? '🎵' : isBlocked ? '🔇' : '🔊'}
                           </button>
                         )}
                       </div>
