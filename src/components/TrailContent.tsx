@@ -202,6 +202,7 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
   }
 
   const handleLogoClick = () => {
+    console.log('Logo clicked - User:', !!user, 'UserProfile:', !!userProfile)
     if (user) {
       router.push('/dashboard')
     } else {
@@ -293,7 +294,7 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
 
       <div className="max-w-4xl mx-auto p-6">
         {/* Mensagem de limite global para usuários free */}
-        {((isPhrasesBlocked && !isPremium) || (actualUserPlan === 'free' && totalPhrasesViewed >= 10)) && (
+        {actualUserPlan === 'free' && !isPremium && isPhrasesBlocked && (
           <GlobalLimitMessage 
             type="phrases"
             timeUntilReset={getTimeUntilReset()}
