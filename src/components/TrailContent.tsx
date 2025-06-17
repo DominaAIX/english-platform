@@ -6,9 +6,11 @@ import { useRouter } from 'next/navigation'
 import Logo from './Logo'
 import { useAuth } from '@/contexts/AuthContext'
 import { useStats } from '@/contexts/StatsContext'
+import { useGlobalLimits } from '@/hooks/useGlobalLimits'
 import PageTransition from './PageTransition'
 import AnimatedContainer from './AnimatedContainer'
 import DragDropExercise from './DragDropExercise'
+import GlobalLimitMessage from './GlobalLimitMessage'
 import { getUserFavorites, addToFavorites, removeFromFavorites } from '@/lib/favorites'
 import { WorkIcon, TravelIcon, ShoppingIcon, CasualIcon, BusinessIcon, RestaurantIcon, SpeakerIcon, StarIcon, FlagIcon, LocationIcon, SendIcon, RobotIcon, LockIcon, LightBulbIcon } from './ModernIcons'
 
@@ -53,6 +55,13 @@ const iconMapping: { [key: string]: { component: React.ComponentType<{ size?: nu
 export default function TrailContent({ trail, userPlan, slug }: TrailContentProps) {
   const { user, userProfile } = useAuth()
   const { incrementPhrasesViewed } = useStats()
+  const { 
+    isPhrasesBlocked, 
+    incrementPhrases, 
+    getRemainingPhrases, 
+    getTimeUntilReset,
+    isPremium 
+  } = useGlobalLimits()
   
   // Usar plano real do usuário ou fallback para o prop
   const actualUserPlan = userProfile?.plan || userPlan || 'free'
@@ -125,8 +134,17 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
 
   const handleNext = async () => {
     if (!completedPhrases.includes(currentPhraseIndex)) {
+      // Verificar limite global antes de permitir próxima frase
+      if (!isPremium) {
+        const canView = incrementPhrases()
+        if (!canView) {
+          // Limite atingido, não permitir visualizar mais frases
+          return
+        }
+      }
+      
       setCompletedPhrases([...completedPhrases, currentPhraseIndex])
-      // Incrementar contador de frases visualizadas
+      // Incrementar contador de frases visualizadas (para stats)
       await incrementPhrasesViewed()
     }
     
@@ -168,6 +186,11 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
     } else {
       router.push('/')
     }
+  }
+
+  const handleUpgrade = () => {
+    // Por enquanto, apenas mostrar um alerta
+    alert('Funcionalidade de upgrade será implementada em breve! 🚀')
   }
 
   const handleLevelChange = (level: 'todas' | 'básico' | 'médio' | 'avançado') => {
@@ -249,7 +272,17 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
       </PageTransition>
 
       <div className="max-w-4xl mx-auto p-6">
+        {/* Mensagem de limite global para usuários free */}
+        {isPhrasesBlocked && !isPremium && (
+          <GlobalLimitMessage 
+            type="phrases"
+            timeUntilReset={getTimeUntilReset()}
+            onUpgradeClick={handleUpgrade}
+          />
+        )}
+
         {/* Trail Header */}
+        {!isPhrasesBlocked && (
         <PageTransition delay={200}>
           <div className="text-center mb-8">
           <div className="mb-4 flex justify-center">
@@ -625,6 +658,7 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
             </button>
             </div>
           </PageTransition>
+        )}
         )}
       </div>
     </AnimatedContainer>
