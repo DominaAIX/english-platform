@@ -33,6 +33,14 @@ export default function HomePage() {
       setIsClosingMenu(false)
     }, 300) // Duração da animação de saída
   }
+
+  const handleLogoClick = () => {
+    if (user) {
+      router.push('/dashboard')
+    } else {
+      // Já está na home, não precisa fazer nada
+    }
+  }
   
   const typingPhrases = [
     "Let's grab a coffee?",
@@ -76,10 +84,13 @@ export default function HomePage() {
         <header className="relative z-[9999] p-3 md:p-6" style={{ pointerEvents: 'auto' }}>
         <div className="max-w-7xl mx-auto flex justify-between items-center flex-wrap gap-2">
           {/* Logo - always on the left */}
-          <div className="text-lg md:text-2xl font-bold text-white flex items-center gap-2 md:gap-3">
-<Logo size="sm" className="md:w-10 md:h-10" />
+          <button 
+            onClick={handleLogoClick}
+            className="text-lg md:text-2xl font-bold text-white flex items-center gap-2 md:gap-3 hover:opacity-80 transition-opacity"
+          >
+            <Logo size="sm" className="md:w-10 md:h-10" />
             <span>Inglês pra Já</span>
-          </div>
+          </button>
 
           {/* Desktop auth button */}
           <div className="hidden md:block">
