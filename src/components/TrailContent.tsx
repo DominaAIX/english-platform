@@ -516,7 +516,7 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
               🎉 Você completou o limite gratuito!
             </h3>
             <p className="text-gray-300 mb-4">
-              Desbloqueie mais de 1.100 frases adicionais e acesso ilimitado
+              Desbloqueie mais de 1.100 frases adicionais e acesso ilimitado a todas as trilhas
             </p>
             <div className="flex flex-col gap-3 justify-center">
               <button 
