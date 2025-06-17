@@ -628,13 +628,15 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
                 <p className="text-gray-300 mb-4">
                   Escolha como você quer praticar: exercícios interativos ou frases do dia a dia
                 </p>
-                <button 
-                  onClick={() => router.push(`/trilha/${slug || 'eventos'}/praticar`)}
-                  className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 px-8 py-4 rounded-xl text-white font-bold text-lg transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 flex items-center justify-center gap-2"
-                >
-                  <SendIcon size={18} className="text-white" />
-                  Começar a Praticar
-                </button>
+                <div className="flex justify-center">
+                  <button 
+                    onClick={() => router.push(`/trilha/${slug || 'eventos'}/praticar`)}
+                    className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 px-8 py-4 rounded-xl text-white font-bold text-lg transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 flex items-center justify-center gap-2"
+                  >
+                    <SendIcon size={18} className="text-white" />
+                    Começar a Praticar
+                  </button>
+                </div>
               </div>
             </div>
           </PageTransition>
