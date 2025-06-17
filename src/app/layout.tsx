@@ -21,14 +21,14 @@ export const metadata: Metadata = {
   keywords: ["inglês", "english", "AI", "aprender inglês", "conversação", "english tutor", "inglês pra já"],
   icons: {
     icon: [
-      { url: '/favicon.ico', sizes: 'any' },
-      { url: '/logo.png', sizes: '32x32', type: 'image/png' },
-      { url: '/logo.png', sizes: '16x16', type: 'image/png' },
+      { url: '/ingles-favicon.ico', sizes: 'any' },
+      { url: '/ingles-icon.png', sizes: '32x32', type: 'image/png' },
+      { url: '/ingles-icon.png', sizes: '16x16', type: 'image/png' },
     ],
     apple: [
       { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
     ],
-    shortcut: '/favicon.ico',
+    shortcut: '/ingles-favicon.ico',
   },
   openGraph: {
     title: "Inglês pra Já - Aprenda Inglês do Dia a Dia",
@@ -45,10 +45,11 @@ export default function RootLayout({
   return (
     <html lang="pt-br">
       <head>
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link rel="icon" href="/logo.png" type="image/png" sizes="32x32" />
-        <link rel="icon" href="/logo.png" type="image/png" sizes="16x16" />
+        <link rel="icon" href="/ingles-favicon.ico" sizes="any" />
+        <link rel="icon" href="/ingles-icon.png" type="image/png" sizes="32x32" />
+        <link rel="icon" href="/ingles-icon.png" type="image/png" sizes="16x16" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
+        <link rel="shortcut icon" href="/ingles-favicon.ico" />
         <meta name="theme-color" content="#1a1a2e" />
       </head>
       <body
