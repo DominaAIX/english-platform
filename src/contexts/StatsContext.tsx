@@ -113,8 +113,16 @@ export function StatsProvider({ children }: { children: ReactNode }) {
     }
   }, [user?.id])
 
-  // Carregar dados apenas uma vez por usuário
+  // Carregar dados apenas uma vez por usuário - com detecção de ambiente
   useEffect(() => {
+    const isLocalDev = process.env.NEXT_PUBLIC_IS_LOCAL_DEV === 'true'
+    
+    if (isLocalDev) {
+      console.log('🚀 CONTEXT: Modo desenvolvimento local - stats desabilitado')
+      setIsLoaded(true)
+      return
+    }
+    
     if (!user?.id || isLoaded) return
     console.log('🚀 CONTEXT: Iniciando carregamento para:', user.id)
     loadStats(user.id)

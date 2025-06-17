@@ -41,56 +41,27 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [session, setSession] = useState<Session | null>(null)
   const [loading, setLoading] = useState(true)
 
-  // Função para buscar perfil do usuário
+  // Função para buscar perfil do usuário - versão simplificada
   const fetchUserProfile = async (userId: string): Promise<UserProfile> => {
     try {
-      console.log('Buscando perfil para userId:', userId)
+      console.log('Criando perfil local para userId:', userId)
       
-      // Adicionar timeout para evitar travamento
-      const timeoutPromise = new Promise((_, reject) => {
-        setTimeout(() => reject(new Error('Timeout na busca do perfil')), 5000)
-      })
-      
-      const searchPromise = supabase
-        .from('users')
-        .select('id, email, plan, created_at')
-        .eq('id', userId)
-        .single()
-      
-      const { data, error } = await Promise.race([searchPromise, timeoutPromise]) as any
-      
-      console.log('Resultado da busca:', { data, error })
-      
-      if (error) {
-        console.error('Erro ao buscar perfil do usuário:', error)
-        console.log('Criando perfil padrão...')
-        
-        // Buscar email do auth
-        const { data: authUser } = await supabase.auth.getUser()
-        const email = authUser.user?.email || ''
-        
-        // Todas as contas são free por padrão até implementar pagamento
-        const plan = 'free'
-        
-        const defaultProfile: UserProfile = {
-          id: userId,
-          email: email,
-          plan: plan as 'free' | 'premium',
-          created_at: new Date().toISOString()
-        }
-        console.log('Perfil padrão criado:', defaultProfile)
-        return defaultProfile
+      // Criar perfil local por enquanto
+      const defaultProfile: UserProfile = {
+        id: userId,
+        email: 'user@example.com',
+        plan: 'free' as const,
+        created_at: new Date().toISOString()
       }
-      
-      console.log('Perfil encontrado:', data)
-      return data as UserProfile
+      console.log('Perfil local criado:', defaultProfile)
+      return defaultProfile
     } catch (error) {
-      console.error('Erro ao buscar perfil:', error)
+      console.error('Erro ao criar perfil:', error)
       
       // Perfil de emergência
       const fallbackProfile: UserProfile = {
         id: userId,
-        email: '',
+        email: 'fallback@example.com',
         plan: 'free' as const,
         created_at: new Date().toISOString()
       }
@@ -100,27 +71,25 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   }
 
   useEffect(() => {
-    // Get initial session
-    const getSession = async () => {
-      const { data: { session } } = await supabase.auth.getSession()
-      setSession(session)
-      setUser(session?.user ?? null)
-      
-      if (session?.user) {
-        const profile = await fetchUserProfile(session.user.id)
-        setUserProfile(profile)
-      } else {
-        setUserProfile(null)
-      }
-      
-      setLoading(false)
-    }
-
-    getSession()
-
-    // Listen for auth changes
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      async (event, session) => {
+    // Detectar se está em ambiente local
+    const isLocalDev = process.env.NEXT_PUBLIC_IS_LOCAL_DEV === 'true'
+    
+    const initializeAuth = async () => {
+      try {
+        console.log('Inicializando auth context...', { isLocalDev })
+        
+        if (isLocalDev) {
+          // Em desenvolvimento local, não conectar com Supabase
+          console.log('Modo desenvolvimento local - auth desabilitado')
+          setSession(null)
+          setUser(null)
+          setUserProfile(null)
+          setLoading(false)
+          return
+        }
+        
+        // Em produção, usar Supabase normalmente
+        const { data: { session } } = await supabase.auth.getSession()
         setSession(session)
         setUser(session?.user ?? null)
         
@@ -132,10 +101,33 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         }
         
         setLoading(false)
-      }
-    )
+        
+        // Listen for auth changes apenas em produção
+        const { data: { subscription } } = supabase.auth.onAuthStateChange(
+          async (event, session) => {
+            setSession(session)
+            setUser(session?.user ?? null)
+            
+            if (session?.user) {
+              const profile = await fetchUserProfile(session.user.id)
+              setUserProfile(profile)
+            } else {
+              setUserProfile(null)
+            }
+            
+            setLoading(false)
+          }
+        )
 
-    return () => subscription.unsubscribe()
+        return () => subscription.unsubscribe()
+        
+      } catch (error) {
+        console.error('Erro ao inicializar auth:', error)
+        setLoading(false)
+      }
+    }
+
+    initializeAuth()
   }, [])
 
   const signOut = async () => {

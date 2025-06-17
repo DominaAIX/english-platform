@@ -8,6 +8,10 @@ const nextConfig = {
     // Ignorar erros de TypeScript durante o build  
     ignoreBuildErrors: true,
   },
+  env: {
+    // Flag para indicar ambiente de desenvolvimento local
+    NEXT_PUBLIC_IS_LOCAL_DEV: 'true'
+  },
 }
 
 module.exports = nextConfig
