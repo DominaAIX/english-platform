@@ -41,37 +41,58 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [session, setSession] = useState<Session | null>(null)
   const [loading, setLoading] = useState(true)
 
-  // Função para buscar perfil do usuário - versão simplificada para debug
+  // Função para buscar perfil do usuário - versão corrigida
   const fetchUserProfile = async (userId: string): Promise<UserProfile> => {
     try {
-      console.log('Criando perfil para userId:', userId)
+      console.log('Buscando perfil para userId:', userId)
       
-      // Se for o Denis, retornar premium automaticamente
       const user = await supabase.auth.getUser()
       const userEmail = user.data.user?.email
       
-      if (userEmail === 'denis_esteban@icloud.com') {
+      // Usuários premium conhecidos - forçar premium
+      if (userEmail === 'denis_esteban@icloud.com' || userEmail === 'teste@premium.com') {
         const premiumProfile: UserProfile = {
           id: userId,
           email: userEmail,
           plan: 'premium' as const,
           created_at: new Date().toISOString()
         }
-        console.log('Perfil PREMIUM criado para Denis:', premiumProfile)
+        console.log('✅ Perfil PREMIUM forçado para:', userEmail, premiumProfile)
         return premiumProfile
       }
       
-      // Para outros usuários, tentar buscar do banco
+      // Tentar buscar do banco para outros usuários
+      try {
+        const { data, error } = await supabase
+          .from('user_profiles')
+          .select('*')
+          .eq('id', userId)
+          .single()
+        
+        if (!error && data) {
+          console.log('✅ Perfil encontrado no banco:', data)
+          return {
+            id: data.id,
+            email: data.email,
+            plan: data.plan as 'free' | 'premium',
+            created_at: data.created_at
+          }
+        }
+      } catch (dbError) {
+        console.log('⚠️ Erro ao buscar no banco, usando padrão:', dbError)
+      }
+      
+      // Perfil padrão se não encontrar
       const defaultProfile: UserProfile = {
         id: userId,
         email: userEmail || 'user@example.com',
         plan: 'free' as const,
         created_at: new Date().toISOString()
       }
-      console.log('Perfil padrão criado:', defaultProfile)
+      console.log('📝 Perfil padrão criado:', defaultProfile)
       return defaultProfile
     } catch (error) {
-      console.error('Erro ao criar perfil:', error)
+      console.error('❌ Erro geral ao buscar perfil:', error)
       
       // Perfil de emergência
       const fallbackProfile: UserProfile = {
@@ -80,7 +101,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         plan: 'free' as const,
         created_at: new Date().toISOString()
       }
-      console.log('Perfil fallback:', fallbackProfile)
+      console.log('🆘 Perfil fallback:', fallbackProfile)
       return fallbackProfile
     }
   }
