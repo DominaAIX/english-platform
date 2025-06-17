@@ -59,9 +59,52 @@ export default function DashboardContent() {
     }
   }
 
-  const demoUser = {
-    name: 'Usuário',
-    image: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&h=150&fit=crop&crop=face'
+  // Função para obter imagem do usuário
+  const getUserImage = () => {
+    // Verificar se tem foto do Google (user metadata ou avatar_url)
+    const googlePhoto = (user as any)?.user_metadata?.avatar_url || 
+                       (user as any)?.user_metadata?.picture ||
+                       (user as any)?.avatar_url
+
+    if (googlePhoto) {
+      return googlePhoto
+    }
+
+    // Se não tem foto do Google, verificar se é login com Google
+    const isGoogleLogin = (user as any)?.app_metadata?.provider === 'google' ||
+                         (user as any)?.user_metadata?.iss?.includes('accounts.google.com')
+
+    if (isGoogleLogin && !googlePhoto) {
+      // Para logins do Google sem foto, usar avatar abstrato baseado no email
+      const email = userProfile?.email || (user as any)?.email || 'user@example.com'
+      const hash = email.split('').reduce((a, b) => {
+        a = ((a << 5) - a) + b.charCodeAt(0)
+        return a & a
+      }, 0)
+      const colors = [
+        'FF6B6B', 'FFD93D', '6BCF7F', '4ECDC4', 
+        'A8E6CF', 'FFB6C1', 'DDA0DD', 'F0E68C',
+        '98D8E8', 'F7DC6F', 'BB8FCE', 'F8C471'
+      ]
+      const color = colors[Math.abs(hash) % colors.length]
+      const initial = getUserDisplayName().charAt(0).toUpperCase()
+      return `https://ui-avatars.com/api/?name=${initial}&background=${color}&color=fff&size=150&font-size=0.6&bold=true`
+    }
+
+    // Para logins com email (não Google), usar avatar abstrato
+    const email = userProfile?.email || (user as any)?.email || 'user@example.com'
+    const hash = email.split('').reduce((a, b) => {
+      a = ((a << 5) - a) + b.charCodeAt(0)
+      return a & a
+    }, 0)
+    const colors = [
+      '667eea', 'f093fb', '4facfe', '43e97b',
+      'fa709a', 'fee140', 'a8edea', 'fed6e3',
+      'ffecd2', 'fcb69f', 'c1dfc4', 'deaaff'
+    ]
+    const color = colors[Math.abs(hash) % colors.length]
+    const initial = getUserDisplayName().charAt(0).toUpperCase()
+    return `https://ui-avatars.com/api/?name=${initial}&background=${color}&color=fff&size=150&font-size=0.6&bold=true`
   }
 
   const trails = [
@@ -139,9 +182,16 @@ export default function DashboardContent() {
           <div className="text-center mb-12">
             <div className="flex justify-center mb-6">
               <img 
-                src={(user as any)?.image || demoUser.image}
-                alt={(user as any)?.name || demoUser.name}
+                src={getUserImage()}
+                alt={getUserDisplayName()}
                 className="w-20 h-20 rounded-full border-4 border-purple-500/30"
+                onError={(e) => {
+                  // Fallback se a imagem não carregar
+                  const target = e.target as HTMLImageElement
+                  const email = userProfile?.email || (user as any)?.email || 'user@example.com'
+                  const initial = getUserDisplayName().charAt(0).toUpperCase()
+                  target.src = `https://ui-avatars.com/api/?name=${initial}&background=667eea&color=fff&size=150&font-size=0.6&bold=true`
+                }}
               />
             </div>
             <h1 className="text-4xl font-bold text-white mb-2">

@@ -5,9 +5,11 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import Logo from '@/components/Logo'
 import { useAuth } from '@/contexts/AuthContext'
+import { useGlobalLimits } from '@/hooks/useGlobalLimits'
 import PageTransition from '@/components/PageTransition'
 import AnimatedContainer from '@/components/AnimatedContainer'
 import DragDropExercise from '@/components/DragDropExercise'
+import GlobalLimitMessage from '@/components/GlobalLimitMessage'
 
 interface Exercise {
   id: string
@@ -247,7 +249,14 @@ export default async function ExercisePage({ params }: ExercisePageProps) {
 }
 
 function ExercisePageClient({ trailData, slug }: { trailData: Trail, slug: string }) {
-  const { user } = useAuth()
+  const { user, userProfile } = useAuth()
+  const { 
+    isExercisesBlocked, 
+    incrementExercises, 
+    getRemainingExercises, 
+    getTimeUntilReset,
+    isPremium 
+  } = useGlobalLimits()
   const router = useRouter()
   const [currentExerciseIndex, setCurrentExerciseIndex] = useState(0)
   const [completedExercises, setCompletedExercises] = useState<string[]>([])
@@ -258,6 +267,15 @@ function ExercisePageClient({ trailData, slug }: { trailData: Trail, slug: strin
 
   const handleExerciseComplete = (isCorrect: boolean) => {
     if (isCorrect && !completedExercises.includes(currentExercise.id)) {
+      // Verificar limite global antes de permitir completar exercício
+      if (!isPremium) {
+        const canComplete = incrementExercises()
+        if (!canComplete) {
+          // Limite atingido, não permitir completar mais exercícios
+          return
+        }
+      }
+      
       setCompletedExercises([...completedExercises, currentExercise.id])
     }
   }
@@ -280,6 +298,10 @@ function ExercisePageClient({ trailData, slug }: { trailData: Trail, slug: strin
     } else {
       router.push('/')
     }
+  }
+
+  const handleUpgrade = () => {
+    alert('Funcionalidade de upgrade será implementada em breve! 🚀')
   }
 
   return (
@@ -316,6 +338,18 @@ function ExercisePageClient({ trailData, slug }: { trailData: Trail, slug: strin
       </PageTransition>
 
       <div className="max-w-4xl mx-auto p-6">
+        {/* Mensagem de limite global para usuários free */}
+        {isExercisesBlocked && !isPremium && (
+          <GlobalLimitMessage 
+            type="exercises"
+            timeUntilReset={getTimeUntilReset()}
+            onUpgradeClick={handleUpgrade}
+          />
+        )}
+
+        {/* Conteúdo principal só aparece se não estiver bloqueado */}
+        {!isExercisesBlocked && (
+        <>
         {/* Trail Header */}
         <PageTransition delay={200}>
           <div className="text-center mb-8">
@@ -449,6 +483,8 @@ function ExercisePageClient({ trailData, slug }: { trailData: Trail, slug: strin
               </div>
             </div>
           </PageTransition>
+        )}
+        </>
         )}
       </div>
     </AnimatedContainer>

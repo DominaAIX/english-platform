@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import Logo from './Logo'
 import { useAuth } from '@/contexts/AuthContext'
-import { useFreePlanLimits } from '@/hooks/useFreePlanLimits'
+import { useGlobalLimits } from '@/hooks/useGlobalLimits'
 import { useStats } from '@/contexts/StatsContext'
 import FreePlanLimitMessage from './FreePlanLimitMessage'
 import PageTransition from './PageTransition'
@@ -21,13 +21,20 @@ interface Message {
 export default function ChatContent() {
   const { user } = useAuth()
   const router = useRouter()
-  const { 
-    messageCount, 
-    isBlocked, 
-    remainingMessages, 
-    timeUntilReset, 
-    incrementMessageCount 
-  } = useFreePlanLimits()
+  const {
+    totalPhrasesViewed,
+    isPhrasesBlocked, 
+    getTimeUntilReset,
+    isPremium,
+    incrementPhrases
+  } = useGlobalLimits()
+  
+  // Para compatibilidade com o código existente
+  const messageCount = totalPhrasesViewed
+  const isBlocked = isPhrasesBlocked && !isPremium
+  const remainingMessages = Math.max(0, 3 - totalPhrasesViewed)
+  const timeUntilReset = getTimeUntilReset()
+  const incrementMessageCount = incrementPhrases
   const { incrementAiMessages } = useStats()
   
   const [messages, setMessages] = useState<Message[]>([
@@ -212,6 +219,19 @@ export default function ChatContent() {
   }
 
   const speakMessage = async (text: string, messageId: string) => {
+    // Verificar se usuário excedeu limite para áudio
+    if (isBlocked) {
+      // Mostrar mensagem de limite excedido
+      const limitAudioMessage: Message = {
+        id: Date.now().toString(),
+        role: 'assistant',
+        content: '🔊 Limite de áudio excedido para conta gratuita. Para ouvir as mensagens, você precisa aguardar 24 horas ou fazer upgrade para o plano Pro! ⏰',
+        timestamp: new Date()
+      }
+      setMessages(prev => [...prev, limitAudioMessage])
+      return
+    }
+
     try {
       setPlayingAudio(messageId)
 
@@ -356,15 +376,23 @@ export default function ChatContent() {
                         {message.role === 'assistant' && (
                           <button
                             onClick={() => speakMessage(message.content, message.id)}
-                            disabled={playingAudio === message.id}
+                            disabled={playingAudio === message.id || isBlocked}
                             className={`p-2 rounded-full transition-colors text-sm ${
                               playingAudio === message.id 
                                 ? 'bg-green-600 animate-pulse cursor-not-allowed' 
+                                : isBlocked
+                                ? 'bg-gray-600 opacity-50 cursor-not-allowed'
                                 : 'bg-blue-600 hover:bg-blue-700'
                             }`}
-                            title={playingAudio === message.id ? "Reproduzindo..." : "Ouvir com voz IA"}
+                            title={
+                              playingAudio === message.id 
+                                ? "Reproduzindo..." 
+                                : isBlocked 
+                                ? "Limite de áudio excedido - Aguarde 24h ou faça upgrade" 
+                                : "Ouvir com voz IA"
+                            }
                           >
-                            {playingAudio === message.id ? '🎵' : '🔊'}
+                            {playingAudio === message.id ? '🎵' : isBlocked ? '🔇' : '🔊'}
                           </button>
                         )}
                       </div>

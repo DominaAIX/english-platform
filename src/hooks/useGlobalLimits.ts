@@ -1,0 +1,195 @@
+'use client'
+
+import { useState, useEffect } from 'react'
+import { useAuth } from '@/contexts/AuthContext'
+
+interface GlobalLimits {
+  totalPhrasesViewed: number
+  totalExercisesCompleted: number
+  phrasesLimit: number
+  exercisesLimit: number
+  isPhrasesBlocked: boolean
+  isExercisesBlocked: boolean
+  resetTime: string | null
+}
+
+export function useGlobalLimits() {
+  const { user, userProfile } = useAuth()
+  const [limits, setLimits] = useState<GlobalLimits>({
+    totalPhrasesViewed: 0,
+    totalExercisesCompleted: 0,
+    phrasesLimit: 10,
+    exercisesLimit: 3,
+    isPhrasesBlocked: false,
+    isExercisesBlocked: false,
+    resetTime: null
+  })
+
+  // Verificar se é usuário premium
+  const isPremium = userProfile?.plan === 'premium'
+
+  useEffect(() => {
+    if (!user || isPremium) {
+      // Usuários premium não têm limites
+      setLimits(prev => ({
+        ...prev,
+        isPhrasesBlocked: false,
+        isExercisesBlocked: false
+      }))
+      return
+    }
+
+    loadLimitsFromStorage()
+  }, [user, isPremium])
+
+  const loadLimitsFromStorage = () => {
+    if (!user) return
+
+    const storageKey = `user_limits_${user.id}`
+    const stored = localStorage.getItem(storageKey)
+    
+    if (stored) {
+      const data = JSON.parse(stored)
+      
+      // Verificar se passou 24 horas desde o último reset
+      const now = new Date()
+      const lastReset = new Date(data.lastReset || 0)
+      const hoursDiff = (now.getTime() - lastReset.getTime()) / (1000 * 60 * 60)
+      
+      if (hoursDiff >= 24) {
+        // Reset dos limites após 24 horas
+        resetLimits()
+      } else {
+        // Carregar limites existentes
+        setLimits({
+          totalPhrasesViewed: data.totalPhrasesViewed || 0,
+          totalExercisesCompleted: data.totalExercisesCompleted || 0,
+          phrasesLimit: 10,
+          exercisesLimit: 3,
+          isPhrasesBlocked: (data.totalPhrasesViewed || 0) >= 10,
+          isExercisesBlocked: (data.totalExercisesCompleted || 0) >= 3,
+          resetTime: data.lastReset
+        })
+      }
+    } else {
+      // Primeira vez - inicializar limites
+      resetLimits()
+    }
+  }
+
+  const resetLimits = () => {
+    const now = new Date()
+    const newLimits = {
+      totalPhrasesViewed: 0,
+      totalExercisesCompleted: 0,
+      phrasesLimit: 10,
+      exercisesLimit: 3,
+      isPhrasesBlocked: false,
+      isExercisesBlocked: false,
+      resetTime: now.toISOString()
+    }
+    
+    setLimits(newLimits)
+    
+    if (user) {
+      const storageKey = `user_limits_${user.id}`
+      localStorage.setItem(storageKey, JSON.stringify({
+        ...newLimits,
+        lastReset: now.toISOString()
+      }))
+    }
+  }
+
+  const incrementPhrases = (): boolean => {
+    if (isPremium) return true
+    if (limits.isPhrasesBlocked) return false
+    
+    const newTotal = limits.totalPhrasesViewed + 1
+    const isBlocked = newTotal >= limits.phrasesLimit
+    
+    const newLimits = {
+      ...limits,
+      totalPhrasesViewed: newTotal,
+      isPhrasesBlocked: isBlocked
+    }
+    
+    setLimits(newLimits)
+    
+    // Salvar no localStorage
+    if (user) {
+      const storageKey = `user_limits_${user.id}`
+      const stored = JSON.parse(localStorage.getItem(storageKey) || '{}')
+      localStorage.setItem(storageKey, JSON.stringify({
+        ...stored,
+        totalPhrasesViewed: newTotal
+      }))
+    }
+    
+    return !isBlocked
+  }
+
+  const incrementExercises = (): boolean => {
+    if (isPremium) return true
+    if (limits.isExercisesBlocked) return false
+    
+    const newTotal = limits.totalExercisesCompleted + 1
+    const isBlocked = newTotal >= limits.exercisesLimit
+    
+    const newLimits = {
+      ...limits,
+      totalExercisesCompleted: newTotal,
+      isExercisesBlocked: isBlocked
+    }
+    
+    setLimits(newLimits)
+    
+    // Salvar no localStorage
+    if (user) {
+      const storageKey = `user_limits_${user.id}`
+      const stored = JSON.parse(localStorage.getItem(storageKey) || '{}')
+      localStorage.setItem(storageKey, JSON.stringify({
+        ...stored,
+        totalExercisesCompleted: newTotal
+      }))
+    }
+    
+    return !isBlocked
+  }
+
+  const getRemainingPhrases = (): number => {
+    if (isPremium) return Infinity
+    return Math.max(0, limits.phrasesLimit - limits.totalPhrasesViewed)
+  }
+
+  const getRemainingExercises = (): number => {
+    if (isPremium) return Infinity
+    return Math.max(0, limits.exercisesLimit - limits.totalExercisesCompleted)
+  }
+
+  const getTimeUntilReset = (): string | null => {
+    if (!limits.resetTime) return null
+    
+    const resetTime = new Date(limits.resetTime)
+    const nextReset = new Date(resetTime.getTime() + 24 * 60 * 60 * 1000)
+    const now = new Date()
+    
+    if (now >= nextReset) return null
+    
+    const diff = nextReset.getTime() - now.getTime()
+    const hours = Math.floor(diff / (1000 * 60 * 60))
+    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))
+    
+    return `${hours}h ${minutes}m`
+  }
+
+  return {
+    ...limits,
+    isPremium,
+    incrementPhrases,
+    incrementExercises,
+    getRemainingPhrases,
+    getRemainingExercises,
+    getTimeUntilReset,
+    resetLimits
+  }
+}
