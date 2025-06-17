@@ -1,5 +1,10 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## 🌍 Environments
+
+- **Production**: `main` branch → Production URL
+- **Staging**: `staging` branch → Staging URL (for testing before production)
+
 ## Getting Started
 
 First, run the development server:
