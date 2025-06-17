@@ -655,8 +655,11 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
             <p className="text-gray-300 mb-4">
               Acesse a lista completa de frases, navegação avançada e muito mais conteúdo exclusivo!
             </p>
-            <div className="w-full flex justify-center">
-              <button className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 px-8 py-3 rounded-full text-white font-bold transition-all duration-300 flex items-center gap-2">
+            <div style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
+              <button 
+                style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
+                className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 px-8 py-3 rounded-full text-white font-bold transition-all duration-300"
+              >
                 <SendIcon size={18} className="text-white" />
                 Upgrade para Premium
               </button>
