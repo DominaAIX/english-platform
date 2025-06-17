@@ -655,10 +655,12 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
             <p className="text-gray-300 mb-4">
               Acesse a lista completa de frases, navegação avançada e muito mais conteúdo exclusivo!
             </p>
-            <button className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 px-8 py-3 rounded-full text-white font-bold transition-all duration-300 inline-flex items-center justify-center gap-2 mx-auto">
-              <SendIcon size={18} className="text-white" />
-              Upgrade para Premium
-            </button>
+            <div className="w-full flex justify-center">
+              <button className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 px-8 py-3 rounded-full text-white font-bold transition-all duration-300 flex items-center gap-2">
+                <SendIcon size={18} className="text-white" />
+                Upgrade para Premium
+              </button>
+            </div>
             </div>
           </PageTransition>
         )}
