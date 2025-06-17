@@ -6,9 +6,11 @@ import { useRouter } from 'next/navigation'
 import Logo from './Logo'
 import { useAuth } from '@/contexts/AuthContext'
 import { useStats } from '@/contexts/StatsContext'
+import { useGlobalLimits } from '@/hooks/useGlobalLimits'
 import PageTransition from './PageTransition'
 import AnimatedContainer from './AnimatedContainer'
 import DragDropExercise from './DragDropExercise'
+import GlobalLimitMessage from './GlobalLimitMessage'
 import { getUserFavorites, addToFavorites, removeFromFavorites } from '@/lib/favorites'
 import { WorkIcon, TravelIcon, ShoppingIcon, CasualIcon, BusinessIcon, RestaurantIcon, SpeakerIcon, StarIcon, FlagIcon, LocationIcon, SendIcon, RobotIcon, LockIcon, LightBulbIcon } from './ModernIcons'
 
@@ -53,7 +55,14 @@ const iconMapping: { [key: string]: { component: React.ComponentType<{ size?: nu
 export default function TrailContent({ trail, userPlan, slug }: TrailContentProps) {
   const { user, userProfile } = useAuth()
   const { incrementPhrasesViewed } = useStats()
-  // Global limits temporarily disabled for build fix
+  const { 
+    isPhrasesBlocked, 
+    incrementPhrases, 
+    getRemainingPhrases, 
+    getTimeUntilReset,
+    isPremium,
+    totalPhrasesViewed
+  } = useGlobalLimits()
   
   // Usar plano real do usuário ou fallback para o prop
   const actualUserPlan = userProfile?.plan || userPlan || 'free'
@@ -89,9 +98,15 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
       filtered = trail.phrases.filter(phrase => phrase.level === selectedLevel)
     }
     
-    // Aplicar limite para usuários free
+    // Para usuários free, aplicar limite baseado no total global visualizado
     if (actualUserPlan === 'free') {
-      filtered = filtered.slice(0, 10)
+      if (isPhrasesBlocked) {
+        // Se bloqueado, mostrar apenas as frases que já foram visualizadas (máximo totalPhrasesViewed)
+        filtered = filtered.slice(0, totalPhrasesViewed)
+      } else {
+        // Se não bloqueado, mostrar até o limite de 10 frases
+        filtered = filtered.slice(0, 10)
+      }
     }
     
     return filtered
@@ -99,6 +114,13 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
 
   const availablePhrases = getFilteredPhrases()
   const currentPhrase = availablePhrases[currentPhraseIndex]
+  
+  // Ajustar índice se necessário quando há limitação
+  useEffect(() => {
+    if (currentPhraseIndex >= availablePhrases.length && availablePhrases.length > 0) {
+      setCurrentPhraseIndex(availablePhrases.length - 1)
+    }
+  }, [currentPhraseIndex, availablePhrases.length])
   
   // Verificar se há frases disponíveis
   if (!currentPhrase && availablePhrases.length === 0) {
@@ -144,6 +166,11 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
       setCurrentPhraseIndex(currentPhraseIndex + 1)
       setShowTranslation(false)
       setShowPronunciation(false)
+    } else {
+      // Se chegou ao final e é usuário free que atingiu limite, redirecionar para dashboard
+      if (!isPremium && isPhrasesBlocked) {
+        router.push('/dashboard')
+      }
     }
   }
 
@@ -180,7 +207,9 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
     }
   }
 
-  // Global limits temporarily disabled for build fix
+  const handleUpgrade = () => {
+    alert('Funcionalidade de upgrade será implementada em breve! 🚀')
+  }
 
   const handleLevelChange = (level: 'todas' | 'básico' | 'médio' | 'avançado') => {
     setSelectedLevel(level)
@@ -261,6 +290,15 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
       </PageTransition>
 
       <div className="max-w-4xl mx-auto p-6">
+        {/* Mensagem de limite global para usuários free */}
+        {isPhrasesBlocked && !isPremium && (
+          <GlobalLimitMessage 
+            type="phrases"
+            timeUntilReset={getTimeUntilReset()}
+            onUpgradeClick={handleUpgrade}
+          />
+        )}
+
         {/* Trail Header */}
         <PageTransition delay={200}>
           <div className="text-center mb-8">
@@ -458,7 +496,10 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
               onClick={handleNext}
               className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 px-6 py-3 rounded-full text-white font-semibold transition-all duration-300"
             >
-              {currentPhraseIndex === availablePhrases.length - 1 ? 'Finalizar' : 'Próxima →'}
+              {currentPhraseIndex === availablePhrases.length - 1 ? 
+                (isPhrasesBlocked && !isPremium ? 'Voltar ao Dashboard' : 'Finalizar') : 
+                'Próxima →'
+              }
             </button>
           </div>
           </div>
