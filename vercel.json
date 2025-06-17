@@ -7,13 +7,5 @@
   },
   "github": {
     "autoAlias": false
-  },
-  "env": {
-    "NEXT_PUBLIC_VERCEL_ENV": "@vercel-env"
-  },
-  "build": {
-    "env": {
-      "NEXT_PUBLIC_VERCEL_ENV": "@vercel-env"
-    }
   }
 }
