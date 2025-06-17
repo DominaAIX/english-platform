@@ -41,19 +41,34 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [session, setSession] = useState<Session | null>(null)
   const [loading, setLoading] = useState(true)
 
-  // Função para buscar perfil do usuário - versão simplificada
+  // Função para buscar perfil do usuário - versão simplificada para debug
   const fetchUserProfile = async (userId: string): Promise<UserProfile> => {
     try {
-      console.log('Criando perfil local para userId:', userId)
+      console.log('Criando perfil para userId:', userId)
       
-      // Criar perfil local por enquanto
+      // Se for o Denis, retornar premium automaticamente
+      const user = await supabase.auth.getUser()
+      const userEmail = user.data.user?.email
+      
+      if (userEmail === 'denis_esteban@icloud.com') {
+        const premiumProfile: UserProfile = {
+          id: userId,
+          email: userEmail,
+          plan: 'premium' as const,
+          created_at: new Date().toISOString()
+        }
+        console.log('Perfil PREMIUM criado para Denis:', premiumProfile)
+        return premiumProfile
+      }
+      
+      // Para outros usuários, tentar buscar do banco
       const defaultProfile: UserProfile = {
         id: userId,
-        email: 'user@example.com',
+        email: userEmail || 'user@example.com',
         plan: 'free' as const,
         created_at: new Date().toISOString()
       }
-      console.log('Perfil local criado:', defaultProfile)
+      console.log('Perfil padrão criado:', defaultProfile)
       return defaultProfile
     } catch (error) {
       console.error('Erro ao criar perfil:', error)
