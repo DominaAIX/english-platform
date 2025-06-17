@@ -630,9 +630,9 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
                 </p>
                 <button 
                   onClick={() => router.push(`/trilha/${slug || 'eventos'}/praticar`)}
-                  className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 px-8 py-4 rounded-xl text-white font-bold text-lg transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
+                  className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 px-8 py-4 rounded-xl text-white font-bold text-lg transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 flex items-center justify-center gap-2"
                 >
-                  <SendIcon size={18} className="mr-2 text-white" />
+                  <SendIcon size={18} className="text-white" />
                   Começar a Praticar
                 </button>
               </div>
