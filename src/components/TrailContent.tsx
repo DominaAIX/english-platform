@@ -518,13 +518,15 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
               Desbloqueie mais de 1.100 frases adicionais e acesso ilimitado a todas as trilhas
             </p>
             <div className="flex flex-col gap-3 justify-center items-center">
-              <button 
-                onClick={handleUpgrade}
-                className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 px-8 py-3 rounded-full text-white font-bold transition-all duration-300 flex items-center justify-center gap-2"
-              >
-                <SendIcon size={18} className="text-white" />
-                Upgrade para Premium
-              </button>
+              <div className="flex justify-center">
+                <button 
+                  onClick={handleUpgrade}
+                  className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 px-8 py-3 rounded-full text-white font-bold transition-all duration-300 flex items-center justify-center gap-2"
+                >
+                  <SendIcon size={18} className="text-white" />
+                  Upgrade para Premium
+                </button>
+              </div>
               
               {getTimeUntilReset() && (
                 <div className="bg-gray-800/50 px-4 py-3 rounded-lg border border-gray-600">
