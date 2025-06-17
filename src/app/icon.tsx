@@ -17,18 +17,19 @@ export default function Icon() {
       // ImageResponse JSX element
       <div
         style={{
-          fontSize: 24,
-          background: 'linear-gradient(135deg, #7c3aed 0%, #4f46e5 50%, #06b6d4 100%)',
+          fontSize: 18,
+          background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)',
           width: '100%',
           height: '100%',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           color: 'white',
-          borderRadius: '50%',
+          fontWeight: 'bold',
+          borderRadius: '20%',
         }}
       >
-        🇬🇧
+        EN
       </div>
     ),
     // ImageResponse options
