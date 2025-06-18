@@ -74,6 +74,17 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
   const [selectedLevel, setSelectedLevel] = useState<'todas' | 'básico' | 'médio' | 'avançado'>('todas')
   const [favoritePhrases, setFavoritePhrases] = useState<number[]>([]) // Índices das frases favoritadas
   const [favoritesLoading, setFavoritesLoading] = useState(false)
+  const [hasReachedLimit, setHasReachedLimit] = useState(false) // Controle local do limite
+  const [phrasesCompletedCount, setPhrasesCompletedCount] = useState(0) // Contador local de frases completadas
+
+  // Verificar limite global ao montar componente
+  useEffect(() => {
+    if (!isPremium && actualUserPlan === 'free') {
+      setHasReachedLimit(isPhrasesBlocked || totalPhrasesViewed >= 10)
+    } else {
+      setHasReachedLimit(false)
+    }
+  }, [isPremium, actualUserPlan, totalPhrasesViewed, isPhrasesBlocked])
 
   // Carregar favoritos do usuário ao montar o componente
   useEffect(() => {
@@ -122,6 +133,7 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
     }
   }, [currentPhraseIndex, availablePhrases.length])
   
+
   // Verificar se há frases disponíveis
   if (!currentPhrase && availablePhrases.length === 0) {
     return (
@@ -147,32 +159,35 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
   const progress = ((completedPhrases.length) / availablePhrases.length) * 100
 
   const handleNext = async () => {
+    // Se já atingiu o limite global, não fazer nada
+    if (hasReachedLimit) {
+      return
+    }
     
     if (!completedPhrases.includes(currentPhraseIndex)) {
-      // Verificar limite global antes de permitir próxima frase
-      if (!isPremium) {
+      // Incrementar contador local
+      const newCount = phrasesCompletedCount + 1
+      setPhrasesCompletedCount(newCount)
+      setCompletedPhrases([...completedPhrases, currentPhraseIndex])
+      
+      // Incrementar contador global para usuários free
+      if (!isPremium && actualUserPlan === 'free') {
         const canView = incrementPhrases()
         if (!canView) {
-          // Limite atingido, não permitir visualizar mais frases
+          setHasReachedLimit(true)
           return
         }
       }
       
-      setCompletedPhrases([...completedPhrases, currentPhraseIndex])
       // Incrementar contador de frases visualizadas (para stats)
       await incrementPhrasesViewed()
     }
     
+    // Avançar para próxima frase se disponível
     if (currentPhraseIndex < availablePhrases.length - 1) {
       setCurrentPhraseIndex(currentPhraseIndex + 1)
       setShowTranslation(false)
       setShowPronunciation(false)
-    } else {
-      // Se chegou ao final das frases disponíveis
-      if (!isPremium && actualUserPlan === 'free') {
-        // Para usuários free, sempre redirecionar ao dashboard quando chegarem ao final
-        router.push('/dashboard')
-      }
     }
   }
 
@@ -211,6 +226,10 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
 
   const handleUpgrade = () => {
     alert('Funcionalidade de upgrade será implementada em breve! 🚀')
+  }
+
+  const handleBackToDashboard = () => {
+    router.push('/dashboard')
   }
 
   const handleLevelChange = (level: 'todas' | 'básico' | 'médio' | 'avançado') => {
@@ -293,7 +312,7 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
 
       <div className="max-w-4xl mx-auto p-6">
         {/* Mensagem de limite global para usuários free */}
-        {actualUserPlan === 'free' && !isPremium && (isPhrasesBlocked || totalPhrasesViewed >= 10) && (
+        {actualUserPlan === 'free' && !isPremium && hasReachedLimit && (
           <GlobalLimitMessage 
             type="phrases"
             timeUntilReset={getTimeUntilReset()}
@@ -495,12 +514,18 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
             </button>
             
             <button
-              onClick={handleNext}
+              onClick={
+                hasReachedLimit && !isPremium && actualUserPlan === 'free' 
+                  ? handleBackToDashboard 
+                  : handleNext
+              }
               className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 px-6 py-3 rounded-full text-white font-semibold transition-all duration-300"
             >
-              {currentPhraseIndex === availablePhrases.length - 1 ? 
-                (!isPremium && actualUserPlan === 'free' ? 'Voltar ao Dashboard' : 'Finalizar') : 
-                'Próxima →'
+              {hasReachedLimit && !isPremium && actualUserPlan === 'free' 
+                ? 'Voltar ao Dashboard'
+                : currentPhraseIndex === availablePhrases.length - 1
+                ? 'Finalizar'
+                : 'Próxima →'
               }
             </button>
           </div>
@@ -508,7 +533,7 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
         </PageTransition>
 
         {/* Free Plan Limit Notice */}
-        {actualUserPlan === 'free' && isPhrasesBlocked && (
+        {actualUserPlan === 'free' && hasReachedLimit && (
           <PageTransition delay={600}>
             <div className="bg-gradient-to-r from-purple-900/50 to-cyan-900/50 border border-purple-500/30 rounded-xl p-6 text-center">
             <h3 className="text-xl font-bold text-white mb-2">
@@ -517,14 +542,16 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
             <p className="text-gray-300 mb-4">
               Desbloqueie mais de 1.100 frases adicionais e acesso ilimitado a todas as trilhas
             </p>
-            <div className="flex flex-col gap-3 justify-center">
-              <button 
-                onClick={handleUpgrade}
-                className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 px-8 py-3 rounded-full text-white font-bold transition-all duration-300 flex items-center justify-center gap-2"
-              >
-                <SendIcon size={18} className="text-white" />
-                Upgrade para Premium
-              </button>
+            <div className="flex flex-col gap-3 justify-center items-center">
+              <div className="flex justify-center">
+                <button 
+                  onClick={handleUpgrade}
+                  className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 px-8 py-3 rounded-full text-white font-bold transition-all duration-300 flex items-center justify-center gap-2"
+                                  >
+                  <SendIcon size={18} className="text-white" />
+                  Upgrade para Premium
+                </button>
+              </div>
               
               {getTimeUntilReset() && (
                 <div className="bg-gray-800/50 px-4 py-3 rounded-lg border border-gray-600">
@@ -653,8 +680,10 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
             <p className="text-gray-300 mb-4">
               Acesse a lista completa de frases, navegação avançada e muito mais conteúdo exclusivo!
             </p>
-            <div style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
-              <button className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 px-8 py-3 rounded-full text-white font-bold transition-all duration-300 flex items-center gap-2">
+            <div className="flex justify-center w-full">
+              <button 
+                className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 px-8 py-3 rounded-full text-white font-bold transition-all duration-300 flex items-center gap-2"
+                              >
                 <SendIcon size={18} className="text-white" />
                 Upgrade para Premium
               </button>
