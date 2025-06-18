@@ -502,10 +502,26 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
               }
               className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 px-6 py-3 rounded-full text-white font-semibold transition-all duration-300"
             >
-              {(currentPhraseIndex === availablePhrases.length - 1 && totalPhrasesViewed >= 10 && !isPremium && actualUserPlan === 'free') ? 
-                'Voltar ao Dashboard' : 
-                (currentPhraseIndex === availablePhrases.length - 1 ? 'Finalizar' : 'Próxima →')
-              }
+              {(() => {
+                console.log('🚨 BUTTON DEBUG:', { 
+                  currentPhraseIndex, 
+                  availableLength: availablePhrases.length,
+                  totalPhrasesViewed, 
+                  isPremium, 
+                  actualUserPlan,
+                  isLastPhrase: currentPhraseIndex === availablePhrases.length - 1,
+                  hasReachedLimit: totalPhrasesViewed >= 10,
+                  shouldShowDashboard: currentPhraseIndex === availablePhrases.length - 1 && totalPhrasesViewed >= 10 && !isPremium && actualUserPlan === 'free'
+                })
+                
+                if (currentPhraseIndex === availablePhrases.length - 1 && totalPhrasesViewed >= 10 && !isPremium && actualUserPlan === 'free') {
+                  return 'Voltar ao Dashboard'
+                } else if (currentPhraseIndex === availablePhrases.length - 1) {
+                  return 'Finalizar'
+                } else {
+                  return 'Próxima →'
+                }
+              })()}
             </button>
           </div>
           </div>
