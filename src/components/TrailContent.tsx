@@ -188,29 +188,39 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
   const progress = ((completedPhrases.length) / availablePhrases.length) * 100
 
   const handleNext = async () => {
+    console.log('🚨 handleNext início:', { currentPhraseIndex, totalPhrasesViewed, isPremium, actualUserPlan })
+    
+    // Se já atingiu o limite, não fazer nada
+    if (!isPremium && actualUserPlan === 'free' && totalPhrasesViewed >= 10) {
+      console.log('🚨 Limite já atingido, parando')
+      return
+    }
     
     if (!completedPhrases.includes(currentPhraseIndex)) {
-      // Verificar limite global ANTES de marcar como completada
-      if (!isPremium) {
-        const canView = incrementPhrases()
-        if (!canView) {
-          // Limite atingido, não permitir avançar nem marcar como completada
-          return
-        }
-      }
-      
       setCompletedPhrases([...completedPhrases, currentPhraseIndex])
       // Incrementar contador de frases visualizadas (para stats)
       await incrementPhrasesViewed()
+      
+      // Verificar limite global APÓS marcar como completada
+      if (!isPremium && actualUserPlan === 'free') {
+        const canView = incrementPhrases()
+        console.log('🚨 incrementPhrases resultado:', canView)
+        if (!canView) {
+          // Limite atingido, não permitir avançar
+          console.log('🚨 Limite atingido, parando aqui')
+          return
+        }
+      }
     }
     
     if (currentPhraseIndex < availablePhrases.length - 1) {
+      console.log('🚨 Avançando para próxima frase')
       setCurrentPhraseIndex(currentPhraseIndex + 1)
       setShowTranslation(false)
       setShowPronunciation(false)
+    } else {
+      console.log('🚨 Chegou ao final das frases disponíveis')
     }
-    // Quando chegar ao final das frases disponíveis, parar aqui
-    // O usuário verá a mensagem de upgrade e decidirá quando clicar em "Voltar ao Dashboard"
   }
 
   const handlePrevious = () => {
@@ -543,10 +553,24 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
               }
               className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 px-6 py-3 rounded-full text-white font-semibold transition-all duration-300"
             >
-              {(currentPhraseIndex === availablePhrases.length - 1 && totalPhrasesViewed >= 10 && !isPremium && actualUserPlan === 'free') ? 
-                'Voltar ao Dashboard' : 
-                (currentPhraseIndex === availablePhrases.length - 1 ? 'Finalizar' : 'Próxima →')
-              }
+              {(() => {
+                console.log('🚨 BUTTON RENDER:', { 
+                  currentPhraseIndex, 
+                  totalPhrasesViewed, 
+                  isPremium, 
+                  actualUserPlan,
+                  isLastPhrase: currentPhraseIndex === availablePhrases.length - 1,
+                  shouldShowDashboard: currentPhraseIndex === availablePhrases.length - 1 && totalPhrasesViewed >= 10 && !isPremium && actualUserPlan === 'free'
+                })
+                
+                if (currentPhraseIndex === availablePhrases.length - 1 && totalPhrasesViewed >= 10 && !isPremium && actualUserPlan === 'free') {
+                  return 'Voltar ao Dashboard'
+                } else if (currentPhraseIndex === availablePhrases.length - 1) {
+                  return 'Finalizar'
+                } else {
+                  return 'Próxima →'
+                }
+              })()}
             </button>
           </div>
           </div>
