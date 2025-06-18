@@ -170,8 +170,14 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
       setShowPronunciation(false)
     } else {
       // Se chegou ao final das frases disponíveis
+      console.log('🚨 Fim das frases:', { isPremium, actualUserPlan, shouldGoToDashboard: !isPremium && actualUserPlan === 'free' })
       if (!isPremium && actualUserPlan === 'free') {
         // Para usuários free, sempre redirecionar ao dashboard quando chegarem ao final
+        console.log('🚨 Redirecionando para dashboard')
+        router.push('/dashboard')
+      } else {
+        // Forçar redirecionamento para dashboard sempre para usuários free
+        console.log('🚨 Forçando redirecionamento para dashboard')
         router.push('/dashboard')
       }
     }
