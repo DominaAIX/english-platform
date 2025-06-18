@@ -32,12 +32,13 @@ export default function GlobalLimitMessage({ type, timeUntilReset, onUpgradeClic
         </p>
         
         <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
-          <div style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
+          <div style={{ display: 'flex', justifyContent: 'center', width: '100%', backgroundColor: 'red', padding: '5px' }}>
             <button
               onClick={onUpgradeClick}
               className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 px-6 py-3 rounded-lg text-white font-semibold transition-all duration-300"
+              style={{ backgroundColor: 'green' }}
             >
-              ⚡ Upgrade para Pro
+              🔴 BOTÃO 1 - Upgrade para Pro
             </button>
           </div>
           
