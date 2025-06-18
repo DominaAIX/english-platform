@@ -6,10 +6,13 @@ import { useAuth } from '@/contexts/AuthContext'
 interface GlobalLimits {
   totalPhrasesViewed: number
   totalExercisesCompleted: number
+  totalAiMessages: number
   phrasesLimit: number
   exercisesLimit: number
+  aiMessagesLimit: number
   isPhrasesBlocked: boolean
   isExercisesBlocked: boolean
+  isAiMessagesBlocked: boolean
   resetTime: string | null
 }
 
@@ -18,10 +21,13 @@ export function useGlobalLimits() {
   const [limits, setLimits] = useState<GlobalLimits>({
     totalPhrasesViewed: 0,
     totalExercisesCompleted: 0,
+    totalAiMessages: 0,
     phrasesLimit: 10,
     exercisesLimit: 3,
+    aiMessagesLimit: 3,
     isPhrasesBlocked: false,
     isExercisesBlocked: false,
+    isAiMessagesBlocked: false,
     resetTime: null
   })
 
@@ -34,7 +40,8 @@ export function useGlobalLimits() {
       setLimits(prev => ({
         ...prev,
         isPhrasesBlocked: false,
-        isExercisesBlocked: false
+        isExercisesBlocked: false,
+        isAiMessagesBlocked: false
       }))
       return
     }
@@ -64,10 +71,13 @@ export function useGlobalLimits() {
         setLimits({
           totalPhrasesViewed: data.totalPhrasesViewed || 0,
           totalExercisesCompleted: data.totalExercisesCompleted || 0,
+          totalAiMessages: data.totalAiMessages || 0,
           phrasesLimit: 10,
           exercisesLimit: 3,
+          aiMessagesLimit: 3,
           isPhrasesBlocked: (data.totalPhrasesViewed || 0) >= 10,
           isExercisesBlocked: (data.totalExercisesCompleted || 0) >= 3,
+          isAiMessagesBlocked: (data.totalAiMessages || 0) >= 3,
           resetTime: data.lastReset
         })
       }
@@ -82,10 +92,13 @@ export function useGlobalLimits() {
     const newLimits = {
       totalPhrasesViewed: 0,
       totalExercisesCompleted: 0,
+      totalAiMessages: 0,
       phrasesLimit: 10,
       exercisesLimit: 3,
+      aiMessagesLimit: 3,
       isPhrasesBlocked: false,
       isExercisesBlocked: false,
+      isAiMessagesBlocked: false,
       resetTime: now.toISOString()
     }
     
@@ -166,6 +179,39 @@ export function useGlobalLimits() {
     return Math.max(0, limits.exercisesLimit - limits.totalExercisesCompleted)
   }
 
+  const incrementAiMessages = (): boolean => {
+    if (isPremium) return true
+    if (limits.isAiMessagesBlocked) return false
+    
+    const newTotal = limits.totalAiMessages + 1
+    const isBlocked = newTotal >= limits.aiMessagesLimit
+    
+    const newLimits = {
+      ...limits,
+      totalAiMessages: newTotal,
+      isAiMessagesBlocked: isBlocked
+    }
+    
+    setLimits(newLimits)
+    
+    // Salvar no localStorage
+    if (user) {
+      const storageKey = `user_limits_${user.id}`
+      const stored = JSON.parse(localStorage.getItem(storageKey) || '{}')
+      localStorage.setItem(storageKey, JSON.stringify({
+        ...stored,
+        totalAiMessages: newTotal
+      }))
+    }
+    
+    return !isBlocked
+  }
+
+  const getRemainingAiMessages = (): number => {
+    if (isPremium) return Infinity
+    return Math.max(0, limits.aiMessagesLimit - limits.totalAiMessages)
+  }
+
   const getTimeUntilReset = (): string | null => {
     if (!limits.resetTime) return null
     
@@ -187,8 +233,10 @@ export function useGlobalLimits() {
     isPremium,
     incrementPhrases,
     incrementExercises,
+    incrementAiMessages,
     getRemainingPhrases,
     getRemainingExercises,
+    getRemainingAiMessages,
     getTimeUntilReset,
     resetLimits
   }
