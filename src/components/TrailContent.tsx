@@ -149,26 +149,26 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
   const handleNext = async () => {
     
     if (!completedPhrases.includes(currentPhraseIndex)) {
-      // Verificar limite global antes de permitir próxima frase
-      if (!isPremium) {
-        const canView = incrementPhrases()
-        if (!canView) {
-          // Limite atingido, não permitir visualizar mais frases
-          return
-        }
-      }
-      
       setCompletedPhrases([...completedPhrases, currentPhraseIndex])
       // Incrementar contador de frases visualizadas (para stats)
       await incrementPhrasesViewed()
     }
     
     if (currentPhraseIndex < availablePhrases.length - 1) {
+      // Verificar limite global antes de permitir avançar para próxima frase
+      if (!isPremium) {
+        const canView = incrementPhrases()
+        if (!canView) {
+          // Limite atingido após completar a frase atual, não permitir avançar
+          return
+        }
+      }
+      
       setCurrentPhraseIndex(currentPhraseIndex + 1)
       setShowTranslation(false)
       setShowPronunciation(false)
     }
-    // Quando chegar ao final das frases, NÃO redirecionar automaticamente
+    // Quando chegar ao final das frases disponíveis, parar aqui
     // O usuário verá a mensagem de upgrade e decidirá quando clicar em "Voltar ao Dashboard"
   }
 
