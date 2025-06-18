@@ -292,15 +292,6 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
       </PageTransition>
 
       <div className="max-w-4xl mx-auto p-6">
-        {/* DEBUG - VERIFICAR SE DEPLOY FUNCIONOU */}
-        {actualUserPlan === 'free' && (
-          <div style={{ backgroundColor: 'lime', color: 'black', padding: '20px', textAlign: 'center', fontSize: '20px', fontWeight: 'bold' }}>
-            🚨 DEPLOY FUNCIONOU - CONTA FREE DETECTADA 🚨
-            <br />
-            Plan: {actualUserPlan} | Premium: {isPremium ? 'SIM' : 'NÃO'} | Frases: {totalPhrasesViewed}
-          </div>
-        )}
-        
         {/* Mensagem de limite global para usuários free */}
         {actualUserPlan === 'free' && !isPremium && (isPhrasesBlocked || totalPhrasesViewed >= 10) && (
           <GlobalLimitMessage 
@@ -321,7 +312,7 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
               <div className="text-6xl">{trail.icon}</div>
             )}
           </div>
-          <h1 className="text-3xl font-bold text-white mb-2">🔥 DEPLOY TESTE 🔥 {trail.title}</h1>
+          <h1 className="text-3xl font-bold text-white mb-2">{trail.title}</h1>
           <p className="text-gray-400 mb-6">{trail.description}</p>
           
           {/* Progress Bar */}
@@ -664,13 +655,13 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
             <p className="text-gray-300 mb-4">
               Acesse a lista completa de frases, navegação avançada e muito mais conteúdo exclusivo!
             </p>
-            <div style={{ display: 'flex', justifyContent: 'center', width: '100%', backgroundColor: 'blue', padding: '5px' }}>
+            <div style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
               <button 
-                style={{ display: 'flex', alignItems: 'center', gap: '8px', backgroundColor: 'yellow', color: 'black' }}
+                style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
                 className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 px-8 py-3 rounded-full text-white font-bold transition-all duration-300"
               >
-                <SendIcon size={18} className="text-black" />
-                🔵 BOTÃO 2 - Área Premium
+                <SendIcon size={18} className="text-white" />
+                Upgrade para Premium
               </button>
             </div>
             </div>
