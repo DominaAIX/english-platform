@@ -525,7 +525,7 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
                   style={{ backgroundColor: 'red !important' }}
                 >
                   <SendIcon size={18} className="text-white" />
-                  DEBUG: TrailContent1 - Upgrade para Premium
+🚨🚨🚨 BOTÃO 1 ENCONTRADO 🚨🚨🚨
                 </button>
               </div>
               
@@ -662,7 +662,7 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
                 style={{ backgroundColor: 'red !important' }}
               >
                 <SendIcon size={18} className="text-white" />
-                DEBUG: TrailContent2 - Upgrade para Premium
+🚨🚨🚨 BOTÃO 2 ENCONTRADO 🚨🚨🚨
               </button>
             </div>
             </div>
