@@ -8,10 +8,25 @@ import UserAvatar from './UserAvatar'
 export default function AuthButton() {
   const { user, loading, signOut } = useAuth()
   const [showAuthModal, setShowAuthModal] = useState(false)
+  const [isSigningOut, setIsSigningOut] = useState(false)
 
   const handleOpenModal = () => {
     console.log('🔥 AuthButton handleOpenModal called!')
     setShowAuthModal(true)
+  }
+
+  const handleSignOut = async () => {
+    if (isSigningOut) return // Evitar múltiplos cliques
+    
+    setIsSigningOut(true)
+    console.log('🚪 AuthButton: Iniciando logout...')
+    
+    try {
+      await signOut()
+    } catch (error) {
+      console.error('❌ AuthButton: Erro no logout:', error)
+      setIsSigningOut(false)
+    }
   }
 
   if (loading) {
@@ -34,10 +49,11 @@ export default function AuthButton() {
           </span>
         </div>
         <button
-          onClick={signOut}
-          className="bg-gray-800 hover:bg-gray-700 px-3 py-2 md:px-6 md:py-3 rounded-full text-white font-semibold border border-gray-600 transition-all duration-300 text-sm md:text-base"
+          onClick={handleSignOut}
+          disabled={isSigningOut}
+          className="bg-gray-800 hover:bg-gray-700 px-3 py-2 md:px-6 md:py-3 rounded-full text-white font-semibold border border-gray-600 transition-all duration-300 text-sm md:text-base disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          Sair
+          {isSigningOut ? 'Saindo...' : 'Sair'}
         </button>
       </div>
     )

@@ -170,8 +170,67 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   }, [])
 
   const signOut = async () => {
-    await supabase.auth.signOut()
-    window.location.href = '/'
+    try {
+      console.log('🚪 Iniciando processo de logout...')
+      
+      // Detectar se está em ambiente local
+      const isLocalhost = typeof window !== 'undefined' && 
+                         (window.location.hostname === 'localhost' || 
+                          window.location.hostname === '127.0.0.1')
+      const isLocalDev = process.env.NEXT_PUBLIC_IS_LOCAL_DEV === 'true' && isLocalhost
+      
+      if (!isLocalDev) {
+        // Em produção, fazer logout do Supabase
+        const { error } = await supabase.auth.signOut()
+        if (error) {
+          console.error('❌ Erro ao fazer logout do Supabase:', error)
+          // Mesmo com erro, continuar o processo de logout local
+        } else {
+          console.log('✅ Logout do Supabase realizado com sucesso')
+        }
+      }
+      
+      // Limpar estado local imediatamente (independente do Supabase)
+      console.log('🧹 Limpando estado local...')
+      setUser(null)
+      setUserProfile(null)
+      setSession(null)
+      setLoading(false)
+      
+      // Limpar localStorage (limites, favoritos, etc.)
+      if (typeof window !== 'undefined') {
+        const keysToRemove = []
+        for (let i = 0; i < localStorage.length; i++) {
+          const key = localStorage.key(i)
+          if (key && (key.startsWith('user_limits_') || key.startsWith('user_'))) {
+            keysToRemove.push(key)
+          }
+        }
+        keysToRemove.forEach(key => {
+          localStorage.removeItem(key)
+          console.log('🗑️ Removido do localStorage:', key)
+        })
+      }
+      
+      console.log('✅ Estado local limpo com sucesso')
+      
+      // Redirecionar para home
+      setTimeout(() => {
+        window.location.href = '/'
+      }, 100) // Pequeno delay para garantir que o estado foi limpo
+      
+    } catch (error) {
+      console.error('❌ Erro durante logout:', error)
+      
+      // Forçar limpeza mesmo em caso de erro
+      setUser(null)
+      setUserProfile(null)
+      setSession(null)
+      setLoading(false)
+      
+      // Forçar redirecionamento mesmo com erro
+      window.location.href = '/'
+    }
   }
 
   const value = {
