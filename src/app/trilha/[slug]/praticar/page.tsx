@@ -379,7 +379,7 @@ function PracticePageClient({ trailData, slug }: { trailData: Trail, slug: strin
                     </button>
                   </div>
                   <p className="text-gray-400 text-sm mt-3">
-                    Planos a partir de R$ 29,90/mês
+                    <span className="whitespace-nowrap">Planos a partir de R$ 29,90/mês</span>
                   </p>
                 </div>
               </div>

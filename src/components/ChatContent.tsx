@@ -24,7 +24,7 @@ export default function ChatContent() {
   const {
     totalAiMessages,
     isAiMessagesBlocked, 
-    getTimeUntilReset,
+    getRealTimeCountdown,
     isPremium,
     incrementAiMessages: incrementAiLimit,
     getRemainingAiMessages
@@ -34,7 +34,7 @@ export default function ChatContent() {
   const messageCount = totalAiMessages
   const isBlocked = isAiMessagesBlocked && !isPremium
   const remainingMessages = getRemainingAiMessages()
-  const timeUntilReset = getTimeUntilReset()
+  const timeUntilReset = getRealTimeCountdown()
   const incrementMessageCount = incrementAiLimit
   const { incrementAiMessages } = useStats()
   

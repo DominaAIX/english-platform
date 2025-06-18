@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { useAuth } from '@/contexts/AuthContext'
+import { useRealTimeCounter } from './useRealTimeCounter'
 
 interface GlobalLimits {
   totalPhrasesViewed: number
@@ -228,6 +229,9 @@ export function useGlobalLimits() {
     return `${hours}h ${minutes}m`
   }
 
+  // Contador em tempo real
+  const realTimeCountdown = useRealTimeCounter(limits.resetTime)
+
   return {
     ...limits,
     isPremium,
@@ -238,6 +242,7 @@ export function useGlobalLimits() {
     getRemainingExercises,
     getRemainingAiMessages,
     getTimeUntilReset,
+    getRealTimeCountdown: () => realTimeCountdown,
     resetLimits
   }
 }

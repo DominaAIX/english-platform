@@ -59,7 +59,7 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
     isPhrasesBlocked, 
     incrementPhrases, 
     getRemainingPhrases, 
-    getTimeUntilReset,
+    getRealTimeCountdown,
     isPremium,
     totalPhrasesViewed
   } = useGlobalLimits()
@@ -315,7 +315,7 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
         {actualUserPlan === 'free' && !isPremium && hasReachedLimit && (
           <GlobalLimitMessage 
             type="phrases"
-            timeUntilReset={getTimeUntilReset()}
+            timeUntilReset={getRealTimeCountdown()}
             onUpgradeClick={handleUpgrade}
           />
         )}
@@ -553,10 +553,10 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
                 </button>
               </div>
               
-              {getTimeUntilReset() && (
+              {getRealTimeCountdown() && (
                 <div className="bg-gray-800/50 px-4 py-3 rounded-lg border border-gray-600">
                   <span className="text-gray-300 text-sm">
-                    ⏰ Reset em: <span className="text-white font-semibold">{getTimeUntilReset()}</span>
+                    ⏰ Reset em: <span className="text-white font-semibold">{getRealTimeCountdown()}</span>
                   </span>
                 </div>
               )}

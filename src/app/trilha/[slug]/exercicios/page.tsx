@@ -254,7 +254,7 @@ function ExercisePageClient({ trailData, slug }: { trailData: Trail, slug: strin
     isExercisesBlocked, 
     incrementExercises, 
     getRemainingExercises, 
-    getTimeUntilReset,
+    getRealTimeCountdown,
     isPremium 
   } = useGlobalLimits()
   const router = useRouter()
@@ -342,7 +342,7 @@ function ExercisePageClient({ trailData, slug }: { trailData: Trail, slug: strin
         {isExercisesBlocked && !isPremium && (
           <GlobalLimitMessage 
             type="exercises"
-            timeUntilReset={getTimeUntilReset()}
+            timeUntilReset={getRealTimeCountdown()}
             onUpgradeClick={handleUpgrade}
           />
         )}

@@ -397,7 +397,7 @@ export default function DashboardContent() {
               className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 px-8 py-4 rounded-full text-white font-bold text-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
               onClick={() => alert('Funcionalidade de assinatura será implementada em breve! 🚀')}
             >
-              🌟 Assinar Premium - R$ 29,90/mês
+              <span className="whitespace-nowrap">🌟 Assinar Premium - R$ 29,90/mês</span>
             </button>
             
             <p className="text-gray-500 text-sm mt-3">
