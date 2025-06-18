@@ -293,7 +293,7 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
 
       <div className="max-w-4xl mx-auto p-6">
         {/* Mensagem de limite global para usuários free */}
-        {actualUserPlan === 'free' && !isPremium && (isPhrasesBlocked || totalPhrasesViewed >= 10) && (
+        {actualUserPlan === 'free' && !isPremium && totalPhrasesViewed >= 10 && (
           <GlobalLimitMessage 
             type="phrases"
             timeUntilReset={getTimeUntilReset()}
@@ -496,13 +496,13 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
             
             <button
               onClick={
-                currentPhraseIndex === availablePhrases.length - 1 && isPhrasesBlocked && !isPremium && actualUserPlan === 'free' 
+                currentPhraseIndex === availablePhrases.length - 1 && totalPhrasesViewed >= 10 && !isPremium && actualUserPlan === 'free' 
                   ? handleBackToDashboard 
                   : handleNext
               }
               className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 px-6 py-3 rounded-full text-white font-semibold transition-all duration-300"
             >
-              {(currentPhraseIndex === availablePhrases.length - 1 && isPhrasesBlocked && !isPremium && actualUserPlan === 'free') ? 
+              {(currentPhraseIndex === availablePhrases.length - 1 && totalPhrasesViewed >= 10 && !isPremium && actualUserPlan === 'free') ? 
                 'Voltar ao Dashboard' : 
                 (currentPhraseIndex === availablePhrases.length - 1 ? 'Finalizar' : 'Próxima →')
               }
@@ -512,7 +512,7 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
         </PageTransition>
 
         {/* Free Plan Limit Notice */}
-        {actualUserPlan === 'free' && isPhrasesBlocked && (
+        {actualUserPlan === 'free' && totalPhrasesViewed >= 10 && (
           <PageTransition delay={600}>
             <div className="bg-gradient-to-r from-purple-900/50 to-cyan-900/50 border border-purple-500/30 rounded-xl p-6 text-center">
             <h3 className="text-xl font-bold text-white mb-2">
