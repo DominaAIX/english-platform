@@ -147,20 +147,6 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
   const progress = ((completedPhrases.length) / availablePhrases.length) * 100
 
   const handleNext = async () => {
-    console.log('🚨 handleNext chamado:', { 
-      currentPhraseIndex, 
-      availablePhrases: availablePhrases.length,
-      isLastPhrase: currentPhraseIndex === availablePhrases.length - 1,
-      isPremium,
-      actualUserPlan 
-    })
-    
-    // Se já estamos na última frase disponível, redirecionar para dashboard
-    if (currentPhraseIndex === availablePhrases.length - 1) {
-      console.log('🚨 Última frase - redirecionando para dashboard')
-      router.push('/dashboard')
-      return
-    }
     
     if (!completedPhrases.includes(currentPhraseIndex)) {
       // Verificar limite global antes de permitir próxima frase
@@ -168,7 +154,6 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
         const canView = incrementPhrases()
         if (!canView) {
           // Limite atingido, não permitir visualizar mais frases
-          console.log('🚨 Limite atingido, parando')
           return
         }
       }
@@ -179,11 +164,12 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
     }
     
     if (currentPhraseIndex < availablePhrases.length - 1) {
-      console.log('🚨 Indo para próxima frase')
       setCurrentPhraseIndex(currentPhraseIndex + 1)
       setShowTranslation(false)
       setShowPronunciation(false)
     }
+    // Quando chegar ao final das frases, NÃO redirecionar automaticamente
+    // O usuário verá a mensagem de upgrade e decidirá quando clicar em "Voltar ao Dashboard"
   }
 
   const handlePrevious = () => {
@@ -221,6 +207,10 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
 
   const handleUpgrade = () => {
     alert('Funcionalidade de upgrade será implementada em breve! 🚀')
+  }
+
+  const handleBackToDashboard = () => {
+    router.push('/dashboard')
   }
 
   const handleLevelChange = (level: 'todas' | 'básico' | 'médio' | 'avançado') => {
@@ -505,7 +495,11 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
             </button>
             
             <button
-              onClick={handleNext}
+              onClick={
+                currentPhraseIndex === availablePhrases.length - 1 && !isPremium && actualUserPlan === 'free' 
+                  ? handleBackToDashboard 
+                  : handleNext
+              }
               className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 px-6 py-3 rounded-full text-white font-semibold transition-all duration-300"
             >
               {currentPhraseIndex === availablePhrases.length - 1 ? 
