@@ -122,6 +122,47 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
     }
   }, [currentPhraseIndex, availablePhrases.length])
   
+  // Se o usuário excedeu o limite global, mostrar apenas mensagens de limite
+  if (!isPremium && actualUserPlan === 'free' && totalPhrasesViewed >= 10) {
+    return (
+      <AnimatedContainer className="min-h-screen">
+        {/* Header */}
+        <PageTransition delay={0}>
+          <header className="bg-gray-900/50 border-b border-gray-700 p-4">
+            <div className="max-w-4xl mx-auto flex justify-between items-center">
+              <button 
+                onClick={handleLogoClick}
+                className="flex items-center gap-3 hover:opacity-80 transition-opacity"
+              >
+                <Logo size="sm" />
+                <span className="text-white font-bold">Inglês pra Já</span>
+              </button>
+            </div>
+          </header>
+        </PageTransition>
+
+        <div className="max-w-4xl mx-auto p-6">
+          {/* Mensagem de limite global */}
+          <GlobalLimitMessage 
+            type="phrases"
+            timeUntilReset={getTimeUntilReset()}
+            onUpgradeClick={handleUpgrade}
+          />
+
+          {/* Botão para voltar ao dashboard */}
+          <div className="text-center mt-8">
+            <button 
+              onClick={handleBackToDashboard}
+              className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 px-8 py-3 rounded-full text-white font-bold transition-all duration-300"
+            >
+              Voltar ao Dashboard
+            </button>
+          </div>
+        </div>
+      </AnimatedContainer>
+    )
+  }
+
   // Verificar se há frases disponíveis
   if (!currentPhrase && availablePhrases.length === 0) {
     return (
@@ -293,7 +334,7 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
 
       <div className="max-w-4xl mx-auto p-6">
         {/* Mensagem de limite global para usuários free */}
-        {actualUserPlan === 'free' && !isPremium && totalPhrasesViewed >= 9 && (
+        {actualUserPlan === 'free' && !isPremium && totalPhrasesViewed >= 10 && (
           <GlobalLimitMessage 
             type="phrases"
             timeUntilReset={getTimeUntilReset()}
@@ -496,7 +537,7 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
             
             <button
               onClick={
-                currentPhraseIndex === availablePhrases.length - 1 && totalPhrasesViewed >= 9 && !isPremium && actualUserPlan === 'free' 
+                currentPhraseIndex === availablePhrases.length - 1 && totalPhrasesViewed >= 10 && !isPremium && actualUserPlan === 'free' 
                   ? handleBackToDashboard 
                   : handleNext
               }
@@ -514,8 +555,8 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
                   shouldShowDashboard: currentPhraseIndex === availablePhrases.length - 1 && totalPhrasesViewed >= 10 && !isPremium && actualUserPlan === 'free'
                 })
                 
-                // Para users free: se está na 10ª frase (índice 9) E já viu 9+ frases, mostrar "Voltar ao Dashboard"
-                if (currentPhraseIndex === availablePhrases.length - 1 && totalPhrasesViewed >= 9 && !isPremium && actualUserPlan === 'free') {
+                // Para users free: se está na 10ª frase (índice 9) E já viu 10 frases, mostrar "Voltar ao Dashboard"
+                if (currentPhraseIndex === availablePhrases.length - 1 && totalPhrasesViewed >= 10 && !isPremium && actualUserPlan === 'free') {
                   return 'Voltar ao Dashboard'
                 } else if (currentPhraseIndex === availablePhrases.length - 1) {
                   return 'Finalizar'
@@ -529,7 +570,7 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
         </PageTransition>
 
         {/* Free Plan Limit Notice */}
-        {actualUserPlan === 'free' && totalPhrasesViewed >= 9 && (
+        {actualUserPlan === 'free' && totalPhrasesViewed >= 10 && (
           <PageTransition delay={600}>
             <div className="bg-gradient-to-r from-purple-900/50 to-cyan-900/50 border border-purple-500/30 rounded-xl p-6 text-center">
             <h3 className="text-xl font-bold text-white mb-2">
