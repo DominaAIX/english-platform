@@ -155,6 +155,13 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
       actualUserPlan 
     })
     
+    // Se já estamos na última frase disponível, redirecionar para dashboard
+    if (currentPhraseIndex === availablePhrases.length - 1) {
+      console.log('🚨 Última frase - redirecionando para dashboard')
+      router.push('/dashboard')
+      return
+    }
+    
     if (!completedPhrases.includes(currentPhraseIndex)) {
       // Verificar limite global antes de permitir próxima frase
       if (!isPremium) {
@@ -176,10 +183,6 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
       setCurrentPhraseIndex(currentPhraseIndex + 1)
       setShowTranslation(false)
       setShowPronunciation(false)
-    } else {
-      // Se chegou ao final das frases disponíveis
-      console.log('🚨 Fim das frases - redirecionando para dashboard')
-      router.push('/dashboard')
     }
   }
 
