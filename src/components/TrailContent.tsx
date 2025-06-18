@@ -53,7 +53,6 @@ const iconMapping: { [key: string]: { component: React.ComponentType<{ size?: nu
 }
 
 export default function TrailContent({ trail, userPlan, slug }: TrailContentProps) {
-  console.log('🚨🚨🚨 TRAILCONTENT RENDERIZANDO 🚨🚨🚨')
   const { user, userProfile } = useAuth()
   const { incrementPhrasesViewed } = useStats()
   const { 
@@ -148,6 +147,13 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
   const progress = ((completedPhrases.length) / availablePhrases.length) * 100
 
   const handleNext = async () => {
+    console.log('🚨 handleNext chamado:', { 
+      currentPhraseIndex, 
+      availablePhrases: availablePhrases.length,
+      isLastPhrase: currentPhraseIndex === availablePhrases.length - 1,
+      isPremium,
+      actualUserPlan 
+    })
     
     if (!completedPhrases.includes(currentPhraseIndex)) {
       // Verificar limite global antes de permitir próxima frase
@@ -155,6 +161,7 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
         const canView = incrementPhrases()
         if (!canView) {
           // Limite atingido, não permitir visualizar mais frases
+          console.log('🚨 Limite atingido, parando')
           return
         }
       }
@@ -165,21 +172,14 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
     }
     
     if (currentPhraseIndex < availablePhrases.length - 1) {
+      console.log('🚨 Indo para próxima frase')
       setCurrentPhraseIndex(currentPhraseIndex + 1)
       setShowTranslation(false)
       setShowPronunciation(false)
     } else {
       // Se chegou ao final das frases disponíveis
-      console.log('🚨 Fim das frases:', { isPremium, actualUserPlan, shouldGoToDashboard: !isPremium && actualUserPlan === 'free' })
-      if (!isPremium && actualUserPlan === 'free') {
-        // Para usuários free, sempre redirecionar ao dashboard quando chegarem ao final
-        console.log('🚨 Redirecionando para dashboard')
-        router.push('/dashboard')
-      } else {
-        // Forçar redirecionamento para dashboard sempre para usuários free
-        console.log('🚨 Forçando redirecionamento para dashboard')
-        router.push('/dashboard')
-      }
+      console.log('🚨 Fim das frases - redirecionando para dashboard')
+      router.push('/dashboard')
     }
   }
 
@@ -272,10 +272,6 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
 
   return (
     <AnimatedContainer className="min-h-screen">
-      {/* DEBUG BANNER */}
-      <div style={{ backgroundColor: 'yellow', color: 'black', padding: '20px', textAlign: 'center', fontSize: '24px', fontWeight: 'bold' }}>
-        🚨🚨🚨 TRAILCONTENT CARREGADO - PROCURE PELOS BOTÕES VERMELHOS 🚨🚨🚨
-      </div>
       {/* Header */}
       <PageTransition delay={0}>
         <header className="bg-gray-900/50 border-b border-gray-700 p-4">
@@ -533,10 +529,9 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
                 <button 
                   onClick={handleUpgrade}
                   className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 px-8 py-3 rounded-full text-white font-bold transition-all duration-300 flex items-center justify-center gap-2"
-                  style={{ backgroundColor: 'red !important' }}
-                >
+                                  >
                   <SendIcon size={18} className="text-white" />
-🚨🚨🚨 BOTÃO 1 ENCONTRADO 🚨🚨🚨
+                  Upgrade para Premium
                 </button>
               </div>
               
@@ -670,10 +665,9 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
             <div className="flex justify-center w-full">
               <button 
                 className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 px-8 py-3 rounded-full text-white font-bold transition-all duration-300 flex items-center gap-2"
-                style={{ backgroundColor: 'red !important' }}
-              >
+                              >
                 <SendIcon size={18} className="text-white" />
-🚨🚨🚨 BOTÃO 2 ENCONTRADO 🚨🚨🚨
+                Upgrade para Premium
               </button>
             </div>
             </div>

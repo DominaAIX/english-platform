@@ -36,9 +36,8 @@ export default function FreePlanLimitMessage({ timeUntilReset, onUpgradeClick }:
           <button
             onClick={onUpgradeClick}
             className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 px-8 py-3 rounded-full text-white font-bold text-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
-            style={{ backgroundColor: 'red !important' }}
           >
-🚨🚨🚨 BOTÃO FREELIMIT ENCONTRADO 🚨🚨🚨
+            🚀 Fazer Upgrade para Pro
           </button>
         </div>
         
