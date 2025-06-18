@@ -190,21 +190,21 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
   const handleNext = async () => {
     
     if (!completedPhrases.includes(currentPhraseIndex)) {
+      // Verificar limite global ANTES de marcar como completada
+      if (!isPremium) {
+        const canView = incrementPhrases()
+        if (!canView) {
+          // Limite atingido, não permitir avançar nem marcar como completada
+          return
+        }
+      }
+      
       setCompletedPhrases([...completedPhrases, currentPhraseIndex])
       // Incrementar contador de frases visualizadas (para stats)
       await incrementPhrasesViewed()
     }
     
     if (currentPhraseIndex < availablePhrases.length - 1) {
-      // Verificar limite global antes de permitir avançar para próxima frase
-      if (!isPremium) {
-        const canView = incrementPhrases()
-        if (!canView) {
-          // Limite atingido após completar a frase atual, não permitir avançar
-          return
-        }
-      }
-      
       setCurrentPhraseIndex(currentPhraseIndex + 1)
       setShowTranslation(false)
       setShowPronunciation(false)
@@ -543,27 +543,10 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
               }
               className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 px-6 py-3 rounded-full text-white font-semibold transition-all duration-300"
             >
-              {(() => {
-                console.log('🚨 BUTTON DEBUG:', { 
-                  currentPhraseIndex, 
-                  availableLength: availablePhrases.length,
-                  totalPhrasesViewed, 
-                  isPremium, 
-                  actualUserPlan,
-                  isLastPhrase: currentPhraseIndex === availablePhrases.length - 1,
-                  hasReachedLimit: totalPhrasesViewed >= 10,
-                  shouldShowDashboard: currentPhraseIndex === availablePhrases.length - 1 && totalPhrasesViewed >= 10 && !isPremium && actualUserPlan === 'free'
-                })
-                
-                // Para users free: se está na 10ª frase (índice 9) E já viu 10 frases, mostrar "Voltar ao Dashboard"
-                if (currentPhraseIndex === availablePhrases.length - 1 && totalPhrasesViewed >= 10 && !isPremium && actualUserPlan === 'free') {
-                  return 'Voltar ao Dashboard'
-                } else if (currentPhraseIndex === availablePhrases.length - 1) {
-                  return 'Finalizar'
-                } else {
-                  return 'Próxima →'
-                }
-              })()}
+              {(currentPhraseIndex === availablePhrases.length - 1 && totalPhrasesViewed >= 10 && !isPremium && actualUserPlan === 'free') ? 
+                'Voltar ao Dashboard' : 
+                (currentPhraseIndex === availablePhrases.length - 1 ? 'Finalizar' : 'Próxima →')
+              }
             </button>
           </div>
           </div>
