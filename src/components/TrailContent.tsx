@@ -74,6 +74,7 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
   const [selectedLevel, setSelectedLevel] = useState<'todas' | 'básico' | 'médio' | 'avançado'>('todas')
   const [favoritePhrases, setFavoritePhrases] = useState<number[]>([]) // Índices das frases favoritadas
   const [favoritesLoading, setFavoritesLoading] = useState(false)
+  const [hasReachedLimit, setHasReachedLimit] = useState(false) // Controle local do limite
 
   // Carregar favoritos do usuário ao montar o componente
   useEffect(() => {
@@ -122,46 +123,6 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
     }
   }, [currentPhraseIndex, availablePhrases.length])
   
-  // Se o usuário excedeu o limite global, mostrar apenas mensagens de limite
-  if (!isPremium && actualUserPlan === 'free' && totalPhrasesViewed >= 10) {
-    return (
-      <AnimatedContainer className="min-h-screen">
-        {/* Header */}
-        <PageTransition delay={0}>
-          <header className="bg-gray-900/50 border-b border-gray-700 p-4">
-            <div className="max-w-4xl mx-auto flex justify-between items-center">
-              <button 
-                onClick={handleLogoClick}
-                className="flex items-center gap-3 hover:opacity-80 transition-opacity"
-              >
-                <Logo size="sm" />
-                <span className="text-white font-bold">Inglês pra Já</span>
-              </button>
-            </div>
-          </header>
-        </PageTransition>
-
-        <div className="max-w-4xl mx-auto p-6">
-          {/* Mensagem de limite global */}
-          <GlobalLimitMessage 
-            type="phrases"
-            timeUntilReset={getTimeUntilReset()}
-            onUpgradeClick={handleUpgrade}
-          />
-
-          {/* Botão para voltar ao dashboard */}
-          <div className="text-center mt-8">
-            <button 
-              onClick={handleBackToDashboard}
-              className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 px-8 py-3 rounded-full text-white font-bold transition-all duration-300"
-            >
-              Voltar ao Dashboard
-            </button>
-          </div>
-        </div>
-      </AnimatedContainer>
-    )
-  }
 
   // Verificar se há frases disponíveis
   if (!currentPhrase && availablePhrases.length === 0) {
@@ -188,10 +149,10 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
   const progress = ((completedPhrases.length) / availablePhrases.length) * 100
 
   const handleNext = async () => {
-    console.log('🚨 handleNext início:', { currentPhraseIndex, totalPhrasesViewed, isPremium, actualUserPlan })
+    console.log('🚨 handleNext início:', { currentPhraseIndex, completedPhrases: completedPhrases.length, actualUserPlan, hasReachedLimit })
     
     // Se já atingiu o limite, não fazer nada
-    if (!isPremium && actualUserPlan === 'free' && totalPhrasesViewed >= 10) {
+    if (hasReachedLimit) {
       console.log('🚨 Limite já atingido, parando')
       return
     }
@@ -200,17 +161,13 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
       setCompletedPhrases([...completedPhrases, currentPhraseIndex])
       // Incrementar contador de frases visualizadas (para stats)
       await incrementPhrasesViewed()
-      
-      // Verificar limite global APÓS marcar como completada
-      if (!isPremium && actualUserPlan === 'free') {
-        const canView = incrementPhrases()
-        console.log('🚨 incrementPhrases resultado:', canView)
-        if (!canView) {
-          // Limite atingido, não permitir avançar
-          console.log('🚨 Limite atingido, parando aqui')
-          return
-        }
-      }
+    }
+    
+    // Para usuários free: verificar se completou 10 frases
+    if (!isPremium && actualUserPlan === 'free' && completedPhrases.length + 1 >= 10) {
+      console.log('🚨 Completou 10 frases, ativando limite')
+      setHasReachedLimit(true)
+      return
     }
     
     if (currentPhraseIndex < availablePhrases.length - 1) {
@@ -344,7 +301,7 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
 
       <div className="max-w-4xl mx-auto p-6">
         {/* Mensagem de limite global para usuários free */}
-        {actualUserPlan === 'free' && !isPremium && totalPhrasesViewed >= 10 && (
+        {actualUserPlan === 'free' && !isPremium && hasReachedLimit && (
           <GlobalLimitMessage 
             type="phrases"
             timeUntilReset={getTimeUntilReset()}
@@ -547,7 +504,7 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
             
             <button
               onClick={
-                currentPhraseIndex === availablePhrases.length - 1 && totalPhrasesViewed >= 10 && !isPremium && actualUserPlan === 'free' 
+                hasReachedLimit && !isPremium && actualUserPlan === 'free' 
                   ? handleBackToDashboard 
                   : handleNext
               }
@@ -563,7 +520,7 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
                   shouldShowDashboard: currentPhraseIndex === availablePhrases.length - 1 && totalPhrasesViewed >= 10 && !isPremium && actualUserPlan === 'free'
                 })
                 
-                if (currentPhraseIndex === availablePhrases.length - 1 && totalPhrasesViewed >= 10 && !isPremium && actualUserPlan === 'free') {
+                if (hasReachedLimit && !isPremium && actualUserPlan === 'free') {
                   return 'Voltar ao Dashboard'
                 } else if (currentPhraseIndex === availablePhrases.length - 1) {
                   return 'Finalizar'
@@ -577,7 +534,7 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
         </PageTransition>
 
         {/* Free Plan Limit Notice */}
-        {actualUserPlan === 'free' && totalPhrasesViewed >= 10 && (
+        {actualUserPlan === 'free' && hasReachedLimit && (
           <PageTransition delay={600}>
             <div className="bg-gradient-to-r from-purple-900/50 to-cyan-900/50 border border-purple-500/30 rounded-xl p-6 text-center">
             <h3 className="text-xl font-bold text-white mb-2">
