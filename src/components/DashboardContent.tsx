@@ -400,7 +400,7 @@ export default function DashboardContent() {
               <span className="hidden sm:inline whitespace-nowrap">🌟 Assinar Premium - R$ 29,90/mês</span>
               <span className="sm:hidden flex flex-col items-center leading-tight">
                 <span>🌟 Assinar Premium</span>
-                <span className="text-sm">R$ 29,90/mês</span>
+                <span>R$ 29,90/mês</span>
               </span>
             </button>
             
