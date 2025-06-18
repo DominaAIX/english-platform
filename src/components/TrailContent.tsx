@@ -292,6 +292,15 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
       </PageTransition>
 
       <div className="max-w-4xl mx-auto p-6">
+        {/* DEBUG - VERIFICAR SE DEPLOY FUNCIONOU */}
+        {actualUserPlan === 'free' && (
+          <div style={{ backgroundColor: 'lime', color: 'black', padding: '20px', textAlign: 'center', fontSize: '20px', fontWeight: 'bold' }}>
+            🚨 DEPLOY FUNCIONOU - CONTA FREE DETECTADA 🚨
+            <br />
+            Plan: {actualUserPlan} | Premium: {isPremium ? 'SIM' : 'NÃO'} | Frases: {totalPhrasesViewed}
+          </div>
+        )}
+        
         {/* Mensagem de limite global para usuários free */}
         {actualUserPlan === 'free' && !isPremium && (isPhrasesBlocked || totalPhrasesViewed >= 10) && (
           <GlobalLimitMessage 
