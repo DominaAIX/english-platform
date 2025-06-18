@@ -496,15 +496,15 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
             
             <button
               onClick={
-                currentPhraseIndex === availablePhrases.length - 1 && !isPremium && actualUserPlan === 'free' 
+                currentPhraseIndex === availablePhrases.length - 1 && isPhrasesBlocked && !isPremium && actualUserPlan === 'free' 
                   ? handleBackToDashboard 
                   : handleNext
               }
               className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 px-6 py-3 rounded-full text-white font-semibold transition-all duration-300"
             >
-              {currentPhraseIndex === availablePhrases.length - 1 ? 
-                (!isPremium && actualUserPlan === 'free' ? 'Voltar ao Dashboard' : 'Finalizar') : 
-                'Próxima →'
+              {(currentPhraseIndex === availablePhrases.length - 1 && isPhrasesBlocked && !isPremium && actualUserPlan === 'free') ? 
+                'Voltar ao Dashboard' : 
+                (currentPhraseIndex === availablePhrases.length - 1 ? 'Finalizar' : 'Próxima →')
               }
             </button>
           </div>
