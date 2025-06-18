@@ -3390,6 +3390,612 @@ const trailsData = {
         portuguese: "Onde posso guardar minha bagagem?",
         level: 'médio',
         context: 'Bagagem'
+      },
+      // ========== NOVAS FRASES PARA ATINGIR 130 TOTAL (100 NOVAS) ==========
+      // BÁSICO (35 frases)
+      {
+        english: "Is this place open today?",
+        portuguese: "Este lugar está aberto hoje?",
+        level: 'básico',
+        context: 'Horários'
+      },
+      {
+        english: "Where is the bathroom?",
+        portuguese: "Onde fica o banheiro?",
+        level: 'básico',
+        context: 'Direções'
+      },
+      {
+        english: "How long does the tour take?",
+        portuguese: "Quanto tempo demora o tour?",
+        level: 'básico',
+        context: 'Tours'
+      },
+      {
+        english: "Can I buy tickets online?",
+        portuguese: "Posso comprar ingressos online?",
+        level: 'básico',
+        context: 'Ingressos'
+      },
+      {
+        english: "Is there a gift shop?",
+        portuguese: "Há uma loja de presentes?",
+        level: 'básico',
+        context: 'Compras'
+      },
+      {
+        english: "What's the nearest subway station?",
+        portuguese: "Qual é a estação de metrô mais próxima?",
+        level: 'básico',
+        context: 'Transporte'
+      },
+      {
+        english: "Do you accept credit cards?",
+        portuguese: "Vocês aceitam cartão de crédito?",
+        level: 'básico',
+        context: 'Pagamento'
+      },
+      {
+        english: "Where can I find a taxi?",
+        portuguese: "Onde posso encontrar um táxi?",
+        level: 'básico',
+        context: 'Transporte'
+      },
+      {
+        english: "Is there free Wi-Fi here?",
+        portuguese: "Há Wi-Fi gratuito aqui?",
+        level: 'básico',
+        context: 'Serviços'
+      },
+      {
+        english: "What time is the next show?",
+        portuguese: "Que horas é o próximo show?",
+        level: 'básico',
+        context: 'Horários'
+      },
+      {
+        english: "Can I get a map?",
+        portuguese: "Posso pegar um mapa?",
+        level: 'básico',
+        context: 'Informações'
+      },
+      {
+        english: "Where is the exit?",
+        portuguese: "Onde é a saída?",
+        level: 'básico',
+        context: 'Direções'
+      },
+      {
+        english: "Is parking free?",
+        portuguese: "O estacionamento é gratuito?",
+        level: 'básico',
+        context: 'Estacionamento'
+      },
+      {
+        english: "How much is a day pass?",
+        portuguese: "Quanto custa um passe diário?",
+        level: 'básico',
+        context: 'Ingressos'
+      },
+      {
+        english: "Are children free?",
+        portuguese: "Crianças são gratuitas?",
+        level: 'básico',
+        context: 'Ingressos'
+      },
+      {
+        english: "What time do you close?",
+        portuguese: "Que horas vocês fecham?",
+        level: 'básico',
+        context: 'Horários'
+      },
+      {
+        english: "Is there a restaurant here?",
+        portuguese: "Há um restaurante aqui?",
+        level: 'básico',
+        context: 'Alimentação'
+      },
+      {
+        english: "Can I re-enter with this ticket?",
+        portuguese: "Posso voltar a entrar com este ingresso?",
+        level: 'básico',
+        context: 'Ingressos'
+      },
+      {
+        english: "Where can I sit down?",
+        portuguese: "Onde posso me sentar?",
+        level: 'básico',
+        context: 'Descanso'
+      },
+      {
+        english: "Is there an elevator?",
+        portuguese: "Há um elevador?",
+        level: 'básico',
+        context: 'Acessibilidade'
+      },
+      {
+        english: "What's included in the ticket?",
+        portuguese: "O que está incluído no ingresso?",
+        level: 'básico',
+        context: 'Ingressos'
+      },
+      {
+        english: "Can I leave and come back?",
+        portuguese: "Posso sair e voltar?",
+        level: 'básico',
+        context: 'Política'
+      },
+      {
+        english: "Where is the information desk?",
+        portuguese: "Onde fica o balcão de informações?",
+        level: 'básico',
+        context: 'Informações'
+      },
+      {
+        english: "Do you have a brochure?",
+        portuguese: "Vocês têm um folheto?",
+        level: 'básico',
+        context: 'Informações'
+      },
+      {
+        english: "Is there a coat check?",
+        portuguese: "Há um guarda-volumes para casacos?",
+        level: 'básico',
+        context: 'Bagagem'
+      },
+      {
+        english: "What floor is this on?",
+        portuguese: "Em que andar isso fica?",
+        level: 'básico',
+        context: 'Direções'
+      },
+      {
+        english: "Is flash photography allowed?",
+        portuguese: "É permitido fotografar com flash?",
+        level: 'básico',
+        context: 'Fotografia'
+      },
+      {
+        english: "Where can I charge my phone?",
+        portuguese: "Onde posso carregar meu celular?",
+        level: 'básico',
+        context: 'Serviços'
+      },
+      {
+        english: "Is there a lost and found?",
+        portuguese: "Há um achados e perdidos?",
+        level: 'básico',
+        context: 'Serviços'
+      },
+      {
+        english: "Can I bring food inside?",
+        portuguese: "Posso trazer comida para dentro?",
+        level: 'básico',
+        context: 'Política'
+      },
+      {
+        english: "What's the weather like outside?",
+        portuguese: "Como está o tempo lá fora?",
+        level: 'básico',
+        context: 'Clima'
+      },
+      {
+        english: "Is there an audio guide?",
+        portuguese: "Há um guia de áudio?",
+        level: 'básico',
+        context: 'Tours'
+      },
+      {
+        english: "Where can I buy souvenirs?",
+        portuguese: "Onde posso comprar lembranças?",
+        level: 'básico',
+        context: 'Compras'
+      },
+      {
+        english: "Is this wheelchair accessible?",
+        portuguese: "Este lugar é acessível para cadeiras de rodas?",
+        level: 'básico',
+        context: 'Acessibilidade'
+      },
+      {
+        english: "How far is it from here?",
+        portuguese: "Qual é a distância daqui?",
+        level: 'básico',
+        context: 'Distância'
+      },
+      
+      // MÉDIO (35 frases)
+      {
+        english: "I'd like to book a private tour.",
+        portuguese: "Gostaria de reservar um tour privado.",
+        level: 'médio',
+        context: 'Tours'
+      },
+      {
+        english: "Are there any discounts for students?",
+        portuguese: "Há descontos para estudantes?",
+        level: 'médio',
+        context: 'Descontos'
+      },
+      {
+        english: "What's the best time to visit to avoid crowds?",
+        portuguese: "Qual é a melhor hora para visitar e evitar multidões?",
+        level: 'médio',
+        context: 'Dicas'
+      },
+      {
+        english: "Could you recommend other nearby attractions?",
+        portuguese: "Você poderia recomendar outras atrações próximas?",
+        level: 'médio',
+        context: 'Recomendações'
+      },
+      {
+        english: "Is there a dress code for this venue?",
+        portuguese: "Há um código de vestimenta para este local?",
+        level: 'médio',
+        context: 'Etiqueta'
+      },
+      {
+        english: "How long should I plan to spend here?",
+        portuguese: "Quanto tempo devo planejar passar aqui?",
+        level: 'médio',
+        context: 'Planejamento'
+      },
+      {
+        english: "Are there seasonal exhibitions right now?",
+        portuguese: "Há exposições sazonais agora?",
+        level: 'médio',
+        context: 'Exposições'
+      },
+      {
+        english: "Can I purchase tickets at a discounted rate?",
+        portuguese: "Posso comprar ingressos com desconto?",
+        level: 'médio',
+        context: 'Descontos'
+      },
+      {
+        english: "What's the cancellation policy for tickets?",
+        portuguese: "Qual é a política de cancelamento dos ingressos?",
+        level: 'médio',
+        context: 'Política'
+      },
+      {
+        english: "Are there any special events this weekend?",
+        portuguese: "Há eventos especiais neste fim de semana?",
+        level: 'médio',
+        context: 'Eventos'
+      },
+      {
+        english: "Is there a membership program available?",
+        portuguese: "Há um programa de associação disponível?",
+        level: 'médio',
+        context: 'Associação'
+      },
+      {
+        english: "Can you tell me about the history of this place?",
+        portuguese: "Você pode me contar sobre a história deste lugar?",
+        level: 'médio',
+        context: 'História'
+      },
+      {
+        english: "Are there any interactive exhibits?",
+        portuguese: "Há exposições interativas?",
+        level: 'médio',
+        context: 'Exposições'
+      },
+      {
+        english: "What's the best way to get here by public transport?",
+        portuguese: "Qual é a melhor forma de chegar aqui de transporte público?",
+        level: 'médio',
+        context: 'Transporte'
+      },
+      {
+        english: "Do you offer group discounts?",
+        portuguese: "Vocês oferecem descontos para grupos?",
+        level: 'médio',
+        context: 'Descontos'
+      },
+      {
+        english: "Is there a cloakroom where I can leave my things?",
+        portuguese: "Há um vestiário onde posso deixar minhas coisas?",
+        level: 'médio',
+        context: 'Bagagem'
+      },
+      {
+        english: "What safety measures are currently in place?",
+        portuguese: "Que medidas de segurança estão em vigor atualmente?",
+        level: 'médio',
+        context: 'Segurança'
+      },
+      {
+        english: "Are there any age restrictions for this attraction?",
+        portuguese: "Há restrições de idade para esta atração?",
+        level: 'médio',
+        context: 'Política'
+      },
+      {
+        english: "Can I get a refund if I'm not satisfied?",
+        portuguese: "Posso ter reembolso se não ficar satisfeito?",
+        level: 'médio',
+        context: 'Política'
+      },
+      {
+        english: "Where can I find information about accessibility features?",
+        portuguese: "Onde posso encontrar informações sobre recursos de acessibilidade?",
+        level: 'médio',
+        context: 'Acessibilidade'
+      },
+      {
+        english: "Is there a mobile app for this attraction?",
+        portuguese: "Há um aplicativo móvel para esta atração?",
+        level: 'médio',
+        context: 'Tecnologia'
+      },
+      {
+        english: "What languages are the tours available in?",
+        portuguese: "Em que idiomas os tours estão disponíveis?",
+        level: 'médio',
+        context: 'Tours'
+      },
+      {
+        english: "Are there any temporary exhibitions I shouldn't miss?",
+        portuguese: "Há exposições temporárias que eu não deveria perder?",
+        level: 'médio',
+        context: 'Exposições'
+      },
+      {
+        english: "Can I purchase a combo ticket for multiple attractions?",
+        portuguese: "Posso comprar um ingresso combinado para várias atrações?",
+        level: 'médio',
+        context: 'Ingressos'
+      },
+      {
+        english: "What's included in the VIP experience?",
+        portuguese: "O que está incluído na experiência VIP?",
+        level: 'médio',
+        context: 'Upgrades'
+      },
+      {
+        english: "Are there any restrictions on bag size?",
+        portuguese: "Há restrições no tamanho da bolsa?",
+        level: 'médio',
+        context: 'Bagagem'
+      },
+      {
+        english: "Is there a fast-track entry option?",
+        portuguese: "Há uma opção de entrada rápida?",
+        level: 'médio',
+        context: 'Ingressos'
+      },
+      {
+        english: "Can you recommend the best route through the attraction?",
+        portuguese: "Você pode recomendar a melhor rota pela atração?",
+        level: 'médio',
+        context: 'Navegação'
+      },
+      {
+        english: "Are there any free events or activities today?",
+        portuguese: "Há eventos ou atividades gratuitas hoje?",
+        level: 'médio',
+        context: 'Eventos'
+      },
+      {
+        english: "What's the policy on bringing outside food and drinks?",
+        portuguese: "Qual é a política sobre trazer comida e bebida de fora?",
+        level: 'médio',
+        context: 'Política'
+      },
+      {
+        english: "Are there any special accommodations for elderly visitors?",
+        portuguese: "Há acomodações especiais para visitantes idosos?",
+        level: 'médio',
+        context: 'Acessibilidade'
+      },
+      {
+        english: "Can I upgrade my ticket to include additional features?",
+        portuguese: "Posso fazer upgrade do meu ingresso para incluir recursos adicionais?",
+        level: 'médio',
+        context: 'Upgrades'
+      },
+      {
+        english: "What's the procedure if I lose my ticket?",
+        portuguese: "Qual é o procedimento se eu perder meu ingresso?",
+        level: 'médio',
+        context: 'Política'
+      },
+      {
+        english: "Are there any photo opportunities with professional photographers?",
+        portuguese: "Há oportunidades de foto com fotógrafos profissionais?",
+        level: 'médio',
+        context: 'Fotografia'
+      },
+      {
+        english: "Is there a loyalty program I can join?",
+        portuguese: "Há um programa de fidelidade que posso aderir?",
+        level: 'médio',
+        context: 'Programas'
+      },
+      
+      // AVANÇADO (30 frases)
+      {
+        english: "I'm particularly interested in the architectural significance of this building.",
+        portuguese: "Estou particularmente interessado no significado arquitetônico deste edifício.",
+        level: 'avançado',
+        context: 'Arquitetura'
+      },
+      {
+        english: "Could you elaborate on the conservation efforts being undertaken here?",
+        portuguese: "Você poderia elaborar sobre os esforços de conservação sendo realizados aqui?",
+        level: 'avançado',
+        context: 'Conservação'
+      },
+      {
+        english: "What measures are in place to preserve the cultural heritage of this site?",
+        portuguese: "Que medidas estão em vigor para preservar o patrimônio cultural deste local?",
+        level: 'avançado',
+        context: 'Patrimônio'
+      },
+      {
+        english: "I'd like to inquire about the provenance of these artifacts.",
+        portuguese: "Gostaria de perguntar sobre a proveniência destes artefatos.",
+        level: 'avançado',
+        context: 'História'
+      },
+      {
+        english: "Are there any behind-the-scenes tours available for researchers?",
+        portuguese: "Há tours dos bastidores disponíveis para pesquisadores?",
+        level: 'avançado',
+        context: 'Pesquisa'
+      },
+      {
+        english: "Could you explain the curatorial approach to this exhibition?",
+        portuguese: "Você poderia explicar a abordagem curatorial desta exposição?",
+        level: 'avançado',
+        context: 'Curadoria'
+      },
+      {
+        english: "What's the historical context surrounding these particular pieces?",
+        portuguese: "Qual é o contexto histórico em torno dessas peças específicas?",
+        level: 'avançado',
+        context: 'História'
+      },
+      {
+        english: "I'm researching the socioeconomic impact of tourism on this area.",
+        portuguese: "Estou pesquisando o impacto socioeconômico do turismo nesta área.",
+        level: 'avançado',
+        context: 'Pesquisa'
+      },
+      {
+        english: "Could you discuss the restoration techniques used on these monuments?",
+        portuguese: "Você poderia discutir as técnicas de restauração usadas nestes monumentos?",
+        level: 'avançado',
+        context: 'Restauração'
+      },
+      {
+        english: "What role does this institution play in contemporary cultural discourse?",
+        portuguese: "Que papel esta instituição desempenha no discurso cultural contemporâneo?",
+        level: 'avançado',
+        context: 'Cultura'
+      },
+      {
+        english: "I'm interested in the interdisciplinary approaches employed in your research.",
+        portuguese: "Estou interessado nas abordagens interdisciplinares empregadas em sua pesquisa.",
+        level: 'avançado',
+        context: 'Pesquisa'
+      },
+      {
+        english: "Could you elaborate on the environmental sustainability initiatives here?",
+        portuguese: "Você poderia elaborar sobre as iniciativas de sustentabilidade ambiental aqui?",
+        level: 'avançado',
+        context: 'Sustentabilidade'
+      },
+      {
+        english: "What's the institutional policy regarding digital archiving and preservation?",
+        portuguese: "Qual é a política institucional sobre arquivamento e preservação digital?",
+        level: 'avançado',
+        context: 'Preservação'
+      },
+      {
+        english: "I'd like to understand the pedagogical framework of your educational programs.",
+        portuguese: "Gostaria de entender a estrutura pedagógica de seus programas educacionais.",
+        level: 'avançado',
+        context: 'Educação'
+      },
+      {
+        english: "Could you discuss the collaborative partnerships with international institutions?",
+        portuguese: "Você poderia discutir as parcerias colaborativas com instituições internacionais?",
+        level: 'avançado',
+        context: 'Parcerias'
+      },
+      {
+        english: "What's the methodology behind your visitor experience optimization?",
+        portuguese: "Qual é a metodologia por trás da otimização da experiência do visitante?",
+        level: 'avançado',
+        context: 'Metodologia'
+      },
+      {
+        english: "I'm particularly intrigued by the phenomenological aspects of this space.",
+        portuguese: "Estou particularmente intrigado pelos aspectos fenomenológicos deste espaço.",
+        level: 'avançado',
+        context: 'Filosofia'
+      },
+      {
+        english: "Could you explain the theoretical underpinnings of this curatorial decision?",
+        portuguese: "Você poderia explicar os fundamentos teóricos desta decisão curatorial?",
+        level: 'avançado',
+        context: 'Teoria'
+      },
+      {
+        english: "What's the significance of this work within the broader art historical narrative?",
+        portuguese: "Qual é o significado desta obra dentro da narrativa histórica da arte mais ampla?",
+        level: 'avançado',
+        context: 'História da Arte'
+      },
+      {
+        english: "I'm investigating the anthropological implications of these cultural practices.",
+        portuguese: "Estou investigando as implicações antropológicas dessas práticas culturais.",
+        level: 'avançado',
+        context: 'Antropologia'
+      },
+      {
+        english: "Could you discuss the epistemological challenges in interpreting these artifacts?",
+        portuguese: "Você poderia discutir os desafios epistemológicos na interpretação destes artefatos?",
+        level: 'avançado',
+        context: 'Epistemologia'
+      },
+      {
+        english: "What's the institutional stance on decolonizing museum practices?",
+        portuguese: "Qual é a posição institucional sobre descolonizar práticas museais?",
+        level: 'avançado',
+        context: 'Decolonização'
+      },
+      {
+        english: "I'm exploring the semiotics of spatial design in cultural institutions.",
+        portuguese: "Estou explorando a semiótica do design espacial em instituições culturais.",
+        level: 'avançado',
+        context: 'Semiótica'
+      },
+      {
+        english: "Could you elaborate on the cross-cultural dialogues facilitated by this exhibition?",
+        portuguese: "Você poderia elaborar sobre os diálogos interculturais facilitados por esta exposição?",
+        level: 'avançado',
+        context: 'Diálogo Cultural'
+      },
+      {
+        english: "What's the hermeneutical approach to understanding these historical narratives?",
+        portuguese: "Qual é a abordagem hermenêutica para entender essas narrativas históricas?",
+        level: 'avançado',
+        context: 'Hermenêutica'
+      },
+      {
+        english: "I'm analyzing the postcolonial perspectives embedded in this collection.",
+        portuguese: "Estou analisando as perspectivas pós-coloniais incorporadas nesta coleção.",
+        level: 'avançado',
+        context: 'Pós-colonialismo'
+      },
+      {
+        english: "Could you discuss the ontological questions raised by these contemporary works?",
+        portuguese: "Você poderia discutir as questões ontológicas levantadas por estas obras contemporâneas?",
+        level: 'avançado',
+        context: 'Ontologia'
+      },
+      {
+        english: "What's the institutional approach to addressing cultural appropriation concerns?",
+        portuguese: "Qual é a abordagem institucional para abordar preocupações de apropriação cultural?",
+        level: 'avançado',
+        context: 'Apropriação Cultural'
+      },
+      {
+        english: "I'm examining the dialectical relationship between tradition and modernity here.",
+        portuguese: "Estou examinando a relação dialética entre tradição e modernidade aqui.",
+        level: 'avançado',
+        context: 'Dialética'
+      },
+      {
+        english: "Could you explain the paradigmatic shifts reflected in this curatorial narrative?",
+        portuguese: "Você poderia explicar as mudanças paradigmáticas refletidas nesta narrativa curatorial?",
+        level: 'avançado',
+        context: 'Paradigmas'
       }
     ],
     exercises: [
