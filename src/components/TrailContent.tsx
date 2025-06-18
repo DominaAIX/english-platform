@@ -53,6 +53,7 @@ const iconMapping: { [key: string]: { component: React.ComponentType<{ size?: nu
 }
 
 export default function TrailContent({ trail, userPlan, slug }: TrailContentProps) {
+  console.log('🚨🚨🚨 TRAILCONTENT RENDERIZANDO 🚨🚨🚨')
   const { user, userProfile } = useAuth()
   const { incrementPhrasesViewed } = useStats()
   const { 
@@ -265,6 +266,10 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
 
   return (
     <AnimatedContainer className="min-h-screen">
+      {/* DEBUG BANNER */}
+      <div style={{ backgroundColor: 'yellow', color: 'black', padding: '20px', textAlign: 'center', fontSize: '24px', fontWeight: 'bold' }}>
+        🚨🚨🚨 TRAILCONTENT CARREGADO - PROCURE PELOS BOTÕES VERMELHOS 🚨🚨🚨
+      </div>
       {/* Header */}
       <PageTransition delay={0}>
         <header className="bg-gray-900/50 border-b border-gray-700 p-4">
