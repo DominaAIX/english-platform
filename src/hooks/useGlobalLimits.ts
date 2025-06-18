@@ -225,12 +225,8 @@ export function useGlobalLimits() {
     const diff = nextReset.getTime() - now.getTime()
     const hours = Math.floor(diff / (1000 * 60 * 60))
     const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))
-    const seconds = Math.floor((diff % (1000 * 60)) / 1000)
     
-    // Formatar com zero à esquerda
-    const formatTime = (num: number) => num.toString().padStart(2, '0')
-    
-    return `${formatTime(hours)}:${formatTime(minutes)}:${formatTime(seconds)}`
+    return `${hours}h ${minutes}m`
   }
 
   // Contador em tempo real

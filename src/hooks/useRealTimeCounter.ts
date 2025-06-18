@@ -24,19 +24,15 @@ export function useRealTimeCounter(resetTime: string | null): string | null {
       const diff = nextReset.getTime() - now.getTime()
       const hours = Math.floor(diff / (1000 * 60 * 60))
       const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))
-      const seconds = Math.floor((diff % (1000 * 60)) / 1000)
       
-      // Formatar com zero à esquerda
-      const formatTime = (num: number) => num.toString().padStart(2, '0')
-      
-      setTimeLeft(`${formatTime(hours)}:${formatTime(minutes)}:${formatTime(seconds)}`)
+      setTimeLeft(`${hours}h ${minutes}m`)
     }
 
     // Calcular imediatamente
     calculateTimeLeft()
 
-    // Atualizar a cada segundo
-    const interval = setInterval(calculateTimeLeft, 1000)
+    // Atualizar a cada minuto (60 segundos)
+    const interval = setInterval(calculateTimeLeft, 60000)
 
     // Cleanup
     return () => clearInterval(interval)
