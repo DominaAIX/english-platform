@@ -293,7 +293,7 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
 
       <div className="max-w-4xl mx-auto p-6">
         {/* Mensagem de limite global para usuários free */}
-        {actualUserPlan === 'free' && !isPremium && totalPhrasesViewed >= 10 && (
+        {actualUserPlan === 'free' && !isPremium && totalPhrasesViewed >= 9 && (
           <GlobalLimitMessage 
             type="phrases"
             timeUntilReset={getTimeUntilReset()}
@@ -496,7 +496,7 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
             
             <button
               onClick={
-                currentPhraseIndex === availablePhrases.length - 1 && totalPhrasesViewed >= 10 && !isPremium && actualUserPlan === 'free' 
+                currentPhraseIndex === availablePhrases.length - 1 && totalPhrasesViewed >= 9 && !isPremium && actualUserPlan === 'free' 
                   ? handleBackToDashboard 
                   : handleNext
               }
@@ -514,7 +514,8 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
                   shouldShowDashboard: currentPhraseIndex === availablePhrases.length - 1 && totalPhrasesViewed >= 10 && !isPremium && actualUserPlan === 'free'
                 })
                 
-                if (currentPhraseIndex === availablePhrases.length - 1 && totalPhrasesViewed >= 10 && !isPremium && actualUserPlan === 'free') {
+                // Para users free: se está na 10ª frase (índice 9) E já viu 9+ frases, mostrar "Voltar ao Dashboard"
+                if (currentPhraseIndex === availablePhrases.length - 1 && totalPhrasesViewed >= 9 && !isPremium && actualUserPlan === 'free') {
                   return 'Voltar ao Dashboard'
                 } else if (currentPhraseIndex === availablePhrases.length - 1) {
                   return 'Finalizar'
@@ -528,7 +529,7 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
         </PageTransition>
 
         {/* Free Plan Limit Notice */}
-        {actualUserPlan === 'free' && totalPhrasesViewed >= 10 && (
+        {actualUserPlan === 'free' && totalPhrasesViewed >= 9 && (
           <PageTransition delay={600}>
             <div className="bg-gradient-to-r from-purple-900/50 to-cyan-900/50 border border-purple-500/30 rounded-xl p-6 text-center">
             <h3 className="text-xl font-bold text-white mb-2">
