@@ -32,12 +32,14 @@ export default function FreePlanLimitMessage({ timeUntilReset, onUpgradeClick }:
           </div>
         </div>
 
-        <button
-          onClick={onUpgradeClick}
-          className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 px-8 py-3 rounded-full text-white font-bold text-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
-        >
-          🚀 Fazer Upgrade para Pro
-        </button>
+        <div className="flex justify-center">
+          <button
+            onClick={onUpgradeClick}
+            className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 px-8 py-3 rounded-full text-white font-bold text-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+          >
+            🚀 Fazer Upgrade para Pro
+          </button>
+        </div>
         
         <p className="text-gray-500 text-xs mt-3">
           Ou aguarde {timeUntilReset || '24h'} para usar novamente
