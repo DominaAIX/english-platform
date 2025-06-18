@@ -321,7 +321,7 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
               <div className="text-6xl">{trail.icon}</div>
             )}
           </div>
-          <h1 className="text-3xl font-bold text-white mb-2">{trail.title}</h1>
+          <h1 className="text-3xl font-bold text-white mb-2">🔥 DEPLOY TESTE 🔥 {trail.title}</h1>
           <p className="text-gray-400 mb-6">{trail.description}</p>
           
           {/* Progress Bar */}
