@@ -22,19 +22,20 @@ export default function ChatContent() {
   const { user } = useAuth()
   const router = useRouter()
   const {
-    totalPhrasesViewed,
-    isPhrasesBlocked, 
+    totalAiMessages,
+    isAiMessagesBlocked, 
     getTimeUntilReset,
     isPremium,
-    incrementPhrases
+    incrementAiMessages: incrementAiLimit,
+    getRemainingAiMessages
   } = useGlobalLimits()
   
-  // Para compatibilidade com o código existente
-  const messageCount = totalPhrasesViewed
-  const isBlocked = isPhrasesBlocked && !isPremium
-  const remainingMessages = Math.max(0, 3 - totalPhrasesViewed)
+  // Limites específicos para AI Chat (independente das frases das trilhas)
+  const messageCount = totalAiMessages
+  const isBlocked = isAiMessagesBlocked && !isPremium
+  const remainingMessages = getRemainingAiMessages()
   const timeUntilReset = getTimeUntilReset()
-  const incrementMessageCount = incrementPhrases
+  const incrementMessageCount = incrementAiLimit
   const { incrementAiMessages } = useStats()
   
   const [messages, setMessages] = useState<Message[]>([
@@ -430,7 +431,7 @@ export default function ChatContent() {
           {/* Input Area */}
           <div className="border-t border-gray-700 p-4 bg-gray-900/30">
             {/* Indicador de mensagens restantes para usuários gratuitos */}
-            {!isBlocked && remainingMessages < 3 && (
+            {!isBlocked && remainingMessages > 0 && remainingMessages < 3 && (
               <div className="mb-3 text-center">
                 <div className="inline-flex items-center gap-2 bg-yellow-900/30 border border-yellow-500/50 rounded-lg px-3 py-2">
                   <span className="text-yellow-400 text-sm">
