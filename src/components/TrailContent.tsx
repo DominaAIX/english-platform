@@ -75,6 +75,16 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
   const [favoritePhrases, setFavoritePhrases] = useState<number[]>([]) // Índices das frases favoritadas
   const [favoritesLoading, setFavoritesLoading] = useState(false)
   const [hasReachedLimit, setHasReachedLimit] = useState(false) // Controle local do limite
+  const [phrasesCompletedCount, setPhrasesCompletedCount] = useState(0) // Contador local de frases completadas
+
+  // Verificar limite global ao montar componente
+  useEffect(() => {
+    if (!isPremium && actualUserPlan === 'free') {
+      setHasReachedLimit(isPhrasesBlocked || totalPhrasesViewed >= 10)
+    } else {
+      setHasReachedLimit(false)
+    }
+  }, [isPremium, actualUserPlan, totalPhrasesViewed, isPhrasesBlocked])
 
   // Carregar favoritos do usuário ao montar o componente
   useEffect(() => {
@@ -149,34 +159,35 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
   const progress = ((completedPhrases.length) / availablePhrases.length) * 100
 
   const handleNext = async () => {
-    console.log('🚨 handleNext início:', { currentPhraseIndex, completedPhrases: completedPhrases.length, actualUserPlan, hasReachedLimit })
-    
-    // Se já atingiu o limite, não fazer nada
+    // Se já atingiu o limite global, não fazer nada
     if (hasReachedLimit) {
-      console.log('🚨 Limite já atingido, parando')
       return
     }
     
     if (!completedPhrases.includes(currentPhraseIndex)) {
+      // Incrementar contador local
+      const newCount = phrasesCompletedCount + 1
+      setPhrasesCompletedCount(newCount)
       setCompletedPhrases([...completedPhrases, currentPhraseIndex])
+      
+      // Incrementar contador global para usuários free
+      if (!isPremium && actualUserPlan === 'free') {
+        const canView = incrementPhrases()
+        if (!canView) {
+          setHasReachedLimit(true)
+          return
+        }
+      }
+      
       // Incrementar contador de frases visualizadas (para stats)
       await incrementPhrasesViewed()
     }
     
-    // Para usuários free: verificar se completou 10 frases
-    if (!isPremium && actualUserPlan === 'free' && completedPhrases.length + 1 >= 10) {
-      console.log('🚨 Completou 10 frases, ativando limite')
-      setHasReachedLimit(true)
-      return
-    }
-    
+    // Avançar para próxima frase se disponível
     if (currentPhraseIndex < availablePhrases.length - 1) {
-      console.log('🚨 Avançando para próxima frase')
       setCurrentPhraseIndex(currentPhraseIndex + 1)
       setShowTranslation(false)
       setShowPronunciation(false)
-    } else {
-      console.log('🚨 Chegou ao final das frases disponíveis')
     }
   }
 
@@ -510,24 +521,12 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
               }
               className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 px-6 py-3 rounded-full text-white font-semibold transition-all duration-300"
             >
-              {(() => {
-                console.log('🚨 BUTTON RENDER:', { 
-                  currentPhraseIndex, 
-                  totalPhrasesViewed, 
-                  isPremium, 
-                  actualUserPlan,
-                  isLastPhrase: currentPhraseIndex === availablePhrases.length - 1,
-                  shouldShowDashboard: currentPhraseIndex === availablePhrases.length - 1 && totalPhrasesViewed >= 10 && !isPremium && actualUserPlan === 'free'
-                })
-                
-                if (hasReachedLimit && !isPremium && actualUserPlan === 'free') {
-                  return 'Voltar ao Dashboard'
-                } else if (currentPhraseIndex === availablePhrases.length - 1) {
-                  return 'Finalizar'
-                } else {
-                  return 'Próxima →'
-                }
-              })()}
+              {hasReachedLimit && !isPremium && actualUserPlan === 'free' 
+                ? 'Voltar ao Dashboard'
+                : currentPhraseIndex === availablePhrases.length - 1
+                ? 'Finalizar'
+                : 'Próxima →'
+              }
             </button>
           </div>
           </div>
