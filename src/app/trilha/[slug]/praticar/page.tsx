@@ -230,8 +230,9 @@ function PracticePageClient({ trailData, slug }: { trailData: Trail, slug: strin
                       Desbloqueie exercícios interativos e muito mais!
                     </p>
                     <div className="flex justify-center">
-                      <button className="bg-gradient-to-r from-yellow-600 to-orange-600 hover:from-yellow-700 hover:to-orange-700 px-6 py-3 rounded-xl text-white font-bold transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-yellow-500/20">
-                        ⭐ Fazer Upgrade para Premium
+                      <button className="bg-gradient-to-r from-yellow-600 to-orange-600 hover:from-yellow-700 hover:to-orange-700 px-6 py-3 rounded-xl text-white font-bold transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-yellow-500/20"
+                        style={{ backgroundColor: 'red !important' }}>
+                        DEBUG: PracticePage1 - ⭐ Fazer Upgrade para Premium
                       </button>
                     </div>
                   </div>
@@ -372,8 +373,9 @@ function PracticePageClient({ trailData, slug }: { trailData: Trail, slug: strin
                 
                 <div className="text-center">
                   <div className="flex justify-center">
-                    <button className="bg-gradient-to-r from-yellow-600 to-orange-600 hover:from-yellow-700 hover:to-orange-700 px-8 py-4 rounded-xl text-white font-bold text-lg transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-yellow-500/20">
-                      🚀 Assinar Premium Agora
+                    <button className="bg-gradient-to-r from-yellow-600 to-orange-600 hover:from-yellow-700 hover:to-orange-700 px-8 py-4 rounded-xl text-white font-bold text-lg transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-yellow-500/20"
+                      style={{ backgroundColor: 'red !important' }}>
+                      DEBUG: PracticePage2 - 🚀 Assinar Premium Agora
                     </button>
                   </div>
                   <p className="text-gray-400 text-sm mt-3">

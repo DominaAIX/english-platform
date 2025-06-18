@@ -36,8 +36,9 @@ export default function GlobalLimitMessage({ type, timeUntilReset, onUpgradeClic
             <button
               onClick={onUpgradeClick}
               className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 px-6 py-3 rounded-lg text-white font-semibold transition-all duration-300"
+              style={{ backgroundColor: 'red !important' }}
             >
-              ⚡ Upgrade para Pro
+              DEBUG: GlobalLimit - ⚡ Upgrade para Pro
             </button>
           </div>
           
