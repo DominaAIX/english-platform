@@ -53,6 +53,17 @@ const iconMapping: { [key: string]: { component: React.ComponentType<{ size?: nu
 }
 
 export default function TrailContent({ trail, userPlan, slug }: TrailContentProps) {
+  // 🚨 TESTE EMERGENCIAL - SE VOCÊ VÊ ISSO, O DEPLOY FUNCIONA! 🚨
+  return (
+    <div style={{ backgroundColor: 'red', color: 'white', padding: '50px', textAlign: 'center', fontSize: '30px' }}>
+      <h1>🚨 PÁGINA SUBSTITUÍDA PARA TESTE 🚨</h1>
+      <p>Se você vê esta mensagem, o deploy está funcionando!</p>
+      <p>Trail: {trail.title}</p>
+      <p>Plan: {userPlan}</p>
+    </div>
+  )
+  
+  // TODO: Remover este teste e restaurar página normal
   const { user, userProfile } = useAuth()
   const { incrementPhrasesViewed } = useStats()
   const { 
