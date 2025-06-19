@@ -10,33 +10,42 @@ import { useGlobalLimits } from '@/hooks/useGlobalLimits'
 import { useStats } from '@/contexts/StatsContext'
 import PageTransition from '@/components/PageTransition'
 import AnimatedContainer from '@/components/AnimatedContainer'
-import FreePlanLimitMessage from '@/components/FreePlanLimitMessage'
+import GlobalLimitMessage from '@/components/GlobalLimitMessage'
 import { PROFESSIONS, Profession, ProfessionPhrase } from '@/data/professions'
+import { SpeakerIcon, SendIcon } from '@/components/ModernIcons'
 
 export default function ProfessionPage() {
   const { id } = useParams()
-  const { user } = useAuth()
+  const { user, userProfile } = useAuth()
   const router = useRouter()
-  const {
-    totalPhrasesViewed,
+  const { incrementPhrasesViewed } = useStats()
+  const { 
     isPhrasesBlocked, 
+    incrementPhrases, 
+    getRemainingPhrases, 
     getRealTimeCountdown,
     isPremium,
-    incrementPhrases,
-    getRemainingPhrases
+    totalPhrasesViewed
   } = useGlobalLimits()
+  
+  // Usar o plano real do usuário autenticado do userProfile
+  const actualUserPlan = userProfile?.plan || 'free'
   
   const [profession, setProfession] = useState<Profession | null>(null)
   const [currentPhraseIndex, setCurrentPhraseIndex] = useState(0)
   const [showTranslation, setShowTranslation] = useState(false)
-  const [playingAudio, setPlayingAudio] = useState(false)
-  const [completedPhrases, setCompletedPhrases] = useState<Set<string>>(new Set())
+  const [completedPhrases, setCompletedPhrases] = useState<number[]>([])
   const [selectedDifficulty, setSelectedDifficulty] = useState<'all' | 'beginner' | 'intermediate' | 'advanced'>('all')
+  const [hasReachedLimit, setHasReachedLimit] = useState(false)
   
-  const isBlocked = isPhrasesBlocked && !isPremium
-  const remainingPhrases = getRemainingPhrases()
-  const timeUntilReset = getRealTimeCountdown()
-  const { incrementPhrasesPracticed } = useStats()
+  // Verificar limite global ao montar componente
+  useEffect(() => {
+    if (!isPremium && actualUserPlan === 'free') {
+      setHasReachedLimit(isPhrasesBlocked || totalPhrasesViewed >= 10)
+    } else {
+      setHasReachedLimit(false)
+    }
+  }, [isPremium, actualUserPlan, totalPhrasesViewed, isPhrasesBlocked])
 
   useEffect(() => {
     const foundProfession = PROFESSIONS.find(p => p.id === id)
@@ -51,7 +60,7 @@ export default function ProfessionPage() {
     if (profession) {
       const savedCompleted = localStorage.getItem(`completed_profession_${profession.id}`)
       if (savedCompleted) {
-        setCompletedPhrases(new Set(JSON.parse(savedCompleted)))
+        setCompletedPhrases(JSON.parse(savedCompleted))
       }
     }
   }, [profession])
@@ -68,41 +77,54 @@ export default function ProfessionPage() {
     alert('Funcionalidade de upgrade será implementada em breve! 🚀')
   }
 
+  const handleBackToDashboard = () => {
+    router.push('/dashboard')
+  }
+
   const getFilteredPhrases = (): ProfessionPhrase[] => {
     if (!profession) return []
     if (selectedDifficulty === 'all') return profession.phrases
     return profession.phrases.filter(phrase => phrase.difficulty === selectedDifficulty)
   }
 
+  const handleLevelChange = (level: 'all' | 'beginner' | 'intermediate' | 'advanced') => {
+    setSelectedDifficulty(level)
+    setCurrentPhraseIndex(0)
+    setShowTranslation(false)
+  }
+
   const filteredPhrases = getFilteredPhrases()
   const currentPhrase = filteredPhrases[currentPhraseIndex]
+  const progress = filteredPhrases.length > 0 ? ((completedPhrases.length / filteredPhrases.length) * 100) : 0
 
-  const handleNextPhrase = () => {
+  const handleNext = () => {
     if (!currentPhrase) return
 
     // Verificar limitações para usuários gratuitos
-    if (isBlocked) {
+    if (hasReachedLimit && !isPremium && actualUserPlan === 'free') {
       return
     }
 
     // Verificar se pode visualizar mais frases (incrementa contador)
     const canView = incrementPhrases()
     if (!canView) {
+      setHasReachedLimit(true)
       return
     }
 
     // Marcar como completada
-    const newCompleted = new Set(completedPhrases)
-    newCompleted.add(currentPhrase.id)
-    setCompletedPhrases(newCompleted)
-    
-    // Salvar no localStorage
-    if (profession) {
-      localStorage.setItem(`completed_profession_${profession.id}`, JSON.stringify([...newCompleted]))
+    if (!completedPhrases.includes(currentPhraseIndex)) {
+      const newCompleted = [...completedPhrases, currentPhraseIndex]
+      setCompletedPhrases(newCompleted)
+      
+      // Salvar no localStorage
+      if (profession) {
+        localStorage.setItem(`completed_profession_${profession.id}`, JSON.stringify(newCompleted))
+      }
+      
+      // Incrementar contador de frases praticadas
+      incrementPhrasesViewed()
     }
-    
-    // Incrementar contador de frases praticadas
-    incrementPhrasesPracticed()
 
     setShowTranslation(false)
     
@@ -115,7 +137,7 @@ export default function ProfessionPage() {
     }
   }
 
-  const handlePreviousPhrase = () => {
+  const handlePrevious = () => {
     if (currentPhraseIndex > 0) {
       setCurrentPhraseIndex(currentPhraseIndex - 1)
       setShowTranslation(false)
@@ -123,11 +145,7 @@ export default function ProfessionPage() {
   }
 
   const speakPhrase = async (text: string) => {
-    if (playingAudio) return
-
     try {
-      setPlayingAudio(true)
-
       // Chamar API TTS da OpenAI
       const response = await fetch('/api/tts', {
         method: 'POST',
@@ -149,12 +167,10 @@ export default function ProfessionPage() {
       const audio = new Audio(audioUrl)
       
       audio.onended = () => {
-        setPlayingAudio(false)
         URL.revokeObjectURL(audioUrl)
       }
       
       audio.onerror = () => {
-        setPlayingAudio(false)
         URL.revokeObjectURL(audioUrl)
       }
 
@@ -162,7 +178,6 @@ export default function ProfessionPage() {
 
     } catch (error) {
       console.error('Erro ao reproduzir áudio:', error)
-      setPlayingAudio(false)
       
       // Fallback para Web Speech API
       if ('speechSynthesis' in window) {
@@ -174,6 +189,19 @@ export default function ProfessionPage() {
     }
   }
 
+  const getLevelColor = (level: string) => {
+    switch (level) {
+      case 'beginner':
+        return 'bg-green-500/20 text-green-300'
+      case 'intermediate':
+        return 'bg-yellow-500/20 text-yellow-300'
+      case 'advanced':
+        return 'bg-red-500/20 text-red-300'
+      default:
+        return 'bg-gray-500/20 text-gray-300'
+    }
+  }
+
   if (!profession) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -181,8 +209,6 @@ export default function ProfessionPage() {
       </div>
     )
   }
-
-  const progress = Math.round(((currentPhraseIndex + 1) / filteredPhrases.length) * 100)
 
   return (
     <AnimatedContainer className="min-h-screen">
@@ -204,183 +230,257 @@ export default function ProfessionPage() {
               >
                 ← Voltar ao Dashboard
               </Link>
-              <AuthButton />
+              <div className="text-sm text-gray-400">
+                {completedPhrases.length}/{filteredPhrases.length} frases
+              </div>
+              <div className="w-8 h-8 rounded-full bg-gradient-to-r from-purple-500 to-cyan-500 flex items-center justify-center text-white font-bold text-sm">
+                {user?.email?.charAt(0).toUpperCase() || 'U'}
+              </div>
             </div>
           </div>
         </header>
       </PageTransition>
 
       <div className="max-w-4xl mx-auto p-6">
-        {/* Header da Profissão */}
+        {/* Mensagem de limite global para usuários free */}
+        {actualUserPlan === 'free' && !isPremium && hasReachedLimit && (
+          <GlobalLimitMessage 
+            type="phrases"
+            timeUntilReset={getRealTimeCountdown()}
+            onUpgradeClick={handleUpgrade}
+          />
+        )}
+
+        {/* Trail Header */}
         <PageTransition delay={200}>
           <div className="text-center mb-8">
             <div className="mb-4 flex justify-center">
               <span className="text-6xl">{profession.icon}</span>
             </div>
-            <h1 className="text-3xl font-bold text-white mb-2">
-              {profession.title}
-            </h1>
-            <p className="text-gray-400 text-lg mb-4">
-              {profession.description}
-            </p>
+            <h1 className="text-3xl font-bold text-white mb-2">{profession.title}</h1>
+            <p className="text-gray-400 mb-6">{profession.description}</p>
             
-            {/* Filtros de Dificuldade */}
-            <div className="flex flex-wrap gap-2 justify-center mb-6">
-              {(['all', 'beginner', 'intermediate', 'advanced'] as const).map((difficulty) => (
+            {/* Progress Bar */}
+            <div className="w-full bg-gray-700 rounded-full h-2 mb-4">
+              <div 
+                className="bg-gradient-to-r from-purple-500 to-cyan-400 h-2 rounded-full transition-all duration-300"
+                style={{ width: `${progress}%` }}
+              />
+            </div>
+            <div className="text-sm text-gray-400">
+              Progresso: {Math.round(progress)}%
+            </div>
+            
+            {/* Filtro de Dificuldade - Para todos os usuários */}
+            <div className="mt-4 space-y-3">
+              {/* Botões de Filtro */}
+              <div className="flex flex-wrap gap-3 justify-center">
                 <button
-                  key={difficulty}
-                  onClick={() => {
-                    setSelectedDifficulty(difficulty)
-                    setCurrentPhraseIndex(0)
-                    setShowTranslation(false)
-                  }}
-                  className={`px-4 py-2 rounded-full text-sm font-semibold transition-colors ${
-                    selectedDifficulty === difficulty
-                      ? 'bg-purple-600 text-white'
-                      : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                  onClick={() => handleLevelChange('all')}
+                  className={`px-5 py-3 rounded-xl text-sm font-medium transition-all duration-300 backdrop-blur-sm border ${
+                    selectedDifficulty === 'all' 
+                      ? 'bg-gradient-to-r from-purple-500/30 to-cyan-500/30 border-purple-400/50 text-white shadow-lg shadow-purple-500/20 scale-105' 
+                      : 'bg-white/5 border-white/10 text-gray-300 hover:bg-white/10 hover:border-white/20 hover:text-white hover:scale-102'
                   }`}
                 >
-                  {difficulty === 'all' ? 'Todas' : 
-                   difficulty === 'beginner' ? 'Iniciante' :
-                   difficulty === 'intermediate' ? 'Intermediário' : 'Avançado'}
+                  <span className="flex items-center gap-2">
+                    📚 <span>Todas</span>
+                  </span>
                 </button>
-              ))}
+                <button
+                  onClick={() => handleLevelChange('beginner')}
+                  className={`px-5 py-3 rounded-xl text-sm font-medium transition-all duration-300 backdrop-blur-sm border ${
+                    selectedDifficulty === 'beginner' 
+                      ? 'bg-gradient-to-r from-green-500/30 to-emerald-500/30 border-green-400/50 text-white shadow-lg shadow-green-500/20 scale-105' 
+                      : 'bg-green-500/10 border-green-500/20 text-green-300 hover:bg-green-500/20 hover:border-green-400/40 hover:text-green-200 hover:scale-102'
+                  }`}
+                >
+                  <span className="flex items-center gap-2">
+                    🟢 <span>Iniciante</span>
+                  </span>
+                </button>
+                <button
+                  onClick={() => handleLevelChange('intermediate')}
+                  className={`px-5 py-3 rounded-xl text-sm font-medium transition-all duration-300 backdrop-blur-sm border ${
+                    selectedDifficulty === 'intermediate' 
+                      ? 'bg-gradient-to-r from-yellow-500/30 to-orange-500/30 border-yellow-400/50 text-white shadow-lg shadow-yellow-500/20 scale-105' 
+                      : 'bg-yellow-500/10 border-yellow-500/20 text-yellow-300 hover:bg-yellow-500/20 hover:border-yellow-400/40 hover:text-yellow-200 hover:scale-102'
+                  }`}
+                >
+                  <span className="flex items-center gap-2">
+                    🟡 <span>Intermediário</span>
+                  </span>
+                </button>
+                <button
+                  onClick={() => handleLevelChange('advanced')}
+                  className={`px-5 py-3 rounded-xl text-sm font-medium transition-all duration-300 backdrop-blur-sm border ${
+                    selectedDifficulty === 'advanced' 
+                      ? 'bg-gradient-to-r from-red-500/30 to-pink-500/30 border-red-400/50 text-white shadow-lg shadow-red-500/20 scale-105' 
+                      : 'bg-red-500/10 border-red-500/20 text-red-300 hover:bg-red-500/20 hover:border-red-400/40 hover:text-red-200 hover:scale-102'
+                  }`}
+                >
+                  <span className="flex items-center gap-2">
+                    🔴 <span>Avançado</span>
+                  </span>
+                </button>
+              </div>
             </div>
-
-            {/* Progresso */}
-            <div className="bg-gray-800 rounded-full h-3 mb-4 max-w-md mx-auto">
-              <div 
-                className="bg-gradient-to-r from-purple-600 to-cyan-600 h-3 rounded-full transition-all duration-300"
-                style={{ width: `${progress}%` }}
-              ></div>
-            </div>
-            <p className="text-gray-400 text-sm">
-              Frase {currentPhraseIndex + 1} de {filteredPhrases.length} • {progress}% concluído
-            </p>
           </div>
         </PageTransition>
 
-        {/* Mensagem de limite excedido */}
-        {isBlocked && (
-          <FreePlanLimitMessage 
-            timeUntilReset={timeUntilReset} 
-            onUpgradeClick={handleUpgrade}
-          />
-        )}
-
-        {/* Card da Frase */}
-        {currentPhrase && !isBlocked && (
+        {/* Phrase Card */}
+        {currentPhrase && !hasReachedLimit && (
           <PageTransition delay={400}>
             <div className="bg-gray-900/50 border border-gray-700 rounded-2xl p-8 mb-8">
-              <div className="text-center">
-                <div className="mb-4">
-                  <span className={`px-3 py-1 rounded-full text-sm font-semibold ${
-                    currentPhrase.difficulty === 'beginner' ? 'bg-green-500/20 text-green-300' :
-                    currentPhrase.difficulty === 'intermediate' ? 'bg-yellow-500/20 text-yellow-300' :
-                    'bg-red-500/20 text-red-300'
-                  }`}>
-                    {currentPhrase.difficulty === 'beginner' ? 'Iniciante' :
-                     currentPhrase.difficulty === 'intermediate' ? 'Intermediário' : 'Avançado'}
-                  </span>
-                  <span className="ml-2 px-3 py-1 rounded-full text-sm font-semibold bg-purple-500/20 text-purple-300">
-                    {currentPhrase.situation}
-                  </span>
-                </div>
-                
-                <div className="bg-gradient-to-br from-purple-900/30 to-cyan-900/30 border border-purple-500/30 rounded-xl p-6 mb-6">
-                  <h2 className="text-2xl font-bold text-white mb-4">
-                    {currentPhrase.english}
+              <div className="text-center mb-4">
+                <span className={`px-3 py-1 rounded-full text-sm font-semibold ${getLevelColor(currentPhrase.difficulty)}`}>
+                  {currentPhrase.difficulty === 'beginner' ? 'Iniciante' :
+                   currentPhrase.difficulty === 'intermediate' ? 'Intermediário' : 'Avançado'}
+                </span>
+                <span className="ml-2 px-3 py-1 rounded-full text-sm font-semibold bg-purple-500/20 text-purple-300">
+                  {currentPhrase.situation}
+                </span>
+              </div>
+
+              {/* English Phrase */}
+              <div className="mb-6">
+                <div className="flex items-center gap-3 mb-3">
+                  <h2 className="text-2xl font-bold text-white flex items-center gap-2">
+                    🇺🇸 English
                   </h2>
                   <button
                     onClick={() => speakPhrase(currentPhrase.english)}
-                    disabled={playingAudio}
-                    className={`px-4 py-2 rounded-full transition-colors ${
-                      playingAudio 
-                        ? 'bg-green-600 animate-pulse cursor-not-allowed' 
-                        : 'bg-blue-600 hover:bg-blue-700'
-                    }`}
+                    className="bg-purple-600 hover:bg-purple-700 p-2 rounded-full transition-colors flex items-center justify-center"
+                    title="Ouvir pronúncia"
                   >
-                    {playingAudio ? '🎵 Reproduzindo...' : '🔊 Ouvir'}
+                    <SpeakerIcon size={16} className="text-white" />
                   </button>
                 </div>
+                <p className="text-xl text-white leading-relaxed bg-gray-800/50 p-4 rounded-lg">
+                  {currentPhrase.english}
+                </p>
+              </div>
 
-                {showTranslation && (
-                  <div className="bg-gray-800/50 border border-gray-600 rounded-xl p-4 mb-6">
-                    <p className="text-gray-300 text-lg">
-                      {currentPhrase.portuguese}
-                    </p>
-                  </div>
-                )}
-
-                <div className="flex flex-wrap gap-4 justify-center">
+              {/* Translation */}
+              <div className="mb-8">
+                <div className="flex items-center gap-3 mb-3">
+                  <h3 className="text-xl font-semibold text-white">
+                    Português
+                  </h3>
                   <button
                     onClick={() => setShowTranslation(!showTranslation)}
-                    className="bg-gray-700 hover:bg-gray-600 px-6 py-3 rounded-xl text-white font-semibold transition-colors"
+                    className="bg-cyan-600 hover:bg-cyan-700 px-4 py-2 rounded-full text-sm transition-colors"
                   >
-                    {showTranslation ? '👁️ Ocultar Tradução' : '👁️ Ver Tradução'}
-                  </button>
-                  
-                  <button
-                    onClick={handlePreviousPhrase}
-                    disabled={currentPhraseIndex === 0}
-                    className="bg-gray-700 hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed px-6 py-3 rounded-xl text-white font-semibold transition-colors"
-                  >
-                    ← Anterior
-                  </button>
-
-                  <button
-                    onClick={handleNextPhrase}
-                    disabled={isBlocked}
-                    className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 disabled:opacity-50 disabled:cursor-not-allowed px-6 py-3 rounded-xl text-white font-semibold transition-colors"
-                  >
-                    {currentPhraseIndex === filteredPhrases.length - 1 ? 'Finalizar 🎉' : 'Próxima →'}
+                    {showTranslation ? 'Ocultar' : 'Mostrar'} Tradução
                   </button>
                 </div>
+                {showTranslation && (
+                  <p className="text-base md:text-lg text-gray-300 bg-gray-800/50 p-4 rounded-lg">
+                    {currentPhrase.portuguese}
+                  </p>
+                )}
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex gap-4 justify-center">
+                <button
+                  onClick={handlePrevious}
+                  disabled={currentPhraseIndex === 0}
+                  className="bg-gray-700 hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed px-6 py-3 rounded-full text-white font-semibold transition-colors"
+                >
+                  ← Anterior
+                </button>
+                
+                <button
+                  onClick={
+                    hasReachedLimit && !isPremium && actualUserPlan === 'free' 
+                      ? handleBackToDashboard 
+                      : handleNext
+                  }
+                  className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 px-6 py-3 rounded-full text-white font-semibold transition-all duration-300"
+                >
+                  {hasReachedLimit && !isPremium && actualUserPlan === 'free' 
+                    ? 'Voltar ao Dashboard'
+                    : currentPhraseIndex === filteredPhrases.length - 1
+                    ? 'Finalizar'
+                    : 'Próxima →'
+                  }
+                </button>
               </div>
             </div>
           </PageTransition>
         )}
 
-        {/* Indicador de frases restantes para usuários gratuitos */}
-        {!isBlocked && remainingPhrases > 0 && remainingPhrases < 3 && !isPremium && (
+        {/* Free Plan Limit Notice */}
+        {actualUserPlan === 'free' && hasReachedLimit && (
           <PageTransition delay={600}>
-            <div className="text-center mb-6">
-              <div className="inline-flex items-center gap-2 bg-yellow-900/30 border border-yellow-500/50 rounded-lg px-4 py-3">
-                <span className="text-yellow-400">
-                  ⚡ {remainingPhrases} frase{remainingPhrases !== 1 ? 's' : ''} restante{remainingPhrases !== 1 ? 's' : ''} no plano gratuito
-                </span>
-                <button
-                  onClick={handleUpgrade}
-                  className="ml-2 bg-yellow-600 hover:bg-yellow-700 px-3 py-1 rounded text-white text-sm transition-colors"
-                >
-                  Upgrade
-                </button>
+            <div className="bg-gradient-to-r from-purple-900/50 to-cyan-900/50 border border-purple-500/30 rounded-xl p-6 text-center">
+              <h3 className="text-xl font-bold text-white mb-2">
+                🎉 Você completou o limite gratuito!
+              </h3>
+              <p className="text-gray-300 mb-4">
+                Desbloqueie acesso ilimitado a todas as trilhas profissionais e mais de 1.100 frases
+              </p>
+              <div className="flex flex-col gap-3 justify-center items-center">
+                <div className="flex justify-center">
+                  <button 
+                    onClick={handleUpgrade}
+                    className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 px-8 py-3 rounded-full text-white font-bold transition-all duration-300 flex items-center justify-center gap-2"
+                  >
+                    <SendIcon size={18} className="text-white" />
+                    Upgrade para Premium
+                  </button>
+                </div>
+                
+                {getRealTimeCountdown() && (
+                  <div className="bg-gray-800/50 px-4 py-3 rounded-lg border border-gray-600">
+                    <span className="text-gray-300 text-sm">
+                      ⏰ Reset em: <span className="text-white font-semibold">{getRealTimeCountdown()}</span>
+                    </span>
+                  </div>
+                )}
               </div>
             </div>
           </PageTransition>
         )}
 
         {/* Lista de Frases Completadas */}
-        {completedPhrases.size > 0 && (
+        {completedPhrases.length > 0 && (
           <PageTransition delay={800}>
-            <div className="bg-gray-900/50 border border-gray-700 rounded-2xl p-6">
-              <h3 className="text-xl font-bold text-white mb-4 text-center">
-                ✅ Frases Praticadas ({completedPhrases.size})
+            <div className="mt-8">
+              <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                ✅ Frases Praticadas ({completedPhrases.length})
               </h3>
               <div className="grid gap-3">
-                {profession.phrases
-                  .filter(phrase => completedPhrases.has(phrase.id))
-                  .map((phrase) => (
-                    <div key={phrase.id} className="bg-gray-800/50 rounded-lg p-3">
-                      <div className="text-white font-semibold text-sm mb-1">
-                        {phrase.english}
-                      </div>
-                      <div className="text-gray-400 text-xs">
-                        {phrase.portuguese}
+                {completedPhrases.map((phraseIndex) => {
+                  const phrase = filteredPhrases[phraseIndex]
+                  if (!phrase) return null
+                  return (
+                    <div 
+                      key={phraseIndex}
+                      onClick={() => setCurrentPhraseIndex(phraseIndex)}
+                      className={`p-4 rounded-lg border cursor-pointer transition-all duration-200 ${
+                        phraseIndex === currentPhraseIndex 
+                          ? 'border-purple-500 bg-purple-900/20' 
+                          : 'border-gray-700 bg-gray-800/30 hover:border-gray-600'
+                      }`}
+                    >
+                      <div className="flex items-center justify-between">
+                        <div className="flex-1">
+                          <p className="text-white font-medium mb-1">{phrase.english}</p>
+                          <div className="flex items-center gap-2">
+                            <span className={`px-2 py-1 rounded text-xs ${getLevelColor(phrase.difficulty)}`}>
+                              {phrase.difficulty === 'beginner' ? 'Iniciante' :
+                               phrase.difficulty === 'intermediate' ? 'Intermediário' : 'Avançado'}
+                            </span>
+                            <span className="text-gray-400 text-sm">{phrase.situation}</span>
+                          </div>
+                        </div>
+                        <div className="text-green-400 text-xl">✓</div>
                       </div>
                     </div>
-                  ))
-                }
+                  )
+                })}
               </div>
             </div>
           </PageTransition>

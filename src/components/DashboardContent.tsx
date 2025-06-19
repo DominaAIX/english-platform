@@ -373,24 +373,29 @@ export default function DashboardContent() {
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
               {PROFESSIONS.map((profession) => (
                 <Link key={profession.id} href={`/profissao/${profession.id}`}>
-                  <div 
-                    className={`group bg-gradient-to-br ${profession.color} bg-opacity-10 border border-gray-600/30 hover:border-gray-400/50 rounded-2xl p-4 transition-all duration-300 cursor-pointer transform hover:scale-105 h-full flex flex-col bg-gray-900/30`}
-                    onMouseEnter={() => setHoveredCard(profession.id)}
-                    onMouseLeave={() => setHoveredCard(null)}
-                  >
-                    <div className="text-center flex-1 flex flex-col justify-between">
+                  <div className="relative group">
+                    {/* Background com gradiente translúcido */}
+                    <div className={`absolute inset-0 bg-gradient-to-br ${profession.color} opacity-20 rounded-2xl transition-all duration-300 group-hover:opacity-30`}></div>
+                    
+                    {/* Border com gradiente */}
+                    <div className={`absolute inset-0 bg-gradient-to-br ${profession.color} opacity-40 rounded-2xl p-[1px] transition-all duration-300 group-hover:opacity-60`}>
+                      <div className="bg-gray-900/40 backdrop-blur-sm rounded-2xl h-full w-full"></div>
+                    </div>
+                    
+                    {/* Conteúdo */}
+                    <div className="relative p-4 text-center backdrop-blur-sm rounded-2xl transition-all duration-300 group-hover:transform group-hover:scale-105 h-full flex flex-col justify-between">
                       <div>
-                        <div className="mb-3 group-hover:scale-110 transition-transform duration-300 flex justify-center">
+                        <div className="mb-3 group-hover:scale-110 transition-transform duration-300 filter drop-shadow-lg flex justify-center">
                           <span className="text-3xl">{profession.icon}</span>
                         </div>
-                        <h3 className="text-white font-bold text-sm mb-2">
+                        <h3 className="text-white font-bold text-sm mb-2 drop-shadow-sm">
                           {profession.title}
                         </h3>
-                        <p className="text-gray-300 text-xs leading-relaxed mb-3">
+                        <p className="text-white/70 text-xs leading-relaxed mb-3">
                           {profession.description}
                         </p>
                         <div className="flex flex-wrap gap-1 justify-center mb-3">
-                          <span className="bg-white/10 text-white px-2 py-1 rounded-full text-xs">
+                          <span className="bg-white/10 text-white px-2 py-1 rounded-full text-xs backdrop-blur-sm">
                             {profession.phrases.length} frases
                           </span>
                         </div>
@@ -398,6 +403,11 @@ export default function DashboardContent() {
                       <div className="text-white/80 group-hover:text-white transition-colors font-semibold text-xs">
                         Começar →
                       </div>
+                    </div>
+                    
+                    {/* Efeito de brilho no hover */}
+                    <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                      <div className={`absolute inset-0 bg-gradient-to-br ${profession.color} opacity-10 rounded-2xl blur-xl`}></div>
                     </div>
                   </div>
                 </Link>
