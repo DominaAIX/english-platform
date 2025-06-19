@@ -189,7 +189,7 @@ export default function ProfessionPage() {
             <div className="flex items-center gap-4">
               <Link 
                 href="/dashboard"
-                className="bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-full text-white font-semibold transition-colors text-sm"
+                className="px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 backdrop-blur-sm border bg-gray-500/20 border-gray-500/40 text-gray-300 hover:bg-gray-500/30 hover:border-gray-400/60 hover:text-gray-200 hover:scale-105"
               >
                 ← Voltar ao Dashboard
               </Link>
@@ -313,10 +313,11 @@ export default function ProfessionPage() {
                   </h2>
                   <button
                     onClick={() => speakPhrase(currentPhrase.english)}
-                    className="bg-purple-600 hover:bg-purple-700 p-2 rounded-full transition-colors flex items-center justify-center"
+                    className="px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 backdrop-blur-sm border bg-purple-500/20 border-purple-500/40 text-purple-300 hover:bg-purple-500/30 hover:border-purple-400/60 hover:text-purple-200 hover:scale-105 flex items-center gap-2"
                     title="Ouvir pronúncia"
                   >
-                    <SpeakerIcon size={16} className="text-white" />
+                    <SpeakerIcon size={16} className="text-purple-300" />
+                    Ouvir
                   </button>
                 </div>
                 <p className="text-xl text-white leading-relaxed bg-gray-800/50 p-4 rounded-lg">
@@ -332,7 +333,7 @@ export default function ProfessionPage() {
                   </h3>
                   <button
                     onClick={() => setShowTranslation(!showTranslation)}
-                    className="bg-cyan-600 hover:bg-cyan-700 px-4 py-2 rounded-full text-sm transition-colors"
+                    className="px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 backdrop-blur-sm border bg-cyan-500/20 border-cyan-500/40 text-cyan-300 hover:bg-cyan-500/30 hover:border-cyan-400/60 hover:text-cyan-200 hover:scale-105"
                   >
                     {showTranslation ? 'Ocultar' : 'Mostrar'} Tradução
                   </button>
@@ -349,7 +350,7 @@ export default function ProfessionPage() {
                 <button
                   onClick={handlePrevious}
                   disabled={currentPhraseIndex === 0}
-                  className="bg-gray-700 hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed px-6 py-3 rounded-full text-white font-semibold transition-colors"
+                  className="px-6 py-3 rounded-xl font-medium transition-all duration-300 backdrop-blur-sm border bg-gray-500/20 border-gray-500/40 text-gray-300 hover:bg-gray-500/30 hover:border-gray-400/60 hover:text-gray-200 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
                 >
                   ← Anterior
                 </button>
