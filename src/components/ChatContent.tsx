@@ -67,6 +67,7 @@ export default function ChatContent() {
     scrollToBottom()
   }, [messages])
 
+
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
   }
