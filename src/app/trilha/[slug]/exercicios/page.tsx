@@ -436,16 +436,18 @@ function ExercisePageClient({ trailData, slug }: { trailData: Trail, slug: strin
                   <div className="flex items-center justify-between">
                     <div className="flex-1">
                       <p className="text-white font-medium mb-1">
-                        {exercise.correctSentence}
+                        Exercício {index + 1}
                       </p>
                       <p className="text-gray-400 text-sm">
                         {exercise.translation}
                       </p>
+                      {completedExercises.includes(exercise.id) && (
+                        <p className="text-green-300 text-sm mt-1 italic">
+                          {exercise.correctSentence}
+                        </p>
+                      )}
                     </div>
                     <div className="flex items-center gap-2">
-                      <span className="text-purple-400 text-sm">
-                        Exercício {index + 1}
-                      </span>
                       {completedExercises.includes(exercise.id) && (
                         <span className="text-green-400 text-xl">✓</span>
                       )}
