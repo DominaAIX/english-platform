@@ -10,6 +10,7 @@ import { useStats } from '@/contexts/StatsContext'
 import PageTransition from './PageTransition'
 import AnimatedContainer from './AnimatedContainer'
 import { WorkIcon, InterviewIcon, TravelIcon, BusinessIcon, CasualIcon, RestaurantIcon, ShoppingIcon, RobotIcon, LearningTrailIcon, ConversationIcon, TargetIcon, AudioIcon, GrammarIcon } from './ModernIcons'
+import { PROFESSIONS } from '@/data/professions'
 
 export default function DashboardContent() {
   const { user, userProfile } = useAuth()
@@ -353,6 +354,55 @@ export default function DashboardContent() {
                 </div>
               </div>
             </Link>
+          </div>
+        </PageTransition>
+
+        {/* Trilhas de Profissões */}
+        <PageTransition>
+          <div className="mb-12">
+            <div className="text-center mb-8">
+              <h2 className="text-3xl font-bold text-white mb-4">
+                🎯 Trilhas de Profissões
+              </h2>
+              <p className="text-gray-400 text-lg max-w-3xl mx-auto">
+                Aprenda inglês específico para sua área profissional. 
+                Frases práticas e vocabulário técnico para usar no trabalho.
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+              {PROFESSIONS.map((profession) => (
+                <Link key={profession.id} href={`/profissao/${profession.id}`}>
+                  <div 
+                    className={`group bg-gradient-to-br ${profession.color} bg-opacity-10 border border-gray-600/30 hover:border-gray-400/50 rounded-2xl p-4 transition-all duration-300 cursor-pointer transform hover:scale-105 h-full flex flex-col bg-gray-900/30`}
+                    onMouseEnter={() => setHoveredCard(profession.id)}
+                    onMouseLeave={() => setHoveredCard(null)}
+                  >
+                    <div className="text-center flex-1 flex flex-col justify-between">
+                      <div>
+                        <div className="mb-3 group-hover:scale-110 transition-transform duration-300 flex justify-center">
+                          <span className="text-3xl">{profession.icon}</span>
+                        </div>
+                        <h3 className="text-white font-bold text-sm mb-2">
+                          {profession.title}
+                        </h3>
+                        <p className="text-gray-300 text-xs leading-relaxed mb-3">
+                          {profession.description}
+                        </p>
+                        <div className="flex flex-wrap gap-1 justify-center mb-3">
+                          <span className="bg-white/10 text-white px-2 py-1 rounded-full text-xs">
+                            {profession.phrases.length} frases
+                          </span>
+                        </div>
+                      </div>
+                      <div className="text-white/80 group-hover:text-white transition-colors font-semibold text-xs">
+                        Começar →
+                      </div>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
           </div>
         </PageTransition>
 
