@@ -75,7 +75,7 @@ export async function POST(request: NextRequest) {
     // Gerar áudio usando OpenAI TTS
     const mp3 = await openai.audio.speech.create({
       model: "tts-1-hd", // HD para melhor qualidade
-      voice: "alloy", // Voz feminina fluida e natural
+      voice: "nova", // Voz feminina muito fluida e natural
       input: englishOnly,
       speed: 0.9 // Velocidade um pouco mais lenta para aprendizado
     })
