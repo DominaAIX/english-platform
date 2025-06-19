@@ -19,6 +19,7 @@ export const metadata: Metadata = {
   title: "Inglês pra Já - Aprenda Inglês do Dia a Dia",
   description: "Aprenda inglês para situações do dia a dia com IA. Nada de 'The book is on the table'. Foque em frases que você usaria HOJE.",
   keywords: ["inglês", "english", "AI", "aprender inglês", "conversação", "english tutor", "inglês pra já"],
+  manifest: '/manifest.json',
   icons: {
     icon: [
       { url: '/ingles-favicon.ico', sizes: 'any' },
@@ -45,6 +46,7 @@ export default function RootLayout({
   return (
     <html lang="pt-br">
       <head>
+        <link rel="manifest" href="/manifest.json" />
         <link rel="icon" href="/ingles-favicon.ico" sizes="any" />
         <link rel="icon" href="/ingles-icon.png" type="image/png" sizes="32x32" />
         <link rel="icon" href="/ingles-icon.png" type="image/png" sizes="16x16" />

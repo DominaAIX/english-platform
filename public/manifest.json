@@ -1,0 +1,26 @@
+{
+  "name": "Inglês pra Já - Aprenda Inglês do Dia a Dia",
+  "short_name": "Inglês pra Já",
+  "description": "Aprenda inglês para situações do dia a dia com IA",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1a1a2e",
+  "theme_color": "#1a1a2e",
+  "icons": [
+    {
+      "src": "/ingles-icon.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/ingles-favicon.ico",
+      "sizes": "16x16 32x32",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ]
+}
