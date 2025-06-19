@@ -458,11 +458,6 @@ export default function DashboardContent() {
                           <p className="text-white/70 text-xs leading-relaxed mb-3">
                             {profession.description}
                           </p>
-                          <div className="flex flex-wrap gap-1 justify-center mb-3">
-                            <span className="bg-white/10 text-white px-2 py-1 rounded-full text-xs backdrop-blur-sm">
-                              {profession.phrases.length} frases
-                            </span>
-                          </div>
                         </div>
                         <div className="text-white/80 group-hover:text-white transition-colors font-semibold text-xs">
                           Começar →
