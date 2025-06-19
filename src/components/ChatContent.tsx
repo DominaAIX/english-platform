@@ -150,13 +150,13 @@ export default function ChatContent() {
       const assistantMessage: Message = {
         id: (Date.now() + 1).toString(),
         role: 'assistant',
-        content: data.response || data.message || "Sorry, I couldn't generate a response. Please try again.",
+        content: data.response || data.message || "Desculpe, não consegui gerar uma resposta. Tente novamente.",
         timestamp: new Date()
       }
 
       setMessages(prev => [...prev, assistantMessage])
     } catch (error) {
-      console.error('Erro ao enviar mensagem:', error)
+      console.error('❌ Erro ao enviar mensagem:', error)
       
       // Fallback em caso de erro
       const errorMessage: Message = {
