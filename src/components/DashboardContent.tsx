@@ -371,47 +371,112 @@ export default function DashboardContent() {
             </div>
             
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-              {PROFESSIONS.map((profession) => (
-                <Link key={profession.id} href={`/profissao/${profession.id}`}>
-                  <div className="relative group">
-                    {/* Background com gradiente translúcido */}
-                    <div className={`absolute inset-0 bg-gradient-to-br ${profession.color} opacity-20 rounded-2xl transition-all duration-300 group-hover:opacity-30`}></div>
-                    
-                    {/* Border com gradiente */}
-                    <div className={`absolute inset-0 bg-gradient-to-br ${profession.color} opacity-40 rounded-2xl p-[1px] transition-all duration-300 group-hover:opacity-60`}>
-                      <div className="bg-gray-900/40 backdrop-blur-sm rounded-2xl h-full w-full"></div>
-                    </div>
-                    
-                    {/* Conteúdo */}
-                    <div className="relative p-4 text-center backdrop-blur-sm rounded-2xl transition-all duration-300 group-hover:transform group-hover:scale-105 h-full flex flex-col justify-between">
-                      <div>
-                        <div className="mb-3 group-hover:scale-110 transition-transform duration-300 filter drop-shadow-lg flex justify-center">
-                          <span className="text-3xl">{profession.icon}</span>
+              {PROFESSIONS.map((profession) => {
+                // Mapeamento de cores para cada profissão
+                const getGradientClasses = (professionId: string) => {
+                  switch(professionId) {
+                    case 'doctor':
+                      return {
+                        bg: 'from-red-600 to-pink-600',
+                        hover: 'from-red-500 to-pink-500'
+                      }
+                    case 'real-estate':
+                      return {
+                        bg: 'from-blue-600 to-cyan-600',
+                        hover: 'from-blue-500 to-cyan-500'
+                      }
+                    case 'it-professional':
+                      return {
+                        bg: 'from-green-600 to-emerald-600',
+                        hover: 'from-green-500 to-emerald-500'
+                      }
+                    case 'nurse':
+                      return {
+                        bg: 'from-purple-600 to-indigo-600',
+                        hover: 'from-purple-500 to-indigo-500'
+                      }
+                    case 'psychologist':
+                      return {
+                        bg: 'from-orange-600 to-red-600',
+                        hover: 'from-orange-500 to-red-500'
+                      }
+                    case 'personal-trainer':
+                      return {
+                        bg: 'from-yellow-600 to-orange-600',
+                        hover: 'from-yellow-500 to-orange-500'
+                      }
+                    case 'teacher':
+                      return {
+                        bg: 'from-indigo-600 to-purple-600',
+                        hover: 'from-indigo-500 to-purple-500'
+                      }
+                    case 'chef':
+                      return {
+                        bg: 'from-rose-600 to-pink-600',
+                        hover: 'from-rose-500 to-pink-500'
+                      }
+                    case 'lawyer':
+                      return {
+                        bg: 'from-gray-600 to-slate-600',
+                        hover: 'from-gray-500 to-slate-500'
+                      }
+                    case 'sales-representative':
+                      return {
+                        bg: 'from-teal-600 to-cyan-600',
+                        hover: 'from-teal-500 to-cyan-500'
+                      }
+                    default:
+                      return {
+                        bg: 'from-gray-600 to-slate-600',
+                        hover: 'from-gray-500 to-slate-500'
+                      }
+                  }
+                }
+                
+                const colors = getGradientClasses(profession.id)
+                
+                return (
+                  <Link key={profession.id} href={`/profissao/${profession.id}`}>
+                    <div className="relative group">
+                      {/* Background com gradiente translúcido */}
+                      <div className={`absolute inset-0 bg-gradient-to-br ${colors.bg} opacity-20 rounded-2xl transition-all duration-300 group-hover:opacity-30`}></div>
+                      
+                      {/* Border com gradiente */}
+                      <div className={`absolute inset-0 bg-gradient-to-br ${colors.bg} opacity-40 rounded-2xl p-[1px] transition-all duration-300 group-hover:opacity-60`}>
+                        <div className="bg-gray-900/40 backdrop-blur-sm rounded-2xl h-full w-full"></div>
+                      </div>
+                      
+                      {/* Conteúdo */}
+                      <div className="relative p-4 text-center backdrop-blur-sm rounded-2xl transition-all duration-300 group-hover:transform group-hover:scale-105 h-full flex flex-col justify-between">
+                        <div>
+                          <div className="mb-3 group-hover:scale-110 transition-transform duration-300 filter drop-shadow-lg flex justify-center">
+                            <span className="text-3xl">{profession.icon}</span>
+                          </div>
+                          <h3 className="text-white font-bold text-sm mb-2 drop-shadow-sm">
+                            {profession.title}
+                          </h3>
+                          <p className="text-white/70 text-xs leading-relaxed mb-3">
+                            {profession.description}
+                          </p>
+                          <div className="flex flex-wrap gap-1 justify-center mb-3">
+                            <span className="bg-white/10 text-white px-2 py-1 rounded-full text-xs backdrop-blur-sm">
+                              {profession.phrases.length} frases
+                            </span>
+                          </div>
                         </div>
-                        <h3 className="text-white font-bold text-sm mb-2 drop-shadow-sm">
-                          {profession.title}
-                        </h3>
-                        <p className="text-white/70 text-xs leading-relaxed mb-3">
-                          {profession.description}
-                        </p>
-                        <div className="flex flex-wrap gap-1 justify-center mb-3">
-                          <span className="bg-white/10 text-white px-2 py-1 rounded-full text-xs backdrop-blur-sm">
-                            {profession.phrases.length} frases
-                          </span>
+                        <div className="text-white/80 group-hover:text-white transition-colors font-semibold text-xs">
+                          Começar →
                         </div>
                       </div>
-                      <div className="text-white/80 group-hover:text-white transition-colors font-semibold text-xs">
-                        Começar →
+                      
+                      {/* Efeito de brilho no hover */}
+                      <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                        <div className={`absolute inset-0 bg-gradient-to-br ${colors.hover} opacity-10 rounded-2xl blur-xl`}></div>
                       </div>
                     </div>
-                    
-                    {/* Efeito de brilho no hover */}
-                    <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-                      <div className={`absolute inset-0 bg-gradient-to-br ${profession.color} opacity-10 rounded-2xl blur-xl`}></div>
-                    </div>
-                  </div>
-                </Link>
-              ))}
+                  </Link>
+                )
+              })}
             </div>
           </div>
         </PageTransition>
