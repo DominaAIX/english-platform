@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation'
 import Logo from '@/components/Logo'
 import AuthButton from '@/components/AuthButton'
 import { useAuth } from '@/contexts/AuthContext'
+import { useGlobalLimits } from '@/hooks/useGlobalLimits'
 import PageTransition from '@/components/PageTransition'
 import AnimatedContainer from '@/components/AnimatedContainer'
 import { GrammarIcon, SendIcon } from '@/components/ModernIcons'
@@ -29,12 +30,26 @@ interface VerbConjugation {
 }
 
 export default function ConjugadorPage() {
-  const { user } = useAuth()
+  const { user, userProfile } = useAuth()
   const router = useRouter()
+  const {
+    totalVerbConjugations,
+    isVerbConjugationsBlocked,
+    getRealTimeCountdown,
+    isPremium,
+    incrementVerbConjugations,
+    getRemainingVerbConjugations
+  } = useGlobalLimits()
+  
   const [verb, setVerb] = useState('')
   const [conjugation, setConjugation] = useState<VerbConjugation | null>(null)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
+
+  // Verificar se usuário excedeu limite
+  const isBlocked = isVerbConjugationsBlocked && !isPremium
+  const remainingConjugations = getRemainingVerbConjugations()
+  const timeUntilReset = getRealTimeCountdown()
 
   const handleLogoClick = () => {
     if (user) {
@@ -47,6 +62,19 @@ export default function ConjugadorPage() {
   const handleConjugate = async () => {
     if (!verb.trim()) {
       setError('Por favor, digite um verbo')
+      return
+    }
+
+    // Verificar limitações para usuários gratuitos
+    if (isBlocked) {
+      setError('Limite de conjugações excedido. Aguarde 24 horas ou faça upgrade para o plano Premium.')
+      return
+    }
+
+    // Verificar se pode conjugar (incrementa contador)
+    const canConjugate = incrementVerbConjugations()
+    if (!canConjugate) {
+      setError('Limite de conjugações excedido para conta gratuita. Aguarde 24 horas ou faça upgrade para o plano Premium.')
       return
     }
 
@@ -78,9 +106,13 @@ export default function ConjugadorPage() {
   }
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' && !isLoading) {
+    if (e.key === 'Enter' && !isLoading && !isBlocked) {
       handleConjugate()
     }
+  }
+
+  const handleUpgrade = () => {
+    alert('Funcionalidade de upgrade será implementada em breve! 🚀')
   }
 
   return (
@@ -133,20 +165,20 @@ export default function ConjugadorPage() {
               <h2 className="text-2xl font-bold text-white mb-6">
                 Qual verbo você quer conjugar?
               </h2>
-              <div className="flex gap-4 mb-4">
+              <div className="flex flex-col sm:flex-row gap-4 mb-4">
                 <input
                   type="text"
                   value={verb}
                   onChange={(e) => setVerb(e.target.value)}
                   onKeyPress={handleKeyPress}
-                  placeholder="Digite o verbo (ex: go, be, have, work...)"
-                  className="flex-1 bg-gray-800 border border-gray-600 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-green-500 transition-colors"
-                  disabled={isLoading}
+                  placeholder={isBlocked ? "Limite excedido. Aguarde 24h ou faça upgrade..." : "Digite o verbo (ex: go, be, have, work...)"}
+                  className={`flex-1 bg-gray-800 border border-gray-600 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-green-500 transition-colors ${isBlocked ? 'opacity-50 cursor-not-allowed' : ''}`}
+                  disabled={isLoading || isBlocked}
                 />
                 <button
                   onClick={handleConjugate}
-                  disabled={isLoading || !verb.trim()}
-                  className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 disabled:opacity-50 disabled:cursor-not-allowed px-6 py-3 rounded-xl text-white font-semibold transition-all duration-300 flex items-center gap-2"
+                  disabled={isLoading || !verb.trim() || isBlocked}
+                  className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 disabled:opacity-50 disabled:cursor-not-allowed px-6 py-3 rounded-xl text-white font-semibold transition-all duration-300 flex items-center justify-center gap-2 sm:w-auto w-full"
                 >
                   {isLoading ? (
                     <>
@@ -164,12 +196,65 @@ export default function ConjugadorPage() {
               {error && (
                 <p className="text-red-400 text-sm">{error}</p>
               )}
+              
+              {/* Indicador de conjugações restantes para usuários gratuitos */}
+              {!isBlocked && remainingConjugations > 0 && remainingConjugations < 2 && !isPremium && (
+                <div className="mb-3">
+                  <div className="inline-flex items-center gap-2 bg-yellow-900/30 border border-yellow-500/50 rounded-lg px-3 py-2">
+                    <span className="text-yellow-400 text-sm">
+                      ⚡ {remainingConjugations} conjugação{remainingConjugations !== 1 ? 'ões' : ''} restante{remainingConjugations !== 1 ? 's' : ''} no plano gratuito
+                    </span>
+                    <button
+                      onClick={handleUpgrade}
+                      className="text-xs bg-yellow-600 hover:bg-yellow-700 px-2 py-1 rounded text-white transition-colors"
+                    >
+                      Upgrade
+                    </button>
+                  </div>
+                </div>
+              )}
+              
               <p className="text-gray-500 text-sm">
                 Exemplos: go, be, have, work, study, play, write, read, speak
               </p>
             </div>
           </div>
         </PageTransition>
+
+        {/* Mensagem de limite excedido */}
+        {isBlocked && (
+          <PageTransition delay={400}>
+            <div className="bg-gradient-to-r from-red-900/30 to-orange-900/30 border-2 border-red-500/50 rounded-2xl p-8 mb-8 max-w-2xl mx-auto">
+              <div className="text-center">
+                <div className="text-6xl mb-4">🚫</div>
+                <h2 className="text-2xl font-bold text-white mb-4">
+                  Limite de Conjugações Excedido
+                </h2>
+                <p className="text-gray-300 mb-6">
+                  Usuários gratuitos podem conjugar apenas 2 verbos por dia. 
+                  Seu limite foi atingido.
+                </p>
+                <div className="bg-gray-900/50 rounded-xl p-4 mb-6">
+                  <div className="text-white mb-2">⏰ Próximo reset em:</div>
+                  <div className="text-2xl font-bold text-orange-400">
+                    {timeUntilReset || '23h 59m'}
+                  </div>
+                </div>
+                <div className="space-y-4">
+                  <button
+                    onClick={handleUpgrade}
+                    className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 px-8 py-4 rounded-xl text-white font-bold text-lg transition-all duration-300 transform hover:scale-105"
+                  >
+                    🌟 Upgrade para Premium - Conjugações Ilimitadas
+                  </button>
+                  <p className="text-gray-400 text-sm">
+                    Com o plano Premium você terá conjugações ilimitadas e acesso completo a todas as funcionalidades
+                  </p>
+                </div>
+              </div>
+            </div>
+          </PageTransition>
+        )}
 
         {/* Conjugation Results */}
         {conjugation && (

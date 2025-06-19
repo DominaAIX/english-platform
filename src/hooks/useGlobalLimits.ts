@@ -8,12 +8,15 @@ interface GlobalLimits {
   totalPhrasesViewed: number
   totalExercisesCompleted: number
   totalAiMessages: number
+  totalVerbConjugations: number
   phrasesLimit: number
   exercisesLimit: number
   aiMessagesLimit: number
+  verbConjugationsLimit: number
   isPhrasesBlocked: boolean
   isExercisesBlocked: boolean
   isAiMessagesBlocked: boolean
+  isVerbConjugationsBlocked: boolean
   resetTime: string | null
 }
 
@@ -23,12 +26,15 @@ export function useGlobalLimits() {
     totalPhrasesViewed: 0,
     totalExercisesCompleted: 0,
     totalAiMessages: 0,
+    totalVerbConjugations: 0,
     phrasesLimit: 10,
     exercisesLimit: 3,
     aiMessagesLimit: 3,
+    verbConjugationsLimit: 2,
     isPhrasesBlocked: false,
     isExercisesBlocked: false,
     isAiMessagesBlocked: false,
+    isVerbConjugationsBlocked: false,
     resetTime: null
   })
 
@@ -42,7 +48,8 @@ export function useGlobalLimits() {
         ...prev,
         isPhrasesBlocked: false,
         isExercisesBlocked: false,
-        isAiMessagesBlocked: false
+        isAiMessagesBlocked: false,
+        isVerbConjugationsBlocked: false
       }))
       return
     }
@@ -73,12 +80,15 @@ export function useGlobalLimits() {
           totalPhrasesViewed: data.totalPhrasesViewed || 0,
           totalExercisesCompleted: data.totalExercisesCompleted || 0,
           totalAiMessages: data.totalAiMessages || 0,
+          totalVerbConjugations: data.totalVerbConjugations || 0,
           phrasesLimit: 10,
           exercisesLimit: 3,
           aiMessagesLimit: 3,
+          verbConjugationsLimit: 2,
           isPhrasesBlocked: (data.totalPhrasesViewed || 0) >= 10,
           isExercisesBlocked: (data.totalExercisesCompleted || 0) >= 3,
           isAiMessagesBlocked: (data.totalAiMessages || 0) >= 3,
+          isVerbConjugationsBlocked: (data.totalVerbConjugations || 0) >= 2,
           resetTime: data.lastReset
         })
       }
@@ -94,12 +104,15 @@ export function useGlobalLimits() {
       totalPhrasesViewed: 0,
       totalExercisesCompleted: 0,
       totalAiMessages: 0,
+      totalVerbConjugations: 0,
       phrasesLimit: 10,
       exercisesLimit: 3,
       aiMessagesLimit: 3,
+      verbConjugationsLimit: 2,
       isPhrasesBlocked: false,
       isExercisesBlocked: false,
       isAiMessagesBlocked: false,
+      isVerbConjugationsBlocked: false,
       resetTime: now.toISOString()
     }
     
@@ -213,6 +226,39 @@ export function useGlobalLimits() {
     return Math.max(0, limits.aiMessagesLimit - limits.totalAiMessages)
   }
 
+  const incrementVerbConjugations = (): boolean => {
+    if (isPremium) return true
+    if (limits.isVerbConjugationsBlocked) return false
+    
+    const newTotal = limits.totalVerbConjugations + 1
+    const isBlocked = newTotal >= limits.verbConjugationsLimit
+    
+    const newLimits = {
+      ...limits,
+      totalVerbConjugations: newTotal,
+      isVerbConjugationsBlocked: isBlocked
+    }
+    
+    setLimits(newLimits)
+    
+    // Salvar no localStorage
+    if (user) {
+      const storageKey = `user_limits_${user.id}`
+      const stored = JSON.parse(localStorage.getItem(storageKey) || '{}')
+      localStorage.setItem(storageKey, JSON.stringify({
+        ...stored,
+        totalVerbConjugations: newTotal
+      }))
+    }
+    
+    return !isBlocked
+  }
+
+  const getRemainingVerbConjugations = (): number => {
+    if (isPremium) return Infinity
+    return Math.max(0, limits.verbConjugationsLimit - limits.totalVerbConjugations)
+  }
+
   const getTimeUntilReset = (): string | null => {
     if (!limits.resetTime) return null
     
@@ -238,9 +284,11 @@ export function useGlobalLimits() {
     incrementPhrases,
     incrementExercises,
     incrementAiMessages,
+    incrementVerbConjugations,
     getRemainingPhrases,
     getRemainingExercises,
     getRemainingAiMessages,
+    getRemainingVerbConjugations,
     getTimeUntilReset,
     getRealTimeCountdown: () => realTimeCountdown,
     resetLimits
