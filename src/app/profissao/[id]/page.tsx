@@ -144,48 +144,11 @@ export default function ProfessionPage() {
     }
   }
 
-  const speakPhrase = async (text: string) => {
-    try {
-      // Chamar API TTS da OpenAI
-      const response = await fetch('/api/tts', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ text })
-      })
-
-      if (!response.ok) {
-        throw new Error('Falha ao gerar áudio')
-      }
-
-      // Converter resposta para blob de áudio
-      const audioBlob = await response.blob()
-      const audioUrl = URL.createObjectURL(audioBlob)
-      
-      // Criar e reproduzir áudio
-      const audio = new Audio(audioUrl)
-      
-      audio.onended = () => {
-        URL.revokeObjectURL(audioUrl)
-      }
-      
-      audio.onerror = () => {
-        URL.revokeObjectURL(audioUrl)
-      }
-
-      await audio.play()
-
-    } catch (error) {
-      console.error('Erro ao reproduzir áudio:', error)
-      
-      // Fallback para Web Speech API
-      if ('speechSynthesis' in window) {
-        const utterance = new SpeechSynthesisUtterance(text)
-        utterance.lang = 'en-US'
-        utterance.rate = 0.9
-        speechSynthesis.speak(utterance)
-      }
+  const speakPhrase = (text: string) => {
+    if ('speechSynthesis' in window) {
+      const utterance = new SpeechSynthesisUtterance(text)
+      utterance.lang = 'en-US'
+      speechSynthesis.speak(utterance)
     }
   }
 
