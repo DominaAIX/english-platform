@@ -416,45 +416,39 @@ function ExercisePageClient({ trailData, slug }: { trailData: Trail, slug: strin
           </div>
         </PageTransition>
 
-        {/* Exercise List */}
+        {/* Progress Summary - Sem mostrar frases para preservar o desafio */}
         <PageTransition delay={800}>
           <div className="bg-gray-900/50 border border-gray-700 rounded-xl p-6">
-            <h3 className="text-lg font-semibold text-white mb-4">
-              Lista de Exercícios
+            <h3 className="text-lg font-semibold text-white mb-4 text-center">
+              📊 Progresso dos Exercícios
             </h3>
-            <div className="grid gap-3">
-              {exercises.map((exercise, index) => (
-                <div 
-                  key={exercise.id}
-                  onClick={() => setCurrentExerciseIndex(index)}
-                  className={`p-4 rounded-lg border cursor-pointer transition-all duration-200 ${
-                    index === currentExerciseIndex 
-                      ? 'border-purple-500 bg-purple-900/20' 
-                      : 'border-gray-700 bg-gray-800/30 hover:border-gray-600'
-                  }`}
-                >
-                  <div className="flex items-center justify-between">
-                    <div className="flex-1">
-                      <p className="text-white font-medium mb-1">
-                        Exercício {index + 1}
-                      </p>
-                      <p className="text-gray-400 text-sm">
-                        {exercise.translation}
-                      </p>
-                      {completedExercises.includes(exercise.id) && (
-                        <p className="text-green-300 text-sm mt-1 italic">
-                          {exercise.correctSentence}
-                        </p>
-                      )}
-                    </div>
-                    <div className="flex items-center gap-2">
-                      {completedExercises.includes(exercise.id) && (
-                        <span className="text-green-400 text-xl">✓</span>
-                      )}
-                    </div>
-                  </div>
+            <div className="flex justify-center items-center gap-8">
+              <div className="text-center">
+                <div className="text-3xl font-bold text-purple-400 mb-2">
+                  {completedExercises.length}
                 </div>
-              ))}
+                <div className="text-gray-400 text-sm">Completados</div>
+              </div>
+              <div className="text-center">
+                <div className="text-3xl font-bold text-cyan-400 mb-2">
+                  {exercises.length}
+                </div>
+                <div className="text-gray-400 text-sm">Total</div>
+              </div>
+              <div className="text-center">
+                <div className="text-3xl font-bold text-green-400 mb-2">
+                  {Math.round((completedExercises.length / exercises.length) * 100)}%
+                </div>
+                <div className="text-gray-400 text-sm">Progresso</div>
+              </div>
+            </div>
+            
+            {/* Barra de progresso visual */}
+            <div className="w-full bg-gray-700 rounded-full h-3 mt-6">
+              <div 
+                className="bg-gradient-to-r from-purple-500 to-cyan-400 h-3 rounded-full transition-all duration-300"
+                style={{ width: `${(completedExercises.length / exercises.length) * 100}%` }}
+              />
             </div>
           </div>
         </PageTransition>
