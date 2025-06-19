@@ -447,15 +447,15 @@ export default function DashboardContent() {
                       </div>
                       
                       {/* Conteúdo */}
-                      <div className="relative p-4 text-center backdrop-blur-sm rounded-2xl transition-all duration-300 group-hover:transform group-hover:scale-105 h-full flex flex-col justify-between">
+                      <div className="relative p-4 text-center backdrop-blur-sm rounded-2xl transition-all duration-300 group-hover:transform group-hover:scale-105 h-32 flex flex-col justify-between">
                         <div>
                           <div className="mb-3 group-hover:scale-110 transition-transform duration-300 filter drop-shadow-lg flex justify-center">
                             <span className="text-3xl">{profession.icon}</span>
                           </div>
-                          <h3 className="text-white font-bold text-sm mb-2 drop-shadow-sm">
+                          <h3 className="text-white font-bold text-sm mb-1 drop-shadow-sm line-clamp-2">
                             {profession.title}
                           </h3>
-                          <p className="text-white/70 text-xs leading-relaxed mb-3">
+                          <p className="text-white/70 text-xs leading-tight mb-2 line-clamp-2">
                             {profession.description}
                           </p>
                         </div>
