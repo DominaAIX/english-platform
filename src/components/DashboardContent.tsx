@@ -9,7 +9,7 @@ import { useAuth } from '@/contexts/AuthContext'
 import { useStats } from '@/contexts/StatsContext'
 import PageTransition from './PageTransition'
 import AnimatedContainer from './AnimatedContainer'
-import { WorkIcon, InterviewIcon, TravelIcon, BusinessIcon, CasualIcon, RestaurantIcon, ShoppingIcon, RobotIcon, LearningTrailIcon, ConversationIcon, TargetIcon, AudioIcon } from './ModernIcons'
+import { WorkIcon, InterviewIcon, TravelIcon, BusinessIcon, CasualIcon, RestaurantIcon, ShoppingIcon, RobotIcon, LearningTrailIcon, ConversationIcon, TargetIcon, AudioIcon, GrammarIcon } from './ModernIcons'
 
 export default function DashboardContent() {
   const { user, userProfile } = useAuth()
@@ -314,6 +314,46 @@ export default function DashboardContent() {
             </div>
           </div>
         </div>
+        </PageTransition>
+
+        {/* Conjugador de Verbos */}
+        <PageTransition>
+          <div className="mb-12">
+            <Link href="/conjugador">
+              <div 
+                className="group bg-gradient-to-br from-green-900/30 to-emerald-900/30 border-2 border-green-500/30 rounded-3xl p-8 hover:border-green-400/50 transition-all duration-300 cursor-pointer transform hover:scale-105"
+                onMouseEnter={() => setHoveredCard('conjugador')}
+                onMouseLeave={() => setHoveredCard(null)}
+              >
+                <div className="text-center">
+                  <div className="mb-6 group-hover:scale-110 transition-transform duration-300 flex justify-center">
+                    <GrammarIcon size={72} className="text-green-400" />
+                  </div>
+                  <h2 className="text-2xl font-bold text-white mb-4">
+                    Conjugador de Verbos
+                  </h2>
+                  <p className="text-gray-300 mb-6 leading-relaxed max-w-2xl mx-auto">
+                    Conjugue qualquer verbo em inglês em todos os tempos verbais. 
+                    Ferramenta prática para dominar a gramática inglesa.
+                  </p>
+                  <div className="flex flex-wrap gap-2 justify-center mb-6">
+                    <span className="bg-green-500/20 text-green-300 px-3 py-1 rounded-full text-sm">
+                      Todos os tempos
+                    </span>
+                    <span className="bg-emerald-500/20 text-emerald-300 px-3 py-1 rounded-full text-sm">
+                      Tabela organizada
+                    </span>
+                    <span className="bg-green-500/20 text-green-300 px-3 py-1 rounded-full text-sm">
+                      Consulta rápida
+                    </span>
+                  </div>
+                  <div className="text-green-400 group-hover:text-green-300 transition-colors font-semibold">
+                    Conjugar Verbos →
+                  </div>
+                </div>
+              </div>
+            </Link>
+          </div>
         </PageTransition>
 
         {/* Stats Section */}
