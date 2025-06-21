@@ -171,7 +171,7 @@ export default function DashboardContent() {
               onClick={handleLogoClick}
               className="flex items-center gap-3 hover:opacity-80 transition-opacity"
             >
-<Logo size="md" />
+              <Logo size="md" />
               <span className="text-white font-bold">Inglês pra Já</span>
             </button>
             <AuthButton />
@@ -471,6 +471,7 @@ export default function DashboardContent() {
           </div>
         </div>
         </PageTransition>
+        )}
 
         {/* Conjugador de Verbos */}
         <PageTransition>
@@ -862,7 +863,6 @@ export default function DashboardContent() {
           </div>
         </div>
         </PageTransition>
-        )}
       </div>
     </AnimatedContainer>
   )
