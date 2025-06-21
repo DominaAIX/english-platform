@@ -46,9 +46,9 @@ export default function MultipleChoiceExercise({
   }
 
   return (
-    <div className="bg-gray-900/50 border border-gray-700 rounded-xl p-6">
+    <div className="bg-gray-900/50 border border-gray-700 rounded-xl p-4 sm:p-6 lg:p-8 max-w-full">
       <div className="mb-6">
-        <h3 className="text-lg font-semibold text-white mb-2">
+        <h3 className="text-base sm:text-lg font-semibold text-white mb-2">
           🎯 Múltipla Escolha
         </h3>
         <p className="text-gray-400 text-sm">
@@ -58,8 +58,8 @@ export default function MultipleChoiceExercise({
 
       {/* Pergunta */}
       <div className="mb-6">
-        <div className="bg-gray-800/50 rounded-lg p-4">
-          <h4 className="text-lg text-white font-medium">
+        <div className="bg-gray-800/50 rounded-lg p-3 sm:p-4">
+          <h4 className="text-base sm:text-lg text-white font-medium break-words leading-tight">
             {exerciseData.question}
           </h4>
         </div>

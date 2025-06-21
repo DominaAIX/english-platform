@@ -11,12 +11,14 @@ import PageTransition from './PageTransition'
 import AnimatedContainer from './AnimatedContainer'
 import { WorkIcon, InterviewIcon, TravelIcon, BusinessIcon, CasualIcon, RestaurantIcon, ShoppingIcon, RobotIcon, LearningTrailIcon, ConversationIcon, TargetIcon, AudioIcon, GrammarIcon } from './ModernIcons'
 import { PROFESSIONS } from '@/data/professions'
+import { useRequiredLevelTest } from '@/hooks/useRequiredLevelTest'
 
 export default function DashboardContent() {
   const { user, userProfile } = useAuth()
   const router = useRouter()
   const [hoveredCard, setHoveredCard] = useState<string | null>(null)
   const { stats, getTotalPhrasesPracticed, getPremiumTimeFormatted } = useStats()
+  const { needsLevelTest, hasCompletedTest, isLoading } = useRequiredLevelTest()
   
   // Usar o plano real do usuário autenticado do userProfile
   const userPlan = userProfile?.plan || 'free'
@@ -199,13 +201,54 @@ export default function DashboardContent() {
               {getGreeting()}, {getUserDisplayName()}! 👋
             </h1>
             <p className="text-gray-400 text-lg">
-              Como você gostaria de praticar inglês hoje?
+              {needsLevelTest ? 'Primeiro, vamos descobrir seu nível de inglês!' : 'Como você gostaria de praticar inglês hoje?'}
             </p>
           </div>
         </PageTransition>
 
+        {/* Tela obrigatória de teste de nível para usuários Premium */}
+        {needsLevelTest && (
+        <PageTransition>
+          <div className="max-w-4xl mx-auto mb-12">
+            <div className="bg-gradient-to-r from-yellow-900/50 to-orange-900/50 border-2 border-yellow-500/50 rounded-xl p-8 text-center">
+              <div className="text-6xl mb-6">🎯</div>
+              <h2 className="text-3xl font-bold text-white mb-4">
+                Teste de Nível Obrigatório
+              </h2>
+              <p className="text-gray-300 mb-6 text-lg max-w-2xl mx-auto">
+                Para personalizar sua experiência de aprendizado, precisamos conhecer seu nível atual de inglês. 
+                Este teste rápido vai determinar quais conteúdos e exercícios são adequados para você.
+              </p>
+              
+              <div className="bg-gray-900/50 rounded-lg p-6 mb-6">
+                <h3 className="text-white font-semibold mb-4">📋 O que esperar:</h3>
+                <ul className="text-gray-300 space-y-2 text-left max-w-md mx-auto">
+                  <li>• 15 perguntas de múltipla escolha</li>
+                  <li>• Tempo estimado: 5-10 minutos</li>
+                  <li>• Resultado determina seu conteúdo personalizado</li>
+                  <li>• Necessário para acessar trilhas progressivas</li>
+                </ul>
+              </div>
+
+              <div className="bg-yellow-900/30 border border-yellow-500/30 rounded-lg p-4 mb-6">
+                <p className="text-yellow-300 text-sm">
+                  ⚠️ Você precisa completar este teste para acessar as funcionalidades Premium da plataforma.
+                </p>
+              </div>
+
+              <Link 
+                href="/teste-nivel"
+                className="bg-gradient-to-r from-yellow-600 to-orange-600 hover:from-yellow-700 hover:to-orange-700 px-8 py-4 rounded-full text-white font-bold text-lg transition-all duration-300 transform hover:scale-105 inline-block"
+              >
+                🚀 Fazer Teste de Nível Agora
+              </Link>
+            </div>
+          </div>
+        </PageTransition>
+        )}
+
         {/* Premium Features - Teste de Nível e Trilhas Progressivas */}
-        {userPlan === 'premium' && (
+        {userPlan === 'premium' && hasCompletedTest && (
         <PageTransition>
           <div className="mb-12">
             <div className="text-center mb-8">
@@ -315,7 +358,8 @@ export default function DashboardContent() {
         </PageTransition>
         )}
 
-        {/* Main Options */}
+        {/* Main Options - Só mostra se não precisar do teste ou se já completou */}
+        {!needsLevelTest && (
         <PageTransition>
           <div className="grid md:grid-cols-2 gap-8 mb-12 items-stretch">
             {/* Chat com Tutor AI */}
@@ -818,6 +862,7 @@ export default function DashboardContent() {
           </div>
         </div>
         </PageTransition>
+        )}
       </div>
     </AnimatedContainer>
   )

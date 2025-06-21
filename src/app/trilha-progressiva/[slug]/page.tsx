@@ -272,7 +272,7 @@ function ProgressiveTrailClient({ trailData, slug }: { trailData: any, slug: str
         <div className="grid lg:grid-cols-4 gap-8">
           {/* Sidebar com lista de passos */}
           <PageTransition delay={400}>
-            <div className="lg:col-span-1">
+            <div className="lg:col-span-1 order-2 lg:order-1">
               <div className="bg-gray-900/50 border border-gray-700 rounded-xl p-4 sticky top-4">
                 <h3 className="text-white font-semibold mb-4">📋 Passos da Trilha</h3>
                 <div className="space-y-2 max-h-96 overflow-y-auto">
@@ -315,7 +315,7 @@ function ProgressiveTrailClient({ trailData, slug }: { trailData: any, slug: str
 
           {/* Conteúdo principal */}
           <PageTransition delay={600}>
-            <div className="lg:col-span-3">
+            <div className="lg:col-span-3 order-1 lg:order-2">
               {currentStep ? (
                 <div>
                   {/* Informação do passo atual */}
@@ -337,7 +337,7 @@ function ProgressiveTrailClient({ trailData, slug }: { trailData: any, slug: str
 
                   {/* Conteúdo do passo */}
                   {currentStep.type === 'phrase' && currentStep.phrase && (
-                    <div className="bg-gray-900/50 border border-gray-700 rounded-xl p-6 mb-6">
+                    <div className="bg-gray-900/50 border border-gray-700 rounded-xl p-4 sm:p-6 lg:p-8 mb-6 max-w-full">
                       <div className="text-center">
                         <div className={`inline-block px-3 py-1 rounded-full text-sm font-semibold mb-4 ${
                           currentStep.phrase.difficulty === 'beginner' ? 'bg-green-500/20 text-green-400' :
@@ -348,10 +348,10 @@ function ProgressiveTrailClient({ trailData, slug }: { trailData: any, slug: str
                            currentStep.phrase.difficulty === 'intermediate' ? 'Intermediário' : 'Avançado'}
                         </div>
                         
-                        <h3 className="text-2xl font-bold text-white mb-4">
+                        <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-white mb-4 leading-tight break-words">
                           {currentStep.phrase.english}
                         </h3>
-                        <p className="text-xl text-gray-300 mb-6">
+                        <p className="text-base sm:text-lg lg:text-xl text-gray-300 mb-6 leading-relaxed break-words">
                           {currentStep.phrase.portuguese}
                         </p>
 

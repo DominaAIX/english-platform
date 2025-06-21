@@ -52,9 +52,9 @@ export default function CompleteSentenceExercise({
   }
 
   return (
-    <div className="bg-gray-900/50 border border-gray-700 rounded-xl p-6">
+    <div className="bg-gray-900/50 border border-gray-700 rounded-xl p-4 sm:p-6 lg:p-8 max-w-full">
       <div className="mb-6">
-        <h3 className="text-lg font-semibold text-white mb-2">
+        <h3 className="text-base sm:text-lg font-semibold text-white mb-2">
           ✏️ Complete a Frase
         </h3>
         <p className="text-gray-400 text-sm">
@@ -64,11 +64,11 @@ export default function CompleteSentenceExercise({
 
       {/* Frase com espaço em branco */}
       <div className="mb-6">
-        <div className="bg-gray-800/50 rounded-lg p-4 mb-3">
-          <div className="text-xl text-white font-medium mb-2">
+        <div className="bg-gray-800/50 rounded-lg p-3 sm:p-4 mb-3">
+          <div className="text-lg sm:text-xl text-white font-medium mb-2 break-words leading-tight">
             {getCompletedSentence()}
           </div>
-          <div className="text-gray-400 text-sm">
+          <div className="text-gray-400 text-sm break-words">
             📝 {exerciseData.translation}
           </div>
         </div>
@@ -76,8 +76,8 @@ export default function CompleteSentenceExercise({
 
       {/* Opções */}
       <div className="mb-6">
-        <h4 className="text-white font-medium mb-3">Escolha a palavra correta:</h4>
-        <div className="grid grid-cols-2 gap-3">
+        <h4 className="text-white font-medium mb-3 text-sm sm:text-base">Escolha a palavra correta:</h4>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           {exerciseData.options.map((option, index) => (
             <button
               key={index}

@@ -319,10 +319,10 @@ export function generateProgressiveSteps(
   const steps: ProgressiveStep[] = []
   let stepOrder = 0
   
-  // Filtrar frases baseado no nível do usuário
+  // Filtrar frases baseado no nível do usuário - apenas nível atual e superiores
   const availablePhrases = trailData.phrases.filter((phrase: any) => {
     const levelOrder = { beginner: 1, intermediate: 2, advanced: 3 }
-    return levelOrder[phrase.requiredLevel] <= levelOrder[userLevel]
+    return levelOrder[phrase.requiredLevel] >= levelOrder[userLevel]
   })
   
   availablePhrases.forEach((phrase: any, index: number) => {

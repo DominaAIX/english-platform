@@ -82,9 +82,9 @@ export default function TranslationExercise({
   }
 
   return (
-    <div className="bg-gray-900/50 border border-gray-700 rounded-xl p-6">
+    <div className="bg-gray-900/50 border border-gray-700 rounded-xl p-4 sm:p-6 lg:p-8 max-w-full">
       <div className="mb-6">
-        <h3 className="text-lg font-semibold text-white mb-2">
+        <h3 className="text-base sm:text-lg font-semibold text-white mb-2">
           🔄 Tradução
         </h3>
         <p className="text-gray-400 text-sm">
@@ -94,9 +94,9 @@ export default function TranslationExercise({
 
       {/* Texto em português */}
       <div className="mb-6">
-        <h4 className="text-white font-medium mb-3">Traduza para o inglês:</h4>
-        <div className="bg-blue-900/20 border border-blue-500/30 rounded-lg p-4">
-          <div className="text-xl text-white font-medium flex items-center gap-2">
+        <h4 className="text-white font-medium mb-3 text-sm sm:text-base">Traduza para o inglês:</h4>
+        <div className="bg-blue-900/20 border border-blue-500/30 rounded-lg p-3 sm:p-4">
+          <div className="text-lg sm:text-xl text-white font-medium flex items-center gap-2 break-words leading-tight">
             🇧🇷 {exerciseData.portugueseText}
           </div>
         </div>
@@ -104,7 +104,7 @@ export default function TranslationExercise({
 
       {/* Campo de resposta */}
       <div className="mb-6">
-        <h4 className="text-white font-medium mb-3">Sua tradução em inglês:</h4>
+        <h4 className="text-white font-medium mb-3 text-sm sm:text-base">Sua tradução em inglês:</h4>
         <textarea
           value={userAnswer}
           onChange={handleInputChange}
