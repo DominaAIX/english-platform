@@ -204,6 +204,117 @@ export default function DashboardContent() {
           </div>
         </PageTransition>
 
+        {/* Premium Features - Teste de Nível e Trilhas Progressivas */}
+        {userPlan === 'premium' && (
+        <PageTransition>
+          <div className="mb-12">
+            <div className="text-center mb-8">
+              <h2 className="text-3xl font-bold text-white mb-4">
+                🎓 Aprendizado Progressivo Premium
+              </h2>
+              <p className="text-gray-400 text-lg max-w-3xl mx-auto">
+                Descubra seu nível e siga trilhas estruturadas com exercícios obrigatórios para um aprendizado eficaz.
+              </p>
+            </div>
+            
+            <div className="grid md:grid-cols-2 gap-8 mb-8">
+              {/* Teste de Nível */}
+              <Link href="/teste-nivel">
+                <div className="group bg-gradient-to-br from-yellow-900/30 to-orange-900/30 border-2 border-yellow-500/30 rounded-3xl p-8 hover:border-yellow-400/50 transition-all duration-300 cursor-pointer transform hover:scale-105 h-full flex flex-col">
+                  <div className="text-center flex-1 flex flex-col justify-between">
+                    <div>
+                      <div className="mb-6 group-hover:scale-110 transition-transform duration-300 flex justify-center">
+                        <span className="text-7xl">🎯</span>
+                      </div>
+                      <h3 className="text-2xl font-bold text-white mb-4">
+                        Teste de Nível
+                      </h3>
+                      <p className="text-gray-300 mb-6 leading-relaxed">
+                        Descubra seu nível atual de inglês com 15 perguntas rápidas. 
+                        Resultado personaliza suas trilhas de aprendizado.
+                      </p>
+                      <div className="flex flex-wrap gap-2 justify-center mb-6">
+                        <span className="bg-yellow-500/20 text-yellow-300 px-3 py-1 rounded-full text-sm">
+                          15 Questões
+                        </span>
+                        <span className="bg-orange-500/20 text-orange-300 px-3 py-1 rounded-full text-sm">
+                          5-10 Min
+                        </span>
+                        <span className="bg-yellow-500/20 text-yellow-300 px-3 py-1 rounded-full text-sm">
+                          Personalizado
+                        </span>
+                      </div>
+                    </div>
+                    <div className="text-yellow-400 group-hover:text-yellow-300 transition-colors font-semibold">
+                      Fazer Teste →
+                    </div>
+                  </div>
+                </div>
+              </Link>
+
+              {/* Trilhas Progressivas */}
+              <div className="group bg-gradient-to-br from-green-900/30 to-emerald-900/30 border-2 border-green-500/30 rounded-3xl p-8 hover:border-green-400/50 transition-all duration-300 cursor-pointer transform hover:scale-105 h-full flex flex-col">
+                <div className="text-center flex-1 flex flex-col justify-between">
+                  <div>
+                    <div className="mb-6 group-hover:scale-110 transition-transform duration-300 flex justify-center">
+                      <span className="text-7xl">🚀</span>
+                    </div>
+                    <h3 className="text-2xl font-bold text-white mb-4">
+                      Trilhas Progressivas
+                    </h3>
+                    <p className="text-gray-300 mb-6 leading-relaxed">
+                      Trilhas estruturadas baseadas no seu nível. Frases + exercícios obrigatórios 
+                      para garantir o aprendizado efetivo.
+                    </p>
+                    <div className="flex flex-wrap gap-2 justify-center mb-6">
+                      <span className="bg-green-500/20 text-green-300 px-3 py-1 rounded-full text-sm">
+                        Progressivo
+                      </span>
+                      <span className="bg-emerald-500/20 text-emerald-300 px-3 py-1 rounded-full text-sm">
+                        Exercícios
+                      </span>
+                      <span className="bg-green-500/20 text-green-300 px-3 py-1 rounded-full text-sm">
+                        Bloqueado
+                      </span>
+                    </div>
+                  </div>
+                  <div className="text-green-400 group-hover:text-green-300 transition-colors font-semibold">
+                    Ver Trilhas →
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Trilhas Progressivas Disponíveis */}
+            <div className="grid grid-cols-2 gap-4">
+              <Link href="/trilha-progressiva/trabalho">
+                <div className="bg-blue-900/20 border border-blue-500/30 rounded-xl p-4 hover:bg-blue-900/30 transition-all duration-300 group">
+                  <div className="flex items-center gap-3">
+                    <span className="text-2xl">💼</span>
+                    <div>
+                      <h4 className="text-white font-semibold text-sm">Trabalho Progressivo</h4>
+                      <p className="text-gray-400 text-xs">Inglês corporativo estruturado</p>
+                    </div>
+                  </div>
+                </div>
+              </Link>
+              
+              <Link href="/trilha-progressiva/viagens">
+                <div className="bg-green-900/20 border border-green-500/30 rounded-xl p-4 hover:bg-green-900/30 transition-all duration-300 group">
+                  <div className="flex items-center gap-3">
+                    <span className="text-2xl">✈️</span>
+                    <div>
+                      <h4 className="text-white font-semibold text-sm">Viagens Progressiva</h4>
+                      <p className="text-gray-400 text-xs">Inglês para turismo estruturado</p>
+                    </div>
+                  </div>
+                </div>
+              </Link>
+            </div>
+          </div>
+        </PageTransition>
+        )}
+
         {/* Main Options */}
         <PageTransition>
           <div className="grid md:grid-cols-2 gap-8 mb-12 items-stretch">
