@@ -165,6 +165,41 @@ function ProgressiveTrailClient({ trailData, slug }: { trailData: any, slug: str
     setExerciseResult(null)
   }
 
+  const handleCompleteStep = () => {
+    if (!user || !userProgress) return
+
+    const currentStep = progressiveSteps[currentStepIndex]
+    if (!currentStep) return
+
+    // Marcar o passo atual como completo
+    const updatedProgress = {
+      ...userProgress,
+      completedSteps: [...userProgress.completedSteps.filter(id => id !== currentStep.id), currentStep.id],
+      currentStepIndex: Math.min(currentStepIndex + 1, progressiveSteps.length - 1),
+      progressPercentage: ((userProgress.completedSteps.length + 1) / progressiveSteps.length) * 100,
+      lastAccessedAt: new Date().toISOString()
+    }
+
+    // Atualizar steps locais - desbloquear próximo step
+    const updatedSteps = progressiveSteps.map((step, index) => ({
+      ...step,
+      isCompleted: step.id === currentStep.id ? true : step.isCompleted,
+      isUnlocked: index <= updatedProgress.currentStepIndex
+    }))
+
+    setUserProgress(updatedProgress)
+    setProgressiveSteps(updatedSteps)
+    saveUserTrailProgress(user.id, updatedProgress)
+
+    // Avançar automaticamente para o próximo step
+    if (currentStepIndex < progressiveSteps.length - 1) {
+      setCurrentStepIndex(currentStepIndex + 1)
+      setShowTranslation(false)
+      setShowNextButton(false)
+      setExerciseResult(null)
+    }
+  }
+
   const handleStepComplete = (stepId: string, isCorrect: boolean) => {
     if (!user || !userProgress) return
 
@@ -546,7 +581,7 @@ function ProgressiveTrailClient({ trailData, slug }: { trailData: any, slug: str
                           </button>
                         )}
                         <button
-                          onClick={() => handleStepComplete(currentStep.id, true)}
+                          onClick={handleCompleteStep}
                           className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 px-8 py-4 rounded-full text-white font-bold transition-all duration-300 transform hover:scale-105"
                         >
                           Completar Aula ✓
