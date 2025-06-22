@@ -140,6 +140,53 @@ export const LEVEL_TEST_QUESTIONS: LevelTestQuestion[] = [
     ],
     correctAnswer: 0,
     difficulty: 'advanced'
+  },
+
+  // Additional Questions (16-20)
+  {
+    id: 'q16',
+    question: 'Where _____ you from?',
+    options: ['are', 'is', 'am', 'be'],
+    correctAnswer: 0,
+    difficulty: 'beginner'
+  },
+  {
+    id: 'q17',
+    question: 'If I had more time, I _____ travel around the world.',
+    options: ['will', 'would', 'can', 'should'],
+    correctAnswer: 1,
+    difficulty: 'intermediate'
+  },
+  {
+    id: 'q18',
+    question: 'She _____ working here for five years.',
+    options: ['has been', 'have been', 'is', 'was'],
+    correctAnswer: 0,
+    difficulty: 'intermediate'
+  },
+  {
+    id: 'q19',
+    question: 'Choose the correct sentence:',
+    options: [
+      "I don't have nothing to say",
+      "I have nothing to say",
+      "I don't have anything to say",
+      "Both B and C are correct"
+    ],
+    correctAnswer: 3,
+    difficulty: 'advanced'
+  },
+  {
+    id: 'q20',
+    question: 'Had I known about the meeting, I _____ attended.',
+    options: [
+      'would have',
+      'will have',
+      'would',
+      'will'
+    ],
+    correctAnswer: 0,
+    difficulty: 'advanced'
   }
 ]
 

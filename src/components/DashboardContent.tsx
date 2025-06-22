@@ -213,7 +213,7 @@ export default function DashboardContent() {
             <div className="bg-gradient-to-r from-yellow-900/50 to-orange-900/50 border-2 border-yellow-500/50 rounded-xl p-8 text-center">
               <div className="text-6xl mb-6">🎯</div>
               <h2 className="text-3xl font-bold text-white mb-4">
-                Teste de Nível Obrigatório
+                Vamos começar?
               </h2>
               <p className="text-gray-300 mb-6 text-lg max-w-2xl mx-auto">
                 Para personalizar sua experiência de aprendizado, precisamos conhecer seu nível atual de inglês. 
@@ -223,8 +223,8 @@ export default function DashboardContent() {
               <div className="bg-gray-900/50 rounded-lg p-6 mb-6">
                 <h3 className="text-white font-semibold mb-4">📋 O que esperar:</h3>
                 <ul className="text-gray-300 space-y-2 text-left max-w-md mx-auto">
-                  <li>• 15 perguntas de múltipla escolha</li>
-                  <li>• Tempo estimado: 5-10 minutos</li>
+                  <li>• 20 perguntas de múltipla escolha</li>
+                  <li>• Tempo estimado: 8-12 minutos</li>
                   <li>• Resultado determina seu conteúdo personalizado</li>
                   <li>• Necessário para acessar trilhas progressivas</li>
                 </ul>

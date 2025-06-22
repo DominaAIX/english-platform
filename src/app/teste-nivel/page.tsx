@@ -25,6 +25,8 @@ export default function LevelTestPage() {
   const [showResult, setShowResult] = useState(false)
   const [testResult, setTestResult] = useState<LevelTestResult | null>(null)
   const [hasStarted, setHasStarted] = useState(false)
+  const [currentSelectedAnswer, setCurrentSelectedAnswer] = useState<number | null>(null)
+  const [showAnswerFeedback, setShowAnswerFeedback] = useState(false)
 
   // Verificar se usuário é premium
   const isPremium = userProfile?.plan === 'premium'
@@ -60,6 +62,11 @@ export default function LevelTestPage() {
   }
 
   const selectAnswer = (answerIndex: number) => {
+    if (showAnswerFeedback) return // Prevent selecting if feedback is already shown
+    
+    setCurrentSelectedAnswer(answerIndex)
+    setShowAnswerFeedback(true)
+    
     const newAnswers = [...selectedAnswers]
     newAnswers[currentQuestionIndex] = answerIndex
     setSelectedAnswers(newAnswers)
@@ -68,6 +75,8 @@ export default function LevelTestPage() {
   const nextQuestion = () => {
     if (currentQuestionIndex < LEVEL_TEST_QUESTIONS.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1)
+      setCurrentSelectedAnswer(null)
+      setShowAnswerFeedback(false)
     } else {
       finishTest()
     }
@@ -397,19 +406,28 @@ export default function LevelTestPage() {
                 <button
                   key={index}
                   onClick={() => selectAnswer(index)}
+                  disabled={showAnswerFeedback}
                   className={`w-full p-4 rounded-lg text-left transition-all duration-200 ${
-                    selectedAnswers[currentQuestionIndex] === index
+                    showAnswerFeedback && currentSelectedAnswer === index
+                      ? currentSelectedAnswer === currentQuestion.correctAnswer
+                        ? 'bg-green-600/30 border-2 border-green-400 text-green-300'
+                        : 'bg-red-600/30 border-2 border-red-400 text-red-300'
+                      : selectedAnswers[currentQuestionIndex] === index
                       ? 'bg-purple-600/30 border-2 border-purple-400'
                       : 'bg-gray-800/50 border-2 border-gray-600 hover:border-gray-500'
-                  }`}
+                  } ${showAnswerFeedback ? 'cursor-not-allowed' : 'cursor-pointer'}`}
                 >
                   <div className="flex items-center gap-3">
                     <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${
-                      selectedAnswers[currentQuestionIndex] === index
+                      showAnswerFeedback && currentSelectedAnswer === index
+                        ? currentSelectedAnswer === currentQuestion.correctAnswer
+                          ? 'border-green-400 bg-green-600'
+                          : 'border-red-400 bg-red-600'
+                        : selectedAnswers[currentQuestionIndex] === index
                         ? 'border-purple-400 bg-purple-600'
                         : 'border-gray-500'
                     }`}>
-                      {selectedAnswers[currentQuestionIndex] === index && (
+                      {(selectedAnswers[currentQuestionIndex] === index || (showAnswerFeedback && currentSelectedAnswer === index)) && (
                         <div className="w-3 h-3 bg-white rounded-full"></div>
                       )}
                     </div>
@@ -418,6 +436,26 @@ export default function LevelTestPage() {
                 </button>
               ))}
             </div>
+
+            {/* Feedback after answer */}
+            {showAnswerFeedback && (
+              <div className={`mt-6 p-4 rounded-lg ${
+                currentSelectedAnswer === currentQuestion.correctAnswer 
+                  ? 'bg-green-900/30 border border-green-500/30' 
+                  : 'bg-red-900/30 border border-red-500/30'
+              }`}>
+                <div className="flex items-center gap-3">
+                  <span className="text-2xl">
+                    {currentSelectedAnswer === currentQuestion.correctAnswer ? '✅' : '❌'}
+                  </span>
+                  <span className={`font-semibold ${
+                    currentSelectedAnswer === currentQuestion.correctAnswer ? 'text-green-400' : 'text-red-400'
+                  }`}>
+                    {currentSelectedAnswer === currentQuestion.correctAnswer ? 'Resposta Correta!' : 'Resposta Incorreta!'}
+                  </span>
+                </div>
+              </div>
+            )}
           </div>
         </PageTransition>
 
@@ -434,7 +472,7 @@ export default function LevelTestPage() {
             
             <button
               onClick={nextQuestion}
-              disabled={selectedAnswers[currentQuestionIndex] === undefined}
+              disabled={!showAnswerFeedback}
               className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 disabled:opacity-50 disabled:cursor-not-allowed px-6 py-3 rounded-full text-white font-semibold transition-all duration-300"
             >
               {currentQuestionIndex === LEVEL_TEST_QUESTIONS.length - 1 ? 'Finalizar Teste' : 'Próxima →'}
