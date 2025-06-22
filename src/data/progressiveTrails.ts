@@ -1366,7 +1366,36 @@ function generateWorkTrailProgressiveSteps(
   const steps: ProgressiveStep[] = []
   let stepOrder = 0
   
-  // Separar conteúdo por níveis - PROGRESSÃO SEQUENCIAL
+  // NOVA ESTRUTURA: Usar módulos se disponíveis
+  if (trailData.courseModules && trailData.courseModules.length > 0) {
+    trailData.courseModules.forEach((module: CourseModule) => {
+      // Adicionar o módulo como um step
+      steps.push({
+        id: module.id,
+        type: 'module',
+        module: module,
+        isCompleted: false,
+        isUnlocked: module.order === 1, // Só o primeiro módulo começa desbloqueado
+        order: stepOrder++
+      })
+      
+      // Adicionar as aulas do módulo
+      module.lessons.forEach((lesson: CourseLesson) => {
+        steps.push({
+          id: lesson.id,
+          type: 'lesson',
+          lesson: lesson,
+          isCompleted: false,
+          isUnlocked: false, // Aulas desbloqueiam conforme progresso
+          order: stepOrder++
+        })
+      })
+    })
+    
+    return steps
+  }
+  
+  // ESTRUTURA LEGADA: Separar conteúdo por níveis - PROGRESSÃO SEQUENCIAL
   const beginnerPhrases = trailData.phrases.filter((p: any) => p.difficulty === 'beginner' || p.difficulty === 'básico')
   const intermediatePhrases = trailData.phrases.filter((p: any) => p.difficulty === 'intermediate' || p.difficulty === 'médio')
   const advancedPhrases = trailData.phrases.filter((p: any) => p.difficulty === 'advanced' || p.difficulty === 'avançado')

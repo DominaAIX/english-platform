@@ -359,10 +359,16 @@ function ProgressiveTrailClient({ trailData, slug }: { trailData: any, slug: str
                   <div className="mb-6">
                     <div className="flex items-center gap-3 mb-2">
                       <span className="text-2xl">
-                        {currentStep.type === 'phrase' ? '💬' : '🧩'}
+                        {currentStep.type === 'phrase' ? '💬' : 
+                         currentStep.type === 'exercise' ? '🧩' :
+                         currentStep.type === 'module' ? '📚' :
+                         currentStep.type === 'lesson' ? '🎯' : '📝'}
                       </span>
                       <h2 className="text-xl font-bold text-white">
-                        {currentStep.type === 'phrase' ? 'Aprender Frase' : 'Exercício'}
+                        {currentStep.type === 'phrase' ? 'Aprender Frase' : 
+                         currentStep.type === 'exercise' ? 'Exercício' :
+                         currentStep.type === 'module' ? 'Módulo' :
+                         currentStep.type === 'lesson' ? 'Aula' : 'Conteúdo'}
                       </h2>
                       {currentStep.isCompleted && (
                         <span className="bg-green-500/20 text-green-400 px-3 py-1 rounded-full text-sm font-medium">
@@ -371,6 +377,183 @@ function ProgressiveTrailClient({ trailData, slug }: { trailData: any, slug: str
                       )}
                     </div>
                   </div>
+
+                  {/* Renderização de Módulo */}
+                  {currentStep.type === 'module' && currentStep.module && (
+                    <div className="bg-gradient-to-r from-purple-900/30 to-blue-900/30 border border-purple-500/30 rounded-2xl p-8 mb-6">
+                      <div className="text-center">
+                        <h1 className="text-3xl font-bold text-white mb-4">
+                          {currentStep.module.title}
+                        </h1>
+                        <p className="text-xl text-gray-300 mb-6">
+                          {currentStep.module.description}
+                        </p>
+                        <div className="bg-gray-800/50 rounded-lg p-6 mb-6">
+                          <h3 className="text-lg font-semibold text-white mb-3">🎯 Objetivo do Módulo:</h3>
+                          <p className="text-gray-300">
+                            {currentStep.module.objective}
+                          </p>
+                        </div>
+                        <div className="mb-6">
+                          <h3 className="text-lg font-semibold text-white mb-3">📋 Estrutura:</h3>
+                          <div className="grid gap-3">
+                            {currentStep.module.lessons.map((lesson, index) => (
+                              <div key={lesson.id} className="bg-gray-800/30 rounded-lg p-4 flex items-center gap-4">
+                                <span className="text-2xl">
+                                  {lesson.type === 'vocabulary' ? '📖' :
+                                   lesson.type === 'grammar' ? '⚡' :
+                                   lesson.type === 'speaking' ? '🗣️' :
+                                   lesson.type === 'listening' ? '👂' :
+                                   lesson.type === 'project' ? '🚀' : '📝'}
+                                </span>
+                                <div className="flex-1 text-left">
+                                  <h4 className="text-white font-medium">{lesson.title}</h4>
+                                  <p className="text-gray-400 text-sm">{lesson.objective}</p>
+                                  <p className="text-gray-500 text-xs">{lesson.estimatedTime} minutos</p>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                        <button
+                          onClick={() => handleNext()}
+                          className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 px-8 py-4 rounded-full text-white font-bold text-lg transition-all duration-300 transform hover:scale-105"
+                        >
+                          Começar Módulo 🚀
+                        </button>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Renderização de Aula */}
+                  {currentStep.type === 'lesson' && currentStep.lesson && (
+                    <div className="bg-gray-900/50 border border-gray-700 rounded-2xl p-8 mb-6">
+                      <div className="mb-6">
+                        <div className="flex items-center gap-3 mb-4">
+                          <span className="text-3xl">
+                            {currentStep.lesson.type === 'vocabulary' ? '📖' :
+                             currentStep.lesson.type === 'grammar' ? '⚡' :
+                             currentStep.lesson.type === 'speaking' ? '🗣️' :
+                             currentStep.lesson.type === 'listening' ? '👂' :
+                             currentStep.lesson.type === 'project' ? '🚀' : '📝'}
+                          </span>
+                          <div>
+                            <h2 className="text-2xl font-bold text-white">{currentStep.lesson.title}</h2>
+                            <p className="text-gray-400">{currentStep.lesson.objective}</p>
+                            <p className="text-gray-500 text-sm">⏱️ {currentStep.lesson.estimatedTime} minutos</p>
+                          </div>
+                        </div>
+                        
+                        <div className="bg-blue-900/20 border border-blue-500/30 rounded-lg p-4 mb-6">
+                          <h3 className="text-white font-semibold mb-2">📋 Tópicos desta aula:</h3>
+                          <ul className="text-gray-300 space-y-1">
+                            {currentStep.lesson.topics.map((topic, index) => (
+                              <li key={index} className="flex items-center gap-2">
+                                <span className="text-blue-400">•</span>
+                                {topic}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
+
+                      {/* Conteúdo da Aula */}
+                      {currentStep.lesson.content.phrases && (
+                        <div className="mb-6">
+                          <h3 className="text-xl font-semibold text-white mb-4">📝 Vocabulário e Frases:</h3>
+                          <div className="space-y-4">
+                            {currentStep.lesson.content.phrases.map((phrase, index) => (
+                              <div key={phrase.id} className="bg-gray-800/50 rounded-lg p-4">
+                                <div className="flex items-center gap-3 mb-2">
+                                  <span className="bg-purple-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-semibold">
+                                    {index + 1}
+                                  </span>
+                                  <button
+                                    onClick={() => speakPhrase(phrase.english)}
+                                    className="bg-purple-600 hover:bg-purple-700 p-1 rounded-full transition-colors"
+                                    title="Ouvir pronúncia"
+                                  >
+                                    🔊
+                                  </button>
+                                </div>
+                                <p className="text-lg text-white font-medium mb-1">{phrase.english}</p>
+                                <p className="text-gray-300">{phrase.portuguese}</p>
+                                <span className="text-xs text-purple-400">{phrase.context}</span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Pontos de Gramática */}
+                      {currentStep.lesson.content.grammarPoints && (
+                        <div className="mb-6">
+                          <h3 className="text-xl font-semibold text-white mb-4">⚡ Gramática:</h3>
+                          {currentStep.lesson.content.grammarPoints.map((grammar) => (
+                            <div key={grammar.id} className="bg-yellow-900/20 border border-yellow-500/30 rounded-lg p-6 mb-4">
+                              <h4 className="text-yellow-400 font-semibold text-lg mb-3">{grammar.title}</h4>
+                              <p className="text-gray-300 mb-4">{grammar.explanation}</p>
+                              
+                              <div className="mb-4">
+                                <h5 className="text-white font-medium mb-2">📝 Exemplos:</h5>
+                                <div className="space-y-2">
+                                  {grammar.examples.map((example, index) => (
+                                    <div key={index} className="bg-gray-800/50 rounded p-3">
+                                      <p className="text-white font-medium">{example.english}</p>
+                                      <p className="text-gray-400 text-sm">{example.portuguese}</p>
+                                    </div>
+                                  ))}
+                                </div>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+
+                      {/* Speaking Prompts */}
+                      {currentStep.lesson.content.speakingPrompts && (
+                        <div className="mb-6">
+                          <h3 className="text-xl font-semibold text-white mb-4">🗣️ Prática de Conversação:</h3>
+                          {currentStep.lesson.content.speakingPrompts.map((prompt) => (
+                            <div key={prompt.id} className="bg-green-900/20 border border-green-500/30 rounded-lg p-6 mb-4">
+                              <h4 className="text-green-400 font-semibold mb-2">🎭 Situação:</h4>
+                              <p className="text-gray-300 mb-3">{prompt.situation}</p>
+                              
+                              <h4 className="text-green-400 font-semibold mb-2">💭 Seu desafio:</h4>
+                              <p className="text-white mb-4">{prompt.prompt}</p>
+                              
+                              <h4 className="text-green-400 font-semibold mb-2">🔑 Frases-chave para usar:</h4>
+                              <div className="flex flex-wrap gap-2">
+                                {prompt.keyPhrases.map((phrase, index) => (
+                                  <span key={index} className="bg-green-600/20 text-green-300 px-3 py-1 rounded-full text-sm">
+                                    {phrase}
+                                  </span>
+                                ))}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+
+                      {/* Botões de Ação */}
+                      <div className="flex gap-4 justify-center">
+                        {currentStepIndex > 0 && (
+                          <button
+                            onClick={handlePrevious}
+                            className="bg-gray-700 hover:bg-gray-600 px-6 py-3 rounded-full text-white font-semibold transition-all duration-300"
+                          >
+                            ← Anterior
+                          </button>
+                        )}
+                        <button
+                          onClick={() => handleStepComplete(currentStep.id, true)}
+                          className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 px-8 py-4 rounded-full text-white font-bold transition-all duration-300 transform hover:scale-105"
+                        >
+                          Completar Aula ✓
+                        </button>
+                      </div>
+                    </div>
+                  )}
 
                   {/* Conteúdo do passo */}
                   {currentStep.type === 'phrase' && currentStep.phrase && (
