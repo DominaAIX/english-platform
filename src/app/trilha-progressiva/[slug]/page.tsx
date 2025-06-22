@@ -116,35 +116,52 @@ function ProgressiveTrailClient({ trailData, slug }: { trailData: any, slug: str
   }
 
   const handleStepComplete = (stepId: string, isCorrect: boolean) => {
-    if (!isCorrect || !user || !userProgress) return
+    if (!user || !userProgress) return
 
-    // Atualizar progresso local
-    const updatedProgress = {
-      ...userProgress,
-      completedSteps: [...userProgress.completedSteps, stepId],
-      currentStepIndex: Math.min(currentStepIndex + 1, progressiveSteps.length - 1),
-      progressPercentage: ((userProgress.completedSteps.length + 1) / progressiveSteps.length) * 100,
-      lastAccessedAt: new Date().toISOString()
+    // Para exercícios: só avançar se a resposta estiver correta
+    const currentStep = progressiveSteps[currentStepIndex]
+    if (currentStep?.type === 'exercise' && !isCorrect) {
+      // Resposta incorreta em exercício - não avançar, permitir tentar novamente
+      return
     }
 
-    // Atualizar steps locais
-    const updatedSteps = progressiveSteps.map((step, index) => ({
-      ...step,
-      isCompleted: step.id === stepId ? true : step.isCompleted,
-      isUnlocked: index <= updatedProgress.currentStepIndex
-    }))
+    // Para frases ou exercícios corretos: marcar como completo e mostrar navegação
+    if (isCorrect || currentStep?.type === 'phrase') {
+      const updatedProgress = {
+        ...userProgress,
+        completedSteps: [...userProgress.completedSteps.filter(id => id !== stepId), stepId],
+        currentStepIndex: Math.min(currentStepIndex + 1, progressiveSteps.length - 1),
+        progressPercentage: ((userProgress.completedSteps.length + 1) / progressiveSteps.length) * 100,
+        lastAccessedAt: new Date().toISOString()
+      }
 
-    setUserProgress(updatedProgress)
-    setProgressiveSteps(updatedSteps)
-    saveUserTrailProgress(user.id, updatedProgress)
+      // Atualizar steps locais
+      const updatedSteps = progressiveSteps.map((step, index) => ({
+        ...step,
+        isCompleted: step.id === stepId ? true : step.isCompleted,
+        isUnlocked: index <= updatedProgress.currentStepIndex
+      }))
 
-    // Mostrar botão próximo em vez de avançar automaticamente
-    setShowNextButton(true)
+      setUserProgress(updatedProgress)
+      setProgressiveSteps(updatedSteps)
+      saveUserTrailProgress(user.id, updatedProgress)
+
+      // Mostrar botões de navegação
+      setShowNextButton(true)
+    }
   }
 
   const handleNext = () => {
     if (currentStepIndex < progressiveSteps.length - 1) {
       setCurrentStepIndex(currentStepIndex + 1)
+      setShowTranslation(false)
+      setShowNextButton(false)
+    }
+  }
+
+  const handlePrevious = () => {
+    if (currentStepIndex > 0) {
+      setCurrentStepIndex(currentStepIndex - 1)
       setShowTranslation(false)
       setShowNextButton(false)
     }
@@ -379,12 +396,22 @@ function ProgressiveTrailClient({ trailData, slug }: { trailData: any, slug: str
                         )}
                         
                         {showNextButton && (
-                          <button
-                            onClick={handleNext}
-                            className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 px-6 py-3 rounded-full text-white font-semibold transition-all duration-300 transform hover:scale-105"
-                          >
-                            Próximo →
-                          </button>
+                          <>
+                            {currentStepIndex > 0 && (
+                              <button
+                                onClick={handlePrevious}
+                                className="bg-gray-700 hover:bg-gray-600 px-6 py-3 rounded-full text-white font-semibold transition-all duration-300"
+                              >
+                                ← Voltar
+                              </button>
+                            )}
+                            <button
+                              onClick={handleNext}
+                              className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 px-6 py-3 rounded-full text-white font-semibold transition-all duration-300 transform hover:scale-105"
+                            >
+                              Próximo →
+                            </button>
+                          </>
                         )}
                       </div>
                     </div>
@@ -585,12 +612,22 @@ function ProgressiveTrailClient({ trailData, slug }: { trailData: any, slug: str
                           )}
                           
                           {showNextButton && (
-                            <button
-                              onClick={handleNext}
-                              className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 px-6 py-3 rounded-full text-white font-semibold transition-all duration-300 transform hover:scale-105"
-                            >
-                              Próximo →
-                            </button>
+                            <>
+                              {currentStepIndex > 0 && (
+                                <button
+                                  onClick={handlePrevious}
+                                  className="bg-gray-700 hover:bg-gray-600 px-6 py-3 rounded-full text-white font-semibold transition-all duration-300"
+                                >
+                                  ← Voltar
+                                </button>
+                              )}
+                              <button
+                                onClick={handleNext}
+                                className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 px-6 py-3 rounded-full text-white font-semibold transition-all duration-300 transform hover:scale-105"
+                              >
+                                Próximo →
+                              </button>
+                            </>
                           )}
                         </div>
                       </div>
