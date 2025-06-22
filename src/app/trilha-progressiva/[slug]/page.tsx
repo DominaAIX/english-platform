@@ -85,8 +85,8 @@ function ProgressiveTrailClient({ trailData, slug }: { trailData: any, slug: str
     const progress = getUserTrailProgress(user.id, slug)
     setUserProgress(progress)
 
-    // Gerar passos progressivos baseados no nível
-    const steps = generateProgressiveSteps(trailData, level)
+    // Gerar passos progressivos baseados no nível (com nova pedagogia para trabalho)
+    const steps = generateProgressiveSteps(trailData, level, slug)
     
     // Atualizar status dos passos baseado no progresso salvo
     const updatedSteps = steps.map((step, index) => ({

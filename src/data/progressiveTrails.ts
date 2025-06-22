@@ -45,6 +45,12 @@ export interface UserTrailProgress {
   progressPercentage: number
   lastAccessedAt: string
   userLevel: 'beginner' | 'intermediate' | 'advanced'
+  currentLevelProgress: {
+    level: 'beginner' | 'intermediate' | 'advanced'
+    completedInLevel: number
+    totalInLevel: number
+    canAdvanceToNextLevel: boolean
+  }
 }
 
 // Exercícios específicos para cada tipo
@@ -308,7 +314,17 @@ export function getUserLevel(userId: string): 'beginner' | 'intermediate' | 'adv
 export function getUserTrailProgress(userId: string, trailId: string): UserTrailProgress {
   const savedProgress = localStorage.getItem(`trail_progress_${userId}_${trailId}`)
   if (savedProgress) {
-    return JSON.parse(savedProgress)
+    const progress = JSON.parse(savedProgress)
+    // Garantir que tem o novo campo currentLevelProgress
+    if (!progress.currentLevelProgress) {
+      progress.currentLevelProgress = {
+        level: progress.userLevel || 'beginner',
+        completedInLevel: 0,
+        totalInLevel: 0,
+        canAdvanceToNextLevel: false
+      }
+    }
+    return progress
   }
   
   // Progresso inicial
@@ -319,7 +335,13 @@ export function getUserTrailProgress(userId: string, trailId: string): UserTrail
     totalSteps: 0,
     progressPercentage: 0,
     lastAccessedAt: new Date().toISOString(),
-    userLevel: getUserLevel(userId)
+    userLevel: getUserLevel(userId),
+    currentLevelProgress: {
+      level: getUserLevel(userId),
+      completedInLevel: 0,
+      totalInLevel: 0,
+      canAdvanceToNextLevel: false
+    }
   }
 }
 
@@ -327,14 +349,43 @@ export function saveUserTrailProgress(userId: string, progress: UserTrailProgres
   localStorage.setItem(`trail_progress_${userId}_${progress.trailId}`, JSON.stringify(progress))
 }
 
+// Função para calcular progresso por nível (apenas trilha trabalho)
+export function calculateLevelProgress(
+  steps: ProgressiveStep[], 
+  completedSteps: string[], 
+  currentLevel: 'beginner' | 'intermediate' | 'advanced'
+): { completedInLevel: number, totalInLevel: number, canAdvanceToNextLevel: boolean } {
+  const levelSteps = steps.filter(step => {
+    if (step.phrase) {
+      return step.phrase.difficulty === currentLevel
+    }
+    if (step.exercise?.phrase) {
+      return step.exercise.phrase.difficulty === currentLevel
+    }
+    return false
+  })
+  
+  const completedInLevel = levelSteps.filter(step => completedSteps.includes(step.id)).length
+  const totalInLevel = levelSteps.length
+  const canAdvanceToNextLevel = completedInLevel === totalInLevel && totalInLevel > 0
+  
+  return { completedInLevel, totalInLevel, canAdvanceToNextLevel }
+}
+
 export function generateProgressiveSteps(
   trailData: any, 
-  userLevel: 'beginner' | 'intermediate' | 'advanced'
+  userLevel: 'beginner' | 'intermediate' | 'advanced',
+  trailId?: string
 ): ProgressiveStep[] {
   const steps: ProgressiveStep[] = []
   let stepOrder = 0
   
-  // Filtrar frases baseado no nível do usuário - apenas nível atual e superiores
+  // Implementação pedagógica APENAS para trilha de trabalho
+  if (trailId === 'trabalho') {
+    return generateWorkTrailProgressiveSteps(trailData, userLevel)
+  }
+  
+  // Lógica original para outras trilhas
   const availablePhrases = trailData.phrases.filter((phrase: any) => {
     const levelOrder = { beginner: 1, intermediate: 2, advanced: 3 }
     return levelOrder[phrase.requiredLevel] >= levelOrder[userLevel]
@@ -347,7 +398,7 @@ export function generateProgressiveSteps(
       type: 'phrase',
       phrase,
       isCompleted: false,
-      isUnlocked: index === 0, // Primeira frase sempre desbloqueada
+      isUnlocked: index === 0,
       order: stepOrder++
     })
     
@@ -362,11 +413,147 @@ export function generateProgressiveSteps(
           phrase
         },
         isCompleted: false,
-        isUnlocked: false, // Exercício só é desbloqueado após completar a frase
+        isUnlocked: false,
         order: stepOrder++
       })
     }
   })
+  
+  return steps
+}
+
+// Função específica para progressão pedagógica da trilha de trabalho
+function generateWorkTrailProgressiveSteps(
+  trailData: any, 
+  userLevel: 'beginner' | 'intermediate' | 'advanced'
+): ProgressiveStep[] {
+  const steps: ProgressiveStep[] = []
+  let stepOrder = 0
+  
+  // Separar conteúdo por níveis - PROGRESSÃO SEQUENCIAL
+  const beginnerPhrases = trailData.phrases.filter((p: any) => p.difficulty === 'beginner' || p.difficulty === 'básico')
+  const intermediatePhrases = trailData.phrases.filter((p: any) => p.difficulty === 'intermediate' || p.difficulty === 'médio')
+  const advancedPhrases = trailData.phrases.filter((p: any) => p.difficulty === 'advanced' || p.difficulty === 'avançado')
+  
+  // PROGRESSÃO PEDAGÓGICA: Básico → Intermediário → Avançado
+  
+  // 1. NÍVEL BÁSICO - Sempre incluir
+  beginnerPhrases.forEach((phrase: any, index: number) => {
+    steps.push({
+      id: `phrase_${phrase.id}`,
+      type: 'phrase',
+      phrase: { ...phrase, difficulty: 'beginner' },
+      isCompleted: false,
+      isUnlocked: index === 0, // Só a primeira frase básica desbloqueada inicialmente
+      order: stepOrder++
+    })
+    
+    // Exercício após cada frase básica
+    const exercise = trailData.exercises?.find((ex: any) => ex.phraseId === phrase.id)
+    if (exercise) {
+      steps.push({
+        id: `exercise_${exercise.id}`,
+        type: 'exercise',
+        exercise: {
+          ...exercise,
+          phrase: { ...phrase, difficulty: 'beginner' }
+        },
+        isCompleted: false,
+        isUnlocked: false,
+        order: stepOrder++
+      })
+    }
+  })
+  
+  // Adicionar teste de progressão do básico
+  if (beginnerPhrases.length > 0) {
+    steps.push({
+      id: 'level_test_beginner_to_intermediate',
+      type: 'exercise',
+      exercise: {
+        id: 'level_test_beginner',
+        type: 'multiple-choice',
+        phrase: {
+          id: 'test_beginner',
+          english: 'Level Assessment Test',
+          portuguese: 'Teste de Avaliação de Nível',
+          difficulty: 'beginner',
+          requiredLevel: 'beginner',
+          context: 'Teste de Progressão',
+          order: 999
+        },
+        data: {
+          question: 'Complete: "Good morning! _____ can I help you today?"',
+          options: ['How', 'What', 'Where', 'When'],
+          correctAnswer: 0,
+          explanation: 'Use "How" to offer help politely in business context.'
+        } as MultipleChoiceData,
+        requiredToProgress: true,
+        order: stepOrder
+      },
+      isCompleted: false,
+      isUnlocked: false, // Só destrava após completar todo o básico
+      order: stepOrder++
+    })
+  }
+  
+  // 2. NÍVEL INTERMEDIÁRIO - Só disponível se usuário passou do básico
+  if (userLevel === 'intermediate' || userLevel === 'advanced') {
+    intermediatePhrases.forEach((phrase: any) => {
+      steps.push({
+        id: `phrase_${phrase.id}`,
+        type: 'phrase',
+        phrase: { ...phrase, difficulty: 'intermediate' },
+        isCompleted: false,
+        isUnlocked: false, // Destrava só após completar básico
+        order: stepOrder++
+      })
+      
+      const exercise = trailData.exercises?.find((ex: any) => ex.phraseId === phrase.id)
+      if (exercise) {
+        steps.push({
+          id: `exercise_${exercise.id}`,
+          type: 'exercise',
+          exercise: {
+            ...exercise,
+            phrase: { ...phrase, difficulty: 'intermediate' }
+          },
+          isCompleted: false,
+          isUnlocked: false,
+          order: stepOrder++
+        })
+      }
+    })
+  }
+  
+  // 3. NÍVEL AVANÇADO - Só disponível se usuário é avançado
+  if (userLevel === 'advanced') {
+    advancedPhrases.forEach((phrase: any) => {
+      steps.push({
+        id: `phrase_${phrase.id}`,
+        type: 'phrase',
+        phrase: { ...phrase, difficulty: 'advanced' },
+        isCompleted: false,
+        isUnlocked: false, // Destrava só após completar intermediário
+        order: stepOrder++
+      })
+      
+      const exercise = trailData.exercises?.find((ex: any) => ex.phraseId === phrase.id)
+      if (exercise) {
+        steps.push({
+          id: `exercise_${exercise.id}`,
+          type: 'exercise',
+          exercise: {
+            ...exercise,
+            phrase: { ...phrase, difficulty: 'advanced' }
+          },
+          isCompleted: false,
+          isUnlocked: false,
+          order: stepOrder++
+        })
+      }
+    })
+  }
   
   return steps
 }
