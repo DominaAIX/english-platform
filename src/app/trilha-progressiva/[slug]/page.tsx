@@ -11,6 +11,7 @@ import DragDropExercise from '@/components/DragDropExercise'
 import CompleteSentenceExercise from '@/components/CompleteSentenceExercise'
 import TranslationExercise from '@/components/TranslationExercise'
 import MultipleChoiceExercise from '@/components/MultipleChoiceExercise'
+import { SpeakerIcon } from '@/components/ModernIcons'
 import {
   PROGRESSIVE_TRAILS_DATA,
   ProgressiveStep,
@@ -58,6 +59,8 @@ function ProgressiveTrailClient({ trailData, slug }: { trailData: any, slug: str
   const [userProgress, setUserProgress] = useState<UserTrailProgress | null>(null)
   const [userLevel, setUserLevel] = useState<'beginner' | 'intermediate' | 'advanced'>('beginner')
   const [isLoading, setIsLoading] = useState(true)
+  const [showTranslation, setShowTranslation] = useState(false)
+  const [showNextButton, setShowNextButton] = useState(false)
 
   // Verificar se usuário é premium
   const isPremium = userProfile?.plan === 'premium'
@@ -104,6 +107,14 @@ function ProgressiveTrailClient({ trailData, slug }: { trailData: any, slug: str
     }
   }
 
+  const speakPhrase = (text: string) => {
+    if ('speechSynthesis' in window) {
+      const utterance = new SpeechSynthesisUtterance(text)
+      utterance.lang = 'en-US'
+      speechSynthesis.speak(utterance)
+    }
+  }
+
   const handleStepComplete = (stepId: string, isCorrect: boolean) => {
     if (!isCorrect || !user || !userProgress) return
 
@@ -127,18 +138,24 @@ function ProgressiveTrailClient({ trailData, slug }: { trailData: any, slug: str
     setProgressiveSteps(updatedSteps)
     saveUserTrailProgress(user.id, updatedProgress)
 
-    // Avançar para próximo passo automaticamente após 2 segundos
-    setTimeout(() => {
-      if (currentStepIndex < progressiveSteps.length - 1) {
-        setCurrentStepIndex(currentStepIndex + 1)
-      }
-    }, 2000)
+    // Mostrar botão próximo em vez de avançar automaticamente
+    setShowNextButton(true)
+  }
+
+  const handleNext = () => {
+    if (currentStepIndex < progressiveSteps.length - 1) {
+      setCurrentStepIndex(currentStepIndex + 1)
+      setShowTranslation(false)
+      setShowNextButton(false)
+    }
   }
 
   const handleStepNavigation = (stepIndex: number) => {
     const step = progressiveSteps[stepIndex]
     if (step && step.isUnlocked) {
       setCurrentStepIndex(stepIndex)
+      setShowTranslation(false)
+      setShowNextButton(false)
     }
   }
 
@@ -354,30 +371,62 @@ function ProgressiveTrailClient({ trailData, slug }: { trailData: any, slug: str
                         </span>
                       </div>
 
-                      {/* Phrase Content */}
-                      <div className="text-center mb-6">
-                        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4 leading-tight">
+                      {/* English Phrase */}
+                      <div className="mb-6">
+                        <div className="flex items-center gap-3 mb-3">
+                          <h2 className="text-2xl font-bold text-white flex items-center gap-2">
+                            🇺🇸 English
+                          </h2>
+                          <button
+                            onClick={() => speakPhrase(currentStep.phrase.english)}
+                            className="bg-purple-600 hover:bg-purple-700 p-2 rounded-full transition-colors flex items-center justify-center"
+                            title="Ouvir pronúncia"
+                          >
+                            <SpeakerIcon size={16} className="text-white" />
+                          </button>
+                        </div>
+                        <p className="text-xl text-white leading-relaxed bg-gray-800/50 p-4 rounded-lg">
                           {currentStep.phrase.english}
-                        </h2>
+                        </p>
                       </div>
 
                       {/* Translation */}
-                      <div className="text-center mb-6">
-                        <div className="bg-gray-800/50 rounded-xl p-4 mb-4">
-                          <p className="text-xl sm:text-2xl text-gray-300 leading-relaxed">
+                      <div className="mb-8">
+                        <div className="flex items-center gap-3 mb-3">
+                          <h3 className="text-xl font-semibold text-white">
+                            Português
+                          </h3>
+                          <button
+                            onClick={() => setShowTranslation(!showTranslation)}
+                            className="bg-cyan-600 hover:bg-cyan-700 px-4 py-2 rounded-full text-sm transition-colors"
+                          >
+                            {showTranslation ? 'Ocultar' : 'Mostrar'} Tradução
+                          </button>
+                        </div>
+                        {showTranslation && (
+                          <p className="text-base md:text-lg text-gray-300 bg-gray-800/50 p-4 rounded-lg">
                             {currentStep.phrase.portuguese}
                           </p>
-                        </div>
+                        )}
                       </div>
 
-                      {/* Action Button */}
-                      <div className="text-center">
-                        {!currentStep.isCompleted && (
+                      {/* Action Buttons */}
+                      <div className="flex gap-4 justify-center">
+                        {!currentStep.isCompleted && !showNextButton && (
                           <button
                             onClick={() => handleStepComplete(currentStep.id, true)}
                             className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 px-6 py-3 rounded-full text-white font-semibold transition-all duration-300 transform hover:scale-105"
                           >
                             Marcar como Aprendida
+                          </button>
+                        )}
+                        
+                        {showNextButton && (
+                          <button
+                            onClick={handleNext}
+                            className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 px-6 py-3 rounded-full text-white font-semibold transition-all duration-300 transform hover:scale-105"
+                          >
+                            Próximo →
                           </button>
                         )}
                       </div>
