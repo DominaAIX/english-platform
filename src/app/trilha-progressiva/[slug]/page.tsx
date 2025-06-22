@@ -61,6 +61,7 @@ function ProgressiveTrailClient({ trailData, slug }: { trailData: any, slug: str
   const [isLoading, setIsLoading] = useState(true)
   const [showTranslation, setShowTranslation] = useState(false)
   const [showNextButton, setShowNextButton] = useState(false)
+  const [exerciseResult, setExerciseResult] = useState<{ completed: boolean, correct: boolean } | null>(null)
 
   // Verificar se usuário é premium
   const isPremium = userProfile?.plan === 'premium'
@@ -115,18 +116,61 @@ function ProgressiveTrailClient({ trailData, slug }: { trailData: any, slug: str
     }
   }
 
+  const handleExerciseComplete = (isCorrect: boolean) => {
+    // Nova lógica de navegação apenas para trilha de trabalho
+    if (slug === 'trabalho') {
+      setExerciseResult({ completed: true, correct: isCorrect })
+    } else {
+      // Lógica original para outras trilhas
+      handleStepComplete(progressiveSteps[currentStepIndex]?.id || '', isCorrect)
+    }
+  }
+
+  const handleExerciseAdvance = () => {
+    if (!user || !userProgress || !exerciseResult?.correct) return
+
+    const currentStep = progressiveSteps[currentStepIndex]
+    if (!currentStep) return
+
+    // Marcar exercício como completado
+    const updatedProgress = {
+      ...userProgress,
+      completedSteps: [...userProgress.completedSteps.filter(id => id !== currentStep.id), currentStep.id],
+      currentStepIndex: Math.min(currentStepIndex + 1, progressiveSteps.length - 1),
+      progressPercentage: ((userProgress.completedSteps.length + 1) / progressiveSteps.length) * 100,
+      lastAccessedAt: new Date().toISOString()
+    }
+
+    // Atualizar steps locais
+    const updatedSteps = progressiveSteps.map((step, index) => ({
+      ...step,
+      isCompleted: step.id === currentStep.id ? true : step.isCompleted,
+      isUnlocked: index <= updatedProgress.currentStepIndex
+    }))
+
+    setUserProgress(updatedProgress)
+    setProgressiveSteps(updatedSteps)
+    saveUserTrailProgress(user.id, updatedProgress)
+
+    // Avançar para próximo passo
+    if (currentStepIndex < progressiveSteps.length - 1) {
+      setCurrentStepIndex(currentStepIndex + 1)
+      setShowTranslation(false)
+      setShowNextButton(false)
+      setExerciseResult(null)
+    }
+  }
+
+  const handleExerciseRetry = () => {
+    setExerciseResult(null)
+  }
+
   const handleStepComplete = (stepId: string, isCorrect: boolean) => {
     if (!user || !userProgress) return
 
-    // Para exercícios: só avançar se a resposta estiver correta
+    // Esta função agora é apenas para frases
     const currentStep = progressiveSteps[currentStepIndex]
-    if (currentStep?.type === 'exercise' && !isCorrect) {
-      // Resposta incorreta em exercício - não avançar, permitir tentar novamente
-      return
-    }
-
-    // Para frases ou exercícios corretos: marcar como completo e mostrar navegação
-    if (isCorrect || currentStep?.type === 'phrase') {
+    if (currentStep?.type === 'phrase') {
       const updatedProgress = {
         ...userProgress,
         completedSteps: [...userProgress.completedSteps.filter(id => id !== stepId), stepId],
@@ -156,6 +200,7 @@ function ProgressiveTrailClient({ trailData, slug }: { trailData: any, slug: str
       setCurrentStepIndex(currentStepIndex + 1)
       setShowTranslation(false)
       setShowNextButton(false)
+      setExerciseResult(null)
     }
   }
 
@@ -164,6 +209,7 @@ function ProgressiveTrailClient({ trailData, slug }: { trailData: any, slug: str
       setCurrentStepIndex(currentStepIndex - 1)
       setShowTranslation(false)
       setShowNextButton(false)
+      setExerciseResult(null)
     }
   }
 
@@ -428,29 +474,60 @@ function ProgressiveTrailClient({ trailData, slug }: { trailData: any, slug: str
                             words: currentStep.exercise.data.words,
                             translation: currentStep.exercise.data.translation
                           }}
-                          onComplete={(isCorrect) => handleStepComplete(currentStep.id, isCorrect)}
+                          onComplete={handleExerciseComplete}
                         />
                       )}
                       
                       {currentStep.exercise.type === 'complete-sentence' && (
                         <CompleteSentenceExercise
                           exerciseData={currentStep.exercise.data}
-                          onComplete={(isCorrect) => handleStepComplete(currentStep.id, isCorrect)}
+                          onComplete={handleExerciseComplete}
                         />
                       )}
                       
                       {currentStep.exercise.type === 'translation' && (
                         <TranslationExercise
                           exerciseData={currentStep.exercise.data}
-                          onComplete={(isCorrect) => handleStepComplete(currentStep.id, isCorrect)}
+                          onComplete={handleExerciseComplete}
                         />
                       )}
                       
                       {currentStep.exercise.type === 'multiple-choice' && (
                         <MultipleChoiceExercise
                           exerciseData={currentStep.exercise.data}
-                          onComplete={(isCorrect) => handleStepComplete(currentStep.id, isCorrect)}
+                          onComplete={handleExerciseComplete}
                         />
+                      )}
+
+                      {/* Botões de navegação para exercícios - apenas trilha trabalho */}
+                      {slug === 'trabalho' && exerciseResult?.completed && (
+                        <div className="flex gap-4 justify-center mt-6">
+                          {exerciseResult.correct ? (
+                            <>
+                              {currentStepIndex > 0 && (
+                                <button
+                                  onClick={handlePrevious}
+                                  className="bg-gray-700 hover:bg-gray-600 px-6 py-3 rounded-full text-white font-semibold transition-all duration-300"
+                                >
+                                  ← Voltar
+                                </button>
+                              )}
+                              <button
+                                onClick={handleExerciseAdvance}
+                                className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 px-6 py-3 rounded-full text-white font-semibold transition-all duration-300 transform hover:scale-105"
+                              >
+                                Próximo →
+                              </button>
+                            </>
+                          ) : (
+                            <button
+                              onClick={handleExerciseRetry}
+                              className="bg-orange-600 hover:bg-orange-700 px-6 py-3 rounded-full text-white font-semibold transition-colors"
+                            >
+                              Tentar Novamente
+                            </button>
+                          )}
+                        </div>
                       )}
                     </div>
                   )}
