@@ -90,83 +90,608 @@ export const PROGRESSIVE_TRAILS_DATA = {
     description: 'Domine o inglês corporativo com uma progressão estruturada',
     color: 'from-blue-500 to-cyan-500',
     phrases: [
-      // Beginner Level
+      // ===== NÍVEL BÁSICO: FUNDAMENTOS DO INGLÊS CORPORATIVO (60 frases) =====
+      
+      // Módulo 1: Saudações e Apresentações (15 frases)
       {
         id: 'work_phrase_1',
         english: 'Good morning everyone',
         portuguese: 'Bom dia pessoal',
         difficulty: 'beginner' as const,
         requiredLevel: 'beginner' as const,
-        context: 'Saudação matinal',
+        context: 'Saudações matinais',
         order: 1
       },
       {
-        id: 'work_phrase_2', 
+        id: 'work_phrase_2',
+        english: 'Good afternoon team',
+        portuguese: 'Boa tarde equipe',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Saudações da tarde',
+        order: 2
+      },
+      {
+        id: 'work_phrase_3',
+        english: 'Have a great day',
+        portuguese: 'Tenha um ótimo dia',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Despedidas',
+        order: 3
+      },
+      {
+        id: 'work_phrase_4',
+        english: 'Nice to meet you',
+        portuguese: 'Prazer em conhecê-lo',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Apresentações',
+        order: 4
+      },
+      {
+        id: 'work_phrase_5',
+        english: 'My name is...',
+        portuguese: 'Meu nome é...',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Apresentação pessoal',
+        order: 5
+      },
+      {
+        id: 'work_phrase_6',
+        english: 'I work in the sales department',
+        portuguese: 'Trabalho no departamento de vendas',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Apresentação profissional',
+        order: 6
+      },
+      {
+        id: 'work_phrase_7',
         english: 'How are you today?',
         portuguese: 'Como você está hoje?',
         difficulty: 'beginner' as const,
         requiredLevel: 'beginner' as const,
         context: 'Conversa informal',
-        order: 2
+        order: 7
       },
       {
-        id: 'work_phrase_3',
+        id: 'work_phrase_8',
+        english: 'I am fine, thank you',
+        portuguese: 'Estou bem, obrigado',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Resposta educada',
+        order: 8
+      },
+      {
+        id: 'work_phrase_9',
+        english: 'Welcome to our company',
+        portuguese: 'Bem-vindo à nossa empresa',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Recepção de visitantes',
+        order: 9
+      },
+      {
+        id: 'work_phrase_10',
+        english: 'See you tomorrow',
+        portuguese: 'Vejo você amanhã',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Despedida do trabalho',
+        order: 10
+      },
+      {
+        id: 'work_phrase_11',
+        english: 'Have a good weekend',
+        portuguese: 'Tenha um bom fim de semana',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Despedida da semana',
+        order: 11
+      },
+      {
+        id: 'work_phrase_12',
+        english: 'What is your job title?',
+        portuguese: 'Qual é o seu cargo?',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Pergunta sobre função',
+        order: 12
+      },
+      {
+        id: 'work_phrase_13',
+        english: 'I am a project manager',
+        portuguese: 'Sou gerente de projetos',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Resposta sobre cargo',
+        order: 13
+      },
+      {
+        id: 'work_phrase_14',
+        english: 'Which department do you work in?',
+        portuguese: 'Em que departamento você trabalha?',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Pergunta sobre setor',
+        order: 14
+      },
+      {
+        id: 'work_phrase_15',
+        english: 'I work in human resources',
+        portuguese: 'Trabalho em recursos humanos',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Resposta sobre departamento',
+        order: 15
+      },
+
+      // Módulo 2: Solicitações e Pedidos Básicos (15 frases)
+      {
+        id: 'work_phrase_16',
         english: 'I need help with this task',
         portuguese: 'Preciso de ajuda com esta tarefa',
         difficulty: 'beginner' as const,
         requiredLevel: 'beginner' as const,
         context: 'Solicitação de ajuda',
-        order: 3
+        order: 16
       },
-      
-      // Intermediate Level
       {
-        id: 'work_phrase_4',
+        id: 'work_phrase_17',
+        english: 'Can you help me please?',
+        portuguese: 'Você pode me ajudar, por favor?',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Pedido educado',
+        order: 17
+      },
+      {
+        id: 'work_phrase_18',
+        english: 'Where is the bathroom?',
+        portuguese: 'Onde fica o banheiro?',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Orientação no escritório',
+        order: 18
+      },
+      {
+        id: 'work_phrase_19',
+        english: 'What time is it?',
+        portuguese: 'Que horas são?',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Pergunta sobre horário',
+        order: 19
+      },
+      {
+        id: 'work_phrase_20',
+        english: 'Can you repeat that please?',
+        portuguese: 'Você pode repetir isso, por favor?',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Clarificação',
+        order: 20
+      },
+      {
+        id: 'work_phrase_21',
+        english: 'I do not understand',
+        portuguese: 'Eu não entendo',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Expressão de dúvida',
+        order: 21
+      },
+      {
+        id: 'work_phrase_22',
+        english: 'Please speak slowly',
+        portuguese: 'Por favor, fale devagar',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Pedido de clareza',
+        order: 22
+      },
+      {
+        id: 'work_phrase_23',
+        english: 'Where is my desk?',
+        portuguese: 'Onde fica minha mesa?',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Localização no escritório',
+        order: 23
+      },
+      {
+        id: 'work_phrase_24',
+        english: 'I need a pen',
+        portuguese: 'Preciso de uma caneta',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Material de escritório',
+        order: 24
+      },
+      {
+        id: 'work_phrase_25',
+        english: 'Do you have paper?',
+        portuguese: 'Você tem papel?',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Pedido de material',
+        order: 25
+      },
+      {
+        id: 'work_phrase_26',
+        english: 'The printer is not working',
+        portuguese: 'A impressora não está funcionando',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Problema técnico básico',
+        order: 26
+      },
+      {
+        id: 'work_phrase_27',
+        english: 'I need to make a copy',
+        portuguese: 'Preciso fazer uma cópia',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Uso de equipamentos',
+        order: 27
+      },
+      {
+        id: 'work_phrase_28',
+        english: 'Where is the coffee machine?',
+        portuguese: 'Onde fica a máquina de café?',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Área comum',
+        order: 28
+      },
+      {
+        id: 'work_phrase_29',
+        english: 'I want some coffee',
+        portuguese: 'Quero um pouco de café',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Pausa para café',
+        order: 29
+      },
+      {
+        id: 'work_phrase_30',
+        english: 'Thank you very much',
+        portuguese: 'Muito obrigado',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Agradecimento',
+        order: 30
+      },
+
+      // Módulo 3: Comunicação por Telefone e Email Básicos (15 frases)
+      {
+        id: 'work_phrase_31',
+        english: 'Hello, this is John speaking',
+        portuguese: 'Olá, aqui é o John falando',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Atendimento telefônico',
+        order: 31
+      },
+      {
+        id: 'work_phrase_32',
+        english: 'How can I help you?',
+        portuguese: 'Como posso ajudá-lo?',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Oferta de ajuda',
+        order: 32
+      },
+      {
+        id: 'work_phrase_33',
+        english: 'Please hold the line',
+        portuguese: 'Por favor, aguarde na linha',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Telefone - espera',
+        order: 33
+      },
+      {
+        id: 'work_phrase_34',
+        english: 'I will call you back',
+        portuguese: 'Eu ligarei de volta',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Promessa de retorno',
+        order: 34
+      },
+      {
+        id: 'work_phrase_35',
+        english: 'Send me an email',
+        portuguese: 'Me envie um email',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Comunicação por email',
+        order: 35
+      },
+      {
+        id: 'work_phrase_36',
+        english: 'I received your message',
+        portuguese: 'Recebi sua mensagem',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Confirmação de recebimento',
+        order: 36
+      },
+      {
+        id: 'work_phrase_37',
+        english: 'What is your email address?',
+        portuguese: 'Qual é seu endereço de email?',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Solicitação de contato',
+        order: 37
+      },
+      {
+        id: 'work_phrase_38',
+        english: 'My email is john@company.com',
+        portuguese: 'Meu email é john@empresa.com',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Fornecimento de email',
+        order: 38
+      },
+      {
+        id: 'work_phrase_39',
+        english: 'Please check your email',
+        portuguese: 'Por favor, verifique seu email',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Solicitação de verificação',
+        order: 39
+      },
+      {
+        id: 'work_phrase_40',
+        english: 'I sent you the document',
+        portuguese: 'Enviei o documento para você',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Envio de arquivo',
+        order: 40
+      },
+      {
+        id: 'work_phrase_41',
+        english: 'Did you get my email?',
+        portuguese: 'Você recebeu meu email?',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Confirmação de envio',
+        order: 41
+      },
+      {
+        id: 'work_phrase_42',
+        english: 'I will send it today',
+        portuguese: 'Enviarei hoje',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Compromisso de envio',
+        order: 42
+      },
+      {
+        id: 'work_phrase_43',
+        english: 'The line is busy',
+        portuguese: 'A linha está ocupada',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Problema telefônico',
+        order: 43
+      },
+      {
+        id: 'work_phrase_44',
+        english: 'Sorry, wrong number',
+        portuguese: 'Desculpe, número errado',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Engano telefônico',
+        order: 44
+      },
+      {
+        id: 'work_phrase_45',
+        english: 'Who is calling please?',
+        portuguese: 'Quem está ligando, por favor?',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Identificação do chamador',
+        order: 45
+      },
+
+      // Módulo 4: Horários e Agenda Básica (15 frases)
+      {
+        id: 'work_phrase_46',
+        english: 'What time do you start work?',
+        portuguese: 'Que horas você começa a trabalhar?',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Horário de trabalho',
+        order: 46
+      },
+      {
+        id: 'work_phrase_47',
+        english: 'I start at 9 AM',
+        portuguese: 'Começo às 9 da manhã',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Horário pessoal',
+        order: 47
+      },
+      {
+        id: 'work_phrase_48',
+        english: 'What time is lunch?',
+        portuguese: 'Que horas é o almoço?',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Pausa para almoço',
+        order: 48
+      },
+      {
+        id: 'work_phrase_49',
+        english: 'Lunch is at 12 PM',
+        portuguese: 'Almoço é ao meio-dia',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Horário de refeição',
+        order: 49
+      },
+      {
+        id: 'work_phrase_50',
+        english: 'I have a meeting at 2 PM',
+        portuguese: 'Tenho uma reunião às 2 da tarde',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Compromisso agendado',
+        order: 50
+      },
+      {
+        id: 'work_phrase_51',
+        english: 'Are you free tomorrow?',
+        portuguese: 'Você está livre amanhã?',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Disponibilidade futura',
+        order: 51
+      },
+      {
+        id: 'work_phrase_52',
+        english: 'I am busy this morning',
+        portuguese: 'Estou ocupado esta manhã',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Indisponibilidade',
+        order: 52
+      },
+      {
+        id: 'work_phrase_53',
+        english: 'When is the deadline?',
+        portuguese: 'Quando é o prazo?',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Prazo de entrega',
+        order: 53
+      },
+      {
+        id: 'work_phrase_54',
+        english: 'The deadline is Friday',
+        portuguese: 'O prazo é sexta-feira',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Data limite',
+        order: 54
+      },
+      {
+        id: 'work_phrase_55',
+        english: 'I am late for work',
+        portuguese: 'Estou atrasado para o trabalho',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Atraso profissional',
+        order: 55
+      },
+      {
+        id: 'work_phrase_56',
+        english: 'I need to leave early today',
+        portuguese: 'Preciso sair mais cedo hoje',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Saída antecipada',
+        order: 56
+      },
+      {
+        id: 'work_phrase_57',
+        english: 'What day is today?',
+        portuguese: 'Que dia é hoje?',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Data atual',
+        order: 57
+      },
+      {
+        id: 'work_phrase_58',
+        english: 'Today is Monday',
+        portuguese: 'Hoje é segunda-feira',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Dia da semana',
+        order: 58
+      },
+      {
+        id: 'work_phrase_59',
+        english: 'I will be back in 10 minutes',
+        portuguese: 'Voltarei em 10 minutos',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Tempo de ausência',
+        order: 59
+      },
+      {
+        id: 'work_phrase_60',
+        english: 'I work from Monday to Friday',
+        portuguese: 'Trabalho de segunda a sexta',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Rotina semanal',
+        order: 60
+      },
+
+      // ===== NÍVEL INTERMEDIÁRIO: COMUNICAÇÃO PROFISSIONAL (40 frases) =====
+      
+      // Módulo 5: Reuniões e Agendamentos (20 frases)
+      {
+        id: 'work_phrase_61',
         english: 'Could you schedule a meeting for tomorrow?',
         portuguese: 'Você poderia agendar uma reunião para amanhã?',
         difficulty: 'intermediate' as const,
         requiredLevel: 'intermediate' as const,
         context: 'Agendamento de reunião',
-        order: 4
+        order: 61
       },
       {
-        id: 'work_phrase_5',
-        english: 'I need to review the quarterly report',
-        portuguese: 'Preciso revisar o relatório trimestral',
+        id: 'work_phrase_62',
+        english: 'I would like to reschedule our appointment',
+        portuguese: 'Gostaria de reagendar nosso compromisso',
         difficulty: 'intermediate' as const,
         requiredLevel: 'intermediate' as const,
-        context: 'Revisão de relatório',
-        order: 5
+        context: 'Reagendamento',
+        order: 62
       },
       {
-        id: 'work_phrase_6',
-        english: 'The project deadline has been moved up',
-        portuguese: 'O prazo do projeto foi antecipado',
+        id: 'work_phrase_63',
+        english: 'The meeting has been postponed until next week',
+        portuguese: 'A reunião foi adiada para a próxima semana',
         difficulty: 'intermediate' as const,
         requiredLevel: 'intermediate' as const,
-        context: 'Alteração de prazo',
-        order: 6
-      },
-      
-      // Advanced Level  
-      {
-        id: 'work_phrase_7',
-        english: 'We need to streamline our operational processes',
-        portuguese: 'Precisamos otimizar nossos processos operacionais',
-        difficulty: 'advanced' as const,
-        requiredLevel: 'advanced' as const,
-        context: 'Otimização de processos',
-        order: 7
+        context: 'Alteração de agenda',
+        order: 63
       },
       {
-        id: 'work_phrase_8',
-        english: 'Let\'s leverage synergies across departments',
-        portuguese: 'Vamos aproveitar as sinergias entre departamentos',
-        difficulty: 'advanced' as const,
-        requiredLevel: 'advanced' as const,
-        context: 'Colaboração entre departamentos',
-        order: 8
+        id: 'work_phrase_64',
+        english: 'We need to discuss the project timeline',
+        portuguese: 'Precisamos discutir o cronograma do projeto',
+        difficulty: 'intermediate' as const,
+        requiredLevel: 'intermediate' as const,
+        context: 'Discussão de projeto',
+        order: 64
+      },
+      {
+        id: 'work_phrase_65',
+        english: 'Let me check my calendar and get back to you',
+        portuguese: 'Deixe-me verificar minha agenda e retorno para você',
+        difficulty: 'intermediate' as const,
+        requiredLevel: 'intermediate' as const,
+        context: 'Verificação de disponibilidade',
+        order: 65
       }
+      
+      // ===== MAIS FRASES INTERMEDIÁRIAS E AVANÇADAS SERÃO ADICIONADAS =====
+      // Total atual: 65 frases (60 básicas + 5 intermediárias)
+      // Meta: 150+ frases para um curso completo
     ],
     exercises: [
       // Exercício após frase 2 (beginner)
