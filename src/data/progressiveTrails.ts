@@ -1,10 +1,108 @@
+// ===== NOVA ESTRUTURA PEDAGÓGICA PROFISSIONAL =====
+
+export interface CourseLesson {
+  id: string
+  title: string
+  type: 'vocabulary' | 'grammar' | 'speaking' | 'listening' | 'project'
+  objective: string
+  topics: string[]
+  content: {
+    phrases?: ProgressivePhrase[]
+    grammarPoints?: GrammarPoint[]
+    exercises?: LessonExercise[]
+    listeningAudios?: AudioContent[]
+    speakingPrompts?: SpeakingPrompt[]
+  }
+  estimatedTime: number // em minutos
+  order: number
+  isCompleted: boolean
+  isUnlocked: boolean
+}
+
+export interface CourseModule {
+  id: string
+  title: string
+  description: string
+  objective: string
+  difficulty: 'beginner' | 'intermediate' | 'advanced'
+  lessons: CourseLesson[]
+  finalAssessment?: Assessment
+  order: number
+  isCompleted: boolean
+  isUnlocked: boolean
+}
+
+export interface GrammarPoint {
+  id: string
+  title: string
+  explanation: string
+  examples: { english: string, portuguese: string }[]
+  exercises: GrammarExercise[]
+}
+
+export interface LessonExercise {
+  id: string
+  type: 'roleplay' | 'matching' | 'fill-blanks' | 'mini-interview' | 'listening' | 'writing'
+  title: string
+  instructions: string
+  content: any
+  points: number
+}
+
+export interface SpeakingPrompt {
+  id: string
+  situation: string
+  prompt: string
+  keyPhrases: string[]
+  expectedResponse: string
+}
+
+export interface AudioContent {
+  id: string
+  title: string
+  audioUrl: string
+  transcript: string
+  questions: Question[]
+}
+
+export interface Assessment {
+  id: string
+  title: string
+  type: 'quiz' | 'project' | 'speaking-test'
+  questions: Question[]
+  passingScore: number
+}
+
+export interface Question {
+  id: string
+  type: 'multiple-choice' | 'fill-blank' | 'true-false' | 'speaking'
+  question: string
+  options?: string[]
+  correctAnswer: string | number
+  explanation?: string
+}
+
+export interface GrammarExercise {
+  id: string
+  type: 'fill-blank' | 'transform' | 'correct-error'
+  instruction: string
+  sentences: { 
+    text: string
+    blank?: string
+    correct: string
+    portuguese: string
+  }[]
+}
+
+// ===== INTERFACES LEGADAS (manter compatibilidade) =====
+
 export interface ProgressivePhrase {
   id: string
   english: string
   portuguese: string
   difficulty: 'beginner' | 'intermediate' | 'advanced'
   requiredLevel: 'beginner' | 'intermediate' | 'advanced'
-  context: string // Tema/categoria da frase (ex: "Solicitação de entrega", "Agenda", etc)
+  context: string
   order: number
 }
 
@@ -12,16 +110,18 @@ export interface ProgressiveExercise {
   id: string
   type: 'drag-drop' | 'complete-sentence' | 'translation' | 'multiple-choice'
   phrase: ProgressivePhrase
-  data: any // Dados específicos do exercício
-  requiredToProgress: boolean // Se é obrigatório para avançar
+  data: any
+  requiredToProgress: boolean
   order: number
 }
 
 export interface ProgressiveStep {
   id: string
-  type: 'phrase' | 'exercise'
+  type: 'phrase' | 'exercise' | 'lesson' | 'module'
   phrase?: ProgressivePhrase
   exercise?: ProgressiveExercise
+  lesson?: CourseLesson
+  module?: CourseModule
   isCompleted: boolean
   isUnlocked: boolean
   order: number
@@ -33,7 +133,8 @@ export interface ProgressiveTrail {
   icon: string
   description: string
   color: string
-  steps: ProgressiveStep[]
+  courseModules?: CourseModule[]  // Nova estrutura pedagógica
+  steps: ProgressiveStep[]        // Estrutura legada
   userProgress: UserTrailProgress
 }
 
@@ -87,8 +188,318 @@ export const PROGRESSIVE_TRAILS_DATA = {
     id: 'trabalho',
     title: 'Inglês para Trabalho',
     icon: '💼',
-    description: 'Domine o inglês corporativo com uma progressão estruturada',
+    description: 'Curso Profissional de Inglês Corporativo - Estrutura Pedagógica Completa',
     color: 'from-blue-500 to-cyan-500',
+    courseModules: [
+      // ===== MÓDULO 1: COMEÇANDO COM CONFIANÇA =====
+      {
+        id: 'module_1_confidence',
+        title: 'Começando com Confiança',
+        description: 'Inglês no ambiente profissional',
+        objective: 'Se apresentar, falar do seu trabalho, e entender instruções básicas',
+        difficulty: 'beginner' as const,
+        order: 1,
+        isCompleted: false,
+        isUnlocked: true,
+        lessons: [
+          // AULA 1: Vocabulário + Frases úteis
+          {
+            id: 'lesson_1_1_vocabulary',
+            title: 'Saudações e Apresentações Profissionais',
+            type: 'vocabulary' as const,
+            objective: 'Aprender cumprimentos e apresentações básicas do ambiente corporativo',
+            topics: ['Greetings: Hello, Good morning', 'Introductions: My name is, I work in', 'Basic courtesy expressions'],
+            estimatedTime: 25,
+            order: 1,
+            isCompleted: false,
+            isUnlocked: true,
+            content: {
+              phrases: [
+                {
+                  id: 'phrase_1_1_1',
+                  english: 'Good morning, everyone',
+                  portuguese: 'Bom dia, pessoal',
+                  difficulty: 'beginner' as const,
+                  requiredLevel: 'beginner' as const,
+                  context: 'Saudação matinal',
+                  order: 1
+                },
+                {
+                  id: 'phrase_1_1_2', 
+                  english: 'Nice to meet you',
+                  portuguese: 'Prazer em conhecê-lo',
+                  difficulty: 'beginner' as const,
+                  requiredLevel: 'beginner' as const,
+                  context: 'Apresentação',
+                  order: 2
+                },
+                {
+                  id: 'phrase_1_1_3',
+                  english: 'My name is John Smith',
+                  portuguese: 'Meu nome é John Smith',
+                  difficulty: 'beginner' as const,
+                  requiredLevel: 'beginner' as const,
+                  context: 'Apresentação pessoal',
+                  order: 3
+                },
+                {
+                  id: 'phrase_1_1_4',
+                  english: 'I work in the marketing department',
+                  portuguese: 'Trabalho no departamento de marketing',
+                  difficulty: 'beginner' as const,
+                  requiredLevel: 'beginner' as const,
+                  context: 'Apresentação profissional',
+                  order: 4
+                },
+                {
+                  id: 'phrase_1_1_5',
+                  english: 'What is your job title?',
+                  portuguese: 'Qual é o seu cargo?',
+                  difficulty: 'beginner' as const,
+                  requiredLevel: 'beginner' as const,
+                  context: 'Pergunta profissional',
+                  order: 5
+                }
+              ],
+              exercises: [
+                {
+                  id: 'exercise_1_1_1',
+                  type: 'matching' as const,
+                  title: 'Conectar Saudações',
+                  instructions: 'Conecte as saudações em inglês com suas traduções em português',
+                  content: {
+                    pairs: [
+                      { english: 'Good morning', portuguese: 'Bom dia' },
+                      { english: 'Nice to meet you', portuguese: 'Prazer em conhecê-lo' },
+                      { english: 'How are you?', portuguese: 'Como você está?' }
+                    ]
+                  },
+                  points: 10
+                }
+              ]
+            }
+          },
+          
+          // AULA 2: Gramática com exemplos reais
+          {
+            id: 'lesson_1_2_grammar',
+            title: 'Verb TO BE + Estrutura Básica de Frases',
+            type: 'grammar' as const,
+            objective: 'Dominar o verbo TO BE em contextos profissionais',
+            topics: ['Verb to be (I am, you are, he/she is)', 'Articles (a/an/the)', 'Basic sentence structure'],
+            estimatedTime: 30,
+            order: 2,
+            isCompleted: false,
+            isUnlocked: false,
+            content: {
+              grammarPoints: [
+                {
+                  id: 'grammar_1_2_1',
+                  title: 'Verb TO BE - Present Simple',
+                  explanation: 'O verbo TO BE é fundamental para apresentações profissionais. Usamos para falar sobre profissão, departamento e localização.',
+                  examples: [
+                    { english: 'I am a manager', portuguese: 'Eu sou um gerente' },
+                    { english: 'She is in the IT department', portuguese: 'Ela está no departamento de TI' },
+                    { english: 'We are from Brazil', portuguese: 'Nós somos do Brasil' }
+                  ],
+                  exercises: [
+                    {
+                      id: 'grammar_ex_1_2_1',
+                      type: 'fill-blank' as const,
+                      instruction: 'Complete as frases com a forma correta do verbo TO BE',
+                      sentences: [
+                        {
+                          text: 'I ___ a project manager',
+                          blank: 'am',
+                          correct: 'am',
+                          portuguese: 'Eu sou um gerente de projetos'
+                        },
+                        {
+                          text: 'She ___ in the sales team',
+                          blank: 'is',
+                          correct: 'is', 
+                          portuguese: 'Ela está na equipe de vendas'
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+
+          // AULA 3: Prática oral (simulação, roleplay)
+          {
+            id: 'lesson_1_3_speaking',
+            title: 'Simulação: Primeiro Dia de Trabalho',
+            type: 'speaking' as const,
+            objective: 'Praticar apresentações em situações reais de trabalho',
+            topics: ['Roleplay: meeting new colleagues', 'Self-introduction practice', 'Job-related conversations'],
+            estimatedTime: 25,
+            order: 3,
+            isCompleted: false,
+            isUnlocked: false,
+            content: {
+              speakingPrompts: [
+                {
+                  id: 'speaking_1_3_1',
+                  situation: 'Primeiro dia de trabalho - conhecendo colegas',
+                  prompt: 'Você é novo na empresa. Apresente-se para um colega de trabalho.',
+                  keyPhrases: ['My name is...', 'I work in...', 'Nice to meet you', 'I am new here'],
+                  expectedResponse: 'Apresentação pessoal com nome, departamento e cortesia'
+                },
+                {
+                  id: 'speaking_1_3_2',
+                  situation: 'Reunião de equipe - apresentação rápida',
+                  prompt: 'Em uma reunião, apresente-se brevemente para a equipe.',
+                  keyPhrases: ['Good morning everyone', 'My name is...', 'I am responsible for...'],
+                  expectedResponse: 'Apresentação profissional concisa'
+                }
+              ],
+              exercises: [
+                {
+                  id: 'exercise_1_3_1',
+                  type: 'roleplay' as const,
+                  title: 'Diálogo: Conhecendo Novo Colega',
+                  instructions: 'Pratique este diálogo em voz alta. Grave-se se possível.',
+                  content: {
+                    dialogue: [
+                      { speaker: 'You', text: 'Good morning! My name is ___. I work in the ___ department.' },
+                      { speaker: 'Colleague', text: 'Nice to meet you! I am Sarah from HR. Welcome to the team!' },
+                      { speaker: 'You', text: 'Thank you! I am excited to work here.' }
+                    ]
+                  },
+                  points: 15
+                }
+              ]
+            }
+          },
+
+          // AULA 4: Listening + revisão
+          {
+            id: 'lesson_1_4_listening',
+            title: 'Compreensão: Apresentações no Escritório',
+            type: 'listening' as const,
+            objective: 'Desenvolver compreensão auditiva em contextos profissionais',
+            topics: ['Understanding introductions', 'Job titles and departments', 'Basic office conversations'],
+            estimatedTime: 20,
+            order: 4,
+            isCompleted: false,
+            isUnlocked: false,
+            content: {
+              listeningAudios: [
+                {
+                  id: 'audio_1_4_1',
+                  title: 'Apresentações na Reunião de Equipe',
+                  audioUrl: '/audio/module1/team-introductions.mp3',
+                  transcript: 'Good morning everyone. My name is Michael Johnson. I am the new IT Manager. I will be working with the development team on our new software project.',
+                  questions: [
+                    {
+                      id: 'q_1_4_1',
+                      type: 'multiple-choice' as const,
+                      question: 'What is Michael\'s job title?',
+                      options: ['Software Developer', 'IT Manager', 'Project Manager', 'Team Leader'],
+                      correctAnswer: 1,
+                      explanation: 'Michael says "I am the new IT Manager"'
+                    }
+                  ]
+                }
+              ],
+              exercises: [
+                {
+                  id: 'exercise_1_4_1',
+                  type: 'listening' as const,
+                  title: 'Escute e Responda',
+                  instructions: 'Ouça o áudio e responda às perguntas sobre as apresentações',
+                  content: { audioId: 'audio_1_4_1' },
+                  points: 10
+                }
+              ]
+            }
+          },
+
+          // AULA 5: Exercício final + mini projeto prático
+          {
+            id: 'lesson_1_5_project',
+            title: 'Projeto: Minha Apresentação Profissional',
+            type: 'project' as const,
+            objective: 'Consolidar aprendizado criando uma apresentação pessoal completa',
+            topics: ['Personal introduction script', 'Professional profile', 'Confidence building'],
+            estimatedTime: 35,
+            order: 5,
+            isCompleted: false,
+            isUnlocked: false,
+            content: {
+              exercises: [
+                {
+                  id: 'exercise_1_5_1',
+                  type: 'writing' as const,
+                  title: 'Crie Sua Apresentação Profissional',
+                  instructions: 'Escreva uma apresentação de 1 minuto sobre você, incluindo: nome, cargo, departamento, tempo na empresa, e o que você gosta no trabalho.',
+                  content: {
+                    template: 'Good morning! My name is ___. I am ___ (job title) in the ___ department. I have been working here for ___. I really enjoy ___ about my work.',
+                    wordLimit: 100,
+                    keyElements: ['Name', 'Job title', 'Department', 'Experience', 'What you enjoy']
+                  },
+                  points: 25
+                },
+                {
+                  id: 'exercise_1_5_2',
+                  type: 'mini-interview' as const,
+                  title: 'Mini Entrevista: Quem é Você?',
+                  instructions: 'Responda estas perguntas como se estivesse em uma apresentação real. Pratique em voz alta.',
+                  content: {
+                    questions: [
+                      'What is your name?',
+                      'Where do you work?',
+                      'What is your job title?',
+                      'Which department are you in?',
+                      'How long have you been working there?'
+                    ]
+                  },
+                  points: 20
+                }
+              ]
+            }
+          }
+        ],
+        finalAssessment: {
+          id: 'assessment_module_1',
+          title: 'Avaliação do Módulo 1',
+          type: 'quiz' as const,
+          passingScore: 80,
+          questions: [
+            {
+              id: 'q_final_1_1',
+              type: 'multiple-choice' as const,
+              question: 'How do you introduce yourself in a professional setting?',
+              options: [
+                'Hi, I am John',
+                'Good morning, my name is John Smith. I work in Marketing',
+                'Hello, John here',
+                'My name John, marketing'
+              ],
+              correctAnswer: 1,
+              explanation: 'Professional introductions should include proper greeting, full name, and department/role'
+            },
+            {
+              id: 'q_final_1_2',
+              type: 'fill-blank' as const,
+              question: 'Complete: "I ___ a project manager in the IT department"',
+              correctAnswer: 'am',
+              explanation: 'Use "am" with "I" for the verb to be'
+            }
+          ]
+        }
+      }
+      
+      // ===== MÓDULOS 2-6 SERÃO IMPLEMENTADOS APÓS VALIDAÇÃO DO MÓDULO 1 =====
+      // Módulo 2: Rotina de Trabalho e Tarefas
+      // Módulo 3: Comunicação no Escritório  
+      // Módulo 4: Reuniões Básicas e Participação
+      // Módulo 5: Vocabulário Essencial por Área
+      // Módulo 6: Preparando para o Intermediário 1
+    ],
     phrases: [
       // ===== NÍVEL BÁSICO: FUNDAMENTOS DO INGLÊS CORPORATIVO (60 frases) =====
       
