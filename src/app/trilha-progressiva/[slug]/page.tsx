@@ -286,53 +286,10 @@ function ProgressiveTrailClient({ trailData, slug }: { trailData: any, slug: str
           </div>
         </PageTransition>
 
-        <div className="flex flex-col lg:flex-row gap-6 lg:gap-8">
-          {/* Sidebar com lista de passos */}
+        {/* Layout para trilha de trabalho - sem sidebar */}
+        {slug === 'trabalho' ? (
           <PageTransition delay={400}>
-            <div className="w-full lg:w-80 lg:flex-shrink-0 order-2 lg:order-1">
-              <div className="bg-gray-900/50 border border-gray-700 rounded-xl p-4 sticky top-4">
-                <h3 className="text-white font-semibold mb-4">📋 Passos da Trilha</h3>
-                <div className="space-y-2 max-h-96 overflow-y-auto">
-                  {progressiveSteps.map((step, index) => (
-                    <button
-                      key={step.id}
-                      onClick={() => handleStepNavigation(index)}
-                      disabled={!step.isUnlocked}
-                      className={`w-full p-3 rounded-lg text-left text-sm transition-all duration-200 ${
-                        index === currentStepIndex
-                          ? 'bg-purple-600/30 border border-purple-400/50 text-white'
-                          : step.isCompleted
-                          ? 'bg-green-600/20 border border-green-500/30 text-green-400'
-                          : step.isUnlocked
-                          ? 'bg-gray-800/50 border border-gray-600 text-gray-300 hover:bg-gray-700/50'
-                          : 'bg-gray-800/30 border border-gray-700 text-gray-500 cursor-not-allowed opacity-50'
-                      }`}
-                    >
-                      <div className="flex items-center gap-2">
-                        <span className="text-lg">
-                          {step.isCompleted ? '✅' : step.isUnlocked ? (step.type === 'phrase' ? '💬' : '🧩') : '🔒'}
-                        </span>
-                        <div>
-                          <div className="font-medium">
-                            {step.type === 'phrase' ? 'Frase' : 'Exercício'} {index + 1}
-                          </div>
-                          {step.phrase && (
-                            <div className="text-xs opacity-80 line-clamp-1">
-                              {step.phrase.english}
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                    </button>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </PageTransition>
-
-          {/* Conteúdo principal */}
-          <PageTransition delay={600}>
-            <div className="flex-1 order-1 lg:order-2">
+            <div className="max-w-4xl mx-auto">
               {currentStep ? (
                 <div>
                   {/* Informação do passo atual */}
@@ -490,7 +447,214 @@ function ProgressiveTrailClient({ trailData, slug }: { trailData: any, slug: str
               )}
             </div>
           </PageTransition>
-        </div>
+        ) : (
+          /* Layout original com sidebar para outras trilhas */
+          <div className="flex flex-col lg:flex-row gap-6 lg:gap-8">
+            {/* Sidebar com lista de passos */}
+            <PageTransition delay={400}>
+              <div className="w-full lg:w-80 lg:flex-shrink-0 order-2 lg:order-1">
+                <div className="bg-gray-900/50 border border-gray-700 rounded-xl p-4 sticky top-4">
+                  <h3 className="text-white font-semibold mb-4">📋 Passos da Trilha</h3>
+                  <div className="space-y-2 max-h-96 overflow-y-auto">
+                    {progressiveSteps.map((step, index) => (
+                      <button
+                        key={step.id}
+                        onClick={() => handleStepNavigation(index)}
+                        disabled={!step.isUnlocked}
+                        className={`w-full p-3 rounded-lg text-left text-sm transition-all duration-200 ${
+                          index === currentStepIndex
+                            ? 'bg-purple-600/30 border border-purple-400/50 text-white'
+                            : step.isCompleted
+                            ? 'bg-green-600/20 border border-green-500/30 text-green-400'
+                            : step.isUnlocked
+                            ? 'bg-gray-800/50 border border-gray-600 text-gray-300 hover:bg-gray-700/50'
+                            : 'bg-gray-800/30 border border-gray-700 text-gray-500 cursor-not-allowed opacity-50'
+                        }`}
+                      >
+                        <div className="flex items-center gap-2">
+                          <span className="text-lg">
+                            {step.isCompleted ? '✅' : step.isUnlocked ? (step.type === 'phrase' ? '💬' : '🧩') : '🔒'}
+                          </span>
+                          <div>
+                            <div className="font-medium">
+                              {step.type === 'phrase' ? 'Frase' : 'Exercício'} {index + 1}
+                            </div>
+                            {step.phrase && (
+                              <div className="text-xs opacity-80 line-clamp-1">
+                                {step.phrase.english}
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </PageTransition>
+
+            {/* Conteúdo principal para outras trilhas */}
+            <PageTransition delay={600}>
+              <div className="flex-1 order-1 lg:order-2">
+                {currentStep ? (
+                  <div>
+                    {/* Informação do passo atual */}
+                    <div className="mb-6">
+                      <div className="flex items-center gap-3 mb-2">
+                        <span className="text-2xl">
+                          {currentStep.type === 'phrase' ? '💬' : '🧩'}
+                        </span>
+                        <h2 className="text-xl font-bold text-white">
+                          {currentStep.type === 'phrase' ? 'Aprender Frase' : 'Exercício'}
+                        </h2>
+                        {currentStep.isCompleted && (
+                          <span className="bg-green-500/20 text-green-400 px-3 py-1 rounded-full text-sm font-medium">
+                            ✓ Concluído
+                          </span>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Conteúdo do passo - mesmo conteúdo da trilha de trabalho */}
+                    {currentStep.type === 'phrase' && currentStep.phrase && (
+                      <div className="bg-gray-900/50 border border-gray-700 rounded-2xl p-8 mb-6">
+                        {/* Context & Level */}
+                        <div className="flex justify-between items-center mb-4">
+                          <span className="text-purple-400 text-sm font-medium flex items-center gap-2">
+                            <span className="text-purple-400">📍</span>
+                            {currentStep.phrase.context}
+                          </span>
+                          <span className={`px-3 py-1 rounded-full text-xs font-medium ${
+                            currentStep.phrase.difficulty === 'beginner' ? 'bg-green-500/20 text-green-400' :
+                            currentStep.phrase.difficulty === 'intermediate' ? 'bg-yellow-500/20 text-yellow-400' :
+                            'bg-red-500/20 text-red-400'
+                          }`}>
+                            {currentStep.phrase.difficulty === 'beginner' ? 'básico' :
+                             currentStep.phrase.difficulty === 'intermediate' ? 'médio' : 'avançado'}
+                          </span>
+                        </div>
+
+                        {/* English Phrase */}
+                        <div className="mb-6">
+                          <div className="flex items-center gap-3 mb-3">
+                            <h2 className="text-2xl font-bold text-white flex items-center gap-2">
+                              🇺🇸 English
+                            </h2>
+                            <button
+                              onClick={() => speakPhrase(currentStep.phrase.english)}
+                              className="bg-purple-600 hover:bg-purple-700 p-2 rounded-full transition-colors flex items-center justify-center"
+                              title="Ouvir pronúncia"
+                            >
+                              <SpeakerIcon size={16} className="text-white" />
+                            </button>
+                          </div>
+                          <p className="text-xl text-white leading-relaxed bg-gray-800/50 p-4 rounded-lg">
+                            {currentStep.phrase.english}
+                          </p>
+                        </div>
+
+                        {/* Translation */}
+                        <div className="mb-8">
+                          <div className="flex items-center gap-3 mb-3">
+                            <h3 className="text-xl font-semibold text-white">
+                              Português
+                            </h3>
+                            <button
+                              onClick={() => setShowTranslation(!showTranslation)}
+                              className="bg-cyan-600 hover:bg-cyan-700 px-4 py-2 rounded-full text-sm transition-colors"
+                            >
+                              {showTranslation ? 'Ocultar' : 'Mostrar'} Tradução
+                            </button>
+                          </div>
+                          {showTranslation && (
+                            <p className="text-base md:text-lg text-gray-300 bg-gray-800/50 p-4 rounded-lg">
+                              {currentStep.phrase.portuguese}
+                            </p>
+                          )}
+                        </div>
+
+                        {/* Action Buttons */}
+                        <div className="flex gap-4 justify-center">
+                          {!currentStep.isCompleted && !showNextButton && (
+                            <button
+                              onClick={() => handleStepComplete(currentStep.id, true)}
+                              className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 px-6 py-3 rounded-full text-white font-semibold transition-all duration-300 transform hover:scale-105"
+                            >
+                              Marcar como Aprendida
+                            </button>
+                          )}
+                          
+                          {showNextButton && (
+                            <button
+                              onClick={handleNext}
+                              className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 px-6 py-3 rounded-full text-white font-semibold transition-all duration-300 transform hover:scale-105"
+                            >
+                              Próximo →
+                            </button>
+                          )}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Exercícios */}
+                    {currentStep.type === 'exercise' && currentStep.exercise && (
+                      <div className="mb-6">
+                        {currentStep.exercise.type === 'drag-drop' && (
+                          <DragDropExercise
+                            exercise={{
+                              id: currentStep.exercise.id,
+                              correctSentence: currentStep.exercise.data.correctSentence,
+                              words: currentStep.exercise.data.words,
+                              translation: currentStep.exercise.data.translation
+                            }}
+                            onComplete={(isCorrect) => handleStepComplete(currentStep.id, isCorrect)}
+                          />
+                        )}
+                        
+                        {currentStep.exercise.type === 'complete-sentence' && (
+                          <CompleteSentenceExercise
+                            exerciseData={currentStep.exercise.data}
+                            onComplete={(isCorrect) => handleStepComplete(currentStep.id, isCorrect)}
+                          />
+                        )}
+                        
+                        {currentStep.exercise.type === 'translation' && (
+                          <TranslationExercise
+                            exerciseData={currentStep.exercise.data}
+                            onComplete={(isCorrect) => handleStepComplete(currentStep.id, isCorrect)}
+                          />
+                        )}
+                        
+                        {currentStep.exercise.type === 'multiple-choice' && (
+                          <MultipleChoiceExercise
+                            exerciseData={currentStep.exercise.data}
+                            onComplete={(isCorrect) => handleStepComplete(currentStep.id, isCorrect)}
+                          />
+                        )}
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  <div className="text-center py-12">
+                    <div className="text-6xl mb-4">🎉</div>
+                    <h2 className="text-2xl font-bold text-white mb-4">
+                      Parabéns! Trilha Concluída!
+                    </h2>
+                    <p className="text-gray-300 mb-6">
+                      Você completou todos os passos desta trilha progressiva.
+                    </p>
+                    <Link 
+                      href="/dashboard"
+                      className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 px-8 py-3 rounded-full text-white font-bold transition-all duration-300"
+                    >
+                      Explorar Outras Trilhas
+                    </Link>
+                  </div>
+                )}
+              </div>
+            </PageTransition>
+          </div>
+        )}
       </div>
     </AnimatedContainer>
   )
