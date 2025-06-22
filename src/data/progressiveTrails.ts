@@ -4,6 +4,7 @@ export interface ProgressivePhrase {
   portuguese: string
   difficulty: 'beginner' | 'intermediate' | 'advanced'
   requiredLevel: 'beginner' | 'intermediate' | 'advanced'
+  context: string // Tema/categoria da frase (ex: "Solicitação de entrega", "Agenda", etc)
   order: number
 }
 
@@ -90,6 +91,7 @@ export const PROGRESSIVE_TRAILS_DATA = {
         portuguese: 'Bom dia pessoal',
         difficulty: 'beginner' as const,
         requiredLevel: 'beginner' as const,
+        context: 'Saudação matinal',
         order: 1
       },
       {
@@ -98,6 +100,7 @@ export const PROGRESSIVE_TRAILS_DATA = {
         portuguese: 'Como você está hoje?',
         difficulty: 'beginner' as const,
         requiredLevel: 'beginner' as const,
+        context: 'Conversa informal',
         order: 2
       },
       {
@@ -106,6 +109,7 @@ export const PROGRESSIVE_TRAILS_DATA = {
         portuguese: 'Preciso de ajuda com esta tarefa',
         difficulty: 'beginner' as const,
         requiredLevel: 'beginner' as const,
+        context: 'Solicitação de ajuda',
         order: 3
       },
       
@@ -116,6 +120,7 @@ export const PROGRESSIVE_TRAILS_DATA = {
         portuguese: 'Você poderia agendar uma reunião para amanhã?',
         difficulty: 'intermediate' as const,
         requiredLevel: 'intermediate' as const,
+        context: 'Agendamento de reunião',
         order: 4
       },
       {
@@ -124,6 +129,7 @@ export const PROGRESSIVE_TRAILS_DATA = {
         portuguese: 'Preciso revisar o relatório trimestral',
         difficulty: 'intermediate' as const,
         requiredLevel: 'intermediate' as const,
+        context: 'Revisão de relatório',
         order: 5
       },
       {
@@ -132,6 +138,7 @@ export const PROGRESSIVE_TRAILS_DATA = {
         portuguese: 'O prazo do projeto foi antecipado',
         difficulty: 'intermediate' as const,
         requiredLevel: 'intermediate' as const,
+        context: 'Alteração de prazo',
         order: 6
       },
       
@@ -142,6 +149,7 @@ export const PROGRESSIVE_TRAILS_DATA = {
         portuguese: 'Precisamos otimizar nossos processos operacionais',
         difficulty: 'advanced' as const,
         requiredLevel: 'advanced' as const,
+        context: 'Otimização de processos',
         order: 7
       },
       {
@@ -150,6 +158,7 @@ export const PROGRESSIVE_TRAILS_DATA = {
         portuguese: 'Vamos aproveitar as sinergias entre departamentos',
         difficulty: 'advanced' as const,
         requiredLevel: 'advanced' as const,
+        context: 'Colaboração entre departamentos',
         order: 8
       }
     ],
@@ -214,6 +223,7 @@ export const PROGRESSIVE_TRAILS_DATA = {
         portuguese: 'Onde fica o aeroporto?',
         difficulty: 'beginner' as const,
         requiredLevel: 'beginner' as const,
+        context: 'Localização do aeroporto',
         order: 1
       },
       {
@@ -222,6 +232,7 @@ export const PROGRESSIVE_TRAILS_DATA = {
         portuguese: 'Eu tenho uma reserva',
         difficulty: 'beginner' as const,
         requiredLevel: 'beginner' as const,
+        context: 'Check-in no hotel',
         order: 2
       },
       {
@@ -230,6 +241,7 @@ export const PROGRESSIVE_TRAILS_DATA = {
         portuguese: 'Quanto custa isso?',
         difficulty: 'beginner' as const,
         requiredLevel: 'beginner' as const,
+        context: 'Pergunta sobre preço',
         order: 3
       },
       
@@ -240,6 +252,7 @@ export const PROGRESSIVE_TRAILS_DATA = {
         portuguese: 'Você poderia recomendar um bom restaurante próximo?',
         difficulty: 'intermediate' as const,
         requiredLevel: 'intermediate' as const,
+        context: 'Pedido de recomendação',
         order: 4
       },
       {
@@ -248,6 +261,7 @@ export const PROGRESSIVE_TRAILS_DATA = {
         portuguese: 'Gostaria de reservar um tour para amanhã',
         difficulty: 'intermediate' as const,
         requiredLevel: 'intermediate' as const,
+        context: 'Reserva de passeio',
         order: 5
       },
       
@@ -258,6 +272,7 @@ export const PROGRESSIVE_TRAILS_DATA = {
         portuguese: 'Preciso reagendar meu voo de conexão',
         difficulty: 'advanced' as const,
         requiredLevel: 'advanced' as const,
+        context: 'Reagendamento de voo',
         order: 6
       }
     ],

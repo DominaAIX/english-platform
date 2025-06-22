@@ -337,28 +337,45 @@ function ProgressiveTrailClient({ trailData, slug }: { trailData: any, slug: str
 
                   {/* Conteúdo do passo */}
                   {currentStep.type === 'phrase' && currentStep.phrase && (
-                    <div className="bg-gray-900/50 border border-gray-700 rounded-xl p-8 sm:p-10 lg:p-16 mb-6 w-full max-w-none min-h-[400px] flex items-center justify-center">
-                      <div className="text-center w-full max-w-4xl mx-auto">
-                        <div className={`inline-block px-4 py-2 rounded-full text-base font-semibold mb-8 ${
+                    <div className="bg-gray-900/50 border border-gray-700 rounded-2xl p-8 mb-6">
+                      {/* Context & Level */}
+                      <div className="flex justify-between items-center mb-4">
+                        <span className="text-purple-400 text-sm font-medium flex items-center gap-2">
+                          <span className="text-purple-400">📍</span>
+                          {currentStep.phrase.context}
+                        </span>
+                        <span className={`px-3 py-1 rounded-full text-xs font-medium ${
                           currentStep.phrase.difficulty === 'beginner' ? 'bg-green-500/20 text-green-400' :
                           currentStep.phrase.difficulty === 'intermediate' ? 'bg-yellow-500/20 text-yellow-400' :
                           'bg-red-500/20 text-red-400'
                         }`}>
-                          {currentStep.phrase.difficulty === 'beginner' ? 'Básico' :
-                           currentStep.phrase.difficulty === 'intermediate' ? 'Intermediário' : 'Avançado'}
-                        </div>
-                        
-                        <h3 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-white mb-8 leading-tight break-words">
-                          {currentStep.phrase.english}
-                        </h3>
-                        <p className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl text-gray-300 mb-12 leading-relaxed break-words">
-                          {currentStep.phrase.portuguese}
-                        </p>
+                          {currentStep.phrase.difficulty === 'beginner' ? 'básico' :
+                           currentStep.phrase.difficulty === 'intermediate' ? 'médio' : 'avançado'}
+                        </span>
+                      </div>
 
+                      {/* Phrase Content */}
+                      <div className="text-center mb-6">
+                        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4 leading-tight">
+                          {currentStep.phrase.english}
+                        </h2>
+                      </div>
+
+                      {/* Translation */}
+                      <div className="text-center mb-6">
+                        <div className="bg-gray-800/50 rounded-xl p-4 mb-4">
+                          <p className="text-xl sm:text-2xl text-gray-300 leading-relaxed">
+                            {currentStep.phrase.portuguese}
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* Action Button */}
+                      <div className="text-center">
                         {!currentStep.isCompleted && (
                           <button
                             onClick={() => handleStepComplete(currentStep.id, true)}
-                            className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 px-8 py-4 rounded-full text-white font-semibold text-lg transition-all duration-300 transform hover:scale-105"
+                            className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 px-6 py-3 rounded-full text-white font-semibold transition-all duration-300 transform hover:scale-105"
                           >
                             Marcar como Aprendida
                           </button>
@@ -369,7 +386,7 @@ function ProgressiveTrailClient({ trailData, slug }: { trailData: any, slug: str
 
                   {/* Exercícios */}
                   {currentStep.type === 'exercise' && currentStep.exercise && (
-                    <div className="mb-6 min-h-[500px]">
+                    <div className="mb-6">
                       {currentStep.exercise.type === 'drag-drop' && (
                         <DragDropExercise
                           exercise={{

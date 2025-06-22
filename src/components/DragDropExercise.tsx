@@ -105,7 +105,7 @@ export default function DragDropExercise({ exercise, onComplete }: DragDropExerc
   const canCheck = droppedWords.length > 0 && availableWords.length === 0
 
   return (
-    <div className="bg-gray-900/50 border border-gray-700 rounded-xl p-6 sm:p-8 lg:p-10 backdrop-blur-sm w-full max-w-none">
+    <div className="bg-gray-900/50 border border-gray-700 rounded-xl p-6 backdrop-blur-sm">
       <div className="mb-4">
         <h3 className="text-lg font-semibold text-white mb-2">
           📝 Monte a frase correta:
