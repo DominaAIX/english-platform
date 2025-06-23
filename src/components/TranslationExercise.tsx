@@ -5,7 +5,7 @@ import { TranslationExerciseData } from '@/data/progressiveTrails'
 
 interface TranslationExerciseProps {
   exerciseData: TranslationExerciseData
-  onComplete: (isCorrect: boolean) => void
+  onComplete: (isCorrect: boolean, answer?: string) => void
   disabled?: boolean
 }
 
@@ -62,7 +62,7 @@ export default function TranslationExercise({
 
     // Chamar callback após um pequeno delay para mostrar o resultado
     setTimeout(() => {
-      onComplete(correct)
+      onComplete(correct, userAnswer)
     }, 2000)
   }
 

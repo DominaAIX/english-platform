@@ -11,6 +11,7 @@ import DragDropExercise from '@/components/DragDropExercise'
 import CompleteSentenceExercise from '@/components/CompleteSentenceExercise'
 import TranslationExercise from '@/components/TranslationExercise'
 import MultipleChoiceExercise from '@/components/MultipleChoiceExercise'
+import FinalCertificationTest from '@/components/FinalCertificationTest'
 import { SpeakerIcon } from '@/components/ModernIcons'
 import {
   PROGRESSIVE_TRAILS_DATA,
@@ -62,6 +63,7 @@ function ProgressiveTrailClient({ trailData, slug }: { trailData: any, slug: str
   const [showTranslation, setShowTranslation] = useState(false)
   const [showNextButton, setShowNextButton] = useState(false)
   const [exerciseResult, setExerciseResult] = useState<{ completed: boolean, correct: boolean } | null>(null)
+  const [showFinalTest, setShowFinalTest] = useState(false)
 
   // Verificar se usuário é premium
   const isPremium = userProfile?.plan === 'premium'
@@ -163,6 +165,34 @@ function ProgressiveTrailClient({ trailData, slug }: { trailData: any, slug: str
 
   const handleExerciseRetry = () => {
     setExerciseResult(null)
+  }
+
+  const handleFinalTestStart = () => {
+    setShowFinalTest(true)
+  }
+
+  const handleFinalTestComplete = (passed: boolean, score: number) => {
+    // Aqui você pode salvar o resultado do teste
+    console.log(`Teste final: ${passed ? 'Aprovado' : 'Reprovado'} com ${score}%`)
+    
+    if (passed) {
+      // Marcar trilha como 100% completa
+      if (user && userProgress) {
+        const completedProgress = {
+          ...userProgress,
+          progressPercentage: 100,
+          isCertified: true,
+          certificateScore: score,
+          certificateDate: new Date().toISOString()
+        }
+        setUserProgress(completedProgress)
+        saveUserTrailProgress(user.id, completedProgress)
+      }
+    }
+  }
+
+  const handleFinalTestClose = () => {
+    setShowFinalTest(false)
   }
 
 
@@ -562,11 +592,68 @@ function ProgressiveTrailClient({ trailData, slug }: { trailData: any, slug: str
                 <div className="text-center py-12">
                   <div className="text-6xl mb-4">🎉</div>
                   <h2 className="text-2xl font-bold text-white mb-4">
-                    Parabéns! Trilha Concluída!
+                    Parabéns! Você completou todas as frases!
                   </h2>
                   <p className="text-gray-300 mb-6">
-                    Você completou todos os passos desta trilha progressiva.
+                    Agora é hora de testar seus conhecimentos com nosso teste de certificação A1/A2.
                   </p>
+                  
+                  {/* Verificar se o teste final está disponível e se o usuário ainda não foi certificado */}
+                  {trailData.finalTest && !userProgress?.isCertified && (
+                    <div className="bg-gradient-to-r from-green-900/50 to-emerald-900/50 border border-green-500/30 rounded-xl p-6 mb-6">
+                      <h3 className="text-green-400 font-semibold text-xl mb-2">
+                        🏆 Teste de Certificação Disponível!
+                      </h3>
+                      <p className="text-gray-300 mb-4">
+                        Prove que dominou as 135 frases essenciais A1/A2 e ganhe seu certificado oficial.
+                      </p>
+                      <div className="bg-gray-800/50 rounded-lg p-4 mb-4">
+                        <div className="grid grid-cols-3 gap-4 text-center text-sm">
+                          <div>
+                            <div className="text-blue-400 font-bold">35</div>
+                            <div className="text-gray-400">Questões</div>
+                          </div>
+                          <div>
+                            <div className="text-green-400 font-bold">70%</div>
+                            <div className="text-gray-400">Nota Mínima</div>
+                          </div>
+                          <div>
+                            <div className="text-purple-400 font-bold">~20min</div>
+                            <div className="text-gray-400">Duração</div>
+                          </div>
+                        </div>
+                      </div>
+                      <button
+                        onClick={handleFinalTestStart}
+                        className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 px-8 py-4 rounded-full text-white font-bold text-lg transition-all duration-300 transform hover:scale-105"
+                      >
+                        🎯 Iniciar Teste de Certificação
+                      </button>
+                    </div>
+                  )}
+                  
+                  {/* Se já foi certificado */}
+                  {userProgress?.isCertified && (
+                    <div className="bg-gradient-to-r from-gold-900/50 to-yellow-900/50 border border-yellow-500/30 rounded-xl p-6 mb-6">
+                      <h3 className="text-yellow-400 font-semibold text-xl mb-2">
+                        🏆 Você já foi certificado!
+                      </h3>
+                      <p className="text-gray-300 mb-2">
+                        Nota do teste: <strong className="text-white">{userProgress.certificateScore}%</strong>
+                      </p>
+                      <p className="text-gray-400 text-sm">
+                        Certificado obtido em: {new Date(userProgress.certificateDate!).toLocaleDateString('pt-BR')}
+                      </p>
+                      
+                      <button
+                        onClick={handleFinalTestStart}
+                        className="mt-4 bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 px-6 py-3 rounded-full text-white font-semibold transition-all duration-300"
+                      >
+                        🔄 Refazer Teste (Melhorar Nota)
+                      </button>
+                    </div>
+                  )}
+                  
                   <Link 
                     href="/dashboard"
                     className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 px-8 py-3 rounded-full text-white font-bold transition-all duration-300"
@@ -796,6 +883,15 @@ function ProgressiveTrailClient({ trailData, slug }: { trailData: any, slug: str
           </div>
         )}
       </div>
+
+      {/* Modal do Teste Final */}
+      {showFinalTest && trailData.finalTest && (
+        <FinalCertificationTest
+          test={trailData.finalTest}
+          onComplete={handleFinalTestComplete}
+          onClose={handleFinalTestClose}
+        />
+      )}
     </AnimatedContainer>
   )
 }

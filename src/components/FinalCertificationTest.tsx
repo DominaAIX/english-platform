@@ -1,0 +1,319 @@
+'use client'
+
+import { useState, useEffect } from 'react'
+import { FinalCertificationTest as FinalTestType, FinalTestQuestion } from '@/data/progressiveTrails'
+import DragDropExercise from './DragDropExercise'
+import MultipleChoiceExercise from './MultipleChoiceExercise'
+import TranslationExercise from './TranslationExercise'
+import CompleteSentenceExercise from './CompleteSentenceExercise'
+
+interface FinalCertificationTestProps {
+  test: FinalTestType
+  onComplete: (passed: boolean, score: number) => void
+  onClose: () => void
+}
+
+export default function FinalCertificationTest({ test, onComplete, onClose }: FinalCertificationTestProps) {
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
+  const [answers, setAnswers] = useState<{ [key: string]: any }>({})
+  const [showResults, setShowResults] = useState(false)
+  const [score, setScore] = useState(0)
+  const [timeStarted, setTimeStarted] = useState<Date>(new Date())
+
+  const currentQuestion = test.questions[currentQuestionIndex]
+  const progress = ((currentQuestionIndex + 1) / test.questions.length) * 100
+
+  useEffect(() => {
+    setTimeStarted(new Date())
+  }, [])
+
+  const handleAnswerSubmit = (answer: any) => {
+    const questionId = currentQuestion.id
+    setAnswers(prev => ({ ...prev, [questionId]: answer }))
+
+    // Avançar automaticamente após resposta
+    setTimeout(() => {
+      if (currentQuestionIndex < test.questions.length - 1) {
+        setCurrentQuestionIndex(currentQuestionIndex + 1)
+      } else {
+        calculateFinalScore()
+      }
+    }, 1500)
+  }
+
+  const calculateFinalScore = () => {
+    let correctAnswers = 0
+
+    test.questions.forEach(question => {
+      const userAnswer = answers[question.id]
+      let isCorrect = false
+
+      switch (question.type) {
+        case 'multiple-choice':
+          isCorrect = userAnswer === question.correctAnswer
+          break
+        case 'translation':
+          if (userAnswer && question.correctAnswer) {
+            const normalizedUser = userAnswer.toLowerCase().replace(/[^a-z\s]/g, '').trim()
+            const normalizedCorrect = question.correctAnswer.toLowerCase().replace(/[^a-z\s]/g, '').trim()
+            isCorrect = normalizedUser === normalizedCorrect
+            
+            // Verificar variações aceitas
+            if (!isCorrect && question.acceptedVariations) {
+              isCorrect = question.acceptedVariations.some(variation => 
+                normalizedUser === variation.toLowerCase().replace(/[^a-z\s]/g, '').trim()
+              )
+            }
+          }
+          break
+        case 'complete-sentence':
+          if (userAnswer && question.correctAnswer) {
+            const normalizedUser = userAnswer.toLowerCase().trim()
+            const normalizedCorrect = question.correctAnswer.toLowerCase().trim()
+            isCorrect = normalizedUser === normalizedCorrect
+            
+            // Verificar variações aceitas
+            if (!isCorrect && question.acceptedVariations) {
+              isCorrect = question.acceptedVariations.some(variation => 
+                normalizedUser === variation.toLowerCase().trim()
+              )
+            }
+          }
+          break
+        case 'drag-drop':
+          if (userAnswer && question.correctSentence) {
+            const normalizedUser = userAnswer.toLowerCase().replace(/[^a-z\s]/g, '').trim()
+            const normalizedCorrect = question.correctSentence.toLowerCase().replace(/[^a-z\s]/g, '').trim()
+            isCorrect = normalizedUser === normalizedCorrect
+          }
+          break
+      }
+
+      if (isCorrect) correctAnswers++
+    })
+
+    const finalScore = Math.round((correctAnswers / test.questions.length) * 100)
+    setScore(finalScore)
+    setShowResults(true)
+
+    const passed = finalScore >= test.passingScore
+    onComplete(passed, finalScore)
+  }
+
+  const handleRetry = () => {
+    setCurrentQuestionIndex(0)
+    setAnswers({})
+    setShowResults(false)
+    setScore(0)
+    setTimeStarted(new Date())
+  }
+
+  const getQuestionComponent = () => {
+    switch (currentQuestion.type) {
+      case 'multiple-choice':
+        return (
+          <MultipleChoiceExercise
+            exerciseData={{
+              question: currentQuestion.question,
+              options: currentQuestion.options!,
+              correctAnswer: currentQuestion.correctAnswer!,
+              explanation: currentQuestion.explanation
+            }}
+            onComplete={(isCorrect) => handleAnswerSubmit(currentQuestion.correctAnswer)}
+          />
+        )
+      
+      case 'translation':
+        return (
+          <TranslationExercise
+            exerciseData={{
+              portugueseText: currentQuestion.question,
+              correctEnglish: currentQuestion.correctAnswer!,
+              alternatives: currentQuestion.acceptedVariations || [],
+              hint: `Resposta esperada: ${currentQuestion.correctAnswer}`
+            }}
+            onComplete={(isCorrect, answer) => handleAnswerSubmit(answer)}
+          />
+        )
+      
+      case 'complete-sentence':
+        return (
+          <CompleteSentenceExercise
+            exerciseData={{
+              sentence: currentQuestion.question,
+              correctAnswer: currentQuestion.correctAnswer!,
+              alternatives: currentQuestion.acceptedVariations || [],
+              hint: `Complete com: ${currentQuestion.correctAnswer}`
+            }}
+            onComplete={(isCorrect, answer) => handleAnswerSubmit(answer)}
+          />
+        )
+      
+      case 'drag-drop':
+        return (
+          <DragDropExercise
+            exercise={{
+              id: currentQuestion.id,
+              correctSentence: currentQuestion.correctSentence!,
+              words: currentQuestion.words!,
+              translation: currentQuestion.translation!
+            }}
+            onComplete={(isCorrect) => handleAnswerSubmit(currentQuestion.correctSentence)}
+          />
+        )
+      
+      default:
+        return null
+    }
+  }
+
+  if (showResults) {
+    const passed = score >= test.passingScore
+    const timeTaken = Math.round((new Date().getTime() - timeStarted.getTime()) / 1000 / 60)
+
+    return (
+      <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+        <div className="bg-gray-900 border border-gray-700 rounded-2xl p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+          <div className="text-center">
+            <div className="text-6xl mb-6">
+              {passed ? '🎉' : '📚'}
+            </div>
+            
+            <h2 className={`text-3xl font-bold mb-4 ${passed ? 'text-green-400' : 'text-orange-400'}`}>
+              {passed ? 'Parabéns! Você foi aprovado!' : 'Continue estudando!'}
+            </h2>
+            
+            <div className="bg-gray-800/50 rounded-xl p-6 mb-6">
+              <div className="grid grid-cols-3 gap-4 text-center">
+                <div>
+                  <div className={`text-2xl font-bold ${passed ? 'text-green-400' : 'text-orange-400'}`}>
+                    {score}%
+                  </div>
+                  <div className="text-gray-400 text-sm">Sua Nota</div>
+                </div>
+                <div>
+                  <div className="text-2xl font-bold text-blue-400">
+                    {test.passingScore}%
+                  </div>
+                  <div className="text-gray-400 text-sm">Nota Mínima</div>
+                </div>
+                <div>
+                  <div className="text-2xl font-bold text-purple-400">
+                    {timeTaken}min
+                  </div>
+                  <div className="text-gray-400 text-sm">Tempo</div>
+                </div>
+              </div>
+            </div>
+
+            {passed ? (
+              <div className="bg-green-900/30 border border-green-500/30 rounded-xl p-6 mb-6">
+                <h3 className="text-green-400 font-semibold text-lg mb-2">
+                  🏆 Certificado Conquistado!
+                </h3>
+                <p className="text-gray-300">
+                  Você demonstrou domínio das 135 frases essenciais A1/A2 para o trabalho.
+                  Seu certificado: <strong className="text-white">{test.certificateName}</strong>
+                </p>
+              </div>
+            ) : (
+              <div className="bg-orange-900/30 border border-orange-500/30 rounded-xl p-6 mb-6">
+                <h3 className="text-orange-400 font-semibold text-lg mb-2">
+                  📖 Continue Praticando
+                </h3>
+                <p className="text-gray-300">
+                  Você precisa de pelo menos {test.passingScore}% para ser aprovado. 
+                  Revise as frases e tente novamente!
+                </p>
+              </div>
+            )}
+
+            <div className="flex gap-4 justify-center">
+              <button
+                onClick={onClose}
+                className="bg-gray-700 hover:bg-gray-600 px-6 py-3 rounded-full text-white font-semibold transition-colors"
+              >
+                Voltar às Frases
+              </button>
+              
+              {!passed && (
+                <button
+                  onClick={handleRetry}
+                  className="bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 px-6 py-3 rounded-full text-white font-semibold transition-all duration-300"
+                >
+                  Tentar Novamente
+                </button>
+              )}
+              
+              {passed && (
+                <button
+                  onClick={() => {/* Função para download do certificado */}}
+                  className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 px-6 py-3 rounded-full text-white font-semibold transition-all duration-300"
+                >
+                  📄 Baixar Certificado
+                </button>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  return (
+    <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+      <div className="bg-gray-900 border border-gray-700 rounded-2xl p-6 max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+        {/* Header */}
+        <div className="flex justify-between items-center mb-6">
+          <div>
+            <h2 className="text-2xl font-bold text-white mb-1">{test.title}</h2>
+            <p className="text-gray-400">{test.description}</p>
+          </div>
+          <button
+            onClick={onClose}
+            className="text-gray-400 hover:text-white transition-colors text-2xl"
+          >
+            ✕
+          </button>
+        </div>
+
+        {/* Progress */}
+        <div className="mb-6">
+          <div className="flex justify-between items-center mb-2">
+            <span className="text-sm text-gray-400">
+              Questão {currentQuestionIndex + 1} de {test.questions.length}
+            </span>
+            <span className="text-sm text-gray-400">
+              {Math.round(progress)}% completo
+            </span>
+          </div>
+          <div className="w-full bg-gray-700 rounded-full h-2">
+            <div 
+              className="bg-gradient-to-r from-purple-500 to-cyan-400 h-2 rounded-full transition-all duration-300"
+              style={{ width: `${progress}%` }}
+            />
+          </div>
+        </div>
+
+        {/* Question */}
+        <div className="mb-6">
+          <div className="flex items-center gap-2 mb-4">
+            <span className="bg-purple-600/30 text-purple-400 px-3 py-1 rounded-full text-sm font-medium">
+              {currentQuestion.type === 'multiple-choice' ? '🎯 Múltipla Escolha' :
+               currentQuestion.type === 'translation' ? '🌍 Tradução' :
+               currentQuestion.type === 'complete-sentence' ? '✍️ Complete' :
+               '🧩 Arrastar e Soltar'}
+            </span>
+          </div>
+          
+          {getQuestionComponent()}
+        </div>
+
+        {/* Navigation hint */}
+        <div className="text-center text-sm text-gray-500">
+          Responda e aguarde para avançar automaticamente
+        </div>
+      </div>
+    </div>
+  )
+}

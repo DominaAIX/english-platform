@@ -5,7 +5,7 @@ import { CompleteSentenceData } from '@/data/progressiveTrails'
 
 interface CompleteSentenceExerciseProps {
   exerciseData: CompleteSentenceData
-  onComplete: (isCorrect: boolean) => void
+  onComplete: (isCorrect: boolean, answer?: string) => void
   disabled?: boolean
 }
 
@@ -34,7 +34,7 @@ export default function CompleteSentenceExercise({
 
     // Chamar callback após um pequeno delay para mostrar o resultado
     setTimeout(() => {
-      onComplete(correct)
+      onComplete(correct, exerciseData.options[selectedAnswer])
     }, 1500)
   }
 

@@ -84,6 +84,26 @@ export interface MultipleChoiceData {
   explanation?: string
 }
 
+// Interface para o teste final de certificação A1/A2
+export interface FinalCertificationTest {
+  id: string
+  title: string
+  description: string
+  level: 'beginner' | 'intermediate' | 'advanced'
+  questions: FinalTestQuestion[]
+  passingScore: number // Porcentagem mínima para passar
+  certificateName: string
+}
+
+export interface FinalTestQuestion {
+  id: string
+  type: 'multiple-choice' | 'drag-drop' | 'translation' | 'listening'
+  question: string
+  data: any
+  points: number
+  category: string // Ex: "Chegada ao trabalho", "Emails", etc.
+}
+
 // ===== DADOS DAS TRILHAS PROGRESSIVAS =====
 export const PROGRESSIVE_TRAILS_DATA = {
   trabalho: {
@@ -2118,70 +2138,835 @@ export const PROGRESSIVE_TRAILS_DATA = {
       }
     ],
     exercises: [
-      // Exercício após frase 3 (beginner)
+      // EXERCÍCIOS INTERCALADOS A CADA 5 FRASES BÁSICAS
+
+      // Exercício 1: Após frases 1-5 (Chegada ao trabalho)
       {
         id: 'work_ex_1',
         type: 'drag-drop' as const,
-        phraseId: 'work_phrase_3',
+        phraseId: 'work_phrase_5',
         data: {
-          correctSentence: 'How was your weekend?',
-          words: ['How', 'was', 'your', 'weekend?'],
-          translation: 'Como foi seu fim de semana?'
+          correctSentence: 'I just got in',
+          words: ['I', 'just', 'got', 'in'],
+          translation: 'Acabei de chegar'
         } as DragDropExerciseData,
         requiredToProgress: true,
-        order: 3.5
-      },
-      
-      // Exercício após frase 7 (beginner)
-      {
-        id: 'work_ex_2', 
-        type: 'complete-sentence' as const,
-        phraseId: 'work_phrase_7',
-        data: {
-          sentence: 'See you _____',
-          options: ['tomorrow', 'yesterday', 'never', 'always'],
-          correctAnswer: 0,
-          translation: 'Vejo você amanhã'
-        } as CompleteSentenceData,
-        requiredToProgress: true,
-        order: 7.5
-      },
-      
-      // Exercício após frase 15 (beginner)
-      {
-        id: 'work_ex_3',
-        type: 'multiple-choice' as const,
-        phraseId: 'work_phrase_15',
-        data: {
-          question: 'What do you say when equipment is broken?',
-          options: [
-            'The printer is not working',
-            'The printer is very good', 
-            'I love the printer',
-            'The printer is expensive'
-          ],
-          correctAnswer: 0,
-          explanation: 'Use "not working" to say something is broken'
-        } as MultipleChoiceData,
-        requiredToProgress: true,
-        order: 15.5
+        order: 5.1
       },
 
-      // Exercício após frase 25 (intermediate)
+      // Exercício 2: Após frases 6-10 (Chegada ao trabalho)
       {
-        id: 'work_ex_4',
-        type: 'translation' as const,
-        phraseId: 'work_phrase_25',
+        id: 'work_ex_2',
+        type: 'multiple-choice' as const,
+        phraseId: 'work_phrase_10',
         data: {
-          portugueseText: 'Isso faz todo sentido',
-          correctEnglish: 'That makes perfect sense',
-          alternatives: ['That makes total sense', 'This makes perfect sense'],
-          hint: 'Use "makes sense" para expressar que algo é lógico'
+          question: 'Como você se despede casualmente no trabalho?',
+          options: [
+            'Have a good one!',
+            'Have a good two!',
+            'Have a good work!',
+            'Have a good boss!'
+          ],
+          correctAnswer: 0,
+          explanation: '"Have a good one!" é uma despedida casual muito comum'
+        } as MultipleChoiceData,
+        requiredToProgress: true,
+        order: 10.1
+      },
+
+      // Exercício 3: Após frases 11-15 (Small talk)
+      {
+        id: 'work_ex_3',
+        type: 'translation' as const,
+        phraseId: 'work_phrase_15',
+        data: {
+          portugueseText: 'Que horas é sua reunião?',
+          correctEnglish: 'What time is your meeting?',
+          alternatives: ['What time is the meeting?', 'At what time is your meeting?'],
+          hint: 'Use "What time" para perguntar horários'
         } as TranslationExerciseData,
         requiredToProgress: true,
-        order: 25.5
+        order: 15.1
+      },
+
+      // Exercício 4: Após frases 16-20 (Small talk cont.)
+      {
+        id: 'work_ex_4',
+        type: 'drag-drop' as const,
+        phraseId: 'work_phrase_20',
+        data: {
+          correctSentence: 'No rush',
+          words: ['No', 'rush'],
+          translation: 'Sem pressa'
+        } as DragDropExerciseData,
+        requiredToProgress: true,
+        order: 20.1
+      },
+
+      // Exercício 5: Após frases 21-25 (Concordância)
+      {
+        id: 'work_ex_5',
+        type: 'multiple-choice' as const,
+        phraseId: 'work_phrase_25',
+        data: {
+          question: 'O que você diz para concordar com um colega?',
+          options: [
+            'You\'re right',
+            'You\'re left',
+            'You\'re up',
+            'You\'re down'
+          ],
+          correctAnswer: 0,
+          explanation: '"You\'re right" significa "Você está certo"'
+        } as MultipleChoiceData,
+        requiredToProgress: true,
+        order: 25.1
+      },
+
+      // Exercício 6: Após frases 26-30 (Emails)
+      {
+        id: 'work_ex_6',
+        type: 'translation' as const,
+        phraseId: 'work_phrase_30',
+        data: {
+          portugueseText: 'Retorno para você',
+          correctEnglish: 'I\'ll get back to you',
+          alternatives: ['I will get back to you', 'I\'ll return to you'],
+          hint: 'Use "get back to" para dizer que vai retornar o contato'
+        } as TranslationExerciseData,
+        requiredToProgress: true,
+        order: 30.1
+      },
+
+      // Exercício 7: Após frases 31-35 (Emails cont.)
+      {
+        id: 'work_ex_7',
+        type: 'drag-drop' as const,
+        phraseId: 'work_phrase_35',
+        data: {
+          correctSentence: 'Can you send it over?',
+          words: ['Can', 'you', 'send', 'it', 'over?'],
+          translation: 'Pode me enviar?'
+        } as DragDropExerciseData,
+        requiredToProgress: true,
+        order: 35.1
+      },
+
+      // Exercício 8: Após frases 36-40 (Durante o trabalho)
+      {
+        id: 'work_ex_8',
+        type: 'multiple-choice' as const,
+        phraseId: 'work_phrase_40',
+        data: {
+          question: 'Como avisar que uma tarefa está demorando mais que esperado?',
+          options: [
+            'It\'s taking longer than expected',
+            'It\'s making longer than expected',
+            'It\'s going longer than expected',
+            'It\'s doing longer than expected'
+          ],
+          correctAnswer: 0,
+          explanation: '"It\'s taking longer" é a forma correta para expressar que algo está demorando'
+        } as MultipleChoiceData,
+        requiredToProgress: true,
+        order: 40.1
+      },
+
+      // Exercício 9: Após frases 41-45 (Durante o trabalho cont.)
+      {
+        id: 'work_ex_9',
+        type: 'translation' as const,
+        phraseId: 'work_phrase_45',
+        data: {
+          portugueseText: 'Vou entrar em alguns minutos',
+          correctEnglish: 'I\'ll join in a few minutes',
+          alternatives: ['I will join in a few minutes', 'I\'ll join in some minutes'],
+          hint: 'Use "a few minutes" para "alguns minutos"'
+        } as TranslationExerciseData,
+        requiredToProgress: true,
+        order: 45.1
+      },
+
+      // Exercício 10: Após frases 46-50 (Colaboração)
+      {
+        id: 'work_ex_10',
+        type: 'drag-drop' as const,
+        phraseId: 'work_phrase_50',
+        data: {
+          correctSentence: 'I got this',
+          words: ['I', 'got', 'this'],
+          translation: 'Eu resolvo isso'
+        } as DragDropExerciseData,
+        requiredToProgress: true,
+        order: 50.1
+      },
+
+      // Exercício 11: Após frases 51-55 (Responsabilidade)
+      {
+        id: 'work_ex_11',
+        type: 'multiple-choice' as const,
+        phraseId: 'work_phrase_55',
+        data: {
+          question: 'Como você expressa concordância simples?',
+          options: [
+            'That\'s true',
+            'That\'s false',
+            'That\'s maybe',
+            'That\'s never'
+          ],
+          correctAnswer: 0,
+          explanation: '"That\'s true" significa "É verdade"'
+        } as MultipleChoiceData,
+        requiredToProgress: true,
+        order: 55.1
+      },
+
+      // Exercício 12: Após frases 56-60 (Expressões para se destacar)
+      {
+        id: 'work_ex_12',
+        type: 'translation' as const,
+        phraseId: 'work_phrase_60',
+        data: {
+          portugueseText: 'Estou pronto',
+          correctEnglish: 'I\'m ready',
+          alternatives: ['I am ready', 'I\'m prepared'],
+          hint: 'Use "ready" para expressar que está preparado'
+        } as TranslationExerciseData,
+        requiredToProgress: true,
+        order: 60.1
+      },
+
+      // Exercício 13: Após frases 61-65 (Mentalidade + Conversas matinais)
+      {
+        id: 'work_ex_13',
+        type: 'drag-drop' as const,
+        phraseId: 'work_phrase_65',
+        data: {
+          correctSentence: 'Did you sleep well?',
+          words: ['Did', 'you', 'sleep', 'well?'],
+          translation: 'Você dormiu bem?'
+        } as DragDropExerciseData,
+        requiredToProgress: true,
+        order: 65.1
+      },
+
+      // Exercício 14: Após frases 66-70 (Planejamento + Gerenciamento)
+      {
+        id: 'work_ex_14',
+        type: 'multiple-choice' as const,
+        phraseId: 'work_phrase_70',
+        data: {
+          question: 'Como prometer envio para mais tarde?',
+          options: [
+            'I\'ll send it soon',
+            'I\'ll send it never',
+            'I\'ll send it yesterday',
+            'I\'ll send it always'
+          ],
+          correctAnswer: 0,
+          explanation: '"I\'ll send it soon" significa "Vou enviar em breve"'
+        } as MultipleChoiceData,
+        requiredToProgress: true,
+        order: 70.1
+      },
+
+      // Exercício 15: Após frases 71-75 (Gerenciamento cont.)
+      {
+        id: 'work_ex_15',
+        type: 'translation' as const,
+        phraseId: 'work_phrase_75',
+        data: {
+          portugueseText: 'Está em andamento',
+          correctEnglish: 'It\'s in progress',
+          alternatives: ['It is in progress', 'It\'s on progress'],
+          hint: 'Use "in progress" para "em andamento"'
+        } as TranslationExerciseData,
+        requiredToProgress: true,
+        order: 75.1
+      },
+
+      // Exercício 16: Após frases 76-80 (Comunicação digital)
+      {
+        id: 'work_ex_16',
+        type: 'drag-drop' as const,
+        phraseId: 'work_phrase_80',
+        data: {
+          correctSentence: 'It\'s in the attachment',
+          words: ['It\'s', 'in', 'the', 'attachment'],
+          translation: 'Está no anexo'
+        } as DragDropExerciseData,
+        requiredToProgress: true,
+        order: 80.1
+      },
+
+      // Exercício 17: Após frases 81-85 (Comunicação cont.)
+      {
+        id: 'work_ex_17',
+        type: 'multiple-choice' as const,
+        phraseId: 'work_phrase_85',
+        data: {
+          question: 'Como perguntar o horário de uma reunião?',
+          options: [
+            'What time is the meeting?',
+            'What day is the meeting?',
+            'What year is the meeting?',
+            'What place is the meeting?'
+          ],
+          correctAnswer: 0,
+          explanation: '"What time" é usado para perguntar horários'
+        } as MultipleChoiceData,
+        requiredToProgress: true,
+        order: 85.1
+      },
+
+      // Exercício 18: Após frases 86-90 (Reuniões + Feedback)
+      {
+        id: 'work_ex_18',
+        type: 'translation' as const,
+        phraseId: 'work_phrase_90',
+        data: {
+          portugueseText: 'Deixe-me pensar',
+          correctEnglish: 'Let me think',
+          alternatives: ['Let me think about it', 'Allow me to think'],
+          hint: 'Use "Let me think" para pedir tempo para refletir'
+        } as TranslationExerciseData,
+        requiredToProgress: true,
+        order: 90.1
+      },
+
+      // Exercício 19: Após frases 91-95 (Feedback cont.)
+      {
+        id: 'work_ex_19',
+        type: 'drag-drop' as const,
+        phraseId: 'work_phrase_95',
+        data: {
+          correctSentence: 'Just a moment',
+          words: ['Just', 'a', 'moment'],
+          translation: 'Só um momento'
+        } as DragDropExerciseData,
+        requiredToProgress: true,
+        order: 95.1
+      },
+
+      // Exercício 20: Após frases 96-100 (Finalizando o dia)
+      {
+        id: 'work_ex_20',
+        type: 'multiple-choice' as const,
+        phraseId: 'work_phrase_100',
+        data: {
+          question: 'Como sugerir adiar uma tarefa para o dia seguinte?',
+          options: [
+            'Let\'s finish this tomorrow',
+            'Let\'s finish this yesterday',
+            'Let\'s finish this never',
+            'Let\'s start this tomorrow'
+          ],
+          correctAnswer: 0,
+          explanation: '"Let\'s finish this tomorrow" significa "Vamos terminar isso amanhã"'
+        } as MultipleChoiceData,
+        requiredToProgress: true,
+        order: 100.1
+      },
+
+      // Exercício 21: Após frases 101-105 (Final do dia + Atendimento)
+      {
+        id: 'work_ex_21',
+        type: 'translation' as const,
+        phraseId: 'work_phrase_105',
+        data: {
+          portugueseText: 'Como posso ajudá-lo hoje?',
+          correctEnglish: 'How can I help you today?',
+          alternatives: ['How may I help you today?', 'What can I do for you today?'],
+          hint: 'Frase padrão para iniciar atendimento ao cliente'
+        } as TranslationExerciseData,
+        requiredToProgress: true,
+        order: 105.1
+      },
+
+      // Exercício 22: Após frases 106-110 (Atendimento cont.)
+      {
+        id: 'work_ex_22',
+        type: 'drag-drop' as const,
+        phraseId: 'work_phrase_110',
+        data: {
+          correctSentence: 'One moment, please',
+          words: ['One', 'moment,', 'please'],
+          translation: 'Um momento, por favor'
+        } as DragDropExerciseData,
+        requiredToProgress: true,
+        order: 110.1
+      },
+
+      // Exercício 23: Após frases 111-115 (Atendimento + Problemas técnicos)
+      {
+        id: 'work_ex_23',
+        type: 'multiple-choice' as const,
+        phraseId: 'work_phrase_115',
+        data: {
+          question: 'Como prometer consertar algo?',
+          options: [
+            'I\'ll fix it',
+            'I\'ll break it',
+            'I\'ll hide it',
+            'I\'ll lose it'
+          ],
+          correctAnswer: 0,
+          explanation: '"I\'ll fix it" significa "Vou consertar"'
+        } as MultipleChoiceData,
+        requiredToProgress: true,
+        order: 115.1
+      },
+
+      // Exercício 24: Após frases 116-120 (Problemas técnicos cont.)
+      {
+        id: 'work_ex_24',
+        type: 'translation' as const,
+        phraseId: 'work_phrase_120',
+        data: {
+          portugueseText: 'Tudo está funcionando agora',
+          correctEnglish: 'Everything\'s working now',
+          alternatives: ['Everything is working now', 'All is working now'],
+          hint: 'Use "Everything\'s working" para confirmar que tudo funciona'
+        } as TranslationExerciseData,
+        requiredToProgress: true,
+        order: 120.1
+      },
+
+      // Exercício 25: Após frases 121-125 (Comunicação online)
+      {
+        id: 'work_ex_25',
+        type: 'drag-drop' as const,
+        phraseId: 'work_phrase_125',
+        data: {
+          correctSentence: 'The connection is bad',
+          words: ['The', 'connection', 'is', 'bad'],
+          translation: 'A conexão está ruim'
+        } as DragDropExerciseData,
+        requiredToProgress: true,
+        order: 125.1
+      },
+
+      // Exercício 26: Após frases 126-130 (Online + Passado)
+      {
+        id: 'work_ex_26',
+        type: 'multiple-choice' as const,
+        phraseId: 'work_phrase_130',
+        data: {
+          question: 'Como explicar que teve uma reunião mais cedo?',
+          options: [
+            'I had a meeting earlier',
+            'I have a meeting earlier',
+            'I will have a meeting earlier',
+            'I want a meeting earlier'
+          ],
+          correctAnswer: 0,
+          explanation: '"I had a meeting earlier" usa o passado simples'
+        } as MultipleChoiceData,
+        requiredToProgress: true,
+        order: 130.1
+      },
+
+      // Exercício 27: Após frases 131-135 (Futuro simples - FINAL DAS BÁSICAS)
+      {
+        id: 'work_ex_27',
+        type: 'translation' as const,
+        phraseId: 'work_phrase_135',
+        data: {
+          portugueseText: 'Vou terminar antes do almoço',
+          correctEnglish: 'I\'ll finish it before lunch',
+          alternatives: ['I will finish it before lunch', 'I\'ll complete it before lunch'],
+          hint: 'Use "before lunch" para "antes do almoço"'
+        } as TranslationExerciseData,
+        requiredToProgress: true,
+        order: 135.1
       }
-    ]
+    ],
+    finalTest: {
+      id: 'work_final_certification',
+      title: 'Certificação A1/A2 - Inglês para o Trabalho',
+      description: 'Teste completo para certificar seu domínio das 135 frases essenciais A1/A2',
+      level: 'beginner' as const,
+      passingScore: 70,
+      certificateName: 'Certificado A1/A2 - Inglês Básico para o Trabalho',
+      questions: [
+        // Seção 1: Chegada ao trabalho (5 questões)
+        {
+          id: 'cert_q1',
+          type: 'multiple-choice' as const,
+          question: 'Como você cumprimenta um colega pela manhã?',
+          options: [
+            'Good morning! How are you today?',
+            'Good night! See you tomorrow!',
+            'Good afternoon! Nice to meet you!',
+            'Good evening! Have a great day!'
+          ],
+          correctAnswer: 0,
+          explanation: 'Good morning é o cumprimento adequado pela manhã, seguido de uma pergunta educada.'
+        },
+        {
+          id: 'cert_q2',
+          type: 'translation' as const,
+          question: 'Traduza para o inglês: "Bom dia! Como foi seu fim de semana?"',
+          correctAnswer: 'Good morning! How was your weekend?',
+          acceptedVariations: [
+            'good morning how was your weekend',
+            'good morning! how was your weekend',
+            'good morning, how was your weekend?'
+          ]
+        },
+        {
+          id: 'cert_q3',
+          type: 'complete-sentence' as const,
+          question: 'Complete: "I hope you have a _____ day at work."',
+          correctAnswer: 'great',
+          acceptedVariations: ['good', 'nice', 'wonderful', 'fantastic']
+        },
+        {
+          id: 'cert_q4',
+          type: 'multiple-choice' as const,
+          question: 'Qual a melhor resposta para "How are you settling in?"',
+          options: [
+            'I\'m doing well, thank you for asking!',
+            'No, I don\'t want to settle.',
+            'Yes, please settle the bill.',
+            'I\'m not sure about settling.'
+          ],
+          correctAnswer: 0,
+          explanation: '"Settling in" significa se adaptando ao novo ambiente de trabalho.'
+        },
+        {
+          id: 'cert_q5',
+          type: 'drag-drop' as const,
+          question: 'Monte a frase: "Nice to see you again"',
+          words: ['Nice', 'to', 'see', 'you', 'again'],
+          correctSentence: 'Nice to see you again',
+          translation: 'Bom te ver novamente'
+        },
+
+        // Seção 2: Small talk e conversas casuais (7 questões)
+        {
+          id: 'cert_q6',
+          type: 'multiple-choice' as const,
+          question: 'Como você pergunta sobre o clima em inglês?',
+          options: [
+            'What\'s the weather like today?',
+            'How much is the weather?',
+            'Where is the weather?',
+            'When will the weather?'
+          ],
+          correctAnswer: 0,
+          explanation: '"What\'s the weather like?" é a forma padrão de perguntar sobre o clima.'
+        },
+        {
+          id: 'cert_q7',
+          type: 'translation' as const,
+          question: 'Traduza: "Está um pouco frio hoje, não acha?"',
+          correctAnswer: 'It\'s a bit cold today, don\'t you think?',
+          acceptedVariations: [
+            'its a bit cold today dont you think',
+            'it is a bit cold today, don\'t you think?',
+            'it\'s quite cold today, don\'t you think?'
+          ]
+        },
+        {
+          id: 'cert_q8',
+          type: 'complete-sentence' as const,
+          question: 'Complete: "Did you _____ the game last night?"',
+          correctAnswer: 'watch',
+          acceptedVariations: ['see', 'catch']
+        },
+        {
+          id: 'cert_q9',
+          type: 'multiple-choice' as const,
+          question: 'O que significa "Any plans for the weekend?"',
+          options: [
+            'Algum plano para o fim de semana?',
+            'Precisa de planos arquitetônicos?',
+            'Quer fazer planos de viagem?',
+            'Tem mapas da cidade?'
+          ],
+          correctAnswer: 0,
+          explanation: '"Plans" aqui se refere a atividades ou compromissos planejados.'
+        },
+        {
+          id: 'cert_q10',
+          type: 'drag-drop' as const,
+          question: 'Monte: "The traffic was terrible this morning"',
+          words: ['The', 'traffic', 'was', 'terrible', 'this', 'morning'],
+          correctSentence: 'The traffic was terrible this morning',
+          translation: 'O trânsito estava terrível esta manhã'
+        },
+        {
+          id: 'cert_q11',
+          type: 'translation' as const,
+          question: 'Traduza: "Como foi sua viagem?"',
+          correctAnswer: 'How was your trip?',
+          acceptedVariations: [
+            'how was your travel',
+            'how was your journey',
+            'how did your trip go'
+          ]
+        },
+        {
+          id: 'cert_q12',
+          type: 'multiple-choice' as const,
+          question: 'Como você responde a "Thanks for asking!"?',
+          options: [
+            'You\'re welcome!',
+            'No, thank you!',
+            'Yes, please ask!',
+            'Don\'t ask me!'
+          ],
+          correctAnswer: 0,
+          explanation: '"You\'re welcome" é a resposta padrão para agradecimentos.'
+        },
+
+        // Seção 3: Comunicação no trabalho (8 questões)
+        {
+          id: 'cert_q13',
+          type: 'multiple-choice' as const,
+          question: 'Como você pergunta sobre uma tarefa?',
+          options: [
+            'What\'s the status of the project?',
+            'Where is the project going?',
+            'Who is the project?',
+            'When project status?'
+          ],
+          correctAnswer: 0,
+          explanation: '"What\'s the status?" é a forma padrão de perguntar sobre o andamento.'
+        },
+        {
+          id: 'cert_q14',
+          type: 'translation' as const,
+          question: 'Traduza: "Preciso da sua ajuda com isso"',
+          correctAnswer: 'I need your help with this',
+          acceptedVariations: [
+            'i need your help with that',
+            'i need help with this',
+            'i need your assistance with this'
+          ]
+        },
+        {
+          id: 'cert_q15',
+          type: 'complete-sentence' as const,
+          question: 'Complete: "Could you please _____ me the report?"',
+          correctAnswer: 'send',
+          acceptedVariations: ['email', 'give', 'show']
+        },
+        {
+          id: 'cert_q16',
+          type: 'drag-drop' as const,
+          question: 'Monte: "Let me know if you need anything"',
+          words: ['Let', 'me', 'know', 'if', 'you', 'need', 'anything'],
+          correctSentence: 'Let me know if you need anything',
+          translation: 'Me avise se precisar de alguma coisa'
+        },
+        {
+          id: 'cert_q17',
+          type: 'multiple-choice' as const,
+          question: 'Como você marca uma reunião?',
+          options: [
+            'Can we schedule a meeting?',
+            'Can we buy a meeting?',
+            'Can we eat a meeting?',
+            'Can we sleep a meeting?'
+          ],
+          correctAnswer: 0,
+          explanation: '"Schedule a meeting" é a expressão correta para marcar reuniões.'
+        },
+        {
+          id: 'cert_q18',
+          type: 'translation' as const,
+          question: 'Traduza: "Vou verificar e te respondo"',
+          correctAnswer: 'I\'ll check and get back to you',
+          acceptedVariations: [
+            'ill check and get back to you',
+            'i will check and get back to you',
+            'ill check and respond to you'
+          ]
+        },
+        {
+          id: 'cert_q19',
+          type: 'complete-sentence' as const,
+          question: 'Complete: "I\'m _____ on a tight deadline"',
+          correctAnswer: 'working',
+          acceptedVariations: ['focused', 'operating']
+        },
+        {
+          id: 'cert_q20',
+          type: 'multiple-choice' as const,
+          question: 'O que significa "Keep me posted"?',
+          options: [
+            'Me mantenha informado',
+            'Me envie uma carta',
+            'Me dê um cargo',
+            'Me coloque no correio'
+          ],
+          correctAnswer: 0,
+          explanation: '"Keep me posted" significa manter alguém atualizado sobre desenvolvimentos.'
+        },
+
+        // Seção 4: Emails e comunicação digital (5 questões)
+        {
+          id: 'cert_q21',
+          type: 'multiple-choice' as const,
+          question: 'Como você inicia um email formal?',
+          options: [
+            'Dear Mr. Smith,',
+            'Hey Smith!',
+            'Yo Smith,',
+            'Smith!'
+          ],
+          correctAnswer: 0,
+          explanation: '"Dear" seguido do título e sobrenome é a forma formal padrão.'
+        },
+        {
+          id: 'cert_q22',
+          type: 'translation' as const,
+          question: 'Traduza: "Espero que este email o encontre bem"',
+          correctAnswer: 'I hope this email finds you well',
+          acceptedVariations: [
+            'i hope this email finds you well',
+            'hope this email finds you well',
+            'i hope this message finds you well'
+          ]
+        },
+        {
+          id: 'cert_q23',
+          type: 'complete-sentence' as const,
+          question: 'Complete: "Thank you for your _____ response"',
+          correctAnswer: 'quick',
+          acceptedVariations: ['fast', 'prompt', 'rapid']
+        },
+        {
+          id: 'cert_q24',
+          type: 'drag-drop' as const,
+          question: 'Monte: "Please find the attached document"',
+          words: ['Please', 'find', 'the', 'attached', 'document'],
+          correctSentence: 'Please find the attached document',
+          translation: 'Por favor, encontre o documento anexo'
+        },
+        {
+          id: 'cert_q25',
+          type: 'multiple-choice' as const,
+          question: 'Como você termina um email profissional?',
+          options: [
+            'Best regards,',
+            'See ya!',
+            'Bye bye!',
+            'Peace out!'
+          ],
+          correctAnswer: 0,
+          explanation: '"Best regards" é um fechamento profissional apropriado.'
+        },
+
+        // Seção 5: Atendimento ao cliente (6 questões) 
+        {
+          id: 'cert_q26',
+          type: 'multiple-choice' as const,
+          question: 'Como você oferece ajuda a um cliente?',
+          options: [
+            'How can I help you today?',
+            'What do you want?',
+            'Why are you here?',
+            'Who are you?'
+          ],
+          correctAnswer: 0,
+          explanation: 'Esta é a forma educada e profissional de oferecer ajuda.'
+        },
+        {
+          id: 'cert_q27',
+          type: 'translation' as const,
+          question: 'Traduza: "Lamento pelo inconveniente"',
+          correctAnswer: 'I apologize for the inconvenience',
+          acceptedVariations: [
+            'i apologize for the inconvenience',
+            'sorry for the inconvenience',
+            'i am sorry for the inconvenience'
+          ]
+        },
+        {
+          id: 'cert_q28',
+          type: 'complete-sentence' as const,
+          question: 'Complete: "Let me _____ that for you"',
+          correctAnswer: 'check',
+          acceptedVariations: ['verify', 'look', 'see']
+        },
+        {
+          id: 'cert_q29',
+          type: 'drag-drop' as const,
+          question: 'Monte: "Thank you for your patience"',
+          words: ['Thank', 'you', 'for', 'your', 'patience'],
+          correctSentence: 'Thank you for your patience',
+          translation: 'Obrigado pela sua paciência'
+        },
+        {
+          id: 'cert_q30',
+          type: 'multiple-choice' as const,
+          question: 'Como você resolve um problema do cliente?',
+          options: [
+            'I\'ll take care of that right away',
+            'That\'s not my problem',
+            'Figure it out yourself',
+            'I don\'t know anything'
+          ],
+          correctAnswer: 0,
+          explanation: 'Demonstra proatividade e compromisso em resolver o problema.'
+        },
+        {
+          id: 'cert_q31',
+          type: 'translation' as const,
+          question: 'Traduza: "Posso transferir você para o departamento correto"',
+          correctAnswer: 'I can transfer you to the right department',
+          acceptedVariations: [
+            'i can transfer you to the correct department',
+            'i can connect you to the right department',
+            'let me transfer you to the right department'
+          ]
+        },
+
+        // Seção 6: Problemas técnicos e soluções (4 questões)
+        {
+          id: 'cert_q32',
+          type: 'multiple-choice' as const,
+          question: 'Como você relata um problema técnico?',
+          options: [
+            'I\'m having trouble with my computer',
+            'My computer is angry at me',
+            'The computer doesn\'t like me',
+            'My computer is sleeping'
+          ],
+          correctAnswer: 0,
+          explanation: '"Having trouble with" é a forma padrão de reportar problemas.'
+        },
+        {
+          id: 'cert_q33',
+          type: 'translation' as const,
+          question: 'Traduza: "Você pode me ajudar a resolver isso?"',
+          correctAnswer: 'Can you help me solve this?',
+          acceptedVariations: [
+            'can you help me fix this',
+            'could you help me solve this',
+            'can you help me resolve this'
+          ]
+        },
+        {
+          id: 'cert_q34',
+          type: 'complete-sentence' as const,
+          question: 'Complete: "The system is _____ down"',
+          correctAnswer: 'shut',
+          acceptedVariations: ['breaking', 'going']
+        },
+        {
+          id: 'cert_q35',
+          type: 'drag-drop' as const,
+          question: 'Monte: "Please restart your computer"',
+          words: ['Please', 'restart', 'your', 'computer'],
+          correctSentence: 'Please restart your computer',
+          translation: 'Por favor, reinicie seu computador'
+        }
+      ]
+    }
   },
   
   viagens: {
