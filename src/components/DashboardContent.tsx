@@ -328,7 +328,7 @@ export default function DashboardContent() {
               </div>
 
               {/* Teste de Certificação A1/A2 */}
-              <Link href="/trilha-progressiva/trabalho">
+              <Link href="/certificacao-a1-a2">
                 <div className="group bg-gradient-to-br from-blue-900/30 to-cyan-900/30 border-2 border-blue-500/30 rounded-3xl p-8 hover:border-blue-400/50 transition-all duration-300 cursor-pointer transform hover:scale-105 h-full flex flex-col">
                   <div className="text-center flex-1 flex flex-col justify-between">
                     <div>
