@@ -924,6 +924,964 @@ export const PROGRESSIVE_TRAILS_DATA = {
         order: 63
       },
 
+      // ===== FRASES ADICIONAIS A1/A2 ESSENCIAIS =====
+      
+      // Conversas matinais e check-in (10 frases)
+      {
+        id: 'work_phrase_64',
+        english: 'How\'s everything?',
+        portuguese: 'Como está tudo?',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Check-in geral',
+        situations: [
+          'Encontrando colega depois de alguns dias → Você: "Hey! How\'s everything?"',
+          'Início de conversa casual → Você: "How\'s everything going with the project?"'
+        ],
+        order: 64
+      },
+      {
+        id: 'work_phrase_65',
+        english: 'Did you sleep well?',
+        portuguese: 'Você dormiu bem?',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Cuidado pessoal',
+        situations: [
+          'Colega parece cansado → Você: "Did you sleep well? You look tired"',
+          'Segunda-feira de manhã → Você: "Did you sleep well? Ready for the week?"'
+        ],
+        order: 65
+      },
+      {
+        id: 'work_phrase_66',
+        english: 'What\'s on the schedule today?',
+        portuguese: 'O que tem na agenda hoje?',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Planejamento do dia',
+        situations: [
+          'Chegando no trabalho → Você: "What\'s on the schedule today?"',
+          'Conversando com assistant → Você: "What\'s on the schedule today? Any meetings?"'
+        ],
+        order: 66
+      },
+      {
+        id: 'work_phrase_67',
+        english: 'Any news?',
+        portuguese: 'Alguma novidade?',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Buscar atualizações',
+        situations: [
+          'Chegando após folga → Você: "Any news while I was out?"',
+          'Início do dia → Você: "Any news from the client?"'
+        ],
+        order: 67
+      },
+      {
+        id: 'work_phrase_68',
+        english: 'Busy day ahead!',
+        portuguese: 'Dia corrido pela frente!',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Antecipação do dia',
+        situations: [
+          'Vendo agenda cheia → Você: "Busy day ahead! Better get started"',
+          'Comentário matinal → Você: "Busy day ahead, but we got this!"'
+        ],
+        order: 68
+      },
+
+      // Gerenciamento de tarefas e prazos (15 frases)
+      {
+        id: 'work_phrase_69',
+        english: 'I need more time.',
+        portuguese: 'Preciso de mais tempo.',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Pedido de extensão',
+        situations: [
+          'Deadline apertado → Você: "I need more time to finish this properly"',
+          'Tarefa complexa → Você: "This is more complex than expected, I need more time"'
+        ],
+        order: 69
+      },
+      {
+        id: 'work_phrase_70',
+        english: 'I\'ll send it soon.',
+        portuguese: 'Vou enviar em breve.',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Promessa de entrega',
+        situations: [
+          'Colega pergunta sobre arquivo → Você: "I\'ll send it soon, just reviewing"',
+          'Cliente aguardando → Você: "I\'ll send it soon, within the hour"'
+        ],
+        order: 70
+      },
+      {
+        id: 'work_phrase_71',
+        english: 'Let me just finish this.',
+        portuguese: 'Deixe-me só terminar isso.',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Pedindo tempo para finalizar',
+        situations: [
+          'Interrupção durante tarefa → Você: "Let me just finish this, then I\'ll help you"',
+          'Colega quer conversar → Você: "Let me just finish this email"'
+        ],
+        order: 71
+      },
+      {
+        id: 'work_phrase_72',
+        english: 'I have a lot to do today.',
+        portuguese: 'Tenho muito para fazer hoje.',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Expressar alta carga de trabalho',
+        situations: [
+          'Explicando correria → Você: "I have a lot to do today, can we talk later?"',
+          'Organizando prioridades → Você: "I have a lot to do today, what\'s most urgent?"'
+        ],
+        order: 72
+      },
+      {
+        id: 'work_phrase_73',
+        english: 'I\'ll start after lunch.',
+        portuguese: 'Vou começar depois do almoço.',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Planejamento de horário',
+        situations: [
+          'Nova tarefa recebida → Você: "I\'ll start after lunch, finishing this first"',
+          'Organizando agenda → Você: "I\'ll start after lunch when I have more time"'
+        ],
+        order: 73
+      },
+      {
+        id: 'work_phrase_74',
+        english: 'I\'m multitasking today.',
+        portuguese: 'Estou fazendo várias coisas hoje.',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Trabalho simultâneo',
+        situations: [
+          'Dia corrido → Você: "I\'m multitasking today, bear with me"',
+          'Várias demandas → Você: "I\'m multitasking today between projects"'
+        ],
+        order: 74
+      },
+      {
+        id: 'work_phrase_75',
+        english: 'It\'s in progress.',
+        portuguese: 'Está em andamento.',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Status de tarefa',
+        situations: [
+          'Pergunta sobre projeto → Você: "It\'s in progress, should be done tomorrow"',
+          'Update de status → Você: "It\'s in progress, about 50% complete"'
+        ],
+        order: 75
+      },
+      {
+        id: 'work_phrase_76',
+        english: 'I ran into an issue.',
+        portuguese: 'Encontrei um problema.',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Reportar problema',
+        situations: [
+          'Bloqueio técnico → Você: "I ran into an issue with the software"',
+          'Complicação inesperada → Você: "I ran into an issue, need some help"'
+        ],
+        order: 76
+      },
+
+      // Comunicação digital e envios (10 frases)
+      {
+        id: 'work_phrase_77',
+        english: 'I sent it to you.',
+        portuguese: 'Enviei para você.',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Confirmação de envio',
+        situations: [
+          'Confirmando entrega → Você: "I sent it to you this morning, check your email"',
+          'Esclarecendo envio → Você: "I sent it to you yesterday, did you receive it?"'
+        ],
+        order: 77
+      },
+      {
+        id: 'work_phrase_78',
+        english: 'Did you get it?',
+        portuguese: 'Você recebeu?',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Confirmação de recebimento',
+        situations: [
+          'Após enviar email → Você: "I sent the report, did you get it?"',
+          'Seguimento de entrega → Você: "Did you get it? Let me know if you need anything else"'
+        ],
+        order: 78
+      },
+      {
+        id: 'work_phrase_79',
+        english: 'I didn\'t receive it yet.',
+        portuguese: 'Ainda não recebi.',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Indicar não recebimento',
+        situations: [
+          'Aguardando arquivo → Você: "I didn\'t receive it yet, can you resend?"',
+          'Email esperado → Você: "I didn\'t receive it yet, maybe check the email address?"'
+        ],
+        order: 79
+      },
+      {
+        id: 'work_phrase_80',
+        english: 'It\'s in the attachment.',
+        portuguese: 'Está no anexo.',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Localizar arquivo',
+        situations: [
+          'Pergunta sobre documento → Você: "It\'s in the attachment, check the PDF"',
+          'Enviando arquivo → Você: "The data you need is in the attachment"'
+        ],
+        order: 80
+      },
+      {
+        id: 'work_phrase_81',
+        english: 'Let me check.',
+        portuguese: 'Deixe-me verificar.',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Verificar informação',
+        situations: [
+          'Pergunta sobre dados → Você: "Let me check the latest numbers"',
+          'Dúvida sobre status → Você: "Let me check with the team"'
+        ],
+        order: 81
+      },
+      {
+        id: 'work_phrase_82',
+        english: 'Can you repeat that?',
+        portuguese: 'Pode repetir isso?',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Pedido de repetição',
+        situations: [
+          'Não entendeu bem → Você: "Sorry, can you repeat that?"',
+          'Ruído na ligação → Você: "Can you repeat that? I couldn\'t hear clearly"'
+        ],
+        order: 82
+      },
+      {
+        id: 'work_phrase_83',
+        english: 'Sorry, I didn\'t get that.',
+        portuguese: 'Desculpe, não entendi.',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Não compreensão',
+        situations: [
+          'Explicação rápida → Você: "Sorry, I didn\'t get that. Can you explain again?"',
+          'Instruções complexas → Você: "Sorry, I didn\'t get that last part"'
+        ],
+        order: 83
+      },
+      {
+        id: 'work_phrase_84',
+        english: 'I understand.',
+        portuguese: 'Eu entendo.',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Confirmar compreensão',
+        situations: [
+          'Após explicação → Você: "I understand, I\'ll take care of it"',
+          'Instruções recebidas → Você: "I understand the requirements"'
+        ],
+        order: 84
+      },
+
+      // Reuniões e agenda (8 frases)
+      {
+        id: 'work_phrase_85',
+        english: 'What time is the meeting?',
+        portuguese: 'Que horas é a reunião?',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Confirmar horário',
+        situations: [
+          'Agenda confusa → Você: "What time is the meeting with the client?"',
+          'Planejamento do dia → Você: "What time is the meeting? I need to prepare"'
+        ],
+        order: 85
+      },
+      {
+        id: 'work_phrase_86',
+        english: 'I\'m running late.',
+        portuguese: 'Estou atrasado.',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Avisar sobre atraso',
+        situations: [
+          'Trânsito complicado → Você: "I\'m running late, start without me"',
+          'Tarefa demorou → Você: "I\'m running late for the meeting, 5 more minutes"'
+        ],
+        order: 86
+      },
+      {
+        id: 'work_phrase_87',
+        english: 'I\'m joining now.',
+        portuguese: 'Estou entrando agora.',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Entrada em reunião',
+        situations: [
+          'Ligação online → Você: "I\'m joining now, sorry for the delay"',
+          'Reunião começou → Você: "I\'m joining now, what did I miss?"'
+        ],
+        order: 87
+      },
+      {
+        id: 'work_phrase_88',
+        english: 'Great meeting!',
+        portuguese: 'Ótima reunião!',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Feedback positivo',
+        situations: [
+          'Final de reunião produtiva → Você: "Great meeting! Let\'s follow up tomorrow"',
+          'Boa discussão → Você: "Great meeting, thanks everyone"'
+        ],
+        order: 88
+      },
+
+      // Expressões de concordância e feedback (10 frases)
+      {
+        id: 'work_phrase_89',
+        english: 'I agree.',
+        portuguese: 'Concordo.',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Expressão de concordância',
+        situations: [
+          'Proposta boa → Você: "I agree, that\'s the best approach"',
+          'Discussão em grupo → Você: "I agree with Sarah\'s suggestion"'
+        ],
+        order: 89
+      },
+      {
+        id: 'work_phrase_90',
+        english: 'Let me think.',
+        portuguese: 'Deixe-me pensar.',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Pedir tempo para refletir',
+        situations: [
+          'Pergunta complexa → Você: "Let me think about that for a moment"',
+          'Decisão importante → Você: "Let me think and get back to you"'
+        ],
+        order: 90
+      },
+      {
+        id: 'work_phrase_91',
+        english: 'That\'s fine.',
+        portuguese: 'Está bem.',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Aceitação tranquila',
+        situations: [
+          'Mudança de planos → Você: "That\'s fine, we can adapt"',
+          'Proposta alternativa → Você: "That\'s fine with me"'
+        ],
+        order: 91
+      },
+      {
+        id: 'work_phrase_92',
+        english: 'Not really.',
+        portuguese: 'Na verdade não.',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Discordância educada',
+        situations: [
+          'Pergunta sobre preferência → Você: "Do you like this approach?" "Not really"',
+          'Opinião divergente → Você: "Is this working?" "Not really, we need changes"'
+        ],
+        order: 92
+      },
+      {
+        id: 'work_phrase_93',
+        english: 'I hope so.',
+        portuguese: 'Espero que sim.',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Expressar esperança',
+        situations: [
+          'Expectativa positiva → Você: "Will the project finish on time?" "I hope so"',
+          'Desejo sobre resultado → Você: "Think the client will approve?" "I hope so"'
+        ],
+        order: 93
+      },
+      {
+        id: 'work_phrase_94',
+        english: 'Let\'s see.',
+        portuguese: 'Vamos ver.',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Aguardar para decidir',
+        situations: [
+          'Incerteza sobre resultado → Você: "Will this work?" "Let\'s see"',
+          'Aguardar desenvolvimento → Você: "How will the client react?" "Let\'s see"'
+        ],
+        order: 94
+      },
+      {
+        id: 'work_phrase_95',
+        english: 'Just a moment.',
+        portuguese: 'Só um momento.',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Pedir pausa breve',
+        situations: [
+          'Precisa verificar algo → Você: "Just a moment, let me check this"',
+          'Telefone tocando → Você: "Just a moment, I need to take this call"'
+        ],
+        order: 95
+      },
+      {
+        id: 'work_phrase_96',
+        english: 'That\'s a great idea.',
+        portuguese: 'Essa é uma ótima ideia.',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Elogio à sugestão',
+        situations: [
+          'Colega sugere melhoria → Você: "That\'s a great idea! Let\'s try it"',
+          'Proposta criativa → Você: "That\'s a great idea, how do we implement it?"'
+        ],
+        order: 96
+      },
+
+      // Finalizando o dia de trabalho (8 frases)
+      {
+        id: 'work_phrase_97',
+        english: 'I\'m heading out.',
+        portuguese: 'Estou saindo.',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Anunciar saída',
+        situations: [
+          'Final do expediente → Você: "I\'m heading out, see you tomorrow"',
+          'Saindo para compromisso → Você: "I\'m heading out for the meeting"'
+        ],
+        order: 97
+      },
+      {
+        id: 'work_phrase_98',
+        english: 'Take care!',
+        portuguese: 'Se cuide!',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Despedida carinhosa',
+        situations: [
+          'Colega doente → Você: "Take care! Get well soon"',
+          'Final de semana → Você: "Take care! Enjoy your weekend"'
+        ],
+        order: 98
+      },
+      {
+        id: 'work_phrase_99',
+        english: 'Good job today!',
+        portuguese: 'Bom trabalho hoje!',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Reconhecimento do esforço',
+        situations: [
+          'Final de projeto → Você: "Good job today! We made great progress"',
+          'Dia produtivo → Você: "Good job today, everyone!"'
+        ],
+        order: 99
+      },
+      {
+        id: 'work_phrase_100',
+        english: 'Let\'s finish this tomorrow.',
+        portuguese: 'Vamos terminar isso amanhã.',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Adiar conclusão',
+        situations: [
+          'Final do expediente → Você: "It\'s late, let\'s finish this tomorrow"',
+          'Tarefa complexa → Você: "We\'re tired, let\'s finish this tomorrow"'
+        ],
+        order: 100
+      },
+      {
+        id: 'work_phrase_101',
+        english: 'It\'s time to go.',
+        portuguese: 'É hora de ir.',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Indicar fim do horário',
+        situations: [
+          'Horário de saída → Você: "It\'s 6pm, it\'s time to go"',
+          'Encerrando atividades → Você: "It\'s time to go, let\'s continue tomorrow"'
+        ],
+        order: 101
+      },
+      {
+        id: 'work_phrase_102',
+        english: 'Have a great evening!',
+        portuguese: 'Tenha uma ótima noite!',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Despedida noturna',
+        situations: [
+          'Saindo à noite → Você: "Have a great evening! See you tomorrow"',
+          'Final de expediente → Você: "Have a great evening with your family"'
+        ],
+        order: 102
+      },
+      {
+        id: 'work_phrase_103',
+        english: 'I\'m logging off now.',
+        portuguese: 'Estou desconectando agora.',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Sair do sistema',
+        situations: [
+          'Trabalho remoto → Você: "I\'m logging off now, talk tomorrow"',
+          'Final do home office → Você: "I\'m logging off now, good night everyone"'
+        ],
+        order: 103
+      },
+      {
+        id: 'work_phrase_104',
+        english: 'Don\'t forget to save.',
+        portuguese: 'Não esqueça de salvar.',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Lembrete importante',
+        situations: [
+          'Colega trabalhando → Você: "Don\'t forget to save your work"',
+          'Final do dia → Você: "Don\'t forget to save before you leave"'
+        ],
+        order: 104
+      },
+
+      // Atendimento ao cliente básico (10 frases)
+      {
+        id: 'work_phrase_105',
+        english: 'How can I help you today?',
+        portuguese: 'Como posso ajudá-lo hoje?',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Abertura de atendimento',
+        situations: [
+          'Cliente chegou → Você: "Good morning! How can I help you today?"',
+          'Ligação de suporte → Você: "Thank you for calling, how can I help you today?"'
+        ],
+        order: 105
+      },
+      {
+        id: 'work_phrase_106',
+        english: 'Thank you for your patience.',
+        portuguese: 'Obrigado pela sua paciência.',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Agradecer espera',
+        situations: [
+          'Após resolver problema → Você: "Thank you for your patience while I fixed this"',
+          'Demora no atendimento → Você: "Thank you for your patience, how can I help?"'
+        ],
+        order: 106
+      },
+      {
+        id: 'work_phrase_107',
+        english: 'I\'ll check that for you.',
+        portuguese: 'Vou verificar isso para você.',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Oferecer verificação',
+        situations: [
+          'Dúvida do cliente → Você: "I\'ll check that for you right away"',
+          'Informação solicitada → Você: "I\'ll check that for you in our system"'
+        ],
+        order: 107
+      },
+      {
+        id: 'work_phrase_108',
+        english: 'Let me confirm the details.',
+        portuguese: 'Deixe-me confirmar os detalhes.',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Confirmar informações',
+        situations: [
+          'Pedido do cliente → Você: "Let me confirm the details before we proceed"',
+          'Dados importantes → Você: "Let me confirm the details with you"'
+        ],
+        order: 108
+      },
+      {
+        id: 'work_phrase_109',
+        english: 'I understand your concern.',
+        portuguese: 'Entendo sua preocupação.',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Demonstrar empatia',
+        situations: [
+          'Cliente preocupado → Você: "I understand your concern, let me help"',
+          'Problema relatado → Você: "I understand your concern about the delivery"'
+        ],
+        order: 109
+      },
+      {
+        id: 'work_phrase_110',
+        english: 'One moment, please.',
+        portuguese: 'Um momento, por favor.',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Pedir pausa formal',
+        situations: [
+          'Verificando sistema → Você: "One moment, please, I\'m checking your account"',
+          'Consultando informação → Você: "One moment, please, let me find that"'
+        ],
+        order: 110
+      },
+      {
+        id: 'work_phrase_111',
+        english: 'I\'ll get back to you shortly.',
+        portuguese: 'Retorno para você em breve.',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Promessa de retorno',
+        situations: [
+          'Precisa consultar → Você: "I\'ll get back to you shortly with an answer"',
+          'Investigação necessária → Você: "I\'ll get back to you shortly after I check this"'
+        ],
+        order: 111
+      },
+      {
+        id: 'work_phrase_112',
+        english: 'We\'ll take care of it.',
+        portuguese: 'Vamos cuidar disso.',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Assumir responsabilidade',
+        situations: [
+          'Problema do cliente → Você: "Don\'t worry, we\'ll take care of it"',
+          'Solicitação especial → Você: "We\'ll take care of it right away"'
+        ],
+        order: 112
+      },
+
+      // Problemas técnicos básicos (8 frases)
+      {
+        id: 'work_phrase_113',
+        english: 'It\'s not working.',
+        portuguese: 'Não está funcionando.',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Reportar problema',
+        situations: [
+          'Sistema com falha → Você: "The printer is not working"',
+          'Software com erro → Você: "My computer is not working properly"'
+        ],
+        order: 113
+      },
+      {
+        id: 'work_phrase_114',
+        english: 'Try restarting it.',
+        portuguese: 'Tente reiniciar.',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Sugestão de solução',
+        situations: [
+          'Problema técnico → Você: "Try restarting it, that usually helps"',
+          'Sistema lento → Você: "Try restarting it to clear the memory"'
+        ],
+        order: 114
+      },
+      {
+        id: 'work_phrase_115',
+        english: 'I\'ll fix it.',
+        portuguese: 'Vou consertar.',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Promessa de reparo',
+        situations: [
+          'Erro identificado → Você: "I found the problem, I\'ll fix it"',
+          'Assumindo tarefa → Você: "Don\'t worry, I\'ll fix it"'
+        ],
+        order: 115
+      },
+      {
+        id: 'work_phrase_116',
+        english: 'There\'s an error.',
+        portuguese: 'Há um erro.',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Identificar problema',
+        situations: [
+          'Verificando sistema → Você: "There\'s an error in the code"',
+          'Analisando relatório → Você: "There\'s an error in these numbers"'
+        ],
+        order: 116
+      },
+      {
+        id: 'work_phrase_117',
+        english: 'Something went wrong.',
+        portuguese: 'Algo deu errado.',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Problema geral',
+        situations: [
+          'Processo falhou → Você: "Something went wrong with the upload"',
+          'Resultado inesperado → Você: "Something went wrong, let me check"'
+        ],
+        order: 117
+      },
+      {
+        id: 'work_phrase_118',
+        english: 'The system is down.',
+        portuguese: 'O sistema está fora do ar.',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Sistema inoperante',
+        situations: [
+          'Falha total → Você: "The system is down, we can\'t access anything"',
+          'Manutenção → Você: "The system is down for updates"'
+        ],
+        order: 118
+      },
+      {
+        id: 'work_phrase_119',
+        english: 'It\'s back online.',
+        portuguese: 'Está online novamente.',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Sistema restaurado',
+        situations: [
+          'Após reparo → Você: "Good news! It\'s back online"',
+          'Sistema funcionando → Você: "It\'s back online, you can try again"'
+        ],
+        order: 119
+      },
+      {
+        id: 'work_phrase_120',
+        english: 'Everything\'s working now.',
+        portuguese: 'Tudo está funcionando agora.',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Confirmação de funcionamento',
+        situations: [
+          'Após correção → Você: "Everything\'s working now, you can proceed"',
+          'Teste concluído → Você: "Everything\'s working now, problem solved"'
+        ],
+        order: 120
+      },
+
+      // Comunicação digital e online (8 frases)
+      {
+        id: 'work_phrase_121',
+        english: 'You\'re on mute.',
+        portuguese: 'Você está no mudo.',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Problema de áudio',
+        situations: [
+          'Reunião online → Você: "Hi John, you\'re on mute, we can\'t hear you"',
+          'Chamada de vídeo → Você: "You\'re on mute, can you unmute please?"'
+        ],
+        order: 121
+      },
+      {
+        id: 'work_phrase_122',
+        english: 'Can you hear me?',
+        portuguese: 'Você consegue me ouvir?',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Verificar áudio',
+        situations: [
+          'Início de ligação → Você: "Can you hear me? Is the audio working?"',
+          'Problema técnico → Você: "Can you hear me clearly now?"'
+        ],
+        order: 122
+      },
+      {
+        id: 'work_phrase_123',
+        english: 'I can\'t see your screen.',
+        portuguese: 'Não consigo ver sua tela.',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Problema de compartilhamento',
+        situations: [
+          'Apresentação online → Você: "I can\'t see your screen, are you sharing?"',
+          'Demonstração → Você: "I can\'t see your screen clearly"'
+        ],
+        order: 123
+      },
+      {
+        id: 'work_phrase_124',
+        english: 'Can you share your screen?',
+        portuguese: 'Você pode compartilhar sua tela?',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Solicitar compartilhamento',
+        situations: [
+          'Precisando ver documento → Você: "Can you share your screen so we can see?"',
+          'Apresentação → Você: "Can you share your screen with the presentation?"'
+        ],
+        order: 124
+      },
+      {
+        id: 'work_phrase_125',
+        english: 'The connection is bad.',
+        portuguese: 'A conexão está ruim.',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Problema de conexão',
+        situations: [
+          'Chamada instável → Você: "The connection is bad, you\'re cutting out"',
+          'Vídeo travando → Você: "The connection is bad, can we try again?"'
+        ],
+        order: 125
+      },
+      {
+        id: 'work_phrase_126',
+        english: 'Let\'s use the chat.',
+        portuguese: 'Vamos usar o chat.',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Alternativa de comunicação',
+        situations: [
+          'Áudio não funciona → Você: "Let\'s use the chat if audio isn\'t working"',
+          'Informação adicional → Você: "Let\'s use the chat for links and details"'
+        ],
+        order: 126
+      },
+
+      // Passado e futuro simples no trabalho (10 frases)
+      {
+        id: 'work_phrase_127',
+        english: 'I finished the report yesterday.',
+        portuguese: 'Terminei o relatório ontem.',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Passado recente',
+        situations: [
+          'Update de status → Você: "I finished the report yesterday, it\'s ready"',
+          'Prestação de contas → Você: "I finished the report yesterday as requested"'
+        ],
+        order: 127
+      },
+      {
+        id: 'work_phrase_128',
+        english: 'I worked late last night.',
+        portuguese: 'Trabalhei até tarde ontem à noite.',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Explicar esforço extra',
+        situations: [
+          'Justificar progresso → Você: "I worked late last night to finish this"',
+          'Explicar cansaço → Você: "I worked late last night, sorry if I\'m tired"'
+        ],
+        order: 128
+      },
+      {
+        id: 'work_phrase_129',
+        english: 'I sent the email this morning.',
+        portuguese: 'Enviei o email esta manhã.',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Confirmação de envio',
+        situations: [
+          'Confirmando ação → Você: "I sent the email this morning, check your inbox"',
+          'Update ao chefe → Você: "I sent the email this morning as you requested"'
+        ],
+        order: 129
+      },
+      {
+        id: 'work_phrase_130',
+        english: 'I had a meeting earlier.',
+        portuguese: 'Tive uma reunião mais cedo.',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Explicar atividade passada',
+        situations: [
+          'Chegando atrasado → Você: "Sorry I\'m late, I had a meeting earlier"',
+          'Compartilhando informação → Você: "I had a meeting earlier with the client"'
+        ],
+        order: 130
+      },
+      {
+        id: 'work_phrase_131',
+        english: 'I\'ll send it later.',
+        portuguese: 'Vou enviar mais tarde.',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Promessa futura',
+        situations: [
+          'Não está pronto → Você: "I\'ll send it later when it\'s complete"',
+          'Planejando entrega → Você: "I\'ll send it later this afternoon"'
+        ],
+        order: 131
+      },
+      {
+        id: 'work_phrase_132',
+        english: 'I\'ll be at the office tomorrow.',
+        portuguese: 'Estarei no escritório amanhã.',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Informar presença futura',
+        situations: [
+          'Confirmando presença → Você: "I\'ll be at the office tomorrow for the meeting"',
+          'Home office → Você: "I\'ll be at the office tomorrow if you need me"'
+        ],
+        order: 132
+      },
+      {
+        id: 'work_phrase_133',
+        english: 'I\'ll talk to him soon.',
+        portuguese: 'Vou falar com ele em breve.',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Promessa de contato',
+        situations: [
+          'Delegação → Você: "I\'ll talk to him soon about the project"',
+          'Resolução pendente → Você: "I\'ll talk to him soon to clarify this"'
+        ],
+        order: 133
+      },
+      {
+        id: 'work_phrase_134',
+        english: 'I\'m going to check that now.',
+        portuguese: 'Vou verificar isso agora.',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Ação imediata futura',
+        situations: [
+          'Dúvida levantada → Você: "Good point, I\'m going to check that now"',
+          'Pedido de verificação → Você: "I\'m going to check that now and confirm"'
+        ],
+        order: 134
+      },
+      {
+        id: 'work_phrase_135',
+        english: 'I\'ll finish it before lunch.',
+        portuguese: 'Vou terminar antes do almoço.',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Prazo específico',
+        situations: [
+          'Compromisso de entrega → Você: "I\'ll finish it before lunch as promised"',
+          'Planejamento → Você: "I\'ll finish it before lunch so we can review together"'
+        ],
+        order: 135
+      },
+
       // ===== NÍVEL INTERMEDIÁRIO: COMUNICAÇÃO MAIS COMPLEXA =====
       
       // Reuniões e agendamentos (15 frases)
