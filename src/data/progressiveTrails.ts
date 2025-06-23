@@ -103,6 +103,10 @@ export const PROGRESSIVE_TRAILS_DATA = {
         difficulty: 'beginner' as const,
         requiredLevel: 'beginner' as const,
         context: 'Saudação matinal formal',
+        situations: [
+          'Chegando no escritório de manhã → Você: "Good morning!" para os colegas',
+          'Entrando em uma reunião matinal → Você: "Good morning everyone!"'
+        ],
         order: 1
       },
       {
@@ -112,6 +116,10 @@ export const PROGRESSIVE_TRAILS_DATA = {
         difficulty: 'beginner' as const,
         requiredLevel: 'beginner' as const,
         context: 'Saudação matinal casual',
+        situations: [
+          'Passando pelo corredor e vendo um colega → Você: "Morning!"',
+          'Chegando atrasado e cumprimentando rapidamente → Você: "Morning!" enquanto anda'
+        ],
         order: 2
       },
       {
@@ -121,6 +129,10 @@ export const PROGRESSIVE_TRAILS_DATA = {
         difficulty: 'beginner' as const,
         requiredLevel: 'beginner' as const,
         context: 'Cumprimento casual',
+        situations: [
+          'Encontrando um colega na cozinha → Você: "Hey! How\'s it going?"',
+          'Colega parece estressado → Você: "How\'s it going? Everything okay?"'
+        ],
         order: 3
       },
       {
@@ -130,6 +142,10 @@ export const PROGRESSIVE_TRAILS_DATA = {
         difficulty: 'beginner' as const,
         requiredLevel: 'beginner' as const,
         context: 'Small talk sobre o dia',
+        situations: [
+          'Vendo colega correndo com papéis → Você: "Busy day today, huh?"',
+          'Notando movimento no escritório → Você: "Busy day today, huh?"'
+        ],
         order: 4
       },
       {
@@ -139,6 +155,10 @@ export const PROGRESSIVE_TRAILS_DATA = {
         difficulty: 'beginner' as const,
         requiredLevel: 'beginner' as const,
         context: 'Chegada ao trabalho',
+        situations: [
+          'Colega: "Você estava na reunião?" → Você: "No, I just got in"',
+          'Chefe: "Você viu meu email?" → Você: "Sorry, I just got in"'
+        ],
         order: 5
       },
       {
@@ -148,6 +168,10 @@ export const PROGRESSIVE_TRAILS_DATA = {
         difficulty: 'beginner' as const,
         requiredLevel: 'beginner' as const,
         context: 'Início do trabalho',
+        situations: [
+          'Chegando na mesa de manhã → Você: "Alright, time to get started!"',
+          'Após o café → Você: "Okay team, time to get started"'
+        ],
         order: 6
       },
       {
@@ -157,6 +181,10 @@ export const PROGRESSIVE_TRAILS_DATA = {
         difficulty: 'beginner' as const,
         requiredLevel: 'beginner' as const,
         context: 'Motivação para começar',
+        situations: [
+          'Início de projeto em equipe → Você: "Alright everyone, let\'s get to it!"',
+          'Voltando do almoço → Você: "Break\'s over, let\'s get to it"'
+        ],
         order: 7
       },
       {
@@ -166,6 +194,10 @@ export const PROGRESSIVE_TRAILS_DATA = {
         difficulty: 'beginner' as const,
         requiredLevel: 'beginner' as const,
         context: 'Saída do trabalho',
+        situations: [
+          'Final do expediente → Você: "I\'m heading out now, see you tomorrow!"',
+          'Saindo para almoço → Você: "I\'m heading out now for lunch"'
+        ],
         order: 8
       },
       {
@@ -175,6 +207,10 @@ export const PROGRESSIVE_TRAILS_DATA = {
         difficulty: 'beginner' as const,
         requiredLevel: 'beginner' as const,
         context: 'Despedida do trabalho',
+        situations: [
+          'Saindo do escritório à noite → Você: "See you tomorrow!"',
+          'Final da sexta-feira → Você: "See you tomorrow!" (ou Monday)'
+        ],
         order: 9
       },
       {
@@ -184,6 +220,10 @@ export const PROGRESSIVE_TRAILS_DATA = {
         difficulty: 'beginner' as const,
         requiredLevel: 'beginner' as const,
         context: 'Despedida casual',
+        situations: [
+          'Colega saindo para o almoço → Você: "Have a good one!"',
+          'Despedida casual no elevador → Você: "Have a good one!"'
+        ],
         order: 10
       },
 
@@ -208,6 +248,10 @@ export const PROGRESSIVE_TRAILS_DATA = {
         difficulty: 'beginner' as const,
         requiredLevel: 'beginner' as const,
         context: 'Resposta casual',
+        situations: [
+          'Colega: "How are you doing?" → Você: "Not bad, and you?"',
+          'Cliente: "How\'s everything?" → Você: "Not bad, and you?"'
+        ],
         order: 12
       },
       {
@@ -217,6 +261,10 @@ export const PROGRESSIVE_TRAILS_DATA = {
         difficulty: 'beginner' as const,
         requiredLevel: 'beginner' as const,
         context: 'Resposta sobre rotina',
+        situations: [
+          'Colega: "What\'s new?" → Você: "Same old, same old"',
+          'Amigo: "How\'s work?" → Você: "Same old, same old"'
+        ],
         order: 13
       },
       {
@@ -226,6 +274,10 @@ export const PROGRESSIVE_TRAILS_DATA = {
         difficulty: 'beginner' as const,
         requiredLevel: 'beginner' as const,
         context: 'Resposta positiva',
+        situations: [
+          'Chefe: "How are things going?" → Você: "Can\'t complain!"',
+          'Cliente: "How\'s business?" → Você: "Can\'t complain"'
+        ],
         order: 14
       },
       {
@@ -235,6 +287,10 @@ export const PROGRESSIVE_TRAILS_DATA = {
         difficulty: 'beginner' as const,
         requiredLevel: 'beginner' as const,
         context: 'Pergunta sobre agenda',
+        situations: [
+          'Planejando horário para conversar → Você: "What time is your meeting?"',
+          'Vendo colega se preparando → Você: "What time is your meeting?"'
+        ],
         order: 15
       },
       {
@@ -244,6 +300,10 @@ export const PROGRESSIVE_TRAILS_DATA = {
         difficulty: 'beginner' as const,
         requiredLevel: 'beginner' as const,
         context: 'Pausa para café',
+        situations: [
+          'Chegando cedo no trabalho → Você: "Let me grab a coffee first"',
+          'Antes de uma reunião → Você: "Let me grab a coffee first, then we can start"'
+        ],
         order: 16
       },
       {
@@ -253,6 +313,10 @@ export const PROGRESSIVE_TRAILS_DATA = {
         difficulty: 'beginner' as const,
         requiredLevel: 'beginner' as const,
         context: 'Explicar o que está fazendo',
+        situations: [
+          'Colega: "What are you working on?" → Você: "Just catching up on emails"',
+          'Chefe passa pela sua mesa → Você: "Just catching up on emails"'
+        ],
         order: 17
       },
       {
@@ -262,6 +326,10 @@ export const PROGRESSIVE_TRAILS_DATA = {
         difficulty: 'beginner' as const,
         requiredLevel: 'beginner' as const,
         context: 'Cumprimento entre colegas',
+        situations: [
+          'Encontrando um amigo do trabalho → Você: "Hey! What\'s up?"',
+          'Colega chega na sua mesa → Você: "What\'s up?"'
+        ],
         order: 18
       },
       {
@@ -271,6 +339,10 @@ export const PROGRESSIVE_TRAILS_DATA = {
         difficulty: 'beginner' as const,
         requiredLevel: 'beginner' as const,
         context: 'Dar tempo ao colega',
+        situations: [
+          'Colega procurando arquivo → Você: "Take your time, no rush"',
+          'Alguém pensando na resposta → Você: "Take your time"'
+        ],
         order: 19
       },
       {
@@ -280,6 +352,10 @@ export const PROGRESSIVE_TRAILS_DATA = {
         difficulty: 'beginner' as const,
         requiredLevel: 'beginner' as const,
         context: 'Sem urgência',
+        situations: [
+          'Pedindo algo para colega → Você: "Can you send it today? No rush though"',
+          'Colega se desculpando por demora → Você: "No rush, take your time"'
+        ],
         order: 20
       },
       {
@@ -289,6 +365,10 @@ export const PROGRESSIVE_TRAILS_DATA = {
         difficulty: 'beginner' as const,
         requiredLevel: 'beginner' as const,
         context: 'Concordar com lógica',
+        situations: [
+          'Colega explica um processo → Você: "Oh, that makes sense!"',
+          'Chefe justifica uma decisão → Você: "Yes, that makes sense"'
+        ],
         order: 21
       },
       {
@@ -298,6 +378,10 @@ export const PROGRESSIVE_TRAILS_DATA = {
         difficulty: 'beginner' as const,
         requiredLevel: 'beginner' as const,
         context: 'Confirmar compreensão',
+        situations: [
+          'Colega explica instruções → Você: "Got it! I\'ll do that"',
+          'Chefe dá orientações → Você: "Got it, thanks!"'
+        ],
         order: 22
       },
       {
@@ -307,6 +391,10 @@ export const PROGRESSIVE_TRAILS_DATA = {
         difficulty: 'beginner' as const,
         requiredLevel: 'beginner' as const,
         context: 'Mostrar compreensão',
+        situations: [
+          'Após explicação complexa → Você: "Ah, I see what you mean now"',
+          'Colega dá sugestão → Você: "I see what you mean, good point"'
+        ],
         order: 23
       },
       {
@@ -316,6 +404,10 @@ export const PROGRESSIVE_TRAILS_DATA = {
         difficulty: 'beginner' as const,
         requiredLevel: 'beginner' as const,
         context: 'Concordância enfática',
+        situations: [
+          'Colega: "This process is confusing" → Você: "Exactly! I think so too"',
+          'Cliente: "We need better communication" → Você: "Exactly!"'
+        ],
         order: 24
       },
       {
@@ -325,6 +417,10 @@ export const PROGRESSIVE_TRAILS_DATA = {
         difficulty: 'beginner' as const,
         requiredLevel: 'beginner' as const,
         context: 'Concordar com colega',
+        situations: [
+          'Colega aponta erro → Você: "You\'re right, I\'ll fix that"',
+          'Discussão de ideias → Você: "You\'re right, that\'s better"'
+        ],
         order: 25
       },
 
@@ -362,6 +458,10 @@ export const PROGRESSIVE_TRAILS_DATA = {
         difficulty: 'beginner' as const,
         requiredLevel: 'beginner' as const,
         context: 'Email com anexo',
+        situations: [
+          'Enviando relatório por email → "Please find attached the monthly report"',
+          'Enviando documento → "Please find attached the contract for review"'
+        ],
         order: 28
       },
       {
@@ -371,6 +471,10 @@ export const PROGRESSIVE_TRAILS_DATA = {
         difficulty: 'beginner' as const,
         requiredLevel: 'beginner' as const,
         context: 'Sigla comum em emails',
+        situations: [
+          'Email informativo → "FYI - meeting moved to 3pm"',
+          'Compartilhando informação → "FYI, the client approved the proposal"'
+        ],
         order: 29
       },
       {
@@ -393,6 +497,10 @@ export const PROGRESSIVE_TRAILS_DATA = {
         difficulty: 'beginner' as const,
         requiredLevel: 'beginner' as const,
         context: 'Aprovação casual',
+        situations: [
+          'Colega sugere reunião → Você: "Tomorrow at 2pm? Sounds good!"',
+          'Plano proposto → Você: "Sounds good, let\'s do it!"'
+        ],
         order: 31
       },
       {
@@ -402,6 +510,10 @@ export const PROGRESSIVE_TRAILS_DATA = {
         difficulty: 'beginner' as const,
         requiredLevel: 'beginner' as const,
         context: 'Agradecimento por email',
+        situations: [
+          'Pedindo favor por email → "Can you review this? Thanks in advance"',
+          'Solicitando informação → "Please send the data. Thanks in advance"'
+        ],
         order: 32
       },
       {
@@ -411,6 +523,10 @@ export const PROGRESSIVE_TRAILS_DATA = {
         difficulty: 'beginner' as const,
         requiredLevel: 'beginner' as const,
         context: 'Resposta tranquilizadora',
+        situations: [
+          'Colega se desculpa → Você: "No worries, it happens"',
+          'Cliente agradece → Você: "No worries, happy to help"'
+        ],
         order: 33
       },
       {
@@ -420,6 +536,10 @@ export const PROGRESSIVE_TRAILS_DATA = {
         difficulty: 'beginner' as const,
         requiredLevel: 'beginner' as const,
         context: 'Resposta positiva',
+        situations: [
+          'Pedido de ajuda → Você: "Can you help me?" → Colega: "No problem!"',
+          'Agradecimento → Cliente: "Thank you!" → Você: "No problem"'
+        ],
         order: 34
       },
       {
@@ -429,6 +549,10 @@ export const PROGRESSIVE_TRAILS_DATA = {
         difficulty: 'beginner' as const,
         requiredLevel: 'beginner' as const,
         context: 'Pedido de arquivo',
+        situations: [
+          'Precisando de documento → Você: "Can you send it over by email?"',
+          'Solicitando arquivo → Você: "Do you have the report? Can you send it over?"'
+        ],
         order: 35
       },
       {
@@ -438,6 +562,10 @@ export const PROGRESSIVE_TRAILS_DATA = {
         difficulty: 'beginner' as const,
         requiredLevel: 'beginner' as const,
         context: 'CC em email',
+        situations: [
+          'Incluindo alguém no email → "I\'m copying you on this email"',
+          'Mantendo informado → "I\'m copying you so you\'re in the loop"'
+        ],
         order: 36
       },
 
@@ -462,6 +590,10 @@ export const PROGRESSIVE_TRAILS_DATA = {
         difficulty: 'beginner' as const,
         requiredLevel: 'beginner' as const,
         context: 'Compromisso imediato',
+        situations: [
+          'Chefe pede tarefa urgente → Você: "I\'ll do it right away"',
+          'Cliente solicita correção → Você: "I\'ll do it right away, sorry"'
+        ],
         order: 38
       },
       {
@@ -471,6 +603,10 @@ export const PROGRESSIVE_TRAILS_DATA = {
         difficulty: 'beginner' as const,
         requiredLevel: 'beginner' as const,
         context: 'Status próximo ao fim',
+        situations: [
+          'Chefe: "How\'s the report?" → Você: "I\'m almost done, 5 more minutes"',
+          'Colega pergunta sobre progresso → Você: "I\'m almost done with this"'
+        ],
         order: 39
       },
       {
@@ -480,6 +616,10 @@ export const PROGRESSIVE_TRAILS_DATA = {
         difficulty: 'beginner' as const,
         requiredLevel: 'beginner' as const,
         context: 'Atraso na tarefa',
+        situations: [
+          'Avisando sobre atraso → Você: "Sorry, it\'s taking longer than expected"',
+          'Explicando demora → Você: "The task is complex, it\'s taking longer than expected"'
+        ],
         order: 40
       },
       {
@@ -489,6 +629,10 @@ export const PROGRESSIVE_TRAILS_DATA = {
         difficulty: 'beginner' as const,
         requiredLevel: 'beginner' as const,
         context: 'Pedido de ajuda casual',
+        situations: [
+          'Tarefa complicada → Você: "I need a hand with this project"',
+          'Problema técnico → Você: "I need a hand with this software issue"'
+        ],
         order: 41
       },
       {
@@ -498,6 +642,10 @@ export const PROGRESSIVE_TRAILS_DATA = {
         difficulty: 'beginner' as const,
         requiredLevel: 'beginner' as const,
         context: 'Sugestão de conversa',
+        situations: [
+          'Questão complexa por email → Você: "Let\'s have a quick call to discuss"',
+          'Esclarecimento necessário → Você: "Let\'s have a quick call about this"'
+        ],
         order: 42
       },
       {
@@ -507,6 +655,10 @@ export const PROGRESSIVE_TRAILS_DATA = {
         difficulty: 'beginner' as const,
         requiredLevel: 'beginner' as const,
         context: 'Pedido de conversa breve',
+        situations: [
+          'Passando na mesa do colega → Você: "Can we talk real quick?"',
+          'Questão urgente → Você: "Can we talk real quick about the project?"'
+        ],
         order: 43
       },
       {
@@ -516,6 +668,10 @@ export const PROGRESSIVE_TRAILS_DATA = {
         difficulty: 'beginner' as const,
         requiredLevel: 'beginner' as const,
         context: 'Status ocupado',
+        situations: [
+          'Telefone toca durante reunião → Você: "Sorry, I\'m in a meeting"',
+          'Colega quer conversar → Você: "I\'m in a meeting, can we talk later?"'
+        ],
         order: 44
       },
       {
@@ -525,6 +681,10 @@ export const PROGRESSIVE_TRAILS_DATA = {
         difficulty: 'beginner' as const,
         requiredLevel: 'beginner' as const,
         context: 'Atraso para reunião',
+        situations: [
+          'Reunião já começou → Você: "I\'ll join in a few minutes"',
+          'Mensagem para equipe → Você: "Starting another call, I\'ll join in a few minutes"'
+        ],
         order: 45
       },
       {
@@ -547,6 +707,10 @@ export const PROGRESSIVE_TRAILS_DATA = {
         difficulty: 'beginner' as const,
         requiredLevel: 'beginner' as const,
         context: 'Pedido formal de arquivo',
+        situations: [
+          'Precisando de documento → Você: "Could you send it to me by email?"',
+          'Solicitando relatório → Você: "When it\'s ready, could you send it to me?"'
+        ],
         order: 47
       },
       {
@@ -556,6 +720,10 @@ export const PROGRESSIVE_TRAILS_DATA = {
         difficulty: 'beginner' as const,
         requiredLevel: 'beginner' as const,
         context: 'Oferta de ajuda',
+        situations: [
+          'Vendo colega com dificuldade → Você: "Do you need help with that?"',
+          'Colega parece sobrecarregado → Você: "Do you need help?"'
+        ],
         order: 48
       },
       {
@@ -565,6 +733,10 @@ export const PROGRESSIVE_TRAILS_DATA = {
         difficulty: 'beginner' as const,
         requiredLevel: 'beginner' as const,
         context: 'Oferta de revisão',
+        situations: [
+          'Colega com problema → Você: "Want me to take a look?"',
+          'Documento para revisar → Você: "Want me to take a look before you send it?"'
+        ],
         order: 49
       },
       {
@@ -587,6 +759,10 @@ export const PROGRESSIVE_TRAILS_DATA = {
         difficulty: 'beginner' as const,
         requiredLevel: 'beginner' as const,
         context: 'Assumir tarefa',
+        situations: [
+          'Problema difícil surgiu → Você: "Let me handle it"',
+          'Situação delicada → Você: "Don\'t worry, let me handle it"'
+        ],
         order: 51
       },
       {
@@ -596,6 +772,10 @@ export const PROGRESSIVE_TRAILS_DATA = {
         difficulty: 'beginner' as const,
         requiredLevel: 'beginner' as const,
         context: 'Tranquilizar colega',
+        situations: [
+          'Colega se desculpa por erro → Você: "Don\'t worry about it, we\'ll fix it"',
+          'Alguém preocupado → Você: "Don\'t worry about it, it\'s not a big deal"'
+        ],
         order: 52
       },
       {
@@ -605,6 +785,10 @@ export const PROGRESSIVE_TRAILS_DATA = {
         difficulty: 'beginner' as const,
         requiredLevel: 'beginner' as const,
         context: 'Assumir responsabilidade',
+        situations: [
+          'Delegando responsabilidade → Você: "I\'ll take care of it"',
+          'Problema precisa ser resolvido → Você: "Don\'t worry, I\'ll take care of it"'
+        ],
         order: 53
       },
       {
@@ -614,6 +798,10 @@ export const PROGRESSIVE_TRAILS_DATA = {
         difficulty: 'beginner' as const,
         requiredLevel: 'beginner' as const,
         context: 'Apoiar colega',
+        situations: [
+          'Colega propõe ideia → Você: "I\'m with you on this"',
+          'Decisão em grupo → Você: "I\'m with you, let\'s do it"'
+        ],
         order: 54
       },
       {
@@ -623,6 +811,10 @@ export const PROGRESSIVE_TRAILS_DATA = {
         difficulty: 'beginner' as const,
         requiredLevel: 'beginner' as const,
         context: 'Concordar',
+        situations: [
+          'Colega faz observação → Você: "That\'s true, I hadn\'t thought of that"',
+          'Discussão sobre fatos → Você: "That\'s true, the data shows that"'
+        ],
         order: 55
       },
 
@@ -673,6 +865,10 @@ export const PROGRESSIVE_TRAILS_DATA = {
         difficulty: 'beginner' as const,
         requiredLevel: 'beginner' as const,
         context: 'Motivação para começar',
+        situations: [
+          'Início de projeto desafiador → Você: "Alright team, let\'s do this!"',
+          'Motivando a equipe → Você: "We can handle this challenge, let\'s do this!"'
+        ],
         order: 59
       },
       {
@@ -682,6 +878,10 @@ export const PROGRESSIVE_TRAILS_DATA = {
         difficulty: 'beginner' as const,
         requiredLevel: 'beginner' as const,
         context: 'Mostrar preparação',
+        situations: [
+          'Antes de apresentação → Você: "I\'m ready to present"',
+          'Novo projeto → Você: "I\'m ready for the challenge"'
+        ],
         order: 60
       },
       {
@@ -691,6 +891,10 @@ export const PROGRESSIVE_TRAILS_DATA = {
         difficulty: 'beginner' as const,
         requiredLevel: 'beginner' as const,
         context: 'Aceitar desafio',
+        situations: [
+          'Tarefa nova e difícil → Você: "I\'ve never done this before, but I\'ll give it a try"',
+          'Desafio proposto → Você: "Sounds challenging, but I\'ll give it a try"'
+        ],
         order: 61
       },
       {
@@ -700,6 +904,10 @@ export const PROGRESSIVE_TRAILS_DATA = {
         difficulty: 'beginner' as const,
         requiredLevel: 'beginner' as const,
         context: 'Abordagem metodológica',
+        situations: [
+          'Projeto complexo → Você: "Let\'s take it step by step"',
+          'Ensinando alguém → Você: "We\'ll do this step by step"'
+        ],
         order: 62
       },
       {
@@ -709,6 +917,10 @@ export const PROGRESSIVE_TRAILS_DATA = {
         difficulty: 'beginner' as const,
         requiredLevel: 'beginner' as const,
         context: 'Mentalidade de melhoria',
+        situations: [
+          'Encorajando colega → Você: "Don\'t worry, practice makes perfect"',
+          'Aprendendo nova skill → Você: "I\'ll keep trying, practice makes perfect"'
+        ],
         order: 63
       },
 
