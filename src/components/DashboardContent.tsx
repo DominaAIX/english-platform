@@ -260,7 +260,7 @@ export default function DashboardContent() {
               </p>
             </div>
             
-            <div className="grid md:grid-cols-2 gap-8 mb-8">
+            <div className="grid md:grid-cols-3 gap-6 mb-8">
               {/* Teste de Nível */}
               <Link href="/teste-nivel">
                 <div className="group bg-gradient-to-br from-yellow-900/30 to-orange-900/30 border-2 border-yellow-500/30 rounded-3xl p-8 hover:border-yellow-400/50 transition-all duration-300 cursor-pointer transform hover:scale-105 h-full flex flex-col">
@@ -326,6 +326,39 @@ export default function DashboardContent() {
                   </div>
                 </div>
               </div>
+
+              {/* Teste de Certificação A1/A2 */}
+              <Link href="/trilha-progressiva/trabalho">
+                <div className="group bg-gradient-to-br from-blue-900/30 to-cyan-900/30 border-2 border-blue-500/30 rounded-3xl p-8 hover:border-blue-400/50 transition-all duration-300 cursor-pointer transform hover:scale-105 h-full flex flex-col">
+                  <div className="text-center flex-1 flex flex-col justify-between">
+                    <div>
+                      <div className="mb-6 group-hover:scale-110 transition-transform duration-300 flex justify-center">
+                        <span className="text-7xl">🏆</span>
+                      </div>
+                      <h3 className="text-2xl font-bold text-white mb-4">
+                        Certificação A1/A2
+                      </h3>
+                      <p className="text-gray-300 mb-6 leading-relaxed">
+                        Teste seu domínio das 145 frases essenciais A1/A2 e ganhe seu certificado oficial.
+                      </p>
+                      <div className="flex flex-wrap gap-2 justify-center mb-6">
+                        <span className="bg-blue-500/20 text-blue-300 px-3 py-1 rounded-full text-sm">
+                          35 Questões
+                        </span>
+                        <span className="bg-cyan-500/20 text-cyan-300 px-3 py-1 rounded-full text-sm">
+                          20 Min
+                        </span>
+                        <span className="bg-blue-500/20 text-blue-300 px-3 py-1 rounded-full text-sm">
+                          Certificado
+                        </span>
+                      </div>
+                    </div>
+                    <div className="text-blue-400 group-hover:text-blue-300 transition-colors font-semibold">
+                      Fazer Teste →
+                    </div>
+                  </div>
+                </div>
+              </Link>
             </div>
 
             {/* Trilhas Progressivas Disponíveis */}

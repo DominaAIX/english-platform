@@ -1902,6 +1902,138 @@ export const PROGRESSIVE_TRAILS_DATA = {
         order: 135
       },
 
+      // === 9 FRASES ADICIONAIS ESSENCIAIS A1/A2 ===
+      {
+        id: 'work_phrase_136',
+        english: 'I\'m busy right now.',
+        portuguese: 'Estou ocupado agora.',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Indisponibilidade',
+        situations: [
+          'Interrupção → Você: "I\'m busy right now, can we talk later?"',
+          'Pedido de ajuda → Você: "I\'m busy right now but I can help you in 10 minutes"'
+        ],
+        order: 136
+      },
+      {
+        id: 'work_phrase_137',
+        english: 'What time is it?',
+        portuguese: 'Que horas são?',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Consulta de horário',
+        situations: [
+          'Reunião → Você: "What time is it? Are we late?"',
+          'Planejamento → Você: "What time is it? I need to leave by 5"'
+        ],
+        order: 137
+      },
+      {
+        id: 'work_phrase_138',
+        english: 'I\'m here.',
+        portuguese: 'Estou aqui.',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Confirmação de presença',
+        situations: [
+          'Chamada → Colega: "Where are you?" Você: "I\'m here, by the printer"',
+          'Reunião online → Você: "I\'m here, can you see me on camera?"'
+        ],
+        order: 138
+      },
+      {
+        id: 'work_phrase_139',
+        english: 'See you tomorrow.',
+        portuguese: 'Te vejo amanhã.',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Despedida diária',
+        situations: [
+          'Final do expediente → Você: "Have a good evening, see you tomorrow"',
+          'Saindo mais cedo → Você: "I\'m leaving early today, see you tomorrow"'
+        ],
+        order: 139
+      },
+      {
+        id: 'work_phrase_140',
+        english: 'Good luck!',
+        portuguese: 'Boa sorte!',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Encorajamento',
+        situations: [
+          'Apresentação → Você: "Good luck with your presentation!"',
+          'Entrevista → Você: "Good luck with the interview this afternoon"'
+        ],
+        order: 140
+      },
+      {
+        id: 'work_phrase_141',
+        english: 'I don\'t know.',
+        portuguese: 'Eu não sei.',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Desconhecimento',
+        situations: [
+          'Pergunta → Colega: "Who\'s responsible for this?" Você: "I don\'t know, maybe ask Sarah"',
+          'Dúvida → Você: "I don\'t know how to use this software, can you help?"'
+        ],
+        order: 141
+      },
+      {
+        id: 'work_phrase_142',
+        english: 'Of course!',
+        portuguese: 'Claro!',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Concordância entusiasmada',
+        situations: [
+          'Pedido → Colega: "Can you help me?" Você: "Of course!"',
+          'Convite → Colega: "Want to join the meeting?" Você: "Of course!"'
+        ],
+        order: 142
+      },
+      {
+        id: 'work_phrase_143',
+        english: 'Almost done.',
+        portuguese: 'Quase pronto.',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Progresso quase final',
+        situations: [
+          'Status → Chefe: "How\'s the report?" Você: "Almost done, just reviewing it"',
+          'Prazo → Você: "Almost done with the presentation, just adding final touches"'
+        ],
+        order: 143
+      },
+      {
+        id: 'work_phrase_144',
+        english: 'I\'ll be back.',
+        portuguese: 'Eu volto já.',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Saída temporária',
+        situations: [
+          'Pausa → Você: "I\'ll be back in 10 minutes, going to get coffee"',
+          'Banheiro → Você: "I\'ll be back, just need to use the restroom"'
+        ],
+        order: 144
+      },
+      {
+        id: 'work_phrase_145',
+        english: 'Nice job!',
+        portuguese: 'Bom trabalho!',
+        difficulty: 'beginner' as const,
+        requiredLevel: 'beginner' as const,
+        context: 'Elogio sincero',
+        situations: [
+          'Parabenizar → Você: "Nice job on that presentation!"',
+          'Reconhecimento → Você: "Nice job fixing that bug so quickly"'
+        ],
+        order: 145
+      },
+
       // ===== NÍVEL INTERMEDIÁRIO: COMUNICAÇÃO MAIS COMPLEXA =====
       
       // Reuniões e agendamentos (15 frases)
@@ -2579,12 +2711,46 @@ export const PROGRESSIVE_TRAILS_DATA = {
         } as TranslationExerciseData,
         requiredToProgress: true,
         order: 135.1
+      },
+
+      // Exercício 28: Após frases 136-140 (Novas frases essenciais A1/A2)
+      {
+        id: 'work_ex_28',
+        type: 'multiple-choice' as const,
+        phraseId: 'work_phrase_140',
+        data: {
+          question: 'Como desejar boa sorte a um colega?',
+          options: [
+            'Good luck!',
+            'Good time!',
+            'Good day!',
+            'Good work!'
+          ],
+          correctAnswer: 0,
+          explanation: '"Good luck!" é a expressão padrão para desejar boa sorte'
+        } as MultipleChoiceData,
+        requiredToProgress: true,
+        order: 140.1
+      },
+
+      // Exercício 29: Após frases 141-145 (Frases finais A1/A2)
+      {
+        id: 'work_ex_29',
+        type: 'drag-drop' as const,
+        phraseId: 'work_phrase_145',
+        data: {
+          correctSentence: 'Nice job on the presentation!',
+          words: ['Nice', 'job', 'on', 'the', 'presentation!'],
+          translation: 'Bom trabalho na apresentação!'
+        } as DragDropExerciseData,
+        requiredToProgress: true,
+        order: 145.1
       }
     ],
     finalTest: {
       id: 'work_final_certification',
       title: 'Certificação A1/A2 - Inglês para o Trabalho',
-      description: 'Teste completo para certificar seu domínio das 135 frases essenciais A1/A2',
+      description: 'Teste completo para certificar seu domínio das 145 frases essenciais A1/A2',
       level: 'beginner' as const,
       passingScore: 70,
       certificateName: 'Certificado A1/A2 - Inglês Básico para o Trabalho',

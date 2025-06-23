@@ -19,13 +19,44 @@ export default function FinalCertificationTest({ test, onComplete, onClose }: Fi
   const [showResults, setShowResults] = useState(false)
   const [score, setScore] = useState(0)
   const [timeStarted, setTimeStarted] = useState<Date>(new Date())
+  const [shuffledQuestions, setShuffledQuestions] = useState<FinalTestQuestion[]>([])
 
-  const currentQuestion = test.questions[currentQuestionIndex]
-  const progress = ((currentQuestionIndex + 1) / test.questions.length) * 100
+  // Função para embaralhar opções de múltipla escolha
+  const shuffleMultipleChoiceOptions = (question: FinalTestQuestion) => {
+    if (question.type !== 'multiple-choice' || !question.options) {
+      return question
+    }
+
+    const correctOption = question.options[question.correctAnswer!]
+    const shuffledOptions = [...question.options].sort(() => Math.random() - 0.5)
+    const newCorrectAnswer = shuffledOptions.indexOf(correctOption)
+
+    return {
+      ...question,
+      options: shuffledOptions,
+      correctAnswer: newCorrectAnswer
+    }
+  }
 
   useEffect(() => {
+    // Embaralhar questões de múltipla escolha ao iniciar o teste
+    const shuffled = test.questions.map(question => shuffleMultipleChoiceOptions(question))
+    setShuffledQuestions(shuffled)
     setTimeStarted(new Date())
   }, [])
+
+  const currentQuestion = shuffledQuestions.length > 0 ? shuffledQuestions[currentQuestionIndex] : null
+  const progress = shuffledQuestions.length > 0 ? ((currentQuestionIndex + 1) / shuffledQuestions.length) * 100 : 0
+
+  if (!currentQuestion) {
+    return (
+      <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+        <div className="bg-gray-900 border border-gray-700 rounded-2xl p-8">
+          <div className="text-white text-center">Carregando teste...</div>
+        </div>
+      </div>
+    )
+  }
 
   const handleAnswerSubmit = (answer: any) => {
     const questionId = currentQuestion.id
@@ -33,7 +64,7 @@ export default function FinalCertificationTest({ test, onComplete, onClose }: Fi
 
     // Avançar automaticamente após resposta
     setTimeout(() => {
-      if (currentQuestionIndex < test.questions.length - 1) {
+      if (currentQuestionIndex < shuffledQuestions.length - 1) {
         setCurrentQuestionIndex(currentQuestionIndex + 1)
       } else {
         calculateFinalScore()
@@ -44,7 +75,7 @@ export default function FinalCertificationTest({ test, onComplete, onClose }: Fi
   const calculateFinalScore = () => {
     let correctAnswers = 0
 
-    test.questions.forEach(question => {
+    shuffledQuestions.forEach(question => {
       const userAnswer = answers[question.id]
       let isCorrect = false
 
@@ -92,7 +123,7 @@ export default function FinalCertificationTest({ test, onComplete, onClose }: Fi
       if (isCorrect) correctAnswers++
     })
 
-    const finalScore = Math.round((correctAnswers / test.questions.length) * 100)
+    const finalScore = Math.round((correctAnswers / shuffledQuestions.length) * 100)
     setScore(finalScore)
     setShowResults(true)
 
@@ -101,6 +132,9 @@ export default function FinalCertificationTest({ test, onComplete, onClose }: Fi
   }
 
   const handleRetry = () => {
+    // Reembaralhar questões ao tentar novamente
+    const reshuffled = test.questions.map(question => shuffleMultipleChoiceOptions(question))
+    setShuffledQuestions(reshuffled)
     setCurrentQuestionIndex(0)
     setAnswers({})
     setShowResults(false)
@@ -281,7 +315,7 @@ export default function FinalCertificationTest({ test, onComplete, onClose }: Fi
         <div className="mb-6">
           <div className="flex justify-between items-center mb-2">
             <span className="text-sm text-gray-400">
-              Questão {currentQuestionIndex + 1} de {test.questions.length}
+              Questão {currentQuestionIndex + 1} de {shuffledQuestions.length}
             </span>
             <span className="text-sm text-gray-400">
               {Math.round(progress)}% completo

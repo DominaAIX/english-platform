@@ -139,7 +139,7 @@ function ProgressiveTrailClient({ trailData, slug }: { trailData: any, slug: str
       ...userProgress,
       completedSteps: [...userProgress.completedSteps.filter(id => id !== currentStep.id), currentStep.id],
       currentStepIndex: Math.min(currentStepIndex + 1, progressiveSteps.length - 1),
-      progressPercentage: ((userProgress.completedSteps.length + 1) / progressiveSteps.length) * 100,
+      progressPercentage: Math.min(((userProgress.completedSteps.length + 1) / progressiveSteps.length) * 100, 100),
       lastAccessedAt: new Date().toISOString()
     }
 
@@ -195,6 +195,13 @@ function ProgressiveTrailClient({ trailData, slug }: { trailData: any, slug: str
     setShowFinalTest(false)
   }
 
+  const handleStudyAgain = () => {
+    setCurrentStepIndex(0)
+    setShowTranslation(false)
+    setShowNextButton(false)
+    setExerciseResult(null)
+  }
+
 
   const handleStepComplete = (stepId: string, isCorrect: boolean) => {
     if (!user || !userProgress) return
@@ -206,7 +213,7 @@ function ProgressiveTrailClient({ trailData, slug }: { trailData: any, slug: str
         ...userProgress,
         completedSteps: [...userProgress.completedSteps.filter(id => id !== stepId), stepId],
         currentStepIndex: Math.min(currentStepIndex + 1, progressiveSteps.length - 1),
-        progressPercentage: ((userProgress.completedSteps.length + 1) / progressiveSteps.length) * 100,
+        progressPercentage: Math.min(((userProgress.completedSteps.length + 1) / progressiveSteps.length) * 100, 100),
         lastAccessedAt: new Date().toISOString()
       }
 
@@ -592,43 +599,51 @@ function ProgressiveTrailClient({ trailData, slug }: { trailData: any, slug: str
                 <div className="text-center py-12">
                   <div className="text-6xl mb-4">🎉</div>
                   <h2 className="text-2xl font-bold text-white mb-4">
-                    Parabéns! Você completou todas as frases!
+                    Parabéns! Você completou todas as 145 frases A1/A2!
                   </h2>
                   <p className="text-gray-300 mb-6">
-                    Agora é hora de testar seus conhecimentos com nosso teste de certificação A1/A2.
+                    Escolha como deseja continuar seus estudos:
                   </p>
-                  
-                  {/* Verificar se o teste final está disponível e se o usuário ainda não foi certificado */}
-                  {trailData.finalTest && !userProgress?.isCertified && (
-                    <div className="bg-gradient-to-r from-green-900/50 to-emerald-900/50 border border-green-500/30 rounded-xl p-6 mb-6">
-                      <h3 className="text-green-400 font-semibold text-xl mb-2">
-                        🏆 Teste de Certificação Disponível!
-                      </h3>
-                      <p className="text-gray-300 mb-4">
-                        Prove que dominou as 135 frases essenciais A1/A2 e ganhe seu certificado oficial.
-                      </p>
-                      <div className="bg-gray-800/50 rounded-lg p-4 mb-4">
-                        <div className="grid grid-cols-3 gap-4 text-center text-sm">
-                          <div>
-                            <div className="text-blue-400 font-bold">35</div>
-                            <div className="text-gray-400">Questões</div>
-                          </div>
-                          <div>
-                            <div className="text-green-400 font-bold">70%</div>
-                            <div className="text-gray-400">Nota Mínima</div>
-                          </div>
-                          <div>
-                            <div className="text-purple-400 font-bold">~20min</div>
-                            <div className="text-gray-400">Duração</div>
-                          </div>
-                        </div>
-                      </div>
+
+                  {/* Botões de ação principal */}
+                  <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+                    <button
+                      onClick={handleStudyAgain}
+                      className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 px-8 py-4 rounded-full text-white font-bold text-lg transition-all duration-300 transform hover:scale-105"
+                    >
+                      📚 Estudar Novamente
+                    </button>
+                    
+                    {trailData.finalTest && (
                       <button
                         onClick={handleFinalTestStart}
                         className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 px-8 py-4 rounded-full text-white font-bold text-lg transition-all duration-300 transform hover:scale-105"
                       >
-                        🎯 Iniciar Teste de Certificação
+                        🎯 Fazer Exame A1/A2
                       </button>
+                    )}
+                  </div>
+                  
+                  {/* Informações sobre o teste */}
+                  {trailData.finalTest && (
+                    <div className="bg-gray-800/30 border border-gray-600 rounded-xl p-4 mb-6">
+                      <h3 className="text-white font-semibold text-lg mb-3 text-center">
+                        📋 Sobre o Exame de Certificação A1/A2
+                      </h3>
+                      <div className="grid grid-cols-3 gap-4 text-center text-sm">
+                        <div>
+                          <div className="text-blue-400 font-bold text-xl">35</div>
+                          <div className="text-gray-400">Questões</div>
+                        </div>
+                        <div>
+                          <div className="text-green-400 font-bold text-xl">70%</div>
+                          <div className="text-gray-400">Nota Mínima</div>
+                        </div>
+                        <div>
+                          <div className="text-purple-400 font-bold text-xl">~20min</div>
+                          <div className="text-gray-400">Duração</div>
+                        </div>
+                      </div>
                     </div>
                   )}
                   
