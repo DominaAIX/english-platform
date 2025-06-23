@@ -432,9 +432,27 @@ function ProgressiveTrailClient({ trailData, slug }: { trailData: any, slug: str
                           </button>
                         </div>
                         {showTranslation && (
-                          <p className="text-base md:text-lg text-gray-300 bg-gray-800/50 p-4 rounded-lg">
-                            {currentStep.phrase.portuguese}
-                          </p>
+                          <div>
+                            <p className="text-base md:text-lg text-gray-300 bg-gray-800/50 p-4 rounded-lg mb-4">
+                              {currentStep.phrase.portuguese}
+                            </p>
+                            
+                            {/* Situações práticas */}
+                            {currentStep.phrase.situations && currentStep.phrase.situations.length > 0 && (
+                              <div className="bg-blue-900/20 border border-blue-500/30 rounded-lg p-4">
+                                <h4 className="text-blue-400 font-medium text-sm mb-2 flex items-center gap-2">
+                                  💡 Quando usar:
+                                </h4>
+                                <div className="space-y-2">
+                                  {currentStep.phrase.situations.map((situation, index) => (
+                                    <p key={index} className="text-gray-300 text-sm">
+                                      {situation}
+                                    </p>
+                                  ))}
+                                </div>
+                              </div>
+                            )}
+                          </div>
                         )}
                       </div>
 
