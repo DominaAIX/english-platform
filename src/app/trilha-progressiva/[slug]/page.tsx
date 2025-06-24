@@ -391,7 +391,7 @@ function ProgressiveTrailClient({ trailData, slug }: { trailData: any, slug: str
         {slug === 'trabalho' ? (
           <PageTransition delay={400}>
             <div className="max-w-4xl mx-auto">
-              {currentStep ? (
+              {userProgress && userProgress.progressPercentage < 100 && currentStep ? (
                 <div>
                   {/* Informação do passo atual */}
                   <div className="mb-6">
