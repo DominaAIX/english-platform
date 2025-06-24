@@ -16,16 +16,7 @@ export function useRequiredLevelTest() {
       return
     }
 
-    // Verificar se é usuário premium
-    const isPremium = userProfile?.plan === 'premium'
-    
-    if (!isPremium) {
-      // Usuários free não precisam fazer teste
-      setHasCompletedTest(true)
-      setIsLoading(false)
-      return
-    }
-
+    // AGORA TODOS OS USUÁRIOS (FREE E PREMIUM) PRECISAM FAZER O TESTE
     // Verificar se já fez o teste de nível
     const testResult = localStorage.getItem(`level_test_${user.id}`)
     const userLevel = localStorage.getItem(`user_level_${user.id}`)
@@ -47,10 +38,6 @@ export function useRequiredLevelTest() {
     // Não bloquear se não está logado ou se está carregando
     if (!user || isLoading) return false
     
-    // Não bloquear usuários free
-    const isPremium = userProfile?.plan === 'premium'
-    if (!isPremium) return false
-
     // Não bloquear se já completou o teste
     if (hasCompletedTest) return false
 
@@ -73,6 +60,6 @@ export function useRequiredLevelTest() {
     isLoading,
     shouldBlockAccess,
     redirectToLevelTest,
-    needsLevelTest: user && userProfile?.plan === 'premium' && !hasCompletedTest
+    needsLevelTest: user && !hasCompletedTest // Agora todos os usuários precisam do teste
   }
 }

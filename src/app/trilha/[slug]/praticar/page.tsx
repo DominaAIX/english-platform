@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import React, { useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import Logo from '@/components/Logo'
@@ -8,6 +8,7 @@ import { useAuth } from '@/contexts/AuthContext'
 import PageTransition from '@/components/PageTransition'
 import AnimatedContainer from '@/components/AnimatedContainer'
 import { WorkIcon, TravelIcon, ShoppingIcon, CasualIcon, BusinessIcon, RestaurantIcon, PuzzleIcon, ConversationIcon } from '@/components/ModernIcons'
+import { getFreeUsageStatus, incrementFreeUsage, canAccessContent } from '@/utils/freeLimitations'
 
 interface Trail {
   title: string
@@ -146,6 +147,17 @@ function PracticePageClient({ trailData, slug }: { trailData: Trail, slug: strin
   
   // Usar plano real do usuário ou fallback para free
   const userPlan = userProfile?.plan || 'free'
+
+  // Verificar se usuário free pode acessar
+  React.useEffect(() => {
+    if (user && userPlan === 'free') {
+      const canAccess = canAccessContent(user.id, userPlan)
+      if (!canAccess) {
+        router.push('/dashboard')
+        return
+      }
+    }
+  }, [user, userPlan, router])
   
 
   const handleLogoClick = () => {

@@ -13,6 +13,7 @@ import { WorkIcon, InterviewIcon, TravelIcon, BusinessIcon, CasualIcon, Restaura
 import { PROFESSIONS } from '@/data/professions'
 import { useRequiredLevelTest } from '@/hooks/useRequiredLevelTest'
 import { checkCertificationCooldown } from '@/utils/certificationCooldown'
+import { getFreeUsageStatus, FreeLimitationStatus } from '@/utils/freeLimitations'
 
 export default function DashboardContent() {
   const { user, userProfile } = useAuth()
@@ -22,6 +23,13 @@ export default function DashboardContent() {
   const { needsLevelTest, hasCompletedTest, isLoading } = useRequiredLevelTest()
   const [certificationBlocked, setCertificationBlocked] = useState({ isBlocked: false, timeRemaining: '' })
   const [hasCompletedBasicTrail, setHasCompletedBasicTrail] = useState(false)
+  const [freeLimitations, setFreeLimitations] = useState<FreeLimitationStatus>({
+    isBlocked: false,
+    phrasesUsed: 0,
+    maxPhrases: 5,
+    timeRemaining: '',
+    canAccess: true
+  })
   
   // Usar o plano real do usuário autenticado do userProfile
   const userPlan = userProfile?.plan || 'free'
@@ -58,6 +66,25 @@ export default function DashboardContent() {
       return () => clearInterval(interval)
     }
   }, [certificationBlocked.isBlocked, user?.id])
+
+  // Verificar limitações para usuários free
+  useEffect(() => {
+    if (user?.id && userPlan === 'free') {
+      const limitations = getFreeUsageStatus(user.id)
+      setFreeLimitations(limitations)
+    }
+  }, [user?.id, userPlan])
+
+  // Atualizar limitações free a cada minuto
+  useEffect(() => {
+    if (user?.id && userPlan === 'free' && freeLimitations.isBlocked) {
+      const interval = setInterval(() => {
+        const limitations = getFreeUsageStatus(user.id!)
+        setFreeLimitations(limitations)
+      }, 60000)
+      return () => clearInterval(interval)
+    }
+  }, [user?.id, userPlan, freeLimitations.isBlocked])
 
   // Função para obter saudação baseada no horário
   const getGreeting = () => {
@@ -239,6 +266,30 @@ export default function DashboardContent() {
             <p className="text-gray-400 text-lg">
               {needsLevelTest ? 'Primeiro, vamos descobrir seu nível de inglês!' : 'Como você gostaria de praticar inglês hoje?'}
             </p>
+            
+            {/* Contador de uso para usuários Free */}
+            {userPlan === 'free' && hasCompletedTest && !freeLimitations.isBlocked && (
+              <div className="mt-6 bg-blue-900/20 border border-blue-500/30 rounded-xl p-4 max-w-md mx-auto">
+                <div className="text-center">
+                  <div className="text-blue-400 text-sm font-medium mb-2">🆓 Plano Gratuito</div>
+                  <div className="flex justify-center items-center gap-2 mb-2">
+                    <span className="text-lg font-bold text-white">{freeLimitations.phrasesUsed}</span>
+                    <span className="text-gray-400">/</span>
+                    <span className="text-lg font-bold text-gray-400">{freeLimitations.maxPhrases}</span>
+                    <span className="text-gray-400 text-sm">frases hoje</span>
+                  </div>
+                  <div className="w-full bg-gray-700 rounded-full h-2 mb-2">
+                    <div 
+                      className="bg-gradient-to-r from-blue-500 to-cyan-400 h-2 rounded-full transition-all duration-300"
+                      style={{ width: `${(freeLimitations.phrasesUsed / freeLimitations.maxPhrases) * 100}%` }}
+                    />
+                  </div>
+                  <p className="text-gray-400 text-xs">
+                    {freeLimitations.maxPhrases - freeLimitations.phrasesUsed} frases restantes hoje
+                  </p>
+                </div>
+              </div>
+            )}
           </div>
         </PageTransition>
 
@@ -278,6 +329,66 @@ export default function DashboardContent() {
               >
                 🚀 Fazer Teste de Nível Agora
               </Link>
+            </div>
+          </div>
+        </PageTransition>
+        )}
+
+        {/* Tela de limitações para usuários Free após atingir o limite */}
+        {userPlan === 'free' && hasCompletedTest && freeLimitations.isBlocked && (
+        <PageTransition>
+          <div className="max-w-4xl mx-auto mb-12">
+            <div className="bg-gradient-to-r from-red-900/50 to-orange-900/50 border-2 border-red-500/50 rounded-xl p-8 text-center">
+              <div className="text-6xl mb-6">🔒</div>
+              <h2 className="text-3xl font-bold text-white mb-4">
+                Limite Diário Atingido!
+              </h2>
+              <p className="text-gray-300 mb-6 text-lg max-w-2xl mx-auto">
+                Você já praticou suas {freeLimitations.maxPhrases} frases diárias gratuitas. 
+                Para continuar aprendendo, faça upgrade para Premium ou aguarde a liberação.
+              </p>
+              
+              <div className="bg-gray-900/50 rounded-lg p-6 mb-6">
+                <h3 className="text-white font-semibold mb-4">📊 Seu uso hoje:</h3>
+                <div className="flex justify-center items-center gap-4 mb-4">
+                  <div className="text-center">
+                    <div className="text-3xl font-bold text-red-400">{freeLimitations.phrasesUsed}</div>
+                    <div className="text-gray-400 text-sm">Frases Usadas</div>
+                  </div>
+                  <div className="text-gray-500 text-2xl">/</div>
+                  <div className="text-center">
+                    <div className="text-3xl font-bold text-gray-400">{freeLimitations.maxPhrases}</div>
+                    <div className="text-gray-400 text-sm">Limite Diário</div>
+                  </div>
+                </div>
+                {freeLimitations.timeRemaining && (
+                  <p className="text-orange-400 font-medium">
+                    ⏰ Próximo acesso em: {freeLimitations.timeRemaining}
+                  </p>
+                )}
+              </div>
+
+              <div className="bg-red-900/30 border border-red-500/30 rounded-lg p-4 mb-6">
+                <p className="text-red-300 text-sm">
+                  🚫 Acesso bloqueado por 24 horas após usar todas as frases gratuitas.
+                </p>
+              </div>
+
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <button 
+                  className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 px-8 py-4 rounded-full text-white font-bold text-lg transition-all duration-300 transform hover:scale-105"
+                  onClick={() => alert('Funcionalidade de assinatura será implementada em breve! 🚀')}
+                >
+                  🌟 Upgrade para Premium
+                </button>
+                <div className="bg-gray-800 px-6 py-4 rounded-full text-gray-300 font-medium text-center">
+                  ⏳ Aguardar Liberação
+                </div>
+              </div>
+              
+              <p className="text-gray-500 text-sm mt-4">
+                Premium: Acesso ilimitado • Sem bloqueios • R$ 29,90/mês
+              </p>
             </div>
           </div>
         </PageTransition>
@@ -465,8 +576,8 @@ export default function DashboardContent() {
         </PageTransition>
         )}
 
-        {/* Main Options - Só mostra se não precisar do teste ou se já completou */}
-        {!needsLevelTest && (
+        {/* Main Options - Só mostra se não precisar do teste ou se já completou E usuário free não está bloqueado */}
+        {!needsLevelTest && (userPlan === 'premium' || !freeLimitations.isBlocked) && (
         <PageTransition>
           <div className="grid md:grid-cols-2 gap-8 mb-12 items-stretch">
             {/* Chat com Tutor AI */}

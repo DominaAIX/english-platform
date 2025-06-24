@@ -23,6 +23,7 @@ import {
   saveUserTrailProgress,
   generateProgressiveSteps
 } from '@/data/progressiveTrails'
+import { getFreeUsageStatus, incrementFreeUsage, canAccessContent } from '@/utils/freeLimitations'
 
 interface ProgressiveTrailPageProps {
   params: Promise<{ slug: string }>
@@ -67,6 +68,7 @@ function ProgressiveTrailClient({ trailData, slug }: { trailData: any, slug: str
 
   // Verificar se usuário é premium
   const isPremium = userProfile?.plan === 'premium'
+  const userPlan = userProfile?.plan || 'free'
 
   useEffect(() => {
     if (!user) {
@@ -74,9 +76,13 @@ function ProgressiveTrailClient({ trailData, slug }: { trailData: any, slug: str
       return
     }
 
+    // Verificar se usuário free pode acessar
     if (!isPremium) {
-      router.push('/dashboard')
-      return
+      const canAccess = canAccessContent(user.id, userPlan)
+      if (!canAccess) {
+        router.push('/dashboard')
+        return
+      }
     }
 
     // Carregar nível do usuário
@@ -209,6 +215,16 @@ function ProgressiveTrailClient({ trailData, slug }: { trailData: any, slug: str
     // Esta função agora é apenas para frases
     const currentStep = progressiveSteps[currentStepIndex]
     if (currentStep?.type === 'phrase') {
+      // Incrementar uso para usuários free
+      if (!isPremium) {
+        const newUsage = incrementFreeUsage(user.id)
+        // Se atingiu o limite, redirecionar para dashboard
+        if (newUsage.isBlocked) {
+          router.push('/dashboard')
+          return
+        }
+      }
+
       const updatedProgress = {
         ...userProgress,
         completedSteps: [...userProgress.completedSteps.filter(id => id !== stepId), stepId],
