@@ -41,7 +41,7 @@ export default function ProfessionPage() {
   // Verificar limite global ao montar componente
   useEffect(() => {
     if (!isPremium && actualUserPlan === 'free') {
-      setHasReachedLimit(isPhrasesBlocked || totalPhrasesViewed >= 10)
+      setHasReachedLimit(isPhrasesBlocked || totalPhrasesViewed >= 5)
     } else {
       setHasReachedLimit(false)
     }

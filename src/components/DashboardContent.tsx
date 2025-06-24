@@ -13,7 +13,7 @@ import { WorkIcon, InterviewIcon, TravelIcon, BusinessIcon, CasualIcon, Restaura
 import { PROFESSIONS } from '@/data/professions'
 import { useRequiredLevelTest } from '@/hooks/useRequiredLevelTest'
 import { checkCertificationCooldown } from '@/utils/certificationCooldown'
-import { getFreeUsageStatus, FreeLimitationStatus } from '@/utils/freeLimitations'
+import { getFreeUsageStatus, FreeLimitationStatus, cleanupOldSystems } from '@/utils/freeLimitations'
 
 export default function DashboardContent() {
   const { user, userProfile } = useAuth()
@@ -70,6 +70,8 @@ export default function DashboardContent() {
   // Verificar limitações para usuários free
   useEffect(() => {
     if (user?.id && userPlan === 'free') {
+      // Limpar sistemas antigos que podem estar interferindo
+      cleanupOldSystems(user.id)
       const limitations = getFreeUsageStatus(user.id)
       setFreeLimitations(limitations)
     }
@@ -85,6 +87,31 @@ export default function DashboardContent() {
       return () => clearInterval(interval)
     }
   }, [user?.id, userPlan, freeLimitations.isBlocked])
+
+  // Atualizar contador quando usuário voltar ao dashboard (focus/visibility)
+  useEffect(() => {
+    const handleFocus = () => {
+      if (user?.id && userPlan === 'free') {
+        const limitations = getFreeUsageStatus(user.id)
+        setFreeLimitations(limitations)
+      }
+    }
+
+    const handleVisibilityChange = () => {
+      if (!document.hidden && user?.id && userPlan === 'free') {
+        const limitations = getFreeUsageStatus(user.id)
+        setFreeLimitations(limitations)
+      }
+    }
+
+    window.addEventListener('focus', handleFocus)
+    document.addEventListener('visibilitychange', handleVisibilityChange)
+
+    return () => {
+      window.removeEventListener('focus', handleFocus)
+      document.removeEventListener('visibilitychange', handleVisibilityChange)
+    }
+  }, [user?.id, userPlan])
 
   // Função para obter saudação baseada no horário
   const getGreeting = () => {

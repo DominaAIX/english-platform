@@ -31,6 +31,12 @@ export function getFreeUsageStatus(userId: string): FreeLimitationStatus {
   const storageKey = `free_usage_${userId}`
   const stored = localStorage.getItem(storageKey)
   
+  console.log('📖 FREE STATUS: Lendo status', { 
+    userId: userId.substring(0, 8), 
+    storageKey, 
+    hasStored: !!stored 
+  })
+  
   const today = new Date().toDateString()
   const now = Date.now()
   
@@ -105,6 +111,13 @@ export function incrementFreeUsage(userId: string): FreeLimitationStatus {
   const storageKey = `free_usage_${userId}`
   const current = getFreeUsageStatus(userId)
   
+  console.log('🔢 FREE USAGE: Incrementando', { 
+    userId: userId.substring(0, 8), 
+    current: current.phrasesUsed, 
+    max: MAX_FREE_PHRASES,
+    storageKey 
+  })
+  
   // Se ainda não atingiu o limite, incrementar
   if (current.phrasesUsed < MAX_FREE_PHRASES) {
     const newUsage: DailyUsage = {
@@ -114,9 +127,14 @@ export function incrementFreeUsage(userId: string): FreeLimitationStatus {
     }
     
     localStorage.setItem(storageKey, JSON.stringify(newUsage))
+    console.log('✅ FREE USAGE: Incrementado para', newUsage.phrasesUsed)
+  } else {
+    console.log('🚫 FREE USAGE: Limite atingido, não incrementando')
   }
   
-  return getFreeUsageStatus(userId)
+  const result = getFreeUsageStatus(userId)
+  console.log('📊 FREE USAGE: Status final', result)
+  return result
 }
 
 export function resetFreeUsage(userId: string): void {
@@ -124,6 +142,25 @@ export function resetFreeUsage(userId: string): void {
   
   const storageKey = `free_usage_${userId}`
   localStorage.removeItem(storageKey)
+}
+
+export function cleanupOldSystems(userId: string): void {
+  if (!userId) return
+  
+  // Limpar dados do sistema antigo que podem estar interferindo
+  const oldKeys = [
+    `daily_usage_${userId}`,
+    `phrase_limit_${userId}`,
+    `global_limits_${userId}`,
+    `user_limits_${userId}`
+  ]
+  
+  oldKeys.forEach(key => {
+    if (localStorage.getItem(key)) {
+      console.log('🧹 Limpando sistema antigo:', key)
+      localStorage.removeItem(key)
+    }
+  })
 }
 
 export function canAccessContent(userId: string, userPlan: string): boolean {
