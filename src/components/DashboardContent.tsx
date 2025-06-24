@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import Logo from './Logo'
@@ -12,6 +12,7 @@ import AnimatedContainer from './AnimatedContainer'
 import { WorkIcon, InterviewIcon, TravelIcon, BusinessIcon, CasualIcon, RestaurantIcon, ShoppingIcon, RobotIcon, LearningTrailIcon, ConversationIcon, TargetIcon, AudioIcon, GrammarIcon } from './ModernIcons'
 import { PROFESSIONS } from '@/data/professions'
 import { useRequiredLevelTest } from '@/hooks/useRequiredLevelTest'
+import { checkCertificationCooldown } from '@/utils/certificationCooldown'
 
 export default function DashboardContent() {
   const { user, userProfile } = useAuth()
@@ -19,9 +20,31 @@ export default function DashboardContent() {
   const [hoveredCard, setHoveredCard] = useState<string | null>(null)
   const { stats, getTotalPhrasesPracticed, getPremiumTimeFormatted } = useStats()
   const { needsLevelTest, hasCompletedTest, isLoading } = useRequiredLevelTest()
+  const [certificationBlocked, setCertificationBlocked] = useState({ isBlocked: false, timeRemaining: '' })
   
   // Usar o plano real do usuário autenticado do userProfile
   const userPlan = userProfile?.plan || 'free'
+
+  // Verificar bloqueio de certificação
+  useEffect(() => {
+    if (user?.id) {
+      const cooldownStatus = checkCertificationCooldown(user.id)
+      setCertificationBlocked(cooldownStatus)
+    }
+  }, [user?.id])
+
+  // Atualizar contador a cada minuto
+  useEffect(() => {
+    if (certificationBlocked.isBlocked) {
+      const interval = setInterval(() => {
+        if (user?.id) {
+          const cooldownStatus = checkCertificationCooldown(user.id)
+          setCertificationBlocked(cooldownStatus)
+        }
+      }, 60000)
+      return () => clearInterval(interval)
+    }
+  }, [certificationBlocked.isBlocked, user?.id])
 
   // Função para obter saudação baseada no horário
   const getGreeting = () => {
@@ -328,33 +351,67 @@ export default function DashboardContent() {
               </div>
 
               {/* Teste de Certificação A1/A2 */}
-              <Link href="/certificacao-a1-a2">
-                <div className="group bg-gradient-to-br from-blue-900/30 to-cyan-900/30 border-2 border-blue-500/30 rounded-3xl p-8 hover:border-blue-400/50 transition-all duration-300 cursor-pointer transform hover:scale-105 h-full flex flex-col">
+              <Link href="/certificacao-a1-a2" className={certificationBlocked.isBlocked ? 'pointer-events-none' : ''}>
+                <div className={`group bg-gradient-to-br from-blue-900/30 to-cyan-900/30 border-2 border-blue-500/30 rounded-3xl p-8 transition-all duration-300 h-full flex flex-col relative ${
+                  certificationBlocked.isBlocked 
+                    ? 'opacity-60 cursor-not-allowed' 
+                    : 'hover:border-blue-400/50 cursor-pointer transform hover:scale-105'
+                }`}>
+                  {/* Overlay de bloqueio */}
+                  {certificationBlocked.isBlocked && (
+                    <div className="absolute inset-0 bg-black/50 rounded-3xl flex items-center justify-center z-10">
+                      <div className="text-center">
+                        <div className="text-6xl mb-2">🔒</div>
+                        <div className="text-red-400 font-bold text-lg">BLOQUEADO</div>
+                        <div className="text-gray-300 text-sm">{certificationBlocked.timeRemaining}</div>
+                      </div>
+                    </div>
+                  )}
+                  
                   <div className="text-center flex-1 flex flex-col justify-between">
                     <div>
                       <div className="mb-6 group-hover:scale-110 transition-transform duration-300 flex justify-center">
-                        <span className="text-7xl">🏆</span>
+                        <span className="text-7xl">{certificationBlocked.isBlocked ? '🔒' : '🏆'}</span>
                       </div>
                       <h3 className="text-2xl font-bold text-white mb-4">
                         Certificação A1/A2
                       </h3>
                       <p className="text-gray-300 mb-6 leading-relaxed">
-                        Teste seu domínio das 145 frases essenciais A1/A2 e ganhe seu certificado oficial.
+                        {certificationBlocked.isBlocked 
+                          ? `Teste bloqueado por mais ${certificationBlocked.timeRemaining}. Aguarde para fazer o próximo teste.`
+                          : 'Teste seu domínio das 145 frases essenciais A1/A2 e ganhe seu certificado oficial.'
+                        }
                       </p>
                       <div className="flex flex-wrap gap-2 justify-center mb-6">
-                        <span className="bg-blue-500/20 text-blue-300 px-3 py-1 rounded-full text-sm">
-                          35 Questões
+                        <span className={`px-3 py-1 rounded-full text-sm ${
+                          certificationBlocked.isBlocked 
+                            ? 'bg-red-500/20 text-red-300' 
+                            : 'bg-blue-500/20 text-blue-300'
+                        }`}>
+                          {certificationBlocked.isBlocked ? 'Bloqueado' : '35 Questões'}
                         </span>
-                        <span className="bg-cyan-500/20 text-cyan-300 px-3 py-1 rounded-full text-sm">
-                          20 Min
+                        <span className={`px-3 py-1 rounded-full text-sm ${
+                          certificationBlocked.isBlocked 
+                            ? 'bg-red-500/20 text-red-300' 
+                            : 'bg-cyan-500/20 text-cyan-300'
+                        }`}>
+                          {certificationBlocked.isBlocked ? '48h Cooldown' : '20 Min'}
                         </span>
-                        <span className="bg-blue-500/20 text-blue-300 px-3 py-1 rounded-full text-sm">
-                          Certificado
+                        <span className={`px-3 py-1 rounded-full text-sm ${
+                          certificationBlocked.isBlocked 
+                            ? 'bg-red-500/20 text-red-300' 
+                            : 'bg-blue-500/20 text-blue-300'
+                        }`}>
+                          {certificationBlocked.isBlocked ? 'Indisponível' : 'Certificado'}
                         </span>
                       </div>
                     </div>
-                    <div className="text-blue-400 group-hover:text-blue-300 transition-colors font-semibold">
-                      Fazer Teste →
+                    <div className={`font-semibold transition-colors ${
+                      certificationBlocked.isBlocked 
+                        ? 'text-red-400' 
+                        : 'text-blue-400 group-hover:text-blue-300'
+                    }`}>
+                      {certificationBlocked.isBlocked ? 'Aguarde liberação' : 'Fazer Teste →'}
                     </div>
                   </div>
                 </div>
