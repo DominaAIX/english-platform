@@ -129,67 +129,7 @@ export default function LevelTestPage() {
     setSelectedAnswers([])
   }
 
-  if (!isPremium) {
-    return (
-      <AnimatedContainer className="min-h-screen">
-        {/* Header */}
-        <PageTransition delay={0}>
-          <header className="bg-gray-900/50 border-b border-gray-700 p-4">
-            <div className="max-w-4xl mx-auto flex justify-between items-center">
-              <button 
-                onClick={handleLogoClick}
-                className="flex items-center gap-3 hover:opacity-80 transition-opacity"
-              >
-                <Logo size="sm" />
-                <span className="text-white font-bold">Inglês pra Já</span>
-              </button>
-              
-              <Link 
-                href="/dashboard"
-                className="bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-full text-white font-semibold transition-colors text-sm"
-              >
-                ← Dashboard
-              </Link>
-            </div>
-          </header>
-        </PageTransition>
-
-        <div className="max-w-4xl mx-auto p-6 flex items-center justify-center min-h-[80vh]">
-          <PageTransition delay={200}>
-            <div className="bg-gradient-to-r from-purple-900/50 to-cyan-900/50 border border-purple-500/30 rounded-xl p-8 text-center max-w-2xl">
-              <div className="text-6xl mb-6">🎓</div>
-              <h1 className="text-3xl font-bold text-white mb-4">
-                Teste de Nível Premium
-              </h1>
-              <p className="text-gray-300 mb-6 text-lg">
-                O teste de nível e as trilhas progressivas são recursos exclusivos para usuários Premium! 
-                Faça upgrade para desbloquear um aprendizado personalizado e estruturado.
-              </p>
-              
-              <div className="bg-gray-900/50 rounded-lg p-6 mb-6">
-                <h3 className="text-white font-semibold mb-4">🚀 Com o Premium você terá:</h3>
-                <ul className="text-gray-300 space-y-2 text-left">
-                  <li>📊 Teste de nível personalizado</li>
-                  <li>🎯 Trilhas progressivas adaptadas ao seu nível</li>
-                  <li>🧩 Exercícios variados e obrigatórios</li>
-                  <li>📈 Sistema de progresso bloqueado até dominar cada etapa</li>
-                  <li>💬 Conversas ilimitadas com IA</li>
-                  <li>🔓 Acesso a todas as funcionalidades</li>
-                </ul>
-              </div>
-
-              <button 
-                onClick={() => alert('Funcionalidade de upgrade será implementada em breve! 🚀')}
-                className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 px-8 py-4 rounded-full text-white font-bold text-lg transition-all duration-300 transform hover:scale-105"
-              >
-                🌟 Fazer Upgrade para Premium
-              </button>
-            </div>
-          </PageTransition>
-        </div>
-      </AnimatedContainer>
-    )
-  }
+  // REMOVIDO: Agora tanto free quanto premium podem fazer o teste de nível
 
   if (showResult && testResult) {
     return (
