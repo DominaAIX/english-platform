@@ -404,7 +404,6 @@ export default function FinalCertificationTest({ test, onComplete, onClose }: Fi
           </div>
         </div>
       </div>
-    </div>
 
       {/* Modal de Aviso de Saída */}
       {showExitWarning && (
