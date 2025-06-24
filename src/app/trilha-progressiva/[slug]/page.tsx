@@ -108,6 +108,30 @@ function ProgressiveTrailClient({ trailData, slug }: { trailData: any, slug: str
     setIsLoading(false)
   }, [user, slug, isPremium, router])
 
+  // Verificar e incrementar uso ao visualizar nova frase (para usuários free)
+  useEffect(() => {
+    if (!user || isPremium || isLoading) return
+    
+    const currentStep = progressiveSteps[currentStepIndex]
+    if (currentStep?.type === 'phrase') {
+      // Verificar se já viu essa frase antes
+      const phraseViewKey = `phrase_viewed_${user.id}_${currentStep.id}`
+      const alreadyViewed = localStorage.getItem(phraseViewKey)
+      
+      if (!alreadyViewed) {
+        // Marcar como vista
+        localStorage.setItem(phraseViewKey, 'true')
+        
+        // Incrementar contador de uso
+        const newUsage = incrementFreeUsage(user.id)
+        if (newUsage.isBlocked) {
+          router.push('/dashboard')
+          return
+        }
+      }
+    }
+  }, [currentStepIndex, progressiveSteps, user, isPremium, isLoading, router])
+
   const handleLogoClick = () => {
     if (user) {
       router.push('/dashboard')
@@ -215,15 +239,6 @@ function ProgressiveTrailClient({ trailData, slug }: { trailData: any, slug: str
     // Esta função agora é apenas para frases
     const currentStep = progressiveSteps[currentStepIndex]
     if (currentStep?.type === 'phrase') {
-      // Incrementar uso para usuários free
-      if (!isPremium) {
-        const newUsage = incrementFreeUsage(user.id)
-        // Se atingiu o limite, redirecionar para dashboard
-        if (newUsage.isBlocked) {
-          router.push('/dashboard')
-          return
-        }
-      }
 
       const updatedProgress = {
         ...userProgress,

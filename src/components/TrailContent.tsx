@@ -6,11 +6,10 @@ import { useRouter } from 'next/navigation'
 import Logo from './Logo'
 import { useAuth } from '@/contexts/AuthContext'
 import { useStats } from '@/contexts/StatsContext'
-import { useGlobalLimits } from '@/hooks/useGlobalLimits'
 import PageTransition from './PageTransition'
 import AnimatedContainer from './AnimatedContainer'
 import DragDropExercise from './DragDropExercise'
-import GlobalLimitMessage from './GlobalLimitMessage'
+import { getFreeUsageStatus, incrementFreeUsage, FreeLimitationStatus } from '@/utils/freeLimitations'
 import { getUserFavorites, addToFavorites, removeFromFavorites } from '@/lib/favorites'
 import { WorkIcon, TravelIcon, ShoppingIcon, CasualIcon, BusinessIcon, RestaurantIcon, SpeakerIcon, StarIcon, FlagIcon, LocationIcon, SendIcon, RobotIcon, LockIcon, LightBulbIcon } from './ModernIcons'
 
@@ -55,14 +54,13 @@ const iconMapping: { [key: string]: { component: React.ComponentType<{ size?: nu
 export default function TrailContent({ trail, userPlan, slug }: TrailContentProps) {
   const { user, userProfile } = useAuth()
   const { incrementPhrasesViewed } = useStats()
-  const { 
-    isPhrasesBlocked, 
-    incrementPhrases, 
-    getRemainingPhrases, 
-    getRealTimeCountdown,
-    isPremium,
-    totalPhrasesViewed
-  } = useGlobalLimits()
+  const [freeLimitations, setFreeLimitations] = useState<FreeLimitationStatus>({
+    isBlocked: false,
+    phrasesUsed: 0,
+    maxPhrases: 5,
+    timeRemaining: '',
+    canAccess: true
+  })
   
   // Usar plano real do usuário ou fallback para o prop
   const actualUserPlan = userProfile?.plan || userPlan || 'free'
@@ -74,17 +72,26 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
   const [selectedLevel, setSelectedLevel] = useState<'todas' | 'básico' | 'médio' | 'avançado'>('todas')
   const [favoritePhrases, setFavoritePhrases] = useState<number[]>([]) // Índices das frases favoritadas
   const [favoritesLoading, setFavoritesLoading] = useState(false)
-  const [hasReachedLimit, setHasReachedLimit] = useState(false) // Controle local do limite
-  const [phrasesCompletedCount, setPhrasesCompletedCount] = useState(0) // Contador local de frases completadas
+  const isPremium = actualUserPlan === 'premium'
 
-  // Verificar limite global ao montar componente
+  // Verificar limitações para usuários free
   useEffect(() => {
-    if (!isPremium && actualUserPlan === 'free') {
-      setHasReachedLimit(isPhrasesBlocked || totalPhrasesViewed >= 10)
-    } else {
-      setHasReachedLimit(false)
+    if (user?.id && actualUserPlan === 'free') {
+      const limitations = getFreeUsageStatus(user.id)
+      setFreeLimitations(limitations)
     }
-  }, [isPremium, actualUserPlan, totalPhrasesViewed, isPhrasesBlocked])
+  }, [user?.id, actualUserPlan])
+
+  // Atualizar limitações free a cada minuto
+  useEffect(() => {
+    if (user?.id && actualUserPlan === 'free' && freeLimitations.isBlocked) {
+      const interval = setInterval(() => {
+        const limitations = getFreeUsageStatus(user.id!)
+        setFreeLimitations(limitations)
+      }, 60000)
+      return () => clearInterval(interval)
+    }
+  }, [user?.id, actualUserPlan, freeLimitations.isBlocked])
 
   // Carregar favoritos do usuário ao montar o componente
   useEffect(() => {
@@ -159,23 +166,32 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
   const progress = ((completedPhrases.length) / availablePhrases.length) * 100
 
   const handleNext = async () => {
-    // Se já atingiu o limite global, não fazer nada
-    if (hasReachedLimit) {
+    // Se já atingiu o limite, não fazer nada
+    if (!isPremium && freeLimitations.isBlocked) {
       return
     }
     
     if (!completedPhrases.includes(currentPhraseIndex)) {
-      // Incrementar contador local
-      const newCount = phrasesCompletedCount + 1
-      setPhrasesCompletedCount(newCount)
       setCompletedPhrases([...completedPhrases, currentPhraseIndex])
       
-      // Incrementar contador global para usuários free
-      if (!isPremium && actualUserPlan === 'free') {
-        const canView = incrementPhrases()
-        if (!canView) {
-          setHasReachedLimit(true)
-          return
+      // Incrementar contador para usuários free
+      if (!isPremium && actualUserPlan === 'free' && user?.id) {
+        // Verificar se já viu essa frase específica antes
+        const phraseKey = `phrase_viewed_${user.id}_trail_${slug}_${currentPhraseIndex}`
+        const alreadyViewed = localStorage.getItem(phraseKey)
+        
+        if (!alreadyViewed) {
+          // Marcar como vista
+          localStorage.setItem(phraseKey, 'true')
+          
+          // Incrementar contador de uso
+          const newUsage = incrementFreeUsage(user.id)
+          setFreeLimitations(newUsage)
+          
+          if (newUsage.isBlocked) {
+            router.push('/dashboard')
+            return
+          }
         }
       }
       
@@ -669,8 +685,57 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
           </PageTransition>
         )}
 
-        {/* Mensagem para usuários Free */}
-        {actualUserPlan === 'free' && (
+        {/* Mensagem de bloqueio para usuários Free que atingiram o limite */}
+        {actualUserPlan === 'free' && freeLimitations.isBlocked && (
+          <PageTransition delay={800}>
+            <div className="mt-8 bg-gradient-to-r from-red-900/50 to-orange-900/50 border-2 border-red-500/50 rounded-xl p-6 text-center">
+              <div className="text-6xl mb-4">🔒</div>
+              <h3 className="text-2xl font-bold text-white mb-3">
+                Limite Diário Atingido!
+              </h3>
+              <p className="text-gray-300 mb-4 text-lg">
+                Você já praticou suas {freeLimitations.maxPhrases} frases diárias gratuitas.
+              </p>
+              
+              <div className="bg-gray-900/50 rounded-lg p-4 mb-6">
+                <div className="flex justify-center items-center gap-4 mb-4">
+                  <div className="text-center">
+                    <div className="text-2xl font-bold text-red-400">{freeLimitations.phrasesUsed}</div>
+                    <div className="text-gray-400 text-sm">Frases Usadas</div>
+                  </div>
+                  <div className="text-gray-500 text-xl">/</div>
+                  <div className="text-center">
+                    <div className="text-2xl font-bold text-gray-400">{freeLimitations.maxPhrases}</div>
+                    <div className="text-gray-400 text-sm">Limite Diário</div>
+                  </div>
+                </div>
+                {freeLimitations.timeRemaining && (
+                  <p className="text-orange-400 font-medium">
+                    ⏰ Próximo acesso em: {freeLimitations.timeRemaining}
+                  </p>
+                )}
+              </div>
+
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <button 
+                  className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 px-6 py-3 rounded-full text-white font-bold transition-all duration-300 transform hover:scale-105"
+                  onClick={() => alert('Funcionalidade de assinatura será implementada em breve! 🚀')}
+                >
+                  🌟 Upgrade para Premium
+                </button>
+                <button 
+                  onClick={() => router.push('/dashboard')}
+                  className="bg-gray-700 hover:bg-gray-600 px-6 py-3 rounded-full text-white font-semibold transition-colors"
+                >
+                  ← Voltar ao Dashboard
+                </button>
+              </div>
+            </div>
+          </PageTransition>
+        )}
+
+        {/* Mensagem para usuários Free que ainda podem usar */}
+        {actualUserPlan === 'free' && !freeLimitations.isBlocked && (
           <PageTransition delay={800}>
             <div className="mt-8 bg-gradient-to-r from-purple-900/50 to-cyan-900/50 border border-purple-500/30 rounded-xl p-6 text-center">
             <h3 className="text-xl font-bold text-white mb-2 flex items-center justify-center gap-2">

@@ -319,7 +319,7 @@ export default function DashboardContent() {
 
               <div className="bg-yellow-900/30 border border-yellow-500/30 rounded-lg p-4 mb-6">
                 <p className="text-yellow-300 text-sm">
-                  ⚠️ Você precisa completar este teste para acessar as funcionalidades Premium da plataforma.
+                  ⚠️ Você precisa completar este teste para acessar todas as funcionalidades da plataforma.
                 </p>
               </div>
 
@@ -333,6 +333,13 @@ export default function DashboardContent() {
           </div>
         </PageTransition>
         )}
+
+        {/* SE PRECISA DO TESTE, PARAR AQUI - NÃO MOSTRAR MAIS NADA */}
+        {needsLevelTest && (
+          </div>
+        </AnimatedContainer>
+      )
+    }
 
         {/* Tela de limitações para usuários Free após atingir o limite */}
         {userPlan === 'free' && hasCompletedTest && freeLimitations.isBlocked && (
