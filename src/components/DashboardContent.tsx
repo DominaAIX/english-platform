@@ -835,6 +835,29 @@ export default function DashboardContent() {
         </PageTransition>
         )}
 
+        {/* BOTÃO PROVISÓRIO - TESTE DE CERTIFICAÇÃO */}
+        {userPlan === 'premium' && (
+        <PageTransition>
+          <div className="bg-red-900/30 border-2 border-red-500/50 rounded-2xl p-4 mb-8">
+            <div className="text-center">
+              <div className="text-2xl mb-2">🚨</div>
+              <h3 className="text-red-400 font-bold text-lg mb-2">
+                AMBIENTE DE HOMOLOGAÇÃO
+              </h3>
+              <p className="text-gray-300 text-sm mb-4">
+                Botão provisório para testar certificação sem completar trilha básica
+              </p>
+              <Link
+                href="/certificacao-a1-a2"
+                className="bg-red-600 hover:bg-red-700 px-6 py-2 rounded-lg text-white font-semibold transition-colors text-sm"
+              >
+                🧪 TESTE CERTIFICAÇÃO (PROVISÓRIO)
+              </Link>
+            </div>
+          </div>
+        </PageTransition>
+        )}
+
         {/* Premium User Benefits - Só aparece para usuários Premium */}
         {userPlan === 'premium' && (
         <PageTransition>
