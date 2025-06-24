@@ -336,10 +336,12 @@ export default function DashboardContent() {
 
         {/* SE PRECISA DO TESTE, PARAR AQUI - NÃO MOSTRAR MAIS NADA */}
         {needsLevelTest && (
-          </div>
-        </AnimatedContainer>
-      )
-    }
+          <div />
+        )}
+
+        {/* Só renderizar o resto se NÃO precisar do teste */}
+        {!needsLevelTest && (
+          <>
 
         {/* Tela de limitações para usuários Free após atingir o limite */}
         {userPlan === 'free' && hasCompletedTest && freeLimitations.isBlocked && (
@@ -1088,6 +1090,8 @@ export default function DashboardContent() {
           </div>
         </div>
         </PageTransition>
+        </>
+        )}
       </div>
     </AnimatedContainer>
   )
