@@ -68,7 +68,6 @@ export default function TranslationExercise({
 
     // Chamar callback após um pequeno delay para mostrar o resultado
     setTimeout(() => {
-      console.log('TranslationExercise calling onComplete', { correct, userAnswer })
       onComplete(correct, userAnswer)
     }, 2000)
   }

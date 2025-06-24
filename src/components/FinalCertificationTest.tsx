@@ -41,9 +41,7 @@ export default function FinalCertificationTest({ test, onComplete, onClose }: Fi
 
   useEffect(() => {
     // Embaralhar questões de múltipla escolha ao iniciar o teste
-    console.log('Setting up test questions', { totalQuestions: test.questions.length })
     const shuffled = test.questions.map(question => shuffleMultipleChoiceOptions(question))
-    console.log('Questions shuffled', { shuffledLength: shuffled.length })
     setShuffledQuestions(shuffled)
     setTimeStarted(new Date())
 
@@ -76,21 +74,6 @@ export default function FinalCertificationTest({ test, onComplete, onClose }: Fi
   const currentQuestion = shuffledQuestions.length > 0 && currentQuestionIndex < shuffledQuestions.length ? shuffledQuestions[currentQuestionIndex] : null
   const progress = shuffledQuestions.length > 0 ? ((currentQuestionIndex + 1) / shuffledQuestions.length) * 100 : 0
 
-  // Log quando currentQuestion muda
-  useEffect(() => {
-    if (currentQuestion) {
-      console.log('Current question changed', { 
-        index: currentQuestionIndex, 
-        questionId: currentQuestion.id,
-        questionType: currentQuestion.type 
-      })
-    } else {
-      console.log('No current question', { 
-        index: currentQuestionIndex, 
-        totalQuestions: shuffledQuestions.length 
-      })
-    }
-  }, [currentQuestionIndex, currentQuestion])
 
   if (!currentQuestion) {
     return (
@@ -103,37 +86,18 @@ export default function FinalCertificationTest({ test, onComplete, onClose }: Fi
   }
 
   const handleAnswerSubmit = (answer: any) => {
-    console.log('handleAnswerSubmit called', { 
-      answer, 
-      currentQuestionIndex, 
-      shuffledQuestionsLength: shuffledQuestions.length,
-      currentQuestion: currentQuestion?.id 
-    })
-    
     if (!currentQuestion) {
-      console.error('No current question found in handleAnswerSubmit')
       return
     }
     
     const questionId = currentQuestion.id
-    setAnswers(prev => {
-      const newAnswers = { ...prev, [questionId]: answer }
-      console.log('Updated answers:', newAnswers)
-      return newAnswers
-    })
+    setAnswers(prev => ({ ...prev, [questionId]: answer }))
 
     // Avançar automaticamente após resposta
     setTimeout(() => {
-      console.log('setTimeout executing', { 
-        currentQuestionIndex, 
-        totalQuestions: shuffledQuestions.length 
-      })
-      
       if (currentQuestionIndex < shuffledQuestions.length - 1) {
-        console.log('Moving to next question:', currentQuestionIndex + 1)
         setCurrentQuestionIndex(currentQuestionIndex + 1)
       } else {
-        console.log('Calculating final score')
         calculateFinalScore()
       }
     }, 1500)
@@ -220,14 +184,6 @@ export default function FinalCertificationTest({ test, onComplete, onClose }: Fi
   }
 
   const getQuestionComponent = () => {
-    console.log('Rendering question component', { 
-      type: currentQuestion.type, 
-      question: currentQuestion.question,
-      hasOptions: !!currentQuestion.options,
-      hasWords: !!currentQuestion.words,
-      hasAcceptedVariations: !!currentQuestion.acceptedVariations
-    })
-    
     switch (currentQuestion.type) {
       case 'multiple-choice':
         return (
