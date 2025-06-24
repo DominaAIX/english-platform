@@ -220,14 +220,22 @@ export default function FinalCertificationTest({ test, onComplete, onClose }: Fi
   }
 
   const getQuestionComponent = () => {
+    console.log('Rendering question component', { 
+      type: currentQuestion.type, 
+      question: currentQuestion.question,
+      hasOptions: !!currentQuestion.options,
+      hasWords: !!currentQuestion.words,
+      hasAcceptedVariations: !!currentQuestion.acceptedVariations
+    })
+    
     switch (currentQuestion.type) {
       case 'multiple-choice':
         return (
           <MultipleChoiceExercise
             exerciseData={{
               question: currentQuestion.question,
-              options: currentQuestion.options!,
-              correctAnswer: currentQuestion.correctAnswer!,
+              options: currentQuestion.options || [],
+              correctAnswer: currentQuestion.correctAnswer || 0,
               explanation: currentQuestion.explanation
             }}
             onComplete={(isCorrect) => handleAnswerSubmit(isCorrect ? currentQuestion.correctAnswer : -1)}
@@ -242,9 +250,9 @@ export default function FinalCertificationTest({ test, onComplete, onClose }: Fi
           <TranslationExercise
             exerciseData={{
               portugueseText: currentQuestion.question,
-              correctEnglish: currentQuestion.correctAnswer!,
+              correctEnglish: currentQuestion.correctAnswer || '',
               alternatives: currentQuestion.acceptedVariations || [],
-              hint: `Resposta esperada: ${currentQuestion.correctAnswer}`
+              hint: `Resposta esperada: ${currentQuestion.correctAnswer || ''}`
             }}
             onComplete={(isCorrect, answer) => handleAnswerSubmit(answer)}
             hideHints={true}
@@ -258,9 +266,9 @@ export default function FinalCertificationTest({ test, onComplete, onClose }: Fi
           <CompleteSentenceExercise
             exerciseData={{
               sentence: currentQuestion.question,
-              correctAnswer: currentQuestion.correctAnswer!,
+              correctAnswer: currentQuestion.correctAnswer || '',
               alternatives: currentQuestion.acceptedVariations || [],
-              hint: `Complete com: ${currentQuestion.correctAnswer}`
+              hint: `Complete com: ${currentQuestion.correctAnswer || ''}`
             }}
             onComplete={(isCorrect, answer) => handleAnswerSubmit(answer)}
             hideRetryButton={true}
@@ -272,9 +280,9 @@ export default function FinalCertificationTest({ test, onComplete, onClose }: Fi
           <DragDropExercise
             exercise={{
               id: currentQuestion.id,
-              correctSentence: currentQuestion.correctSentence!,
-              words: currentQuestion.words!,
-              translation: currentQuestion.translation!
+              correctSentence: currentQuestion.correctSentence || '',
+              words: currentQuestion.words || [],
+              translation: currentQuestion.translation || ''
             }}
             onComplete={(isCorrect) => handleAnswerSubmit(currentQuestion.correctSentence)}
             hideRetryButton={true}
