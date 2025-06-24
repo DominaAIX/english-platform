@@ -80,7 +80,13 @@ export default function MultipleChoiceExercise({
               onClick={() => handleOptionSelect(index)}
               disabled={disabled || hasSubmitted}
               className={`w-full p-4 rounded-lg text-left transition-all duration-200 ${
-                hasSubmitted
+                hasSubmitted && showMinimalFeedback
+                  ? selectedAnswer === index
+                    ? isCorrect
+                      ? 'bg-green-600/30 border-2 border-green-400 text-green-300'
+                      : 'bg-red-600/30 border-2 border-red-400 text-red-300'
+                    : 'bg-gray-700/50 border border-gray-600 text-gray-400'
+                  : hasSubmitted
                   ? index === exerciseData.correctAnswer
                     ? 'bg-green-600/30 border-2 border-green-400 text-green-300'
                     : selectedAnswer === index
@@ -93,7 +99,13 @@ export default function MultipleChoiceExercise({
             >
               <div className="flex items-center gap-3">
                 <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${
-                  hasSubmitted
+                  hasSubmitted && showMinimalFeedback
+                    ? selectedAnswer === index
+                      ? isCorrect
+                        ? 'border-green-400 bg-green-600'
+                        : 'border-red-400 bg-red-600'
+                      : 'border-gray-500'
+                    : hasSubmitted
                     ? index === exerciseData.correctAnswer
                       ? 'border-green-400 bg-green-600'
                       : selectedAnswer === index
@@ -103,10 +115,13 @@ export default function MultipleChoiceExercise({
                     ? 'border-purple-400 bg-purple-600'
                     : 'border-gray-500'
                 }`}>
-                  {hasSubmitted && index === exerciseData.correctAnswer && (
+                  {hasSubmitted && showMinimalFeedback && selectedAnswer === index && (
                     <div className="w-3 h-3 bg-white rounded-full"></div>
                   )}
-                  {hasSubmitted && selectedAnswer === index && index !== exerciseData.correctAnswer && (
+                  {hasSubmitted && !showMinimalFeedback && index === exerciseData.correctAnswer && (
+                    <div className="w-3 h-3 bg-white rounded-full"></div>
+                  )}
+                  {hasSubmitted && !showMinimalFeedback && selectedAnswer === index && index !== exerciseData.correctAnswer && (
                     <div className="w-3 h-3 bg-white rounded-full"></div>
                   )}
                   {!hasSubmitted && selectedAnswer === index && (
@@ -123,7 +138,7 @@ export default function MultipleChoiceExercise({
       </div>
 
       {/* Resultado */}
-      {showResult && (
+      {showResult && !showMinimalFeedback && (
         <div className={`mb-6 p-4 rounded-lg ${
           isCorrect 
             ? 'bg-green-900/30 border border-green-500/30' 
@@ -133,22 +148,20 @@ export default function MultipleChoiceExercise({
             <span className="text-4xl">
               {isCorrect ? '✅' : '❌'}
             </span>
-            {!showMinimalFeedback && (
-              <span className={`font-semibold ${
-                isCorrect ? 'text-green-400' : 'text-red-400'
-              }`}>
-                {isCorrect ? 'Resposta Correta!' : 'Resposta Incorreta!'}
-              </span>
-            )}
+            <span className={`font-semibold ${
+              isCorrect ? 'text-green-400' : 'text-red-400'
+            }`}>
+              {isCorrect ? 'Resposta Correta!' : 'Resposta Incorreta!'}
+            </span>
           </div>
           
-          {!showMinimalFeedback && !isCorrect && (
+          {!isCorrect && (
             <div className="text-gray-300 text-sm mb-2 mt-3">
               <p>A resposta correta é: <strong>{String.fromCharCode(65 + exerciseData.correctAnswer)}. {exerciseData.options[exerciseData.correctAnswer]}</strong></p>
             </div>
           )}
           
-          {!showMinimalFeedback && exerciseData.explanation && (
+          {exerciseData.explanation && (
             <div className="bg-gray-800/50 rounded-lg p-3 mt-3">
               <div className="text-cyan-400 text-sm font-medium mb-1">💡 Explicação:</div>
               <div className="text-gray-300 text-sm">
@@ -157,7 +170,7 @@ export default function MultipleChoiceExercise({
             </div>
           )}
           
-          {!showMinimalFeedback && isCorrect && (
+          {isCorrect && (
             <div className="text-green-300 text-sm mt-3">
               Excelente! Você escolheu a alternativa correta.
             </div>

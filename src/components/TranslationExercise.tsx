@@ -120,8 +120,8 @@ export default function TranslationExercise({
           className={`w-full bg-gray-800 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 resize-none focus:outline-none focus:border-purple-500 transition-colors ${
             hasSubmitted 
               ? isCorrect 
-                ? 'border-green-500 bg-green-900/20' 
-                : 'border-red-500 bg-red-900/20'
+                ? 'border-green-500 bg-green-900/20 text-green-300' 
+                : 'border-red-500 bg-red-900/20 text-red-300'
               : ''
           } ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
           rows={3}
@@ -150,7 +150,7 @@ export default function TranslationExercise({
       )}
 
       {/* Resultado */}
-      {showResult && (
+      {showResult && !showMinimalFeedback && (
         <div className={`mb-6 p-4 rounded-lg ${
           isCorrect 
             ? 'bg-green-900/30 border border-green-500/30' 
@@ -160,16 +160,14 @@ export default function TranslationExercise({
             <span className="text-4xl">
               {isCorrect ? '✅' : '❌'}
             </span>
-            {!showMinimalFeedback && (
-              <span className={`font-semibold ${
-                isCorrect ? 'text-green-400' : 'text-red-400'
-              }`}>
-                {isCorrect ? 'Tradução Correta!' : 'Tradução Incorreta!'}
-              </span>
-            )}
+            <span className={`font-semibold ${
+              isCorrect ? 'text-green-400' : 'text-red-400'
+            }`}>
+              {isCorrect ? 'Tradução Correta!' : 'Tradução Incorreta!'}
+            </span>
           </div>
           
-          {!showMinimalFeedback && !isCorrect && (
+          {!isCorrect && (
             <div className="space-y-2 mt-3">
               <div className="text-gray-300 text-sm">
                 <p><strong>Sua resposta:</strong> {userAnswer}</p>
@@ -190,7 +188,7 @@ export default function TranslationExercise({
             </div>
           )}
           
-          {!showMinimalFeedback && isCorrect && (
+          {isCorrect && (
             <div className="text-green-300 text-sm mt-3">
               Perfeito! Sua tradução está correta.
             </div>
