@@ -5,14 +5,16 @@ import { CompleteSentenceData } from '@/data/progressiveTrails'
 
 interface CompleteSentenceExerciseProps {
   exerciseData: CompleteSentenceData
-  onComplete: (isCorrect: boolean) => void
+  onComplete: (isCorrect: boolean, answer?: string) => void
   disabled?: boolean
+  hideRetryButton?: boolean
 }
 
 export default function CompleteSentenceExercise({ 
   exerciseData, 
   onComplete, 
-  disabled = false 
+  disabled = false,
+  hideRetryButton = false
 }: CompleteSentenceExerciseProps) {
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null)
   const [showResult, setShowResult] = useState(false)
@@ -34,7 +36,7 @@ export default function CompleteSentenceExercise({
 
     // Chamar callback após um pequeno delay para mostrar o resultado
     setTimeout(() => {
-      onComplete(correct)
+      onComplete(correct, exerciseData.options[selectedAnswer])
     }, 1500)
   }
 
@@ -52,7 +54,7 @@ export default function CompleteSentenceExercise({
   }
 
   return (
-    <div className="bg-gray-900/50 border border-gray-700 rounded-xl p-6 sm:p-8 lg:p-10 w-full max-w-none min-h-[350px]">
+    <div className="bg-gray-900/50 border border-gray-700 rounded-xl p-6">
       <div className="mb-6">
         <h3 className="text-base sm:text-lg font-semibold text-white mb-2">
           ✏️ Complete a Frase
@@ -143,7 +145,7 @@ export default function CompleteSentenceExercise({
           >
             Verificar Resposta
           </button>
-        ) : !isCorrect ? (
+        ) : !isCorrect && !hideRetryButton ? (
           <button
             onClick={handleTryAgain}
             disabled={disabled}

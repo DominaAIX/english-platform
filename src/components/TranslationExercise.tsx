@@ -5,14 +5,20 @@ import { TranslationExerciseData } from '@/data/progressiveTrails'
 
 interface TranslationExerciseProps {
   exerciseData: TranslationExerciseData
-  onComplete: (isCorrect: boolean) => void
+  onComplete: (isCorrect: boolean, answer?: string) => void
   disabled?: boolean
+  hideHints?: boolean
+  hideRetryButton?: boolean
+  showMinimalFeedback?: boolean
 }
 
 export default function TranslationExercise({ 
   exerciseData, 
   onComplete, 
-  disabled = false 
+  disabled = false,
+  hideHints = false,
+  hideRetryButton = false,
+  showMinimalFeedback = false
 }: TranslationExerciseProps) {
   const [userAnswer, setUserAnswer] = useState('')
   const [showResult, setShowResult] = useState(false)
@@ -62,7 +68,7 @@ export default function TranslationExercise({
 
     // Chamar callback após um pequeno delay para mostrar o resultado
     setTimeout(() => {
-      onComplete(correct)
+      onComplete(correct, userAnswer)
     }, 2000)
   }
 
@@ -82,7 +88,7 @@ export default function TranslationExercise({
   }
 
   return (
-    <div className="bg-gray-900/50 border border-gray-700 rounded-xl p-6 sm:p-8 lg:p-10 w-full max-w-none min-h-[350px]">
+    <div className="bg-gray-900/50 border border-gray-700 rounded-xl p-6">
       <div className="mb-6">
         <h3 className="text-base sm:text-lg font-semibold text-white mb-2">
           🔄 Tradução
@@ -114,8 +120,8 @@ export default function TranslationExercise({
           className={`w-full bg-gray-800 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 resize-none focus:outline-none focus:border-purple-500 transition-colors ${
             hasSubmitted 
               ? isCorrect 
-                ? 'border-green-500 bg-green-900/20' 
-                : 'border-red-500 bg-red-900/20'
+                ? 'border-green-500 bg-green-900/20 text-green-300' 
+                : 'border-red-500 bg-red-900/20 text-red-300'
               : ''
           } ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
           rows={3}
@@ -123,7 +129,7 @@ export default function TranslationExercise({
       </div>
 
       {/* Dica */}
-      {exerciseData.hint && (
+      {exerciseData.hint && !hideHints && (
         <div className="mb-6">
           <button
             onClick={() => setShowHint(!showHint)}
@@ -144,14 +150,14 @@ export default function TranslationExercise({
       )}
 
       {/* Resultado */}
-      {showResult && (
+      {showResult && !showMinimalFeedback && (
         <div className={`mb-6 p-4 rounded-lg ${
           isCorrect 
             ? 'bg-green-900/30 border border-green-500/30' 
             : 'bg-red-900/30 border border-red-500/30'
         }`}>
-          <div className="flex items-center gap-3 mb-3">
-            <span className="text-2xl">
+          <div className="flex items-center justify-center gap-3">
+            <span className="text-4xl">
               {isCorrect ? '✅' : '❌'}
             </span>
             <span className={`font-semibold ${
@@ -162,7 +168,7 @@ export default function TranslationExercise({
           </div>
           
           {!isCorrect && (
-            <div className="space-y-2">
+            <div className="space-y-2 mt-3">
               <div className="text-gray-300 text-sm">
                 <p><strong>Sua resposta:</strong> {userAnswer}</p>
               </div>
@@ -183,7 +189,7 @@ export default function TranslationExercise({
           )}
           
           {isCorrect && (
-            <div className="text-green-300 text-sm">
+            <div className="text-green-300 text-sm mt-3">
               Perfeito! Sua tradução está correta.
             </div>
           )}
@@ -200,7 +206,7 @@ export default function TranslationExercise({
           >
             Verificar Tradução
           </button>
-        ) : !isCorrect ? (
+        ) : !isCorrect && !hideRetryButton ? (
           <button
             onClick={handleTryAgain}
             disabled={disabled}
