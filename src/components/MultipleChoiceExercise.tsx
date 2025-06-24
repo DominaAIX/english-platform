@@ -7,12 +7,18 @@ interface MultipleChoiceExerciseProps {
   exerciseData: MultipleChoiceData
   onComplete: (isCorrect: boolean) => void
   disabled?: boolean
+  hideHints?: boolean
+  hideRetryButton?: boolean
+  showMinimalFeedback?: boolean
 }
 
 export default function MultipleChoiceExercise({ 
   exerciseData, 
   onComplete, 
-  disabled = false 
+  disabled = false,
+  hideHints = false,
+  hideRetryButton = false,
+  showMinimalFeedback = false
 }: MultipleChoiceExerciseProps) {
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null)
   const [showResult, setShowResult] = useState(false)
@@ -123,24 +129,26 @@ export default function MultipleChoiceExercise({
             ? 'bg-green-900/30 border border-green-500/30' 
             : 'bg-red-900/30 border border-red-500/30'
         }`}>
-          <div className="flex items-center gap-3 mb-3">
-            <span className="text-2xl">
+          <div className="flex items-center justify-center gap-3">
+            <span className="text-4xl">
               {isCorrect ? '✅' : '❌'}
             </span>
-            <span className={`font-semibold ${
-              isCorrect ? 'text-green-400' : 'text-red-400'
-            }`}>
-              {isCorrect ? 'Resposta Correta!' : 'Resposta Incorreta!'}
-            </span>
+            {!showMinimalFeedback && (
+              <span className={`font-semibold ${
+                isCorrect ? 'text-green-400' : 'text-red-400'
+              }`}>
+                {isCorrect ? 'Resposta Correta!' : 'Resposta Incorreta!'}
+              </span>
+            )}
           </div>
           
-          {!isCorrect && (
-            <div className="text-gray-300 text-sm mb-2">
+          {!showMinimalFeedback && !isCorrect && (
+            <div className="text-gray-300 text-sm mb-2 mt-3">
               <p>A resposta correta é: <strong>{String.fromCharCode(65 + exerciseData.correctAnswer)}. {exerciseData.options[exerciseData.correctAnswer]}</strong></p>
             </div>
           )}
           
-          {exerciseData.explanation && (
+          {!showMinimalFeedback && exerciseData.explanation && (
             <div className="bg-gray-800/50 rounded-lg p-3 mt-3">
               <div className="text-cyan-400 text-sm font-medium mb-1">💡 Explicação:</div>
               <div className="text-gray-300 text-sm">
@@ -149,8 +157,8 @@ export default function MultipleChoiceExercise({
             </div>
           )}
           
-          {isCorrect && (
-            <div className="text-green-300 text-sm">
+          {!showMinimalFeedback && isCorrect && (
+            <div className="text-green-300 text-sm mt-3">
               Excelente! Você escolheu a alternativa correta.
             </div>
           )}
@@ -167,7 +175,7 @@ export default function MultipleChoiceExercise({
           >
             Verificar Resposta
           </button>
-        ) : !isCorrect ? (
+        ) : !isCorrect && !hideRetryButton ? (
           <button
             onClick={handleTryAgain}
             disabled={disabled}

@@ -192,6 +192,7 @@ export default function FinalCertificationTest({ test, onComplete, onClose }: Fi
             onComplete={(isCorrect) => handleAnswerSubmit(currentQuestion.correctAnswer)}
             hideHints={true}
             hideRetryButton={true}
+            showMinimalFeedback={true}
           />
         )
       
@@ -207,6 +208,7 @@ export default function FinalCertificationTest({ test, onComplete, onClose }: Fi
             onComplete={(isCorrect, answer) => handleAnswerSubmit(answer)}
             hideHints={true}
             hideRetryButton={true}
+            showMinimalFeedback={true}
           />
         )
       
