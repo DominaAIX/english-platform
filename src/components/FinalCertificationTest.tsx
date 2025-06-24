@@ -189,7 +189,7 @@ export default function FinalCertificationTest({ test, onComplete, onClose }: Fi
               correctAnswer: currentQuestion.correctAnswer!,
               explanation: currentQuestion.explanation
             }}
-            onComplete={(isCorrect) => handleAnswerSubmit(currentQuestion.correctAnswer)}
+            onComplete={(isCorrect) => handleAnswerSubmit(isCorrect ? currentQuestion.correctAnswer : -1)}
             hideHints={true}
             hideRetryButton={true}
             showMinimalFeedback={true}
