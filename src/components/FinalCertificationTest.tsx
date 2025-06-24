@@ -190,6 +190,8 @@ export default function FinalCertificationTest({ test, onComplete, onClose }: Fi
               explanation: currentQuestion.explanation
             }}
             onComplete={(isCorrect) => handleAnswerSubmit(currentQuestion.correctAnswer)}
+            hideHints={true}
+            hideRetryButton={true}
           />
         )
       
@@ -204,6 +206,7 @@ export default function FinalCertificationTest({ test, onComplete, onClose }: Fi
             }}
             onComplete={(isCorrect, answer) => handleAnswerSubmit(answer)}
             hideHints={true}
+            hideRetryButton={true}
           />
         )
       
@@ -217,6 +220,7 @@ export default function FinalCertificationTest({ test, onComplete, onClose }: Fi
               hint: `Complete com: ${currentQuestion.correctAnswer}`
             }}
             onComplete={(isCorrect, answer) => handleAnswerSubmit(answer)}
+            hideRetryButton={true}
           />
         )
       
@@ -230,6 +234,7 @@ export default function FinalCertificationTest({ test, onComplete, onClose }: Fi
               translation: currentQuestion.translation!
             }}
             onComplete={(isCorrect) => handleAnswerSubmit(currentQuestion.correctSentence)}
+            hideRetryButton={true}
           />
         )
       
@@ -332,19 +337,34 @@ export default function FinalCertificationTest({ test, onComplete, onClose }: Fi
   }
 
   return (
-    <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 z-50">
-      <div className="bg-gray-900 border border-gray-700 rounded-2xl p-6 max-w-4xl w-full max-h-[90vh] overflow-y-auto">
-        {/* Header */}
-        <div className="flex justify-between items-center mb-6">
-          <div>
+    <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex flex-col z-50">
+      {/* Header com Logo */}
+      <div className="bg-gray-900/50 border-b border-gray-700 p-4">
+        <div className="max-w-4xl mx-auto flex justify-between items-center">
+          <button 
+            onClick={() => setShowExitWarning(true)}
+            className="flex items-center gap-3 hover:opacity-80 transition-opacity"
+          >
+            <div className="w-8 h-8 bg-gradient-to-br from-purple-500 to-cyan-500 rounded-lg flex items-center justify-center">
+              <span className="text-white font-bold text-sm">IP</span>
+            </div>
+            <span className="text-white font-bold">Inglês pra Já</span>
+          </button>
+          
+          <div className="text-red-400 text-sm font-medium">
+            ⚠️ Teste de Certificação em Andamento
+          </div>
+        </div>
+      </div>
+
+      {/* Conteúdo do Teste */}
+      <div className="flex-1 flex items-center justify-center p-4">
+        <div className="bg-gray-900 border border-gray-700 rounded-2xl p-6 max-w-4xl w-full max-h-[80vh] overflow-y-auto">
+          {/* Header do Teste */}
+          <div className="mb-6">
             <h2 className="text-2xl font-bold text-white mb-1">{test.title}</h2>
             <p className="text-gray-400">{test.description}</p>
           </div>
-          {/* Remover botão X durante o teste para prevenir saída acidental */}
-          <div className="text-red-400 text-sm font-medium">
-            ⚠️ Teste em andamento
-          </div>
-        </div>
 
         {/* Progress */}
         <div className="mb-6">
@@ -378,11 +398,13 @@ export default function FinalCertificationTest({ test, onComplete, onClose }: Fi
           {getQuestionComponent()}
         </div>
 
-        {/* Navigation hint */}
-        <div className="text-center text-sm text-gray-500">
-          Responda e aguarde para avançar automaticamente
+          {/* Navigation hint */}
+          <div className="text-center text-sm text-gray-500">
+            Responda e aguarde para avançar automaticamente
+          </div>
         </div>
       </div>
+    </div>
 
       {/* Modal de Aviso de Saída */}
       {showExitWarning && (
@@ -395,10 +417,10 @@ export default function FinalCertificationTest({ test, onComplete, onClose }: Fi
               </h3>
               <p className="text-white mb-6 leading-relaxed">
                 Você está tentando sair do teste de certificação. 
-                <strong className="text-red-300"> Se sair agora, o próximo teste só será liberado em 48 horas.</strong>
+                <strong className="text-red-300"> Se sair agora, será bloqueado por 48 horas.</strong>
               </p>
               <p className="text-gray-300 mb-8 text-sm">
-                Tem certeza que deseja sair e perder esta tentativa?
+                O próximo teste só será liberado em: <strong className="text-red-300">48 horas</strong>
               </p>
               
               <div className="flex gap-4">

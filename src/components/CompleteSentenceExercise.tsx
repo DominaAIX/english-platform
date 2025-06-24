@@ -7,12 +7,14 @@ interface CompleteSentenceExerciseProps {
   exerciseData: CompleteSentenceData
   onComplete: (isCorrect: boolean, answer?: string) => void
   disabled?: boolean
+  hideRetryButton?: boolean
 }
 
 export default function CompleteSentenceExercise({ 
   exerciseData, 
   onComplete, 
-  disabled = false 
+  disabled = false,
+  hideRetryButton = false
 }: CompleteSentenceExerciseProps) {
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null)
   const [showResult, setShowResult] = useState(false)
@@ -143,7 +145,7 @@ export default function CompleteSentenceExercise({
           >
             Verificar Resposta
           </button>
-        ) : !isCorrect ? (
+        ) : !isCorrect && !hideRetryButton ? (
           <button
             onClick={handleTryAgain}
             disabled={disabled}
