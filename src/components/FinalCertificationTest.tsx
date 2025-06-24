@@ -262,13 +262,36 @@ export default function FinalCertificationTest({ test, onComplete, onClose }: Fi
         )
       
       case 'complete-sentence':
+        // Para complete-sentence, precisamos gerar opções se não existirem
+        const generateCompleteSentenceOptions = () => {
+          if (currentQuestion.options && currentQuestion.options.length > 0) {
+            return {
+              options: currentQuestion.options,
+              correctAnswer: currentQuestion.correctAnswer || 0
+            }
+          }
+          
+          // Se não tem opções, criar opções baseadas na resposta correta
+          const correctWord = currentQuestion.correctAnswer || 'good'
+          const wrongOptions = ['bad', 'terrible', 'awful', 'horrible']
+          const allOptions = [correctWord, ...wrongOptions.slice(0, 3)]
+          const shuffledOptions = allOptions.sort(() => Math.random() - 0.5)
+          
+          return {
+            options: shuffledOptions,
+            correctAnswer: shuffledOptions.indexOf(correctWord)
+          }
+        }
+        
+        const { options, correctAnswer } = generateCompleteSentenceOptions()
+        
         return (
           <CompleteSentenceExercise
             exerciseData={{
               sentence: currentQuestion.question,
-              correctAnswer: currentQuestion.correctAnswer || '',
-              alternatives: currentQuestion.acceptedVariations || [],
-              hint: `Complete com: ${currentQuestion.correctAnswer || ''}`
+              options: options,
+              correctAnswer: correctAnswer,
+              translation: currentQuestion.translation || ''
             }}
             onComplete={(isCorrect, answer) => handleAnswerSubmit(answer)}
             hideRetryButton={true}
