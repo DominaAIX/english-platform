@@ -71,7 +71,7 @@ export default function FinalCertificationTest({ test, onComplete, onClose }: Fi
     }
   }, [showResults])
 
-  const currentQuestion = shuffledQuestions.length > 0 ? shuffledQuestions[currentQuestionIndex] : null
+  const currentQuestion = shuffledQuestions.length > 0 && currentQuestionIndex < shuffledQuestions.length ? shuffledQuestions[currentQuestionIndex] : null
   const progress = shuffledQuestions.length > 0 ? ((currentQuestionIndex + 1) / shuffledQuestions.length) * 100 : 0
 
   if (!currentQuestion) {
@@ -85,6 +85,11 @@ export default function FinalCertificationTest({ test, onComplete, onClose }: Fi
   }
 
   const handleAnswerSubmit = (answer: any) => {
+    if (!currentQuestion) {
+      console.error('No current question found')
+      return
+    }
+    
     const questionId = currentQuestion.id
     setAnswers(prev => ({ ...prev, [questionId]: answer }))
 
