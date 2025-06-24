@@ -184,6 +184,20 @@ export default function CertificacaoA1A2Page() {
                 </div>
               </div>
 
+              {/* Aviso importante sobre as regras */}
+              <div className="bg-red-900/30 border border-red-500/50 rounded-xl p-6 mb-8 max-w-2xl mx-auto">
+                <h3 className="text-red-400 font-semibold text-lg mb-3 flex items-center gap-2">
+                  ⚠️ Regras Importantes
+                </h3>
+                <ul className="text-gray-300 text-sm space-y-2 text-left">
+                  <li>• <strong>Sem pausas:</strong> O teste deve ser feito do início ao fim</li>
+                  <li>• <strong>Sem dicas:</strong> Este é um teste de avaliação real</li>
+                  <li>• <strong>Limite de tentativas:</strong> Apenas 1 teste a cada 48 horas</li>
+                  <li>• <strong>Se sair:</strong> Próximo teste só em 48 horas</li>
+                  <li>• <strong>Tempo recomendado:</strong> Reserve 25-30 minutos</li>
+                </ul>
+              </div>
+
               <button
                 onClick={handleStartTest}
                 className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 px-12 py-4 rounded-full text-white font-bold text-xl transition-all duration-300 transform hover:scale-105 shadow-lg"
@@ -192,7 +206,7 @@ export default function CertificacaoA1A2Page() {
               </button>
               
               <p className="text-gray-500 text-sm mt-6">
-                ⚠️ O teste não pode ser pausado. Certifique-se de ter tempo disponível.
+                ⚠️ Ao clicar em "Iniciar", você concorda com as regras acima.
               </p>
             </div>
           </PageTransition>

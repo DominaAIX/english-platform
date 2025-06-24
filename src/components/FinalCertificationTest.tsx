@@ -20,6 +20,7 @@ export default function FinalCertificationTest({ test, onComplete, onClose }: Fi
   const [score, setScore] = useState(0)
   const [timeStarted, setTimeStarted] = useState<Date>(new Date())
   const [shuffledQuestions, setShuffledQuestions] = useState<FinalTestQuestion[]>([])
+  const [showExitWarning, setShowExitWarning] = useState(false)
 
   // Função para embaralhar opções de múltipla escolha
   const shuffleMultipleChoiceOptions = (question: FinalTestQuestion) => {
@@ -43,7 +44,32 @@ export default function FinalCertificationTest({ test, onComplete, onClose }: Fi
     const shuffled = test.questions.map(question => shuffleMultipleChoiceOptions(question))
     setShuffledQuestions(shuffled)
     setTimeStarted(new Date())
-  }, [])
+
+    // Prevenir fechamento da aba/navegador durante o teste
+    const handleBeforeUnload = (e: BeforeUnloadEvent) => {
+      if (!showResults) {
+        e.preventDefault()
+        e.returnValue = 'Você está saindo do teste de certificação. O próximo teste só será liberado em 48 horas. Tem certeza?'
+        return e.returnValue
+      }
+    }
+
+    // Prevenir tecla ESC
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && !showResults) {
+        e.preventDefault()
+        setShowExitWarning(true)
+      }
+    }
+
+    window.addEventListener('beforeunload', handleBeforeUnload)
+    window.addEventListener('keydown', handleKeyDown)
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload)
+      window.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [showResults])
 
   const currentQuestion = shuffledQuestions.length > 0 ? shuffledQuestions[currentQuestionIndex] : null
   const progress = shuffledQuestions.length > 0 ? ((currentQuestionIndex + 1) / shuffledQuestions.length) * 100 : 0
@@ -142,6 +168,16 @@ export default function FinalCertificationTest({ test, onComplete, onClose }: Fi
     setTimeStarted(new Date())
   }
 
+  const handleForceExit = () => {
+    // Marcar como falha e bloquear por 48h
+    onComplete(false, 0)
+    onClose()
+  }
+
+  const handleCancelExit = () => {
+    setShowExitWarning(false)
+  }
+
   const getQuestionComponent = () => {
     switch (currentQuestion.type) {
       case 'multiple-choice':
@@ -167,6 +203,7 @@ export default function FinalCertificationTest({ test, onComplete, onClose }: Fi
               hint: `Resposta esperada: ${currentQuestion.correctAnswer}`
             }}
             onComplete={(isCorrect, answer) => handleAnswerSubmit(answer)}
+            hideHints={true}
           />
         )
       
@@ -303,12 +340,10 @@ export default function FinalCertificationTest({ test, onComplete, onClose }: Fi
             <h2 className="text-2xl font-bold text-white mb-1">{test.title}</h2>
             <p className="text-gray-400">{test.description}</p>
           </div>
-          <button
-            onClick={onClose}
-            className="text-gray-400 hover:text-white transition-colors text-2xl"
-          >
-            ✕
-          </button>
+          {/* Remover botão X durante o teste para prevenir saída acidental */}
+          <div className="text-red-400 text-sm font-medium">
+            ⚠️ Teste em andamento
+          </div>
         </div>
 
         {/* Progress */}
@@ -348,6 +383,42 @@ export default function FinalCertificationTest({ test, onComplete, onClose }: Fi
           Responda e aguarde para avançar automaticamente
         </div>
       </div>
+
+      {/* Modal de Aviso de Saída */}
+      {showExitWarning && (
+        <div className="fixed inset-0 bg-black/90 backdrop-blur-sm flex items-center justify-center p-4 z-[60]">
+          <div className="bg-red-900/50 border-2 border-red-500 rounded-2xl p-8 max-w-md w-full">
+            <div className="text-center">
+              <div className="text-6xl mb-4">⚠️</div>
+              <h3 className="text-2xl font-bold text-red-400 mb-4">
+                Atenção!
+              </h3>
+              <p className="text-white mb-6 leading-relaxed">
+                Você está tentando sair do teste de certificação. 
+                <strong className="text-red-300"> Se sair agora, o próximo teste só será liberado em 48 horas.</strong>
+              </p>
+              <p className="text-gray-300 mb-8 text-sm">
+                Tem certeza que deseja sair e perder esta tentativa?
+              </p>
+              
+              <div className="flex gap-4">
+                <button
+                  onClick={handleCancelExit}
+                  className="flex-1 bg-green-600 hover:bg-green-700 px-6 py-3 rounded-lg text-white font-semibold transition-colors"
+                >
+                  Continuar Teste
+                </button>
+                <button
+                  onClick={handleForceExit}
+                  className="flex-1 bg-red-600 hover:bg-red-700 px-6 py-3 rounded-lg text-white font-semibold transition-colors"
+                >
+                  Sair (48h bloqueio)
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

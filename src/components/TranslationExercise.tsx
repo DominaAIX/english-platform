@@ -7,12 +7,14 @@ interface TranslationExerciseProps {
   exerciseData: TranslationExerciseData
   onComplete: (isCorrect: boolean, answer?: string) => void
   disabled?: boolean
+  hideHints?: boolean
 }
 
 export default function TranslationExercise({ 
   exerciseData, 
   onComplete, 
-  disabled = false 
+  disabled = false,
+  hideHints = false
 }: TranslationExerciseProps) {
   const [userAnswer, setUserAnswer] = useState('')
   const [showResult, setShowResult] = useState(false)
@@ -123,7 +125,7 @@ export default function TranslationExercise({
       </div>
 
       {/* Dica */}
-      {exerciseData.hint && (
+      {exerciseData.hint && !hideHints && (
         <div className="mb-6">
           <button
             onClick={() => setShowHint(!showHint)}
