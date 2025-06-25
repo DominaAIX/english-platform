@@ -7,7 +7,9 @@ import Logo from './Logo'
 import { useAuth } from '@/contexts/AuthContext'
 import PageTransition from './PageTransition'
 import AnimatedContainer from './AnimatedContainer'
-import { WorkIcon, TravelIcon, ShoppingIcon, CasualIcon, BusinessIcon, RestaurantIcon, SpeakerIcon } from './ModernIcons'
+import { getFreeUsageStatus, incrementFreeUsage, FreeLimitationStatus } from '@/utils/freeLimitations'
+import { getUserFavorites, addToFavorites, removeFromFavorites } from '@/lib/favorites'
+import { WorkIcon, TravelIcon, ShoppingIcon, CasualIcon, BusinessIcon, RestaurantIcon, SpeakerIcon, StarIcon } from './ModernIcons'
 
 interface Phrase {
   english: string
@@ -44,13 +46,50 @@ export default function SimpleTrailContent({ trail, userPlan, slug }: SimpleTrai
   const router = useRouter()
   const [currentPhraseIndex, setCurrentPhraseIndex] = useState(0)
   const [showTranslation, setShowTranslation] = useState(false)
+  const [isPlayingAudio, setIsPlayingAudio] = useState(false)
+  const [favoritePhrases, setFavoritePhrases] = useState<number[]>([])
+  const [favoritesLoading, setFavoritesLoading] = useState(false)
+  const [freeLimitations, setFreeLimitations] = useState<FreeLimitationStatus>({
+    isBlocked: false,
+    phrasesUsed: 0,
+    maxPhrases: 5,
+    timeRemaining: '',
+    canAccess: true
+  })
   
   // Usar plano real do usuário
   const actualUserPlan = userProfile?.plan || userPlan || 'free'
   
-  // Filtrar frases para usuários free (máximo 10)
+  // Verificar limitações para usuários free
+  useEffect(() => {
+    if (user?.id && actualUserPlan === 'free') {
+      const limitations = getFreeUsageStatus(user.id)
+      setFreeLimitations(limitations)
+    }
+  }, [user?.id, actualUserPlan])
+
+  // Carregar favoritos (apenas para premium)
+  useEffect(() => {
+    const loadFavorites = async () => {
+      if (user && slug && actualUserPlan === 'premium') {
+        try {
+          setFavoritesLoading(true)
+          const favorites = await getUserFavorites(user.id, slug)
+          setFavoritePhrases(favorites)
+        } catch (error) {
+          console.error('Erro ao carregar favoritos:', error)
+        } finally {
+          setFavoritesLoading(false)
+        }
+      }
+    }
+
+    loadFavorites()
+  }, [user, slug, actualUserPlan])
+  
+  // Filtrar frases baseado no plano do usuário
   const availablePhrases = actualUserPlan === 'free' 
-    ? trail.phrases.slice(0, 10) 
+    ? trail.phrases.slice(0, Math.min(10, freeLimitations.maxPhrases)) 
     : trail.phrases
   
   const currentPhrase = availablePhrases[currentPhraseIndex]
@@ -60,8 +99,41 @@ export default function SimpleTrailContent({ trail, userPlan, slug }: SimpleTrai
     router.push(user ? '/dashboard' : '/')
   }
 
+  const handlePlayAudio = () => {
+    if (currentPhrase) {
+      setIsPlayingAudio(true)
+      
+      // Usar a API de síntese de voz do navegador
+      const utterance = new SpeechSynthesisUtterance(currentPhrase.english)
+      utterance.lang = 'en-US'
+      utterance.rate = 0.8
+      utterance.pitch = 1
+      
+      utterance.onend = () => {
+        setIsPlayingAudio(false)
+      }
+      
+      utterance.onerror = () => {
+        setIsPlayingAudio(false)
+      }
+      
+      speechSynthesis.speak(utterance)
+    }
+  }
+
   const handleNext = () => {
     if (currentPhraseIndex < availablePhrases.length - 1) {
+      // Para usuários free, verificar e incrementar limite
+      if (actualUserPlan === 'free' && user?.id) {
+        const newUsage = incrementFreeUsage(user.id)
+        setFreeLimitations(newUsage)
+        
+        if (newUsage.isBlocked) {
+          // Se atingiu o limite, mostrar mensagem
+          return
+        }
+      }
+      
       setCurrentPhraseIndex(currentPhraseIndex + 1)
       setShowTranslation(false)
     }
@@ -72,6 +144,117 @@ export default function SimpleTrailContent({ trail, userPlan, slug }: SimpleTrai
       setCurrentPhraseIndex(currentPhraseIndex - 1)
       setShowTranslation(false)
     }
+  }
+
+  const handleToggleFavorite = async () => {
+    if (!user || !slug || actualUserPlan !== 'premium' || !currentPhrase) return
+
+    const phraseIndex = currentPhraseIndex
+    const isCurrentlyFavorite = favoritePhrases.includes(phraseIndex)
+
+    // Atualizar estado local imediatamente
+    setFavoritePhrases(prev => {
+      if (isCurrentlyFavorite) {
+        return prev.filter(index => index !== phraseIndex)
+      } else {
+        return [...prev, phraseIndex]
+      }
+    })
+
+    // Salvar no banco de dados
+    try {
+      if (isCurrentlyFavorite) {
+        await removeFromFavorites(user.id, slug, phraseIndex)
+      } else {
+        await addToFavorites(user.id, {
+          trail_slug: slug,
+          phrase_index: phraseIndex,
+          phrase_english: currentPhrase.english,
+          phrase_portuguese: currentPhrase.portuguese
+        })
+      }
+    } catch (error) {
+      console.error('Erro ao salvar favorito:', error)
+      // Reverter estado local se houver erro
+      setFavoritePhrases(prev => {
+        if (isCurrentlyFavorite) {
+          return [...prev, phraseIndex]
+        } else {
+          return prev.filter(index => index !== phraseIndex)
+        }
+      })
+    }
+  }
+
+  // Mostrar bloqueio se usuário free atingiu limite
+  if (actualUserPlan === 'free' && freeLimitations.isBlocked) {
+    return (
+      <AnimatedContainer className="min-h-screen">
+        <header className="bg-gray-900/50 border-b border-gray-700 p-4">
+          <div className="max-w-4xl mx-auto flex justify-between items-center">
+            <button 
+              onClick={handleLogoClick}
+              className="flex items-center gap-3 hover:opacity-80 transition-opacity"
+            >
+              <Logo size="sm" />
+              <span className="text-white font-bold">Inglês pra Já</span>
+            </button>
+            <Link 
+              href="/dashboard"
+              className="bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-full text-white font-semibold transition-colors text-sm"
+            >
+              ← Dashboard
+            </Link>
+          </div>
+        </header>
+        
+        <div className="max-w-4xl mx-auto p-6 flex items-center justify-center min-h-[80vh]">
+          <div className="bg-gradient-to-r from-red-900/50 to-orange-900/50 border-2 border-red-500/50 rounded-xl p-8 text-center max-w-2xl">
+            <div className="text-6xl mb-6">🔒</div>
+            <h1 className="text-3xl font-bold text-white mb-4">
+              Limite Diário Atingido!
+            </h1>
+            <p className="text-gray-300 mb-6 text-lg">
+              Você já praticou suas {freeLimitations.maxPhrases} frases diárias gratuitas.
+            </p>
+            
+            <div className="bg-gray-900/50 rounded-lg p-4 mb-6">
+              <div className="flex justify-center items-center gap-4 mb-4">
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-red-400">{freeLimitations.phrasesUsed}</div>
+                  <div className="text-gray-400 text-sm">Frases Usadas</div>
+                </div>
+                <div className="text-gray-500 text-xl">/</div>
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-gray-400">{freeLimitations.maxPhrases}</div>
+                  <div className="text-gray-400 text-sm">Limite Diário</div>
+                </div>
+              </div>
+              {freeLimitations.timeRemaining && (
+                <p className="text-orange-400 font-medium">
+                  ⏰ Próximo acesso em: {freeLimitations.timeRemaining}
+                </p>
+              )}
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <button 
+                className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 px-6 py-3 rounded-full text-white font-bold transition-all duration-300 transform hover:scale-105"
+                onClick={() => alert('Funcionalidade de assinatura será implementada em breve! 🚀')}
+              >
+                🌟 Upgrade para Premium
+              </button>
+              <Link 
+                href="/dashboard"
+                className="bg-gray-700 hover:bg-gray-600 px-6 py-3 rounded-full text-white font-semibold transition-colors text-center"
+              >
+                ← Voltar ao Dashboard
+              </Link>
+            </div>
+          </div>
+        </div>
+      </AnimatedContainer>
+    )
   }
 
   if (!currentPhrase) {
@@ -102,6 +285,16 @@ export default function SimpleTrailContent({ trail, userPlan, slug }: SimpleTrai
             </button>
             
             <div className="flex items-center gap-4">
+              {/* Contador para usuários free */}
+              {actualUserPlan === 'free' && !freeLimitations.isBlocked && (
+                <div className="bg-blue-900/20 border border-blue-500/30 rounded-lg px-3 py-2">
+                  <div className="text-blue-400 text-xs font-medium">🆓 Plano Gratuito</div>
+                  <div className="text-white text-sm font-bold">
+                    {freeLimitations.phrasesUsed}/{freeLimitations.maxPhrases} frases hoje
+                  </div>
+                </div>
+              )}
+              
               <Link 
                 href="/dashboard"
                 className="bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-full text-white font-semibold transition-colors text-sm"
@@ -158,11 +351,36 @@ export default function SimpleTrailContent({ trail, userPlan, slug }: SimpleTrai
               
               <div className="flex justify-center gap-4 mb-6">
                 <button
+                  onClick={handlePlayAudio}
+                  disabled={isPlayingAudio}
+                  className="bg-green-600 hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed px-6 py-2 rounded-full text-white font-semibold transition-colors flex items-center gap-2"
+                >
+                  <SpeakerIcon size={20} />
+                  {isPlayingAudio ? 'Tocando...' : 'Ouvir'}
+                </button>
+                
+                <button
                   onClick={() => setShowTranslation(!showTranslation)}
                   className="bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded-full text-white font-semibold transition-colors"
                 >
                   {showTranslation ? 'Ocultar' : 'Ver Tradução'}
                 </button>
+
+                {/* Botão de favorito - apenas para premium */}
+                {actualUserPlan === 'premium' && (
+                  <button
+                    onClick={handleToggleFavorite}
+                    disabled={favoritesLoading}
+                    className={`px-6 py-2 rounded-full font-semibold transition-colors flex items-center gap-2 ${
+                      favoritePhrases.includes(currentPhraseIndex)
+                        ? 'bg-yellow-600 hover:bg-yellow-700 text-white'
+                        : 'bg-gray-600 hover:bg-gray-700 text-white'
+                    }`}
+                  >
+                    <StarIcon size={20} />
+                    {favoritePhrases.includes(currentPhraseIndex) ? 'Favoritado' : 'Favoritar'}
+                  </button>
+                )}
               </div>
               
               <div className="text-sm text-gray-400">
