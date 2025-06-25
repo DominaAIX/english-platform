@@ -604,8 +604,8 @@ export default function DashboardContent() {
             </div>
 
             {/* Trilhas Progressivas Disponíveis */}
-            <div className="flex justify-center">
-              <div className="grid grid-cols-2 gap-4 max-w-md">
+            <div className="flex justify-center px-4">
+              <div className="grid grid-cols-2 gap-6 max-w-lg">
               <Link href="/trilha-progressiva/trabalho">
                 <div className="relative group overflow-hidden">
                   {/* Efeito de partículas flutuantes */}
@@ -655,6 +655,16 @@ export default function DashboardContent() {
                       
                       {/* Tags decorativas */}
                       <div className="flex flex-wrap gap-1 justify-center">
+                        {/* Indicador de nível baseado no teste */}
+                        <span className={`px-2 py-0.5 rounded-full text-xs border font-semibold ${
+                          userLevel === 'beginner' 
+                            ? 'bg-green-500/20 text-green-300 border-green-400/40' 
+                            : userLevel === 'intermediate'
+                            ? 'bg-yellow-500/20 text-yellow-300 border-yellow-400/40'
+                            : 'bg-red-500/20 text-red-300 border-red-400/40'
+                        }`}>
+                          {userLevel === 'beginner' ? '🟢 BÁSICO' : userLevel === 'intermediate' ? '🟡 INTER' : '🔴 AVANÇ'}
+                        </span>
                         <span className="bg-cyan-500/20 text-cyan-300 px-2 py-0.5 rounded-full text-xs border border-cyan-400/30">
                           🎯 Estruturado
                         </span>
@@ -726,6 +736,16 @@ export default function DashboardContent() {
                       
                       {/* Tags decorativas */}
                       <div className="flex flex-wrap gap-1 justify-center">
+                        {/* Indicador de nível baseado no teste */}
+                        <span className={`px-2 py-0.5 rounded-full text-xs border font-semibold ${
+                          userLevel === 'beginner' 
+                            ? 'bg-green-500/20 text-green-300 border-green-400/40' 
+                            : userLevel === 'intermediate'
+                            ? 'bg-yellow-500/20 text-yellow-300 border-yellow-400/40'
+                            : 'bg-red-500/20 text-red-300 border-red-400/40'
+                        }`}>
+                          {userLevel === 'beginner' ? '🟢 BÁSICO' : userLevel === 'intermediate' ? '🟡 INTER' : '🔴 AVANÇ'}
+                        </span>
                         <span className="bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded-full text-xs border border-emerald-400/30">
                           🌎 Global
                         </span>
