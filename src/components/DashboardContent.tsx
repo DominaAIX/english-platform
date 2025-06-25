@@ -430,16 +430,16 @@ export default function DashboardContent() {
         </PageTransition>
         )}
 
-        {/* Premium Features - Teste de Nível e Trilhas Progressivas */}
-        {userPlan === 'premium' && hasCompletedTest && (
+        {/* Features - Teste de Nível e Trilhas Progressivas para todos os usuários */}
+        {hasCompletedTest && (
         <PageTransition>
           <div className="mb-12">
             <div className="text-center mb-8">
               <h2 className="text-3xl font-bold text-white mb-4">
-                🎓 Aprendizado Progressivo Premium
+                🎓 Aprendizado Progressivo
               </h2>
               <p className="text-gray-400 text-lg max-w-3xl mx-auto">
-                Descubra seu nível e siga trilhas estruturadas com exercícios obrigatórios para um aprendizado eficaz.
+                Descubra seu nível e siga trilhas estruturadas. {userPlan === 'premium' ? 'Exercícios obrigatórios para um aprendizado eficaz.' : 'Experimente 5 frases por dia ou faça upgrade para acesso ilimitado.'}
               </p>
             </div>
             
@@ -590,7 +590,7 @@ export default function DashboardContent() {
                     <span className="text-2xl">💼</span>
                     <div>
                       <h4 className="text-white font-semibold text-sm">Trabalho Progressivo</h4>
-                      <p className="text-gray-400 text-xs">Inglês corporativo estruturado</p>
+                      <p className="text-gray-400 text-xs">{userPlan === 'premium' ? 'Inglês corporativo estruturado' : '5 frases/dia - Corporativo'}</p>
                     </div>
                   </div>
                 </div>
@@ -602,7 +602,7 @@ export default function DashboardContent() {
                     <span className="text-2xl">✈️</span>
                     <div>
                       <h4 className="text-white font-semibold text-sm">Viagens Progressiva</h4>
-                      <p className="text-gray-400 text-xs">Inglês para turismo estruturado</p>
+                      <p className="text-gray-400 text-xs">{userPlan === 'premium' ? 'Inglês para turismo estruturado' : '5 frases/dia - Turismo'}</p>
                     </div>
                   </div>
                 </div>

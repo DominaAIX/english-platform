@@ -23,7 +23,7 @@ import {
   saveUserTrailProgress,
   generateProgressiveSteps
 } from '@/data/progressiveTrails'
-import { getFreeUsageStatus, incrementFreeUsage, canAccessContent } from '@/utils/freeLimitations'
+import { getFreeUsageStatus, incrementFreeUsage, canAccessContent, FreeLimitationStatus } from '@/utils/freeLimitations'
 
 interface ProgressiveTrailPageProps {
   params: Promise<{ slug: string }>
@@ -65,24 +65,30 @@ function ProgressiveTrailClient({ trailData, slug }: { trailData: any, slug: str
   const [showNextButton, setShowNextButton] = useState(false)
   const [exerciseResult, setExerciseResult] = useState<{ completed: boolean, correct: boolean } | null>(null)
   const [showFinalTest, setShowFinalTest] = useState(false)
+  const [freeLimitations, setFreeLimitations] = useState<FreeLimitationStatus>({
+    isBlocked: false,
+    phrasesUsed: 0,
+    maxPhrases: 5,
+    timeRemaining: '',
+    canAccess: true
+  })
 
   // Verificar se usuário é premium
   const isPremium = userProfile?.plan === 'premium'
   const userPlan = userProfile?.plan || 'free'
 
+  // Verificar limitações para usuários free
+  useEffect(() => {
+    if (user?.id && userPlan === 'free') {
+      const limitations = getFreeUsageStatus(user.id)
+      setFreeLimitations(limitations)
+    }
+  }, [user?.id, userPlan])
+
   useEffect(() => {
     if (!user) {
       router.push('/dashboard')
       return
-    }
-
-    // Verificar se usuário free pode acessar
-    if (!isPremium) {
-      const canAccess = canAccessContent(user.id, userPlan)
-      if (!canAccess) {
-        router.push('/dashboard')
-        return
-      }
     }
 
     // Carregar nível do usuário
@@ -232,6 +238,10 @@ function ProgressiveTrailClient({ trailData, slug }: { trailData: any, slug: str
     setExerciseResult(null)
   }
 
+  const handleLogoClick = () => {
+    router.push('/dashboard')
+  }
+
 
   const handleStepComplete = (stepId: string, isCorrect: boolean) => {
     if (!user || !userProgress) return
@@ -239,6 +249,28 @@ function ProgressiveTrailClient({ trailData, slug }: { trailData: any, slug: str
     // Esta função agora é apenas para frases
     const currentStep = progressiveSteps[currentStepIndex]
     if (currentStep?.type === 'phrase') {
+      
+      // Para usuários free, verificar limitação antes de completar
+      if (!isPremium && userPlan === 'free') {
+        // Verificar se já viu essa frase específica antes
+        const phraseKey = `progressive_phrase_viewed_${user.id}_${slug}_${stepId}`
+        const alreadyViewed = localStorage.getItem(phraseKey)
+        
+        if (!alreadyViewed) {
+          // Marcar como vista
+          localStorage.setItem(phraseKey, 'true')
+          
+          // Incrementar contador de uso
+          const newUsage = incrementFreeUsage(user.id)
+          setFreeLimitations(newUsage)
+          
+          if (newUsage.isBlocked) {
+            // Redirecionar para dashboard se atingiu o limite
+            router.push('/dashboard')
+            return
+          }
+        }
+      }
 
       const updatedProgress = {
         ...userProgress,
@@ -291,54 +323,6 @@ function ProgressiveTrailClient({ trailData, slug }: { trailData: any, slug: str
     }
   }
 
-  if (!isPremium) {
-    return (
-      <AnimatedContainer className="min-h-screen">
-        <PageTransition delay={0}>
-          <header className="bg-gray-900/50 border-b border-gray-700 p-4">
-            <div className="max-w-4xl mx-auto flex justify-between items-center">
-              <button 
-                onClick={handleLogoClick}
-                className="flex items-center gap-3 hover:opacity-80 transition-opacity"
-              >
-                <Logo size="sm" />
-                <span className="text-white font-bold">Inglês pra Já</span>
-              </button>
-              
-              <Link 
-                href="/dashboard"
-                className="bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-full text-white font-semibold transition-colors text-sm"
-              >
-                ← Dashboard
-              </Link>
-            </div>
-          </header>
-        </PageTransition>
-
-        <div className="max-w-4xl mx-auto p-6 flex items-center justify-center min-h-[80vh]">
-          <PageTransition delay={200}>
-            <div className="bg-gradient-to-r from-purple-900/50 to-cyan-900/50 border border-purple-500/30 rounded-xl p-8 text-center max-w-2xl">
-              <div className="text-6xl mb-6">🚀</div>
-              <h1 className="text-3xl font-bold text-white mb-4">
-                Trilhas Progressivas Premium
-              </h1>
-              <p className="text-gray-300 mb-6 text-lg">
-                As trilhas progressivas são um recurso exclusivo para usuários Premium! 
-                Faça upgrade para ter acesso ao aprendizado estruturado e personalizado.
-              </p>
-              
-              <button 
-                onClick={() => alert('Funcionalidade de upgrade será implementada em breve! 🚀')}
-                className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 px-8 py-4 rounded-full text-white font-bold text-lg transition-all duration-300 transform hover:scale-105"
-              >
-                🌟 Fazer Upgrade para Premium
-              </button>
-            </div>
-          </PageTransition>
-        </div>
-      </AnimatedContainer>
-    )
-  }
 
   if (isLoading) {
     return (
@@ -366,6 +350,16 @@ function ProgressiveTrailClient({ trailData, slug }: { trailData: any, slug: str
             </button>
             
             <div className="flex items-center gap-4">
+              {/* Contador para usuários free */}
+              {userPlan === 'free' && !freeLimitations.isBlocked && (
+                <div className="bg-blue-900/20 border border-blue-500/30 rounded-lg px-3 py-2">
+                  <div className="text-blue-400 text-xs font-medium">🆓 Plano Gratuito</div>
+                  <div className="text-white text-sm font-bold">
+                    {freeLimitations.phrasesUsed}/{freeLimitations.maxPhrases} frases hoje
+                  </div>
+                </div>
+              )}
+              
               <Link 
                 href="/dashboard"
                 className="bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-full text-white font-semibold transition-colors text-sm"
@@ -418,11 +412,62 @@ function ProgressiveTrailClient({ trailData, slug }: { trailData: any, slug: str
           </div>
         </PageTransition>
 
+        {/* Mensagem de limitação para usuários free */}
+        {userPlan === 'free' && freeLimitations.isBlocked && (
+          <PageTransition delay={300}>
+            <div className="max-w-4xl mx-auto mb-8">
+              <div className="bg-gradient-to-r from-red-900/50 to-orange-900/50 border-2 border-red-500/50 rounded-xl p-6 text-center">
+                <div className="text-6xl mb-4">🔒</div>
+                <h3 className="text-2xl font-bold text-white mb-3">
+                  Limite Diário Atingido!
+                </h3>
+                <p className="text-gray-300 mb-4 text-lg">
+                  Você já praticou suas {freeLimitations.maxPhrases} frases diárias gratuitas nas trilhas progressivas.
+                </p>
+                
+                <div className="bg-gray-900/50 rounded-lg p-4 mb-6">
+                  <div className="flex justify-center items-center gap-4 mb-4">
+                    <div className="text-center">
+                      <div className="text-2xl font-bold text-red-400">{freeLimitations.phrasesUsed}</div>
+                      <div className="text-gray-400 text-sm">Frases Usadas</div>
+                    </div>
+                    <div className="text-gray-500 text-xl">/</div>
+                    <div className="text-center">
+                      <div className="text-2xl font-bold text-gray-400">{freeLimitations.maxPhrases}</div>
+                      <div className="text-gray-400 text-sm">Limite Diário</div>
+                    </div>
+                  </div>
+                  {freeLimitations.timeRemaining && (
+                    <p className="text-orange-400 font-medium">
+                      ⏰ Próximo acesso em: {freeLimitations.timeRemaining}
+                    </p>
+                  )}
+                </div>
+
+                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                  <button 
+                    className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 px-6 py-3 rounded-full text-white font-bold transition-all duration-300 transform hover:scale-105"
+                    onClick={() => alert('Funcionalidade de assinatura será implementada em breve! 🚀')}
+                  >
+                    🌟 Upgrade para Premium
+                  </button>
+                  <button 
+                    onClick={() => router.push('/dashboard')}
+                    className="bg-gray-700 hover:bg-gray-600 px-6 py-3 rounded-full text-white font-semibold transition-colors"
+                  >
+                    ← Voltar ao Dashboard
+                  </button>
+                </div>
+              </div>
+            </div>
+          </PageTransition>
+        )}
+
         {/* Layout para trilha de trabalho - sem sidebar */}
         {slug === 'trabalho' ? (
           <PageTransition delay={400}>
             <div className="max-w-4xl mx-auto">
-              {userProgress && userProgress.progressPercentage < 100 && currentStep ? (
+              {userProgress && userProgress.progressPercentage < 100 && currentStep && (!freeLimitations.isBlocked || userPlan === 'premium') ? (
                 <div>
                   {/* Informação do passo atual */}
                   <div className="mb-6">
