@@ -607,7 +607,7 @@ export default function DashboardContent() {
             <div className="flex justify-center px-4">
               <div className="grid grid-cols-2 gap-6 max-w-lg">
               <Link href="/trilha-progressiva/trabalho">
-                <div className="relative group overflow-hidden">
+                <div className="relative group">
                   {/* Efeito de partículas flutuantes */}
                   <div className="absolute inset-0 opacity-30 group-hover:opacity-60 transition-opacity duration-500">
                     <div className="absolute top-2 left-3 w-1 h-1 bg-cyan-400 rounded-full animate-ping"></div>
@@ -625,7 +625,7 @@ export default function DashboardContent() {
                   </div>
                   
                   {/* Badge "NEW" ou "HOT" */}
-                  <div className="absolute -top-1 -right-1 bg-gradient-to-r from-orange-500 to-red-500 text-white text-xs font-bold px-2 py-1 rounded-full shadow-lg transform rotate-12 z-10">
+                  <div className="absolute top-2 right-2 bg-gradient-to-r from-orange-500 to-red-500 text-white text-xs font-bold px-2 py-1 rounded-full shadow-lg transform rotate-12 z-10">
                     🔥 HOT
                   </div>
                   
@@ -645,7 +645,7 @@ export default function DashboardContent() {
                       </h3>
                       
                       <p className="text-white/80 text-xs mb-2 leading-relaxed group-hover:text-white/90 transition-colors">
-                        {userPlan === 'premium' ? '✨ Corporativo estruturado' : '🎆 5 frases/dia'}
+                        {userPlan === 'premium' ? '✨ Corporativo estruturado' : '🔓 Acesso Ilimitado no Premium'}
                       </p>
                       
                       {/* Barra de progresso decorativa */}
@@ -665,12 +665,6 @@ export default function DashboardContent() {
                         }`}>
                           {userLevel === 'beginner' ? '🟢 BÁSICO' : userLevel === 'intermediate' ? '🟡 INTER' : '🔴 AVANÇ'}
                         </span>
-                        <span className="bg-cyan-500/20 text-cyan-300 px-2 py-0.5 rounded-full text-xs border border-cyan-400/30">
-                          🎯 Estruturado
-                        </span>
-                        <span className="bg-blue-500/20 text-blue-300 px-2 py-0.5 rounded-full text-xs border border-blue-400/30">
-                          🚀 Eficaz
-                        </span>
                       </div>
                     </div>
                     
@@ -688,7 +682,7 @@ export default function DashboardContent() {
               </Link>
               
               <Link href="/trilha-progressiva/viagens">
-                <div className="relative group overflow-hidden">
+                <div className="relative group">
                   {/* Efeito de partículas flutuantes */}
                   <div className="absolute inset-0 opacity-30 group-hover:opacity-60 transition-opacity duration-500">
                     <div className="absolute top-3 left-2 w-1 h-1 bg-emerald-400 rounded-full animate-ping"></div>
@@ -706,7 +700,7 @@ export default function DashboardContent() {
                   </div>
                   
                   {/* Badge "POPULAR" */}
-                  <div className="absolute -top-1 -right-1 bg-gradient-to-r from-purple-500 to-pink-500 text-white text-xs font-bold px-2 py-1 rounded-full shadow-lg transform rotate-12 z-10">
+                  <div className="absolute top-2 right-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white text-xs font-bold px-2 py-1 rounded-full shadow-lg transform rotate-12 z-10">
                     ⭐ POPULAR
                   </div>
                   
@@ -726,7 +720,7 @@ export default function DashboardContent() {
                       </h3>
                       
                       <p className="text-white/80 text-xs mb-2 leading-relaxed group-hover:text-white/90 transition-colors">
-                        {userPlan === 'premium' ? '✨ Turismo estruturado' : '🌍 5 frases/dia'}
+                        {userPlan === 'premium' ? '✨ Turismo estruturado' : '🔓 Acesso Ilimitado no Premium'}
                       </p>
                       
                       {/* Barra de progresso decorativa */}
@@ -745,12 +739,6 @@ export default function DashboardContent() {
                             : 'bg-red-500/20 text-red-300 border-red-400/40'
                         }`}>
                           {userLevel === 'beginner' ? '🟢 BÁSICO' : userLevel === 'intermediate' ? '🟡 INTER' : '🔴 AVANÇ'}
-                        </span>
-                        <span className="bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded-full text-xs border border-emerald-400/30">
-                          🌎 Global
-                        </span>
-                        <span className="bg-green-500/20 text-green-300 px-2 py-0.5 rounded-full text-xs border border-green-400/30">
-                          📝 Prático
                         </span>
                       </div>
                     </div>
