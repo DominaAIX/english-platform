@@ -11,6 +11,7 @@ import AnimatedContainer from './AnimatedContainer'
 import DragDropExercise from './DragDropExercise'
 import { getFreeUsageStatus, incrementFreeUsage, FreeLimitationStatus } from '@/utils/freeLimitations'
 import { getUserFavorites, addToFavorites, removeFromFavorites } from '@/lib/favorites'
+import { useGlobalLimits } from '@/hooks/useGlobalLimits'
 import { WorkIcon, TravelIcon, ShoppingIcon, CasualIcon, BusinessIcon, RestaurantIcon, SpeakerIcon, StarIcon, FlagIcon, LocationIcon, SendIcon, RobotIcon, LockIcon, LightBulbIcon } from './ModernIcons'
 
 interface Phrase {
@@ -54,6 +55,7 @@ const iconMapping: { [key: string]: { component: React.ComponentType<{ size?: nu
 export default function TrailContent({ trail, userPlan, slug }: TrailContentProps) {
   const { user, userProfile } = useAuth()
   const { incrementPhrasesViewed } = useStats()
+  const { totalPhrasesViewed, isPhrasesBlocked } = useGlobalLimits()
   const [freeLimitations, setFreeLimitations] = useState<FreeLimitationStatus>({
     isBlocked: false,
     phrasesUsed: 0,
