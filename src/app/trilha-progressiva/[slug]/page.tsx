@@ -304,10 +304,19 @@ function ProgressiveTrailClient({ trailData, slug }: { trailData: any, slug: str
 
   const handlePrevious = () => {
     if (currentStepIndex > 0) {
-      setCurrentStepIndex(currentStepIndex - 1)
+      const newIndex = currentStepIndex - 1
+      const previousStep = progressiveSteps[newIndex]
+      
+      setCurrentStepIndex(newIndex)
       setShowTranslation(false)
-      setShowNextButton(false)
       setExerciseResult(null)
+      
+      // Se o passo anterior já foi completado, mostrar botões de navegação
+      if (previousStep && previousStep.isCompleted) {
+        setShowNextButton(true)
+      } else {
+        setShowNextButton(false)
+      }
     }
   }
 

@@ -14,6 +14,7 @@ import { PROFESSIONS } from '@/data/professions'
 import { useRequiredLevelTest } from '@/hooks/useRequiredLevelTest'
 import { checkCertificationCooldown } from '@/utils/certificationCooldown'
 import { getFreeUsageStatus, FreeLimitationStatus, cleanupOldSystems } from '@/utils/freeLimitations'
+import { getUserLevel } from '@/data/progressiveTrails'
 
 export default function DashboardContent() {
   const { user, userProfile } = useAuth()
@@ -30,9 +31,18 @@ export default function DashboardContent() {
     timeRemaining: '',
     canAccess: true
   })
+  const [userLevel, setUserLevel] = useState<'beginner' | 'intermediate' | 'advanced'>('beginner')
   
   // Usar o plano real do usuário autenticado do userProfile
   const userPlan = userProfile?.plan || 'free'
+
+  // Carregar nível do usuário
+  useEffect(() => {
+    if (user?.id) {
+      const level = getUserLevel(user.id)
+      setUserLevel(level)
+    }
+  }, [user?.id])
 
   // Verificar se completou trilha básica (trabalho)
   useEffect(() => {
@@ -207,7 +217,8 @@ export default function DashboardContent() {
       desc: 'Reuniões, e-mails, feedbacks', 
       slug: 'trabalho', 
       color: 'from-blue-500 to-cyan-500',
-      iconColor: 'text-cyan-400'
+      iconColor: 'text-cyan-400',
+      level: 'beginner'
     },
     { 
       icon: TravelIcon, 
@@ -215,7 +226,8 @@ export default function DashboardContent() {
       desc: 'Aeroporto, hotel, restaurante', 
       slug: 'viagens', 
       color: 'from-green-500 to-emerald-500',
-      iconColor: 'text-emerald-400'
+      iconColor: 'text-emerald-400',
+      level: 'beginner'
     },
     { 
       icon: ShoppingIcon, 
@@ -223,7 +235,8 @@ export default function DashboardContent() {
       desc: 'Preços, formas de pagamento', 
       slug: 'mercado', 
       color: 'from-yellow-500 to-orange-500',
-      iconColor: 'text-orange-400'
+      iconColor: 'text-orange-400',
+      level: 'intermediate'
     },
     { 
       icon: CasualIcon, 
@@ -231,7 +244,8 @@ export default function DashboardContent() {
       desc: 'Tickets, atrações, direções', 
       slug: 'passeios', 
       color: 'from-purple-500 to-pink-500',
-      iconColor: 'text-pink-400'
+      iconColor: 'text-pink-400',
+      level: 'intermediate'
     },
     { 
       icon: BusinessIcon, 
@@ -239,7 +253,8 @@ export default function DashboardContent() {
       desc: 'Convites, conversas casuais', 
       slug: 'amigos', 
       color: 'from-indigo-500 to-purple-500',
-      iconColor: 'text-purple-400'
+      iconColor: 'text-purple-400',
+      level: 'advanced'
     },
     { 
       icon: RestaurantIcon, 
@@ -247,9 +262,15 @@ export default function DashboardContent() {
       desc: 'Networking, palestras + Exercícios', 
       slug: 'eventos', 
       color: 'from-pink-500 to-rose-500',
-      iconColor: 'text-rose-400'
+      iconColor: 'text-rose-400',
+      level: 'advanced'
     }
   ]
+
+  // Função para verificar se a trilha é recomendada para o nível do usuário
+  const isRecommendedTrail = (trailLevel: string) => {
+    return trailLevel === userLevel
+  }
 
   return (
     <AnimatedContainer className="min-h-screen">
@@ -583,27 +604,63 @@ export default function DashboardContent() {
             </div>
 
             {/* Trilhas Progressivas Disponíveis */}
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
               <Link href="/trilha-progressiva/trabalho">
-                <div className="bg-blue-900/20 border border-blue-500/30 rounded-xl p-4 hover:bg-blue-900/30 transition-all duration-300 group">
-                  <div className="flex items-center gap-3">
-                    <span className="text-2xl">💼</span>
-                    <div>
-                      <h4 className="text-white font-semibold text-sm">Trabalho Progressivo</h4>
-                      <p className="text-gray-400 text-xs">{userPlan === 'premium' ? 'Inglês corporativo estruturado' : '5 frases/dia - Corporativo'}</p>
+                <div className="relative group">
+                  {/* Background com gradiente translúcido */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-cyan-500 opacity-20 rounded-2xl transition-all duration-300 group-hover:opacity-30"></div>
+                  
+                  {/* Border com gradiente */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-cyan-500 opacity-40 rounded-2xl p-[1px] transition-all duration-300 group-hover:opacity-60">
+                    <div className="bg-gray-900/40 backdrop-blur-sm rounded-2xl h-full w-full"></div>
+                  </div>
+                  
+                  {/* Conteúdo */}
+                  <div className="relative p-5 text-center backdrop-blur-sm rounded-2xl transition-all duration-300 group-hover:transform group-hover:scale-105">
+                    <div className="mb-3 group-hover:scale-110 transition-transform duration-300 filter drop-shadow-lg flex justify-center">
+                      <WorkIcon size={32} className="text-cyan-400" />
                     </div>
+                    <h3 className="text-white font-semibold text-sm mb-2 drop-shadow-sm">
+                      Trabalho Progressivo
+                    </h3>
+                    <p className="text-white/70 text-xs leading-relaxed">
+                      {userPlan === 'premium' ? 'Corporativo estruturado' : '5 frases/dia'}
+                    </p>
+                  </div>
+                  
+                  {/* Efeito de brilho no hover */}
+                  <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                    <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-cyan-500 opacity-10 rounded-2xl blur-xl"></div>
                   </div>
                 </div>
               </Link>
               
               <Link href="/trilha-progressiva/viagens">
-                <div className="bg-green-900/20 border border-green-500/30 rounded-xl p-4 hover:bg-green-900/30 transition-all duration-300 group">
-                  <div className="flex items-center gap-3">
-                    <span className="text-2xl">✈️</span>
-                    <div>
-                      <h4 className="text-white font-semibold text-sm">Viagens Progressiva</h4>
-                      <p className="text-gray-400 text-xs">{userPlan === 'premium' ? 'Inglês para turismo estruturado' : '5 frases/dia - Turismo'}</p>
+                <div className="relative group">
+                  {/* Background com gradiente translúcido */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-green-500 to-emerald-500 opacity-20 rounded-2xl transition-all duration-300 group-hover:opacity-30"></div>
+                  
+                  {/* Border com gradiente */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-green-500 to-emerald-500 opacity-40 rounded-2xl p-[1px] transition-all duration-300 group-hover:opacity-60">
+                    <div className="bg-gray-900/40 backdrop-blur-sm rounded-2xl h-full w-full"></div>
+                  </div>
+                  
+                  {/* Conteúdo */}
+                  <div className="relative p-5 text-center backdrop-blur-sm rounded-2xl transition-all duration-300 group-hover:transform group-hover:scale-105">
+                    <div className="mb-3 group-hover:scale-110 transition-transform duration-300 filter drop-shadow-lg flex justify-center">
+                      <TravelIcon size={32} className="text-emerald-400" />
                     </div>
+                    <h3 className="text-white font-semibold text-sm mb-2 drop-shadow-sm">
+                      Viagens Progressiva
+                    </h3>
+                    <p className="text-white/70 text-xs leading-relaxed">
+                      {userPlan === 'premium' ? 'Turismo estruturado' : '5 frases/dia'}
+                    </p>
+                  </div>
+                  
+                  {/* Efeito de brilho no hover */}
+                  <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                    <div className="absolute inset-0 bg-gradient-to-br from-green-500 to-emerald-500 opacity-10 rounded-2xl blur-xl"></div>
                   </div>
                 </div>
               </Link>
@@ -690,37 +747,54 @@ export default function DashboardContent() {
 
             {/* Grid de Trilhas */}
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-              {trails.map((trail, index) => (
-                <Link key={index} href={`/trilha/${trail.slug}/praticar`}>
-                  <div className="relative group">
-                    {/* Background com gradiente translúcido */}
-                    <div className={`absolute inset-0 bg-gradient-to-br ${trail.color} opacity-20 rounded-2xl transition-all duration-300 group-hover:opacity-30`}></div>
-                    
-                    {/* Border com gradiente */}
-                    <div className={`absolute inset-0 bg-gradient-to-br ${trail.color} opacity-40 rounded-2xl p-[1px] transition-all duration-300 group-hover:opacity-60`}>
-                      <div className="bg-gray-900/40 backdrop-blur-sm rounded-2xl h-full w-full"></div>
-                    </div>
-                    
-                    {/* Conteúdo */}
-                    <div className="relative p-5 text-center backdrop-blur-sm rounded-2xl transition-all duration-300 group-hover:transform group-hover:scale-105">
-                      <div className="mb-3 group-hover:scale-110 transition-transform duration-300 filter drop-shadow-lg flex justify-center">
-                        <trail.icon size={32} className={trail.iconColor} />
+              {trails.map((trail, index) => {
+                const isRecommended = isRecommendedTrail(trail.level)
+                return (
+                  <Link key={index} href={`/trilha/${trail.slug}/praticar`}>
+                    <div className="relative group">
+                      {/* Badge de recomendação */}
+                      {isRecommended && (
+                        <div className="absolute -top-2 -right-2 bg-gradient-to-r from-yellow-500 to-orange-500 text-white text-xs font-bold px-2 py-1 rounded-full z-10 shadow-lg">
+                          ⭐ Recomendado
+                        </div>
+                      )}
+                      
+                      {/* Background com gradiente translúcido */}
+                      <div className={`absolute inset-0 bg-gradient-to-br ${trail.color} ${isRecommended ? 'opacity-30' : 'opacity-20'} rounded-2xl transition-all duration-300 group-hover:opacity-30`}></div>
+                      
+                      {/* Border com gradiente */}
+                      <div className={`absolute inset-0 bg-gradient-to-br ${trail.color} ${isRecommended ? 'opacity-60' : 'opacity-40'} rounded-2xl p-[1px] transition-all duration-300 group-hover:opacity-60 ${isRecommended ? 'ring-2 ring-yellow-400/50' : ''}`}>
+                        <div className="bg-gray-900/40 backdrop-blur-sm rounded-2xl h-full w-full"></div>
                       </div>
-                      <h3 className="text-white font-semibold text-sm mb-2 drop-shadow-sm">
-                        {trail.title}
-                      </h3>
-                      <p className="text-white/70 text-xs leading-relaxed">
-                        {trail.desc.split(',')[0]}
-                      </p>
+                      
+                      {/* Conteúdo */}
+                      <div className={`relative p-5 text-center backdrop-blur-sm rounded-2xl transition-all duration-300 group-hover:transform group-hover:scale-105 ${isRecommended ? 'transform scale-105' : ''}`}>
+                        <div className="mb-3 group-hover:scale-110 transition-transform duration-300 filter drop-shadow-lg flex justify-center">
+                          <trail.icon size={32} className={trail.iconColor} />
+                        </div>
+                        <h3 className="text-white font-semibold text-sm mb-2 drop-shadow-sm">
+                          {trail.title}
+                        </h3>
+                        <p className="text-white/70 text-xs leading-relaxed">
+                          {trail.desc.split(',')[0]}
+                        </p>
+                        {isRecommended && (
+                          <div className="mt-2">
+                            <span className="bg-yellow-500/20 text-yellow-300 px-2 py-1 rounded-full text-xs font-medium">
+                              Seu nível: {userLevel === 'beginner' ? 'Básico' : userLevel === 'intermediate' ? 'Intermediário' : 'Avançado'}
+                            </span>
+                          </div>
+                        )}
+                      </div>
+                      
+                      {/* Efeito de brilho no hover */}
+                      <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                        <div className={`absolute inset-0 bg-gradient-to-br ${trail.color} opacity-10 rounded-2xl blur-xl`}></div>
+                      </div>
                     </div>
-                    
-                    {/* Efeito de brilho no hover */}
-                    <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-                      <div className={`absolute inset-0 bg-gradient-to-br ${trail.color} opacity-10 rounded-2xl blur-xl`}></div>
-                    </div>
-                  </div>
-                </Link>
-              ))}
+                  </Link>
+                )
+              })}
             </div>
           </div>
         </div>
