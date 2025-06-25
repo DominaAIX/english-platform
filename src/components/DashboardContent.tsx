@@ -624,10 +624,6 @@ export default function DashboardContent() {
                     <div className="bg-gray-900/50 backdrop-blur-md rounded-2xl h-full w-full"></div>
                   </div>
                   
-                  {/* Badge "NEW" ou "HOT" */}
-                  <div className="absolute top-2 right-2 bg-gradient-to-r from-orange-500 to-red-500 text-white text-xs font-bold px-2 py-1 rounded-full shadow-lg transform rotate-12 z-10">
-                    🔥 HOT
-                  </div>
                   
                   {/* Conteúdo */}
                   <div className="relative p-5 text-center backdrop-blur-sm rounded-2xl transition-all duration-500 group-hover:transform group-hover:scale-110 h-48 flex flex-col justify-between">
@@ -648,10 +644,6 @@ export default function DashboardContent() {
                         {userPlan === 'premium' ? '✨ Corporativo estruturado' : '🔓 Acesso Ilimitado no Premium'}
                       </p>
                       
-                      {/* Barra de progresso decorativa */}
-                      <div className="w-full bg-gray-700/50 rounded-full h-1.5 mb-2">
-                        <div className="bg-gradient-to-r from-cyan-400 to-blue-400 h-1.5 rounded-full w-3/4 group-hover:w-full transition-all duration-1000"></div>
-                      </div>
                       
                       {/* Tags decorativas */}
                       <div className="flex flex-wrap gap-1 justify-center">
@@ -699,10 +691,6 @@ export default function DashboardContent() {
                     <div className="bg-gray-900/50 backdrop-blur-md rounded-2xl h-full w-full"></div>
                   </div>
                   
-                  {/* Badge "POPULAR" */}
-                  <div className="absolute top-2 right-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white text-xs font-bold px-2 py-1 rounded-full shadow-lg transform rotate-12 z-10">
-                    ⭐ POPULAR
-                  </div>
                   
                   {/* Conteúdo */}
                   <div className="relative p-5 text-center backdrop-blur-sm rounded-2xl transition-all duration-500 group-hover:transform group-hover:scale-110 h-48 flex flex-col justify-between">
@@ -723,10 +711,6 @@ export default function DashboardContent() {
                         {userPlan === 'premium' ? '✨ Turismo estruturado' : '🔓 Acesso Ilimitado no Premium'}
                       </p>
                       
-                      {/* Barra de progresso decorativa */}
-                      <div className="w-full bg-gray-700/50 rounded-full h-1.5 mb-2">
-                        <div className="bg-gradient-to-r from-emerald-400 to-green-400 h-1.5 rounded-full w-2/3 group-hover:w-full transition-all duration-1000"></div>
-                      </div>
                       
                       {/* Tags decorativas */}
                       <div className="flex flex-wrap gap-1 justify-center">
