@@ -114,29 +114,8 @@ function ProgressiveTrailClient({ trailData, slug }: { trailData: any, slug: str
     setIsLoading(false)
   }, [user, slug, isPremium, router])
 
-  // Verificar e incrementar uso ao visualizar nova frase (para usuários free)
-  useEffect(() => {
-    if (!user || isPremium || isLoading) return
-    
-    const currentStep = progressiveSteps[currentStepIndex]
-    if (currentStep?.type === 'phrase') {
-      // Verificar se já viu essa frase antes
-      const phraseViewKey = `phrase_viewed_${user.id}_${currentStep.id}`
-      const alreadyViewed = localStorage.getItem(phraseViewKey)
-      
-      if (!alreadyViewed) {
-        // Marcar como vista
-        localStorage.setItem(phraseViewKey, 'true')
-        
-        // Incrementar contador de uso
-        const newUsage = incrementFreeUsage(user.id)
-        if (newUsage.isBlocked) {
-          router.push('/dashboard')
-          return
-        }
-      }
-    }
-  }, [currentStepIndex, progressiveSteps, user, isPremium, isLoading, router])
+  // Removido: contagem duplicada ao visualizar frase
+  // Agora só conta quando clicar em "Próximo" (handleStepComplete)
 
   const handleLogoClick = () => {
     if (user) {
