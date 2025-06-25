@@ -119,8 +119,27 @@ const trailsData: { [key: string]: Trail } = {
 
 export default async function PracticePage({ params }: PracticePageProps) {
   const { slug } = await params
-  const trailData = trailsData[slug as keyof typeof trailsData]
+  
+  return <PracticePageClient slug={slug} />
+}
 
+function PracticePageClient({ slug }: { slug: string }) {
+  const { user, userProfile } = useAuth()
+  const router = useRouter()
+  
+  // Usar plano real do usuário ou fallback para free
+  const userPlan = userProfile?.plan || 'free'
+  
+  // Buscar dados da trilha
+  const trailData = trailsData[slug as keyof typeof trailsData]
+  
+  // Se não encontrar trilha, redirecionar
+  React.useEffect(() => {
+    if (!trailData) {
+      router.push('/dashboard')
+    }
+  }, [trailData, router])
+  
   if (!trailData) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -137,16 +156,6 @@ export default async function PracticePage({ params }: PracticePageProps) {
       </div>
     )
   }
-
-  return <PracticePageClient trailData={trailData} slug={slug} />
-}
-
-function PracticePageClient({ trailData, slug }: { trailData: Trail, slug: string }) {
-  const { user, userProfile } = useAuth()
-  const router = useRouter()
-  
-  // Usar plano real do usuário ou fallback para free
-  const userPlan = userProfile?.plan || 'free'
 
   // Verificar se usuário free pode acessar
   React.useEffect(() => {
@@ -204,7 +213,11 @@ function PracticePageClient({ trailData, slug }: { trailData: Trail, slug: strin
         <PageTransition delay={200}>
           <div className="text-center mb-12">
             <div className="mb-4 flex justify-center">
-              <trailData.iconComponent size={72} className={trailData.iconColor} />
+              {trailData.iconComponent ? (
+                <trailData.iconComponent size={72} className={trailData.iconColor} />
+              ) : (
+                <span className="text-6xl">{trailData.icon}</span>
+              )}
             </div>
             <h1 className="text-3xl font-bold text-white mb-4">
               Como você quer praticar?

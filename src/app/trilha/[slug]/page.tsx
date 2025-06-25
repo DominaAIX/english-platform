@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import TrailContent from '@/components/TrailContent'
 
 const trailsData = {
@@ -4926,7 +4927,13 @@ export default async function TrailPage({ params }: TrailPageProps) {
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-white mb-4">Trilha não encontrada</h1>
-          <p className="text-gray-400">Esta trilha não existe ou ainda não foi criada.</p>
+          <p className="text-gray-400 mb-6">Esta trilha não existe ou ainda não foi criada.</p>
+          <Link 
+            href="/dashboard"
+            className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 px-6 py-3 rounded-full text-white font-semibold transition-all duration-300"
+          >
+            ← Voltar ao Dashboard
+          </Link>
         </div>
       </div>
     )
@@ -4935,7 +4942,7 @@ export default async function TrailPage({ params }: TrailPageProps) {
   return (
     <div className="min-h-screen">
       <TrailContent 
-        trail={trailData as any}
+        trail={trailData}
         userPlan="free" // Fallback - será substituído pelo plano real do usuário
         slug={slug}
       />

@@ -520,9 +520,6 @@ export default function DashboardContent() {
                       <span className="bg-emerald-500/20 text-emerald-300 px-3 py-1 rounded-full text-sm">
                         Exercícios
                       </span>
-                      <span className="bg-green-500/20 text-green-300 px-3 py-1 rounded-full text-sm">
-                        Bloqueado
-                      </span>
                     </div>
                   </div>
                   <div className="text-green-400 group-hover:text-green-300 transition-colors font-semibold">
@@ -626,18 +623,18 @@ export default function DashboardContent() {
                   
                   
                   {/* Conteúdo */}
-                  <div className="relative p-5 text-center backdrop-blur-sm rounded-2xl transition-all duration-500 group-hover:transform group-hover:scale-110 h-48 flex flex-col justify-between">
+                  <div className="relative p-3 sm:p-5 text-center backdrop-blur-sm rounded-2xl transition-all duration-500 group-hover:transform group-hover:scale-110 h-48 flex flex-col justify-between">
                     <div className="flex-1">
                       {/* Ícone com efeito pulsante */}
-                      <div className="mb-3 relative">
+                      <div className="mb-2 sm:mb-3 relative">
                         <div className="absolute inset-0 bg-cyan-400 rounded-full opacity-20 group-hover:opacity-40 transition-opacity duration-300 animate-pulse"></div>
                         <div className="relative group-hover:scale-125 transition-transform duration-300 filter drop-shadow-2xl flex justify-center">
-                          <WorkIcon size={40} className="text-cyan-300 group-hover:text-cyan-100" />
+                          <WorkIcon size={36} className="text-cyan-300 group-hover:text-cyan-100" />
                         </div>
                       </div>
                       
-                      <h3 className="text-white font-bold text-sm sm:text-base mb-2 drop-shadow-lg group-hover:text-cyan-100 transition-colors">
-                        💼 Trabalho Progressivo
+                      <h3 className="text-white font-bold text-xs sm:text-sm mb-1 sm:mb-2 drop-shadow-lg group-hover:text-cyan-100 transition-colors">
+                        💼 Trabalho
                       </h3>
                       
                       <p className="text-white/80 text-xs mb-2 leading-relaxed group-hover:text-white/90 transition-colors">
@@ -661,7 +658,7 @@ export default function DashboardContent() {
                     </div>
                     
                     {/* Botão de ação */}
-                    <div className="mt-3 text-cyan-400 group-hover:text-cyan-300 transition-colors font-semibold text-sm group-hover:animate-pulse">
+                    <div className="mt-2 text-cyan-400 group-hover:text-cyan-300 transition-colors font-semibold text-xs sm:text-sm group-hover:animate-pulse px-1">
                       Começar Jornada →
                     </div>
                   </div>
@@ -693,18 +690,18 @@ export default function DashboardContent() {
                   
                   
                   {/* Conteúdo */}
-                  <div className="relative p-5 text-center backdrop-blur-sm rounded-2xl transition-all duration-500 group-hover:transform group-hover:scale-110 h-48 flex flex-col justify-between">
+                  <div className="relative p-3 sm:p-5 text-center backdrop-blur-sm rounded-2xl transition-all duration-500 group-hover:transform group-hover:scale-110 h-48 flex flex-col justify-between">
                     <div className="flex-1">
                       {/* Ícone com efeito pulsante */}
-                      <div className="mb-3 relative">
+                      <div className="mb-2 sm:mb-3 relative">
                         <div className="absolute inset-0 bg-emerald-400 rounded-full opacity-20 group-hover:opacity-40 transition-opacity duration-300 animate-pulse"></div>
                         <div className="relative group-hover:scale-125 transition-transform duration-300 filter drop-shadow-2xl flex justify-center">
-                          <TravelIcon size={40} className="text-emerald-300 group-hover:text-emerald-100" />
+                          <TravelIcon size={36} className="text-emerald-300 group-hover:text-emerald-100" />
                         </div>
                       </div>
                       
-                      <h3 className="text-white font-bold text-sm sm:text-base mb-2 drop-shadow-lg group-hover:text-emerald-100 transition-colors">
-                        ✈️ Viagens Progressiva
+                      <h3 className="text-white font-bold text-xs sm:text-sm mb-1 sm:mb-2 drop-shadow-lg group-hover:text-emerald-100 transition-colors">
+                        ✈️ Viagens
                       </h3>
                       
                       <p className="text-white/80 text-xs mb-2 leading-relaxed group-hover:text-white/90 transition-colors">
@@ -728,7 +725,7 @@ export default function DashboardContent() {
                     </div>
                     
                     {/* Botão de ação */}
-                    <div className="mt-3 text-emerald-400 group-hover:text-emerald-300 transition-colors font-semibold text-sm group-hover:animate-pulse">
+                    <div className="mt-2 text-emerald-400 group-hover:text-emerald-300 transition-colors font-semibold text-xs sm:text-sm group-hover:animate-pulse px-1">
                       Explorar Mundo →
                     </div>
                   </div>
