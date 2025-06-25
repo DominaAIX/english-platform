@@ -460,7 +460,7 @@ export default function DashboardContent() {
                 🎓 Aprendizado Progressivo
               </h2>
               <p className="text-gray-400 text-lg max-w-3xl mx-auto">
-                Descubra seu nível e siga trilhas estruturadas. {userPlan === 'premium' ? 'Exercícios obrigatórios para um aprendizado eficaz.' : 'Experimente 5 frases por dia ou faça upgrade para acesso ilimitado.'}
+                Descubra seu nível e siga trilhas estruturadas. Exercícios práticos, favoritos, filtros avançados e acesso ilimitado. {userPlan === 'free' ? '5 frases/dia no plano gratuito - faça upgrade para acesso completo!' : 'Acesso premium ativo!'}
               </p>
             </div>
             
@@ -604,7 +604,7 @@ export default function DashboardContent() {
             </div>
 
             {/* Trilhas Progressivas Disponíveis */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
               <Link href="/trilha-progressiva/trabalho">
                 <div className="relative group">
                   {/* Background com gradiente translúcido */}
@@ -616,16 +616,18 @@ export default function DashboardContent() {
                   </div>
                   
                   {/* Conteúdo */}
-                  <div className="relative p-5 text-center backdrop-blur-sm rounded-2xl transition-all duration-300 group-hover:transform group-hover:scale-105">
-                    <div className="mb-3 group-hover:scale-110 transition-transform duration-300 filter drop-shadow-lg flex justify-center">
-                      <WorkIcon size={32} className="text-cyan-400" />
+                  <div className="relative p-4 text-center backdrop-blur-sm rounded-2xl transition-all duration-300 group-hover:transform group-hover:scale-105 h-40 flex flex-col justify-between">
+                    <div className="flex-1">
+                      <div className="mb-2 group-hover:scale-110 transition-transform duration-300 filter drop-shadow-lg flex justify-center">
+                        <WorkIcon size={32} className="text-cyan-400" />
+                      </div>
+                      <h3 className="text-white font-bold text-xs sm:text-sm mb-1 drop-shadow-sm line-clamp-2">
+                        Trabalho Progressivo
+                      </h3>
+                      <p className="text-white/70 text-xs leading-tight mb-2 line-clamp-2">
+                        {userPlan === 'premium' ? 'Corporativo estruturado' : '5 frases/dia'}
+                      </p>
                     </div>
-                    <h3 className="text-white font-semibold text-sm mb-2 drop-shadow-sm">
-                      Trabalho Progressivo
-                    </h3>
-                    <p className="text-white/70 text-xs leading-relaxed">
-                      {userPlan === 'premium' ? 'Corporativo estruturado' : '5 frases/dia'}
-                    </p>
                   </div>
                   
                   {/* Efeito de brilho no hover */}
@@ -646,16 +648,18 @@ export default function DashboardContent() {
                   </div>
                   
                   {/* Conteúdo */}
-                  <div className="relative p-5 text-center backdrop-blur-sm rounded-2xl transition-all duration-300 group-hover:transform group-hover:scale-105">
-                    <div className="mb-3 group-hover:scale-110 transition-transform duration-300 filter drop-shadow-lg flex justify-center">
-                      <TravelIcon size={32} className="text-emerald-400" />
+                  <div className="relative p-4 text-center backdrop-blur-sm rounded-2xl transition-all duration-300 group-hover:transform group-hover:scale-105 h-40 flex flex-col justify-between">
+                    <div className="flex-1">
+                      <div className="mb-2 group-hover:scale-110 transition-transform duration-300 filter drop-shadow-lg flex justify-center">
+                        <TravelIcon size={32} className="text-emerald-400" />
+                      </div>
+                      <h3 className="text-white font-bold text-xs sm:text-sm mb-1 drop-shadow-sm line-clamp-2">
+                        Viagens Progressiva
+                      </h3>
+                      <p className="text-white/70 text-xs leading-tight mb-2 line-clamp-2">
+                        {userPlan === 'premium' ? 'Turismo estruturado' : '5 frases/dia'}
+                      </p>
                     </div>
-                    <h3 className="text-white font-semibold text-sm mb-2 drop-shadow-sm">
-                      Viagens Progressiva
-                    </h3>
-                    <p className="text-white/70 text-xs leading-relaxed">
-                      {userPlan === 'premium' ? 'Turismo estruturado' : '5 frases/dia'}
-                    </p>
                   </div>
                   
                   {/* Efeito de brilho no hover */}
@@ -669,8 +673,8 @@ export default function DashboardContent() {
         </PageTransition>
         )}
 
-        {/* Main Options - Só mostra se não precisar do teste ou se já completou E usuário free não está bloqueado */}
-        {!needsLevelTest && (userPlan === 'premium' || !freeLimitations.isBlocked) && (
+        {/* Main Options - Mostra para todos após completar teste */}
+        {!needsLevelTest && (
         <PageTransition>
           <div className="grid md:grid-cols-2 gap-8 mb-12 items-stretch">
             {/* Chat com Tutor AI */}
@@ -992,8 +996,8 @@ export default function DashboardContent() {
         </div>
         </PageTransition>
 
-        {/* Upgrade to Premium - Só aparece para usuários Free */}
-        {userPlan === 'free' && (
+        {/* Upgrade to Premium - Aparece para todos */}
+        {(
         <PageTransition>
           <div className="bg-gradient-to-r from-purple-900/30 to-cyan-900/30 border-2 border-purple-500/50 rounded-2xl p-6 mt-8">
           <div className="text-center">
@@ -1056,18 +1060,20 @@ export default function DashboardContent() {
         </PageTransition>
         )}
 
-        {/* Premium User Benefits - Só aparece para usuários Premium */}
-        {userPlan === 'premium' && (
+        {/* Premium User Benefits - Aparece para todos */}
+        {(
         <PageTransition>
           <div className="bg-gradient-to-r from-yellow-900/30 to-orange-900/30 border-2 border-yellow-500/50 rounded-2xl p-6 mt-8">
           <div className="text-center">
             <div className="text-4xl mb-4">⭐</div>
             <h3 className="text-2xl font-bold text-white mb-3">
-              Você é Premium! 
+              {userPlan === 'premium' ? 'Você é Premium! 🎉' : 'Veja o que o Premium oferece! ⭐'}
             </h3>
             <p className="text-gray-300 mb-6 max-w-3xl mx-auto">
-              Você tem acesso completo a todas as funcionalidades premium da plataforma! 
-              Aproveite ao máximo sua experiência de aprendizado sem limitações.
+              {userPlan === 'premium' 
+                ? 'Você tem acesso completo a todas as funcionalidades premium da plataforma! Aproveite ao máximo sua experiência de aprendizado sem limitações.'
+                : 'Conheça todos os recursos premium que você pode desbloquear para turbinar seu aprendizado de inglês!'
+              }
             </p>
             
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 mb-6">
