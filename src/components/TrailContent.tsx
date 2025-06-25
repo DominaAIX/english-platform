@@ -10,8 +10,7 @@ import PageTransition from './PageTransition'
 import AnimatedContainer from './AnimatedContainer'
 import DragDropExercise from './DragDropExercise'
 import { getFreeUsageStatus, incrementFreeUsage, FreeLimitationStatus } from '@/utils/freeLimitations'
-import { getUserFavorites, addToFavorites, removeFromFavorites } from '@/lib/favorites'
-import { useGlobalLimits } from '@/hooks/useGlobalLimits'
+// import { getUserFavorites, addToFavorites, removeFromFavorites } from '@/lib/favorites'
 import { WorkIcon, TravelIcon, ShoppingIcon, CasualIcon, BusinessIcon, RestaurantIcon, SpeakerIcon, StarIcon, FlagIcon, LocationIcon, SendIcon, RobotIcon, LockIcon, LightBulbIcon } from './ModernIcons'
 
 interface Phrase {
@@ -55,7 +54,6 @@ const iconMapping: { [key: string]: { component: React.ComponentType<{ size?: nu
 export default function TrailContent({ trail, userPlan, slug }: TrailContentProps) {
   const { user, userProfile } = useAuth()
   const { incrementPhrasesViewed } = useStats()
-  const { totalPhrasesViewed, isPhrasesBlocked } = useGlobalLimits()
   const [freeLimitations, setFreeLimitations] = useState<FreeLimitationStatus>({
     isBlocked: false,
     phrasesUsed: 0,
@@ -100,8 +98,8 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
     const loadFavorites = async () => {
       if (user && slug && actualUserPlan === 'premium') {
         setFavoritesLoading(true)
-        const favorites = await getUserFavorites(user.id, slug)
-        setFavoritePhrases(favorites)
+        // const favorites = await getUserFavorites(user.id, slug)
+        // setFavoritePhrases(favorites)
         setFavoritesLoading(false)
       }
     }
@@ -118,15 +116,9 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
       filtered = trail.phrases.filter(phrase => phrase.level === selectedLevel)
     }
     
-    // Para usuários free, aplicar limite baseado no total global visualizado
+    // Para usuários free, aplicar limite de 10 frases
     if (actualUserPlan === 'free') {
-      if (isPhrasesBlocked) {
-        // Se bloqueado, mostrar apenas as frases que já foram visualizadas (máximo totalPhrasesViewed)
-        filtered = filtered.slice(0, totalPhrasesViewed)
-      } else {
-        // Se não bloqueado, mostrar até o limite de 10 frases
-        filtered = filtered.slice(0, 10)
-      }
+      filtered = filtered.slice(0, 10)
     }
     
     return filtered
@@ -278,14 +270,14 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
     // Salvar no banco de dados
     try {
       if (isCurrentlyFavorite) {
-        await removeFromFavorites(user.id, slug, phraseIndex)
+        // await removeFromFavorites(user.id, slug, phraseIndex)
       } else {
-        await addToFavorites(user.id, {
-          trail_slug: slug,
-          phrase_index: phraseIndex,
-          phrase_english: phrase.english,
-          phrase_portuguese: phrase.portuguese
-        })
+        // await addToFavorites(user.id, {
+        //   trail_slug: slug,
+        //   phrase_index: phraseIndex,
+        //   phrase_english: phrase.english,
+        //   phrase_portuguese: phrase.portuguese
+        // })
       }
     } catch (error) {
       console.error('Erro ao salvar favorito:', error)
