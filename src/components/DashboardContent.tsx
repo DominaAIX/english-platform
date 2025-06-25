@@ -607,65 +607,143 @@ export default function DashboardContent() {
             <div className="flex justify-center">
               <div className="grid grid-cols-2 gap-4 max-w-md">
               <Link href="/trilha-progressiva/trabalho">
-                <div className="relative group">
-                  {/* Background com gradiente translúcido */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-cyan-500 opacity-20 rounded-2xl transition-all duration-300 group-hover:opacity-30"></div>
+                <div className="relative group overflow-hidden">
+                  {/* Efeito de partículas flutuantes */}
+                  <div className="absolute inset-0 opacity-30 group-hover:opacity-60 transition-opacity duration-500">
+                    <div className="absolute top-2 left-3 w-1 h-1 bg-cyan-400 rounded-full animate-ping"></div>
+                    <div className="absolute top-6 right-4 w-1.5 h-1.5 bg-blue-300 rounded-full animate-pulse"></div>
+                    <div className="absolute bottom-8 left-2 w-1 h-1 bg-cyan-300 rounded-full animate-ping" style={{animationDelay: '1s'}}></div>
+                    <div className="absolute bottom-4 right-2 w-1 h-1 bg-blue-400 rounded-full animate-pulse" style={{animationDelay: '0.5s'}}></div>
+                  </div>
                   
-                  {/* Border com gradiente */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-cyan-500 opacity-40 rounded-2xl p-[1px] transition-all duration-300 group-hover:opacity-60">
-                    <div className="bg-gray-900/40 backdrop-blur-sm rounded-2xl h-full w-full"></div>
+                  {/* Background com gradiente e movimento */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-blue-500 via-cyan-500 to-blue-600 opacity-25 rounded-2xl transition-all duration-500 group-hover:opacity-40 group-hover:scale-105"></div>
+                  
+                  {/* Border com gradiente animado */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-blue-400 via-cyan-400 to-blue-500 opacity-50 rounded-2xl p-[2px] transition-all duration-500 group-hover:opacity-80 group-hover:from-cyan-400 group-hover:to-blue-400">
+                    <div className="bg-gray-900/50 backdrop-blur-md rounded-2xl h-full w-full"></div>
+                  </div>
+                  
+                  {/* Badge "NEW" ou "HOT" */}
+                  <div className="absolute -top-1 -right-1 bg-gradient-to-r from-orange-500 to-red-500 text-white text-xs font-bold px-2 py-1 rounded-full shadow-lg transform rotate-12 z-10">
+                    🔥 HOT
                   </div>
                   
                   {/* Conteúdo */}
-                  <div className="relative p-4 text-center backdrop-blur-sm rounded-2xl transition-all duration-300 group-hover:transform group-hover:scale-105 h-40 flex flex-col justify-between">
+                  <div className="relative p-5 text-center backdrop-blur-sm rounded-2xl transition-all duration-500 group-hover:transform group-hover:scale-110 h-48 flex flex-col justify-between">
                     <div className="flex-1">
-                      <div className="mb-2 group-hover:scale-110 transition-transform duration-300 filter drop-shadow-lg flex justify-center">
-                        <WorkIcon size={32} className="text-cyan-400" />
+                      {/* Ícone com efeito pulsante */}
+                      <div className="mb-3 relative">
+                        <div className="absolute inset-0 bg-cyan-400 rounded-full opacity-20 group-hover:opacity-40 transition-opacity duration-300 animate-pulse"></div>
+                        <div className="relative group-hover:scale-125 transition-transform duration-300 filter drop-shadow-2xl flex justify-center">
+                          <WorkIcon size={40} className="text-cyan-300 group-hover:text-cyan-100" />
+                        </div>
                       </div>
-                      <h3 className="text-white font-bold text-xs sm:text-sm mb-1 drop-shadow-sm line-clamp-2">
-                        Trabalho Progressivo
+                      
+                      <h3 className="text-white font-bold text-sm sm:text-base mb-2 drop-shadow-lg group-hover:text-cyan-100 transition-colors">
+                        💼 Trabalho Progressivo
                       </h3>
-                      <p className="text-white/70 text-xs leading-tight mb-2 line-clamp-2">
-                        {userPlan === 'premium' ? 'Corporativo estruturado' : '5 frases/dia'}
+                      
+                      <p className="text-white/80 text-xs mb-2 leading-relaxed group-hover:text-white/90 transition-colors">
+                        {userPlan === 'premium' ? '✨ Corporativo estruturado' : '🎆 5 frases/dia'}
                       </p>
+                      
+                      {/* Barra de progresso decorativa */}
+                      <div className="w-full bg-gray-700/50 rounded-full h-1.5 mb-2">
+                        <div className="bg-gradient-to-r from-cyan-400 to-blue-400 h-1.5 rounded-full w-3/4 group-hover:w-full transition-all duration-1000"></div>
+                      </div>
+                      
+                      {/* Tags decorativas */}
+                      <div className="flex flex-wrap gap-1 justify-center">
+                        <span className="bg-cyan-500/20 text-cyan-300 px-2 py-0.5 rounded-full text-xs border border-cyan-400/30">
+                          🎯 Estruturado
+                        </span>
+                        <span className="bg-blue-500/20 text-blue-300 px-2 py-0.5 rounded-full text-xs border border-blue-400/30">
+                          🚀 Eficaz
+                        </span>
+                      </div>
+                    </div>
+                    
+                    {/* Botão de ação */}
+                    <div className="mt-3 text-cyan-400 group-hover:text-cyan-300 transition-colors font-semibold text-sm group-hover:animate-pulse">
+                      Começar Jornada →
                     </div>
                   </div>
                   
-                  {/* Efeito de brilho no hover */}
-                  <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-                    <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-cyan-500 opacity-10 rounded-2xl blur-xl"></div>
+                  {/* Efeito de brilho expandido */}
+                  <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none">
+                    <div className="absolute inset-0 bg-gradient-to-br from-cyan-400 via-blue-400 to-cyan-500 opacity-20 rounded-2xl blur-2xl transform group-hover:scale-110 transition-transform duration-700"></div>
                   </div>
                 </div>
               </Link>
               
               <Link href="/trilha-progressiva/viagens">
-                <div className="relative group">
-                  {/* Background com gradiente translúcido */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-green-500 to-emerald-500 opacity-20 rounded-2xl transition-all duration-300 group-hover:opacity-30"></div>
+                <div className="relative group overflow-hidden">
+                  {/* Efeito de partículas flutuantes */}
+                  <div className="absolute inset-0 opacity-30 group-hover:opacity-60 transition-opacity duration-500">
+                    <div className="absolute top-3 left-2 w-1 h-1 bg-emerald-400 rounded-full animate-ping"></div>
+                    <div className="absolute top-5 right-3 w-1.5 h-1.5 bg-green-300 rounded-full animate-pulse"></div>
+                    <div className="absolute bottom-6 left-4 w-1 h-1 bg-emerald-300 rounded-full animate-ping" style={{animationDelay: '1.5s'}}></div>
+                    <div className="absolute bottom-3 right-1 w-1 h-1 bg-green-400 rounded-full animate-pulse" style={{animationDelay: '0.8s'}}></div>
+                  </div>
                   
-                  {/* Border com gradiente */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-green-500 to-emerald-500 opacity-40 rounded-2xl p-[1px] transition-all duration-300 group-hover:opacity-60">
-                    <div className="bg-gray-900/40 backdrop-blur-sm rounded-2xl h-full w-full"></div>
+                  {/* Background com gradiente e movimento */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-green-500 via-emerald-500 to-green-600 opacity-25 rounded-2xl transition-all duration-500 group-hover:opacity-40 group-hover:scale-105"></div>
+                  
+                  {/* Border com gradiente animado */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-green-400 via-emerald-400 to-green-500 opacity-50 rounded-2xl p-[2px] transition-all duration-500 group-hover:opacity-80 group-hover:from-emerald-400 group-hover:to-green-400">
+                    <div className="bg-gray-900/50 backdrop-blur-md rounded-2xl h-full w-full"></div>
+                  </div>
+                  
+                  {/* Badge "POPULAR" */}
+                  <div className="absolute -top-1 -right-1 bg-gradient-to-r from-purple-500 to-pink-500 text-white text-xs font-bold px-2 py-1 rounded-full shadow-lg transform rotate-12 z-10">
+                    ⭐ POPULAR
                   </div>
                   
                   {/* Conteúdo */}
-                  <div className="relative p-4 text-center backdrop-blur-sm rounded-2xl transition-all duration-300 group-hover:transform group-hover:scale-105 h-40 flex flex-col justify-between">
+                  <div className="relative p-5 text-center backdrop-blur-sm rounded-2xl transition-all duration-500 group-hover:transform group-hover:scale-110 h-48 flex flex-col justify-between">
                     <div className="flex-1">
-                      <div className="mb-2 group-hover:scale-110 transition-transform duration-300 filter drop-shadow-lg flex justify-center">
-                        <TravelIcon size={32} className="text-emerald-400" />
+                      {/* Ícone com efeito pulsante */}
+                      <div className="mb-3 relative">
+                        <div className="absolute inset-0 bg-emerald-400 rounded-full opacity-20 group-hover:opacity-40 transition-opacity duration-300 animate-pulse"></div>
+                        <div className="relative group-hover:scale-125 transition-transform duration-300 filter drop-shadow-2xl flex justify-center">
+                          <TravelIcon size={40} className="text-emerald-300 group-hover:text-emerald-100" />
+                        </div>
                       </div>
-                      <h3 className="text-white font-bold text-xs sm:text-sm mb-1 drop-shadow-sm line-clamp-2">
-                        Viagens Progressiva
+                      
+                      <h3 className="text-white font-bold text-sm sm:text-base mb-2 drop-shadow-lg group-hover:text-emerald-100 transition-colors">
+                        ✈️ Viagens Progressiva
                       </h3>
-                      <p className="text-white/70 text-xs leading-tight mb-2 line-clamp-2">
-                        {userPlan === 'premium' ? 'Turismo estruturado' : '5 frases/dia'}
+                      
+                      <p className="text-white/80 text-xs mb-2 leading-relaxed group-hover:text-white/90 transition-colors">
+                        {userPlan === 'premium' ? '✨ Turismo estruturado' : '🌍 5 frases/dia'}
                       </p>
+                      
+                      {/* Barra de progresso decorativa */}
+                      <div className="w-full bg-gray-700/50 rounded-full h-1.5 mb-2">
+                        <div className="bg-gradient-to-r from-emerald-400 to-green-400 h-1.5 rounded-full w-2/3 group-hover:w-full transition-all duration-1000"></div>
+                      </div>
+                      
+                      {/* Tags decorativas */}
+                      <div className="flex flex-wrap gap-1 justify-center">
+                        <span className="bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded-full text-xs border border-emerald-400/30">
+                          🌎 Global
+                        </span>
+                        <span className="bg-green-500/20 text-green-300 px-2 py-0.5 rounded-full text-xs border border-green-400/30">
+                          📝 Prático
+                        </span>
+                      </div>
+                    </div>
+                    
+                    {/* Botão de ação */}
+                    <div className="mt-3 text-emerald-400 group-hover:text-emerald-300 transition-colors font-semibold text-sm group-hover:animate-pulse">
+                      Explorar Mundo →
                     </div>
                   </div>
                   
-                  {/* Efeito de brilho no hover */}
-                  <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-                    <div className="absolute inset-0 bg-gradient-to-br from-green-500 to-emerald-500 opacity-10 rounded-2xl blur-xl"></div>
+                  {/* Efeito de brilho expandido */}
+                  <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none">
+                    <div className="absolute inset-0 bg-gradient-to-br from-emerald-400 via-green-400 to-emerald-500 opacity-20 rounded-2xl blur-2xl transform group-hover:scale-110 transition-transform duration-700"></div>
                   </div>
                 </div>
               </Link>
