@@ -238,9 +238,6 @@ function ProgressiveTrailClient({ trailData, slug }: { trailData: any, slug: str
     setExerciseResult(null)
   }
 
-  const handleLogoClick = () => {
-    router.push('/dashboard')
-  }
 
 
   const handleStepComplete = (stepId: string, isCorrect: boolean) => {
