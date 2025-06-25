@@ -304,7 +304,13 @@ function ProgressiveTrailClient({ trailData, slug }: { trailData: any, slug: str
     if (step && step.isUnlocked) {
       setCurrentStepIndex(stepIndex)
       setShowTranslation(false)
-      setShowNextButton(false)
+      
+      // Verificar se o passo está completo para mostrar botões de navegação
+      if (step.isCompleted) {
+        setShowNextButton(true)
+      } else {
+        setShowNextButton(false)
+      }
     }
   }
 

@@ -604,7 +604,8 @@ export default function DashboardContent() {
             </div>
 
             {/* Trilhas Progressivas Disponíveis */}
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+            <div className="flex justify-center">
+              <div className="grid grid-cols-2 gap-4 max-w-md">
               <Link href="/trilha-progressiva/trabalho">
                 <div className="relative group">
                   {/* Background com gradiente translúcido */}
@@ -668,6 +669,7 @@ export default function DashboardContent() {
                   </div>
                 </div>
               </Link>
+              </div>
             </div>
           </div>
         </PageTransition>
@@ -996,8 +998,8 @@ export default function DashboardContent() {
         </div>
         </PageTransition>
 
-        {/* Upgrade to Premium - Aparece para todos */}
-        {(
+        {/* Upgrade to Premium - Só aparece para usuários Free */}
+        {userPlan === 'free' && (
         <PageTransition>
           <div className="bg-gradient-to-r from-purple-900/30 to-cyan-900/30 border-2 border-purple-500/50 rounded-2xl p-6 mt-8">
           <div className="text-center">
