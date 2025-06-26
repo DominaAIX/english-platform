@@ -500,7 +500,7 @@ export default function DashboardContent() {
               </Link>
 
               {/* Trilhas Progressivas */}
-              <div className="group bg-gradient-to-br from-green-900/30 to-emerald-900/30 border-2 border-green-500/30 rounded-3xl p-8 hover:border-green-400/50 transition-all duration-300 cursor-pointer transform hover:scale-105 h-full flex flex-col">
+              <div className="group bg-gradient-to-br from-green-900/30 to-emerald-900/30 border-2 border-green-500/30 rounded-3xl p-8 hover:border-green-400/50 transition-all duration-300 h-full flex flex-col">
                 <div className="text-center flex-1 flex flex-col justify-between">
                   <div>
                     <div className="mb-6 group-hover:scale-110 transition-transform duration-300 flex justify-center">
@@ -521,223 +521,111 @@ export default function DashboardContent() {
                         Exercícios
                       </span>
                     </div>
-                  </div>
-                  <div className="text-green-400 group-hover:text-green-300 transition-colors font-semibold">
-                    Ver Trilhas →
+
+                    {/* Trilhas Disponíveis */}
+                    <div className="grid grid-cols-2 gap-3 mb-6">
+                      <Link href="/trilha-progressiva/trabalho" className="group/trail">
+                        <div className="relative bg-cyan-900/20 border border-cyan-500/30 rounded-xl p-3 hover:border-cyan-400/50 transition-all duration-300 hover:bg-cyan-900/30">
+                          <div className="flex flex-col items-center">
+                            <WorkIcon size={24} className="text-cyan-300 mb-2" />
+                            <span className="text-white text-xs font-semibold">Trabalho</span>
+                          </div>
+                        </div>
+                      </Link>
+                      
+                      <Link href="/trilha-progressiva/viagens" className="group/trail">
+                        <div className="relative bg-emerald-900/20 border border-emerald-500/30 rounded-xl p-3 hover:border-emerald-400/50 transition-all duration-300 hover:bg-emerald-900/30">
+                          <div className="flex flex-col items-center">
+                            <TravelIcon size={24} className="text-emerald-300 mb-2" />
+                            <span className="text-white text-xs font-semibold">Viagens</span>
+                          </div>
+                        </div>
+                      </Link>
+                    </div>
                   </div>
                 </div>
               </div>
 
-              {/* Teste de Certificação A1/A2 - SÓ APARECE APÓS COMPLETAR BÁSICO */}
-              {hasCompletedBasicTrail && (
-                <Link href="/certificacao-a1-a2" className={certificationBlocked.isBlocked ? 'pointer-events-none' : ''}>
-                  <div className={`group bg-gradient-to-br from-blue-900/30 to-cyan-900/30 border-2 border-blue-500/30 rounded-3xl p-8 transition-all duration-300 h-full flex flex-col relative ${
-                    certificationBlocked.isBlocked 
-                      ? 'opacity-60 cursor-not-allowed' 
-                      : 'hover:border-blue-400/50 cursor-pointer transform hover:scale-105'
-                  }`}>
-                    {/* Overlay de bloqueio por cooldown */}
-                    {certificationBlocked.isBlocked && (
-                      <div className="absolute inset-0 bg-black/50 rounded-3xl flex items-center justify-center z-10">
-                        <div className="text-center">
-                          <div className="text-6xl mb-2"></div>
-                          <div className="text-red-400 font-bold text-lg">BLOQUEADO</div>
-                          <div className="text-gray-300 text-sm">{certificationBlocked.timeRemaining}</div>
-                        </div>
+              {/* Teste de Certificação A1/A2 - SEMPRE APARECE, MAS BLOQUEADO ATÉ COMPLETAR TRILHA */}
+              <div className={`group bg-gradient-to-br from-blue-900/30 to-cyan-900/30 border-2 border-blue-500/30 rounded-3xl p-8 transition-all duration-300 h-full flex flex-col relative ${
+                !hasCompletedBasicTrail || certificationBlocked.isBlocked
+                  ? 'opacity-60 cursor-not-allowed' 
+                  : 'hover:border-blue-400/50 cursor-pointer transform hover:scale-105'
+              }`}>
+                {/* Link condicional */}
+                {hasCompletedBasicTrail && !certificationBlocked.isBlocked && (
+                  <Link href="/certificacao-a1-a2" className="absolute inset-0 z-20" />
+                )}
+
+                {/* Overlay de bloqueio */}
+                {(!hasCompletedBasicTrail || certificationBlocked.isBlocked) && (
+                  <div className="absolute inset-0 bg-black/50 rounded-3xl flex items-center justify-center z-10">
+                    <div className="text-center">
+                      <div className="text-6xl mb-2"></div>
+                      <div className="text-red-400 font-bold text-lg">BLOQUEADO</div>
+                      <div className="text-gray-300 text-sm">
+                        {!hasCompletedBasicTrail 
+                          ? 'Complete uma trilha progressiva primeiro'
+                          : certificationBlocked.timeRemaining
+                        }
                       </div>
-                    )}
-                    
-                    <div className="text-center flex-1 flex flex-col justify-between">
-                      <div>
-                        <div className="mb-6 group-hover:scale-110 transition-transform duration-300 flex justify-center">
-                          <span className="text-7xl">
-                            
-                          </span>
-                        </div>
-                        <h3 className="text-2xl font-bold text-white mb-4">
-                          Certificação A1/A2
-                        </h3>
-                        <p className="text-gray-300 mb-6 leading-relaxed">
-                          {certificationBlocked.isBlocked 
-                            ? `Teste bloqueado por mais ${certificationBlocked.timeRemaining}. Aguarde para fazer o próximo teste.`
-                            : 'Teste seu domínio das 145 frases essenciais A1/A2 e ganhe seu certificado oficial.'
-                          }
-                        </p>
-                        <div className="flex flex-wrap gap-2 justify-center mb-6">
-                          <span className={`px-3 py-1 rounded-full text-sm ${
-                            certificationBlocked.isBlocked 
-                              ? 'bg-red-500/20 text-red-300' 
-                              : 'bg-blue-500/20 text-blue-300'
-                          }`}>
-                            {certificationBlocked.isBlocked ? 'Bloqueado' : '35 Questões'}
-                          </span>
-                          <span className={`px-3 py-1 rounded-full text-sm ${
-                            certificationBlocked.isBlocked 
-                              ? 'bg-red-500/20 text-red-300' 
-                              : 'bg-cyan-500/20 text-cyan-300'
-                          }`}>
-                            {certificationBlocked.isBlocked ? '48h Cooldown' : '20 Min'}
-                          </span>
-                          <span className={`px-3 py-1 rounded-full text-sm ${
-                            certificationBlocked.isBlocked 
-                              ? 'bg-red-500/20 text-red-300' 
-                              : 'bg-blue-500/20 text-blue-300'
-                          }`}>
-                            {certificationBlocked.isBlocked ? 'Indisponível' : 'Certificado'}
-                          </span>
-                        </div>
-                      </div>
-                      <div className={`font-semibold transition-colors ${
-                        certificationBlocked.isBlocked 
-                          ? 'text-red-400' 
-                          : 'text-blue-400 group-hover:text-blue-300'
+                    </div>
+                  </div>
+                )}
+                
+                <div className="text-center flex-1 flex flex-col justify-between">
+                  <div>
+                    <div className="mb-6 group-hover:scale-110 transition-transform duration-300 flex justify-center">
+                      <span className="text-7xl">
+                        
+                      </span>
+                    </div>
+                    <h3 className="text-2xl font-bold text-white mb-4">
+                      Certificação A1/A2
+                    </h3>
+                    <p className="text-gray-300 mb-6 leading-relaxed">
+                      {!hasCompletedBasicTrail 
+                        ? 'Complete ao menos uma trilha progressiva para desbloquear o exame de certificação A1/A2.'
+                        : certificationBlocked.isBlocked 
+                        ? `Teste bloqueado por mais ${certificationBlocked.timeRemaining}. Aguarde para fazer o próximo teste.`
+                        : 'Teste seu domínio das 145 frases essenciais A1/A2 e ganhe seu certificado oficial.'
+                      }
+                    </p>
+                    <div className="flex flex-wrap gap-2 justify-center mb-6">
+                      <span className={`px-3 py-1 rounded-full text-sm ${
+                        !hasCompletedBasicTrail || certificationBlocked.isBlocked
+                          ? 'bg-red-500/20 text-red-300' 
+                          : 'bg-blue-500/20 text-blue-300'
                       }`}>
-                        {certificationBlocked.isBlocked ? 'Aguarde liberação' : 'Fazer Teste →'}
-                      </div>
+                        {!hasCompletedBasicTrail || certificationBlocked.isBlocked ? 'Bloqueado' : '35 Questões'}
+                      </span>
+                      <span className={`px-3 py-1 rounded-full text-sm ${
+                        !hasCompletedBasicTrail || certificationBlocked.isBlocked
+                          ? 'bg-red-500/20 text-red-300' 
+                          : 'bg-cyan-500/20 text-cyan-300'
+                      }`}>
+                        {!hasCompletedBasicTrail || certificationBlocked.isBlocked ? 'Indisponível' : '20 Min'}
+                      </span>
+                      <span className={`px-3 py-1 rounded-full text-sm ${
+                        !hasCompletedBasicTrail || certificationBlocked.isBlocked
+                          ? 'bg-red-500/20 text-red-300' 
+                          : 'bg-blue-500/20 text-blue-300'
+                      }`}>
+                        {!hasCompletedBasicTrail || certificationBlocked.isBlocked ? 'Indisponível' : 'Certificado'}
+                      </span>
                     </div>
                   </div>
-                </Link>
-              )}
-            </div>
-
-            {/* Trilhas Progressivas Disponíveis */}
-            <div className="flex justify-center px-4">
-              <div className="grid grid-cols-2 gap-6 max-w-lg">
-              <Link href="/trilha-progressiva/trabalho">
-                <div className="relative group">
-                  {/* Efeito de partículas flutuantes */}
-                  <div className="absolute inset-0 opacity-30 group-hover:opacity-60 transition-opacity duration-500">
-                    <div className="absolute top-2 left-3 w-1 h-1 bg-cyan-400 rounded-full animate-ping"></div>
-                    <div className="absolute top-6 right-4 w-1.5 h-1.5 bg-blue-300 rounded-full animate-pulse"></div>
-                    <div className="absolute bottom-8 left-2 w-1 h-1 bg-cyan-300 rounded-full animate-ping" style={{animationDelay: '1s'}}></div>
-                    <div className="absolute bottom-4 right-2 w-1 h-1 bg-blue-400 rounded-full animate-pulse" style={{animationDelay: '0.5s'}}></div>
-                  </div>
-                  
-                  {/* Background com gradiente e movimento */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-blue-500 via-cyan-500 to-blue-600 opacity-25 rounded-2xl transition-all duration-500 group-hover:opacity-40 group-hover:scale-105"></div>
-                  
-                  {/* Border com gradiente animado */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-blue-400 via-cyan-400 to-blue-500 opacity-50 rounded-2xl p-[2px] transition-all duration-500 group-hover:opacity-80 group-hover:from-cyan-400 group-hover:to-blue-400">
-                    <div className="bg-gray-900/50 backdrop-blur-md rounded-2xl h-full w-full"></div>
-                  </div>
-                  
-                  
-                  {/* Conteúdo */}
-                  <div className="relative p-3 sm:p-5 text-center backdrop-blur-sm rounded-2xl transition-all duration-500 group-hover:transform group-hover:scale-110 h-48 flex flex-col justify-between">
-                    <div className="flex-1">
-                      {/* Ícone com efeito pulsante */}
-                      <div className="mb-2 sm:mb-3 relative">
-                        <div className="absolute inset-0 bg-cyan-400 rounded-full opacity-20 group-hover:opacity-40 transition-opacity duration-300 animate-pulse"></div>
-                        <div className="relative group-hover:scale-125 transition-transform duration-300 filter drop-shadow-2xl flex justify-center">
-                          <WorkIcon size={36} className="text-cyan-300 group-hover:text-cyan-100" />
-                        </div>
-                      </div>
-                      
-                      <h3 className="text-white font-bold text-xs sm:text-sm mb-1 sm:mb-2 drop-shadow-lg group-hover:text-cyan-100 transition-colors">
-                        Trabalho
-                      </h3>
-                      
-                      <p className="text-white/80 text-xs mb-2 leading-relaxed group-hover:text-white/90 transition-colors">
-                        {userPlan === 'premium' ? 'Corporativo estruturado' : 'Acesso Ilimitado no Premium'}
-                      </p>
-                      
-                      
-                      {/* Tags decorativas */}
-                      <div className="flex flex-wrap gap-1 justify-center">
-                        {/* Indicador de nível baseado no teste */}
-                        <span className={`px-2 py-0.5 rounded-full text-xs border font-semibold ${
-                          userLevel === 'beginner' 
-                            ? 'bg-green-500/20 text-green-300 border-green-400/40' 
-                            : userLevel === 'intermediate'
-                            ? 'bg-yellow-500/20 text-yellow-300 border-yellow-400/40'
-                            : 'bg-red-500/20 text-red-300 border-red-400/40'
-                        }`}>
-                          {userLevel === 'beginner' ? 'BÁSICO' : userLevel === 'intermediate' ? 'INTER' : 'AVANÇ'}
-                        </span>
-                      </div>
-                    </div>
-                    
-                    {/* Botão de ação */}
-                    <div className="mt-2 text-cyan-400 group-hover:text-cyan-300 transition-colors font-semibold text-xs sm:text-sm group-hover:animate-pulse px-1">
-                      Começar Jornada →
-                    </div>
-                  </div>
-                  
-                  {/* Efeito de brilho expandido */}
-                  <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none">
-                    <div className="absolute inset-0 bg-gradient-to-br from-cyan-400 via-blue-400 to-cyan-500 opacity-20 rounded-2xl blur-2xl transform group-hover:scale-110 transition-transform duration-700"></div>
+                  <div className={`font-semibold transition-colors ${
+                    !hasCompletedBasicTrail || certificationBlocked.isBlocked
+                      ? 'text-red-400' 
+                      : 'text-blue-400 group-hover:text-blue-300'
+                  }`}>
+                    {!hasCompletedBasicTrail || certificationBlocked.isBlocked ? 'Bloqueado' : 'Fazer Teste →'}
                   </div>
                 </div>
-              </Link>
-              
-              <Link href="/trilha-progressiva/viagens">
-                <div className="relative group">
-                  {/* Efeito de partículas flutuantes */}
-                  <div className="absolute inset-0 opacity-30 group-hover:opacity-60 transition-opacity duration-500">
-                    <div className="absolute top-3 left-2 w-1 h-1 bg-emerald-400 rounded-full animate-ping"></div>
-                    <div className="absolute top-5 right-3 w-1.5 h-1.5 bg-green-300 rounded-full animate-pulse"></div>
-                    <div className="absolute bottom-6 left-4 w-1 h-1 bg-emerald-300 rounded-full animate-ping" style={{animationDelay: '1.5s'}}></div>
-                    <div className="absolute bottom-3 right-1 w-1 h-1 bg-green-400 rounded-full animate-pulse" style={{animationDelay: '0.8s'}}></div>
-                  </div>
-                  
-                  {/* Background com gradiente e movimento */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-green-500 via-emerald-500 to-green-600 opacity-25 rounded-2xl transition-all duration-500 group-hover:opacity-40 group-hover:scale-105"></div>
-                  
-                  {/* Border com gradiente animado */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-green-400 via-emerald-400 to-green-500 opacity-50 rounded-2xl p-[2px] transition-all duration-500 group-hover:opacity-80 group-hover:from-emerald-400 group-hover:to-green-400">
-                    <div className="bg-gray-900/50 backdrop-blur-md rounded-2xl h-full w-full"></div>
-                  </div>
-                  
-                  
-                  {/* Conteúdo */}
-                  <div className="relative p-3 sm:p-5 text-center backdrop-blur-sm rounded-2xl transition-all duration-500 group-hover:transform group-hover:scale-110 h-48 flex flex-col justify-between">
-                    <div className="flex-1">
-                      {/* Ícone com efeito pulsante */}
-                      <div className="mb-2 sm:mb-3 relative">
-                        <div className="absolute inset-0 bg-emerald-400 rounded-full opacity-20 group-hover:opacity-40 transition-opacity duration-300 animate-pulse"></div>
-                        <div className="relative group-hover:scale-125 transition-transform duration-300 filter drop-shadow-2xl flex justify-center">
-                          <TravelIcon size={36} className="text-emerald-300 group-hover:text-emerald-100" />
-                        </div>
-                      </div>
-                      
-                      <h3 className="text-white font-bold text-xs sm:text-sm mb-1 sm:mb-2 drop-shadow-lg group-hover:text-emerald-100 transition-colors">
-                        Viagens
-                      </h3>
-                      
-                      <p className="text-white/80 text-xs mb-2 leading-relaxed group-hover:text-white/90 transition-colors">
-                        {userPlan === 'premium' ? 'Turismo estruturado' : 'Acesso Ilimitado no Premium'}
-                      </p>
-                      
-                      
-                      {/* Tags decorativas */}
-                      <div className="flex flex-wrap gap-1 justify-center">
-                        {/* Indicador de nível baseado no teste */}
-                        <span className={`px-2 py-0.5 rounded-full text-xs border font-semibold ${
-                          userLevel === 'beginner' 
-                            ? 'bg-green-500/20 text-green-300 border-green-400/40' 
-                            : userLevel === 'intermediate'
-                            ? 'bg-yellow-500/20 text-yellow-300 border-yellow-400/40'
-                            : 'bg-red-500/20 text-red-300 border-red-400/40'
-                        }`}>
-                          {userLevel === 'beginner' ? 'BÁSICO' : userLevel === 'intermediate' ? 'INTER' : 'AVANÇ'}
-                        </span>
-                      </div>
-                    </div>
-                    
-                    {/* Botão de ação */}
-                    <div className="mt-2 text-emerald-400 group-hover:text-emerald-300 transition-colors font-semibold text-xs sm:text-sm group-hover:animate-pulse px-1">
-                      Explorar Mundo →
-                    </div>
-                  </div>
-                  
-                  {/* Efeito de brilho expandido */}
-                  <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none">
-                    <div className="absolute inset-0 bg-gradient-to-br from-emerald-400 via-green-400 to-emerald-500 opacity-20 rounded-2xl blur-2xl transform group-hover:scale-110 transition-transform duration-700"></div>
-                  </div>
-                </div>
-              </Link>
               </div>
             </div>
+
           </div>
         </PageTransition>
         )}

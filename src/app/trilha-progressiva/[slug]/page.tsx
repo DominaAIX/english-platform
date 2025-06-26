@@ -536,7 +536,7 @@ function ProgressiveTrailClient({ trailData, slug }: { trailData: any, slug: str
                           </h2>
                           <button
                             onClick={() => speakPhrase(currentStep.phrase.english)}
-                            className="bg-purple-600 hover:bg-purple-700 w-8 h-8 rounded-full transition-colors flex items-center justify-center flex-shrink-0"
+                            className="bg-purple-600 hover:bg-purple-700 w-8 h-8 min-w-[2rem] min-h-[2rem] rounded-full transition-colors flex items-center justify-center flex-shrink-0"
                             title="Ouvir pronúncia"
                           >
                             <SpeakerIcon size={16} className="text-white" />
