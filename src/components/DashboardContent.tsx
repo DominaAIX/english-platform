@@ -309,7 +309,7 @@ export default function DashboardContent() {
               />
             </div>
             <h1 className="text-4xl font-bold text-white mb-2">
-              {getGreeting()}, {getUserDisplayName()}! 👋
+              {getGreeting()}, {getUserDisplayName()}!
             </h1>
             <p className="text-gray-400 text-lg">
               {needsLevelTest ? 'Primeiro, vamos descobrir seu nível de inglês!' : 'Como você gostaria de praticar inglês hoje?'}
@@ -346,7 +346,7 @@ export default function DashboardContent() {
         <PageTransition>
           <div className="max-w-4xl mx-auto mb-12">
             <div className="bg-gradient-to-r from-yellow-900/50 to-orange-900/50 border-2 border-yellow-500/50 rounded-xl p-8 text-center">
-              <div className="text-6xl mb-6">🎯</div>
+              <div className="text-6xl mb-6"></div>
               <h2 className="text-3xl font-bold text-white mb-4">
                 Vamos começar?
               </h2>
@@ -356,7 +356,7 @@ export default function DashboardContent() {
               </p>
               
               <div className="bg-gray-900/50 rounded-lg p-6 mb-6">
-                <h3 className="text-white font-semibold mb-4">📋 O que esperar:</h3>
+                <h3 className="text-white font-semibold mb-4">O que esperar:</h3>
                 <ul className="text-gray-300 space-y-2 text-left max-w-md mx-auto">
                   <li>• 20 perguntas de múltipla escolha</li>
                   <li>• Tempo estimado: 8-12 minutos</li>
@@ -367,7 +367,7 @@ export default function DashboardContent() {
 
               <div className="bg-yellow-900/30 border border-yellow-500/30 rounded-lg p-4 mb-6">
                 <p className="text-yellow-300 text-sm">
-                  ⚠️ Você precisa completar este teste para acessar todas as funcionalidades da plataforma.
+                  Você precisa completar este teste para acessar todas as funcionalidades da plataforma.
                 </p>
               </div>
 
@@ -375,7 +375,7 @@ export default function DashboardContent() {
                 href="/teste-nivel"
                 className="bg-gradient-to-r from-yellow-600 to-orange-600 hover:from-yellow-700 hover:to-orange-700 px-8 py-4 rounded-full text-white font-bold text-lg transition-all duration-300 transform hover:scale-105 inline-block"
               >
-                🚀 Fazer Teste de Nível Agora
+                Fazer Teste de Nível Agora
               </Link>
             </div>
           </div>
@@ -396,7 +396,7 @@ export default function DashboardContent() {
         <PageTransition>
           <div className="max-w-4xl mx-auto mb-12">
             <div className="bg-gradient-to-r from-red-900/50 to-orange-900/50 border-2 border-red-500/50 rounded-xl p-8 text-center">
-              <div className="text-6xl mb-6">🔒</div>
+              <div className="text-6xl mb-6"></div>
               <h2 className="text-3xl font-bold text-white mb-4">
                 Limite Diário Atingido!
               </h2>
@@ -406,7 +406,7 @@ export default function DashboardContent() {
               </p>
               
               <div className="bg-gray-900/50 rounded-lg p-6 mb-6">
-                <h3 className="text-white font-semibold mb-4">📊 Seu uso hoje:</h3>
+                <h3 className="text-white font-semibold mb-4">Seu uso hoje:</h3>
                 <div className="flex justify-center items-center gap-4 mb-4">
                   <div className="text-center">
                     <div className="text-3xl font-bold text-red-400">{freeLimitations.phrasesUsed}</div>
@@ -434,9 +434,9 @@ export default function DashboardContent() {
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <button 
                   className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 px-8 py-4 rounded-full text-white font-bold text-lg transition-all duration-300 transform hover:scale-105"
-                  onClick={() => alert('Funcionalidade de assinatura será implementada em breve! 🚀')}
+                  onClick={() => alert('Funcionalidade de assinatura será implementada em breve!')}
                 >
-                  🌟 Upgrade para Premium
+                  Upgrade para Premium
                 </button>
                 <div className="bg-gray-800 px-6 py-4 rounded-full text-gray-300 font-medium text-center">
                   ⏳ Aguardar Liberação
@@ -457,7 +457,7 @@ export default function DashboardContent() {
           <div className="mb-12">
             <div className="text-center mb-8">
               <h2 className="text-3xl font-bold text-white mb-4">
-                🎓 Aprendizado Progressivo
+                Aprendizado Progressivo
               </h2>
               <p className="text-gray-400 text-lg max-w-3xl mx-auto">
                 Descubra seu nível e siga trilhas estruturadas. Exercícios práticos, favoritos, filtros avançados e acesso ilimitado. {userPlan === 'free' ? '5 frases/dia no plano gratuito - faça upgrade para acesso completo!' : 'Acesso premium ativo!'}
@@ -471,7 +471,7 @@ export default function DashboardContent() {
                   <div className="text-center flex-1 flex flex-col justify-between">
                     <div>
                       <div className="mb-6 group-hover:scale-110 transition-transform duration-300 flex justify-center">
-                        <span className="text-7xl">🎯</span>
+                        <span className="text-7xl"></span>
                       </div>
                       <h3 className="text-2xl font-bold text-white mb-4">
                         Teste de Nível
@@ -504,7 +504,7 @@ export default function DashboardContent() {
                 <div className="text-center flex-1 flex flex-col justify-between">
                   <div>
                     <div className="mb-6 group-hover:scale-110 transition-transform duration-300 flex justify-center">
-                      <span className="text-7xl">🚀</span>
+                      <TargetIcon size={64} className="text-green-400" />
                     </div>
                     <h3 className="text-2xl font-bold text-white mb-4">
                       Trilhas Progressivas
@@ -540,7 +540,7 @@ export default function DashboardContent() {
                     {certificationBlocked.isBlocked && (
                       <div className="absolute inset-0 bg-black/50 rounded-3xl flex items-center justify-center z-10">
                         <div className="text-center">
-                          <div className="text-6xl mb-2">🔒</div>
+                          <div className="text-6xl mb-2"></div>
                           <div className="text-red-400 font-bold text-lg">BLOQUEADO</div>
                           <div className="text-gray-300 text-sm">{certificationBlocked.timeRemaining}</div>
                         </div>
@@ -551,7 +551,7 @@ export default function DashboardContent() {
                       <div>
                         <div className="mb-6 group-hover:scale-110 transition-transform duration-300 flex justify-center">
                           <span className="text-7xl">
-                            {certificationBlocked.isBlocked ? '🔒' : '🏆'}
+                            
                           </span>
                         </div>
                         <h3 className="text-2xl font-bold text-white mb-4">
@@ -634,11 +634,11 @@ export default function DashboardContent() {
                       </div>
                       
                       <h3 className="text-white font-bold text-xs sm:text-sm mb-1 sm:mb-2 drop-shadow-lg group-hover:text-cyan-100 transition-colors">
-                        💼 Trabalho
+                        Trabalho
                       </h3>
                       
                       <p className="text-white/80 text-xs mb-2 leading-relaxed group-hover:text-white/90 transition-colors">
-                        {userPlan === 'premium' ? '✨ Corporativo estruturado' : '🔓 Acesso Ilimitado no Premium'}
+                        {userPlan === 'premium' ? 'Corporativo estruturado' : 'Acesso Ilimitado no Premium'}
                       </p>
                       
                       
@@ -652,7 +652,7 @@ export default function DashboardContent() {
                             ? 'bg-yellow-500/20 text-yellow-300 border-yellow-400/40'
                             : 'bg-red-500/20 text-red-300 border-red-400/40'
                         }`}>
-                          {userLevel === 'beginner' ? '🟢 BÁSICO' : userLevel === 'intermediate' ? '🟡 INTER' : '🔴 AVANÇ'}
+                          {userLevel === 'beginner' ? 'BÁSICO' : userLevel === 'intermediate' ? 'INTER' : 'AVANÇ'}
                         </span>
                       </div>
                     </div>
@@ -701,11 +701,11 @@ export default function DashboardContent() {
                       </div>
                       
                       <h3 className="text-white font-bold text-xs sm:text-sm mb-1 sm:mb-2 drop-shadow-lg group-hover:text-emerald-100 transition-colors">
-                        ✈️ Viagens
+                        Viagens
                       </h3>
                       
                       <p className="text-white/80 text-xs mb-2 leading-relaxed group-hover:text-white/90 transition-colors">
-                        {userPlan === 'premium' ? '✨ Turismo estruturado' : '🔓 Acesso Ilimitado no Premium'}
+                        {userPlan === 'premium' ? 'Turismo estruturado' : 'Acesso Ilimitado no Premium'}
                       </p>
                       
                       
@@ -719,7 +719,7 @@ export default function DashboardContent() {
                             ? 'bg-yellow-500/20 text-yellow-300 border-yellow-400/40'
                             : 'bg-red-500/20 text-red-300 border-red-400/40'
                         }`}>
-                          {userLevel === 'beginner' ? '🟢 BÁSICO' : userLevel === 'intermediate' ? '🟡 INTER' : '🔴 AVANÇ'}
+                          {userLevel === 'beginner' ? 'BÁSICO' : userLevel === 'intermediate' ? 'INTER' : 'AVANÇ'}
                         </span>
                       </div>
                     </div>
@@ -828,7 +828,7 @@ export default function DashboardContent() {
                       {/* Badge de recomendação */}
                       {isRecommended && (
                         <div className="absolute -top-2 -right-2 bg-gradient-to-r from-yellow-500 to-orange-500 text-white text-xs font-bold px-2 py-1 rounded-full z-10 shadow-lg">
-                          ⭐ Recomendado
+                          Recomendado
                         </div>
                       )}
                       
@@ -919,7 +919,7 @@ export default function DashboardContent() {
           <div className="mb-12">
             <div className="text-center mb-8">
               <h2 className="text-3xl font-bold text-white mb-4">
-                🎯 Trilhas de Profissões
+                Trilhas de Profissões
               </h2>
               <p className="text-gray-400 text-lg max-w-3xl mx-auto">
                 Aprenda inglês específico para sua área profissional. 
@@ -1070,7 +1070,7 @@ export default function DashboardContent() {
         <PageTransition>
           <div className="bg-gradient-to-r from-purple-900/30 to-cyan-900/30 border-2 border-purple-500/50 rounded-2xl p-6 mt-8">
           <div className="text-center">
-            <div className="text-4xl mb-4">🚀</div>
+            <div className="text-4xl mb-4"></div>
             <h3 className="text-2xl font-bold text-white mb-3">
               Desbloqueie Todo o Potencial do Inglês pra Já
             </h3>
@@ -1112,11 +1112,11 @@ export default function DashboardContent() {
 
             <button 
               className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 px-6 py-4 rounded-full text-white font-bold text-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
-              onClick={() => alert('Funcionalidade de assinatura será implementada em breve! 🚀')}
+              onClick={() => alert('Funcionalidade de assinatura será implementada em breve!'))
             >
-              <span className="hidden sm:inline whitespace-nowrap">🌟 Assinar Premium - R$ 29,90/mês</span>
+              <span className="hidden sm:inline whitespace-nowrap">Assinar Premium - R$ 29,90/mês</span>
               <span className="sm:hidden flex flex-col items-center leading-tight">
-                <span>🌟 Assinar Premium</span>
+                <span>Assinar Premium</span>
                 <span>R$ 29,90/mês</span>
               </span>
             </button>
@@ -1134,9 +1134,9 @@ export default function DashboardContent() {
         <PageTransition>
           <div className="bg-gradient-to-r from-yellow-900/30 to-orange-900/30 border-2 border-yellow-500/50 rounded-2xl p-6 mt-8">
           <div className="text-center">
-            <div className="text-4xl mb-4">⭐</div>
+            <div className="text-4xl mb-4"></div>
             <h3 className="text-2xl font-bold text-white mb-3">
-              {userPlan === 'premium' ? 'Você é Premium! 🎉' : 'Veja o que o Premium oferece! ⭐'}
+              {userPlan === 'premium' ? 'Você é Premium!' : 'Veja o que o Premium oferece!'}
             </h3>
             <p className="text-gray-300 mb-6 max-w-3xl mx-auto">
               {userPlan === 'premium' 
@@ -1147,23 +1147,23 @@ export default function DashboardContent() {
             
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 mb-6">
               <div className="bg-gray-900/50 rounded-lg p-3">
-                <div className="text-yellow-400 text-sm font-semibold">💬 Conversas IA</div>
+                <div className="text-yellow-400 text-sm font-semibold">Conversas IA</div>
                 <div className="text-white font-bold">Ilimitadas</div>
               </div>
               <div className="bg-gray-900/50 rounded-lg p-3">
-                <div className="text-yellow-400 text-sm font-semibold">🎯 Trilhas</div>
+                <div className="text-yellow-400 text-sm font-semibold">Trilhas</div>
                 <div className="text-white font-bold">Todas</div>
               </div>
               <div className="bg-gray-900/50 rounded-lg p-3">
-                <div className="text-yellow-400 text-sm font-semibold">🔍 Filtros</div>
+                <div className="text-yellow-400 text-sm font-semibold">Filtros</div>
                 <div className="text-white font-bold">Todos os Níveis</div>
               </div>
               <div className="bg-gray-900/50 rounded-lg p-3">
-                <div className="text-yellow-400 text-sm font-semibold">🎮 Exercícios</div>
+                <div className="text-yellow-400 text-sm font-semibold">Exercícios</div>
                 <div className="text-white font-bold">Todos</div>
               </div>
               <div className="bg-gray-900/50 rounded-lg p-3">
-                <div className="text-yellow-400 text-sm font-semibold">⭐ Favoritos</div>
+                <div className="text-yellow-400 text-sm font-semibold">Favoritos</div>
                 <div className="text-white font-bold">Ilimitados</div>
               </div>
               <div className="bg-gray-900/50 rounded-lg p-3">
@@ -1171,17 +1171,17 @@ export default function DashboardContent() {
                 <div className="text-white font-bold">Pronúncia IA</div>
               </div>
               <div className="bg-gray-900/50 rounded-lg p-3">
-                <div className="text-yellow-400 text-sm font-semibold">📊 Progresso</div>
+                <div className="text-yellow-400 text-sm font-semibold">Progresso</div>
                 <div className="text-white font-bold">Estatísticas</div>
               </div>
               <div className="bg-gray-900/50 rounded-lg p-3">
-                <div className="text-yellow-400 text-sm font-semibold">🚀 Experiência</div>
+                <div className="text-yellow-400 text-sm font-semibold">Experiência</div>
                 <div className="text-white font-bold">Sem Anúncios</div>
               </div>
             </div>
 
             <p className="text-gray-500 text-sm">
-              Obrigado por ser um usuário Premium! 🚀
+              Obrigado por ser um usuário Premium!
             </p>
           </div>
           </div>
@@ -1202,7 +1202,7 @@ export default function DashboardContent() {
                 <div className="bg-gray-900/40 backdrop-blur-sm rounded-full h-full w-full"></div>
               </div>
               <span className="relative px-6 py-3 text-white font-semibold transition-all duration-300 group-hover:scale-105 inline-block backdrop-blur-sm rounded-full">
-                💼 Inglês para Trabalho
+                Inglês para Trabalho
               </span>
             </Link>
             <Link 
@@ -1214,7 +1214,7 @@ export default function DashboardContent() {
                 <div className="bg-gray-900/40 backdrop-blur-sm rounded-full h-full w-full"></div>
               </div>
               <span className="relative px-6 py-3 text-white font-semibold transition-all duration-300 group-hover:scale-105 inline-block backdrop-blur-sm rounded-full">
-                ✈️ Inglês para Viagens
+                Inglês para Viagens
               </span>
             </Link>
             <Link 
@@ -1226,7 +1226,7 @@ export default function DashboardContent() {
                 <div className="bg-gray-900/40 backdrop-blur-sm rounded-full h-full w-full"></div>
               </div>
               <span className="relative px-6 py-3 text-white font-semibold transition-all duration-300 group-hover:scale-105 inline-block backdrop-blur-sm rounded-full">
-                🤖 Conversar com IA
+                Conversar com IA
               </span>
             </Link>
           </div>
@@ -1251,7 +1251,7 @@ export default function DashboardContent() {
                 className="bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded-lg text-gray-300 text-sm transition-colors"
                 onClick={() => alert('Suporte será implementado em breve!')}
               >
-                💬 Suporte
+                Suporte
               </button>
               <button 
                 className="bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded-lg text-gray-300 text-sm transition-colors"

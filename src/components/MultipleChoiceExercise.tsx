@@ -55,7 +55,7 @@ export default function MultipleChoiceExercise({
     <div className="bg-gray-900/50 border border-gray-700 rounded-xl p-6">
       <div className="mb-6">
         <h3 className="text-base sm:text-lg font-semibold text-white mb-2">
-          🎯 Múltipla Escolha
+          Múltipla Escolha
         </h3>
         <p className="text-gray-400 text-sm">
           Escolha a alternativa correta.

@@ -200,16 +200,16 @@ export default function LevelTestPage() {
                   {getLevelDescription(testResult.level)}
                 </p>
 
-                <div className="flex gap-4 justify-center">
+                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center max-w-md mx-auto">
                   <Link 
                     href="/dashboard"
-                    className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 px-8 py-3 rounded-full text-white font-bold transition-all duration-300"
+                    className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 px-6 sm:px-8 py-3 rounded-full text-white font-semibold text-sm sm:text-base transition-all duration-300 text-center"
                   >
-                    Começar Trilhas Progressivas
+                    Começar Trilhas
                   </Link>
                   <button
                     onClick={retakeTest}
-                    className="bg-gray-700 hover:bg-gray-600 px-8 py-3 rounded-full text-white font-bold transition-colors"
+                    className="bg-gray-700 hover:bg-gray-600 px-6 sm:px-8 py-3 rounded-full text-white font-semibold text-sm sm:text-base transition-colors"
                   >
                     Refazer Teste
                   </button>
@@ -250,7 +250,7 @@ export default function LevelTestPage() {
         <div className="max-w-4xl mx-auto p-6 flex items-center justify-center min-h-[80vh]">
           <PageTransition delay={200}>
             <div className="bg-gray-900/50 border border-gray-700 rounded-xl p-8 text-center max-w-2xl">
-              <div className="text-6xl mb-6">🎯</div>
+              <div className="text-6xl mb-6"></div>
               <h1 className="text-3xl font-bold text-white mb-4">
                 Teste de Nível de Inglês
               </h1>
@@ -274,7 +274,7 @@ export default function LevelTestPage() {
                 onClick={startTest}
                 className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 px-8 py-4 rounded-full text-white font-bold text-lg transition-all duration-300 transform hover:scale-105"
               >
-                🚀 Começar Teste
+                Começar Teste
               </button>
             </div>
           </PageTransition>

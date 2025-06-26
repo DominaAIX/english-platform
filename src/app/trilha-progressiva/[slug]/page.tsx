@@ -12,7 +12,7 @@ import CompleteSentenceExercise from '@/components/CompleteSentenceExercise'
 import TranslationExercise from '@/components/TranslationExercise'
 import MultipleChoiceExercise from '@/components/MultipleChoiceExercise'
 import FinalCertificationTest from '@/components/FinalCertificationTest'
-import { SpeakerIcon } from '@/components/ModernIcons'
+import { SpeakerIcon, WorkIcon, TravelIcon } from '@/components/ModernIcons'
 import {
   PROGRESSIVE_TRAILS_DATA,
   ProgressiveStep,
@@ -339,40 +339,48 @@ function ProgressiveTrailClient({ trailData, slug }: { trailData: any, slug: str
     <AnimatedContainer className="min-h-screen">
       {/* Header */}
       <PageTransition delay={0}>
-        <header className="bg-gray-900/50 border-b border-gray-700 p-4">
-          <div className="max-w-7xl mx-auto flex justify-between items-center">
-            <button 
-              onClick={handleLogoClick}
-              className="flex items-center gap-3 hover:opacity-80 transition-opacity"
-            >
-              <Logo size="sm" />
-              <span className="text-white font-bold">Inglês pra Já</span>
-            </button>
+        <header className="bg-gray-900/50 border-b border-gray-700 p-3 sm:p-4">
+          <div className="max-w-7xl mx-auto">
+            {/* Top row */}
+            <div className="flex justify-between items-center mb-2 sm:mb-0">
+              <button 
+                onClick={handleLogoClick}
+                className="flex items-center gap-2 hover:opacity-80 transition-opacity"
+              >
+                <Logo size="sm" />
+                <span className="text-white font-bold text-sm sm:text-base whitespace-nowrap">Inglês pra Já</span>
+              </button>
+              
+              <div className="flex items-center gap-2 sm:gap-4">
+                <Link 
+                  href="/dashboard"
+                  className="bg-gray-700 hover:bg-gray-600 px-3 sm:px-4 py-2 rounded-full text-white font-semibold transition-colors text-xs sm:text-sm flex items-center gap-1"
+                >
+                  <span>←</span>
+                  <span className="hidden sm:inline">Dashboard</span>
+                </Link>
+                
+                <div className="w-8 h-8 rounded-full bg-gradient-to-r from-purple-500 to-cyan-500 flex items-center justify-center text-white font-bold text-sm">
+                  {user?.email?.charAt(0).toUpperCase() || 'U'}
+                </div>
+              </div>
+            </div>
             
-            <div className="flex items-center gap-4">
+            {/* Bottom row on mobile, inline on desktop */}
+            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center">
+              <div className="text-xs sm:text-sm text-gray-400 mb-2 sm:mb-0">
+                Passo {currentStepIndex + 1} de {progressiveSteps.length}
+              </div>
+              
               {/* Contador para usuários free */}
               {userPlan === 'free' && !freeLimitations.isBlocked && (
-                <div className="bg-blue-900/20 border border-blue-500/30 rounded-lg px-3 py-2">
+                <div className="bg-blue-900/20 border border-blue-500/30 rounded-lg px-2 sm:px-3 py-1 sm:py-2">
                   <div className="text-blue-400 text-xs font-medium">🆓 Plano Gratuito</div>
-                  <div className="text-white text-sm font-bold">
+                  <div className="text-white text-xs sm:text-sm font-bold">
                     {freeLimitations.phrasesUsed}/{freeLimitations.maxPhrases} frases hoje
                   </div>
                 </div>
               )}
-              
-              <Link 
-                href="/dashboard"
-                className="bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-full text-white font-semibold transition-colors text-sm"
-              >
-                ← Dashboard
-              </Link>
-              
-              <div className="text-sm text-gray-400">
-                Passo {currentStepIndex + 1} de {progressiveSteps.length}
-              </div>
-              <div className="w-8 h-8 rounded-full bg-gradient-to-r from-purple-500 to-cyan-500 flex items-center justify-center text-white font-bold text-sm">
-                {user?.email?.charAt(0).toUpperCase() || 'U'}
-              </div>
             </div>
           </div>
         </header>
@@ -382,8 +390,16 @@ function ProgressiveTrailClient({ trailData, slug }: { trailData: any, slug: str
         {/* Trail Header */}
         <PageTransition delay={200}>
           <div className="text-center mb-8">
-            <div className="text-6xl mb-4">{trailData.icon}</div>
-            <h1 className="text-3xl font-bold text-white mb-2">
+            <div className="mb-4 flex justify-center">
+              {slug === 'trabalho' ? (
+                <WorkIcon size={64} className="text-cyan-400" />
+              ) : slug === 'viagens' ? (
+                <TravelIcon size={64} className="text-emerald-400" />
+              ) : (
+                <span className="text-6xl">{trailData.icon}</span>
+              )}
+            </div>
+            <h1 className="text-2xl sm:text-3xl font-bold text-white mb-2">
               {trailData.title} - Trilha Progressiva
             </h1>
             <p className="text-gray-400 mb-4">
@@ -520,7 +536,7 @@ function ProgressiveTrailClient({ trailData, slug }: { trailData: any, slug: str
                           </h2>
                           <button
                             onClick={() => speakPhrase(currentStep.phrase.english)}
-                            className="bg-purple-600 hover:bg-purple-700 p-2 rounded-full transition-colors flex items-center justify-center"
+                            className="bg-purple-600 hover:bg-purple-700 w-8 h-8 rounded-full transition-colors flex items-center justify-center flex-shrink-0"
                             title="Ouvir pronúncia"
                           >
                             <SpeakerIcon size={16} className="text-white" />
