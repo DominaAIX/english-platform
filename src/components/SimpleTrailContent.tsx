@@ -50,6 +50,7 @@ export default function SimpleTrailContent({ trail, userPlan, slug }: SimpleTrai
   const [favoritePhrases, setFavoritePhrases] = useState<number[]>([])
   const [favoritesLoading, setFavoritesLoading] = useState(false)
   const [favoriteMessage, setFavoriteMessage] = useState<string>('')
+  const [showFavoriteHint, setShowFavoriteHint] = useState(false)
   const [freeLimitations, setFreeLimitations] = useState<FreeLimitationStatus>({
     isBlocked: false,
     phrasesUsed: 0,
@@ -371,29 +372,41 @@ export default function SimpleTrailContent({ trail, userPlan, slug }: SimpleTrai
           <div className="relative bg-gradient-to-br from-gray-900/50 to-gray-800/50 border border-gray-700/50 rounded-xl p-8 mb-8">
             {/* Estrela de favorito no canto superior direito - apenas para premium */}
             {actualUserPlan === 'premium' && (
-              <button
-                onClick={handleToggleFavorite}
-                disabled={favoritesLoading}
-                className={`absolute top-4 right-4 p-3 rounded-full transition-all duration-300 transform hover:scale-110 shadow-lg ${
-                  favoritePhrases.includes(currentPhraseIndex)
-                    ? 'bg-yellow-500/30 text-yellow-400 hover:bg-yellow-500/40 shadow-yellow-500/20'
-                    : 'bg-gray-700/70 text-gray-400 hover:bg-gray-600/70 hover:text-yellow-400 shadow-black/20'
-                } ${favoritesLoading ? 'animate-pulse opacity-70' : ''}`}
-                title={favoritePhrases.includes(currentPhraseIndex) ? 'Remover dos favoritos' : 'Adicionar aos favoritos'}
-              >
-                {favoritesLoading ? (
-                  <div className="w-6 h-6 border-2 border-current border-t-transparent rounded-full animate-spin" />
-                ) : (
-                  <StarIcon 
-                    size={24} 
-                    className={`transition-all duration-300 ${
-                      favoritePhrases.includes(currentPhraseIndex) 
-                        ? 'fill-current text-yellow-400 drop-shadow-sm' 
-                        : 'text-gray-400'
-                    }`} 
-                  />
-                )}
-              </button>
+              <div className="absolute top-4 right-4 flex items-center gap-2">
+                {/* Texto discreto que aparece no hover */}
+                <span 
+                  className={`text-gray-400 text-sm font-medium transition-all duration-300 whitespace-nowrap ${
+                    showFavoriteHint ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-2 pointer-events-none'
+                  }`}
+                >
+                  {favoritePhrases.includes(currentPhraseIndex) ? 'Remover favorito' : 'Favoritar essa mensagem'}
+                </span>
+                <button
+                  onClick={handleToggleFavorite}
+                  disabled={favoritesLoading}
+                  onMouseEnter={() => setShowFavoriteHint(true)}
+                  onMouseLeave={() => setShowFavoriteHint(false)}
+                  className={`p-3 rounded-full transition-all duration-300 transform hover:scale-110 shadow-lg ${
+                    favoritePhrases.includes(currentPhraseIndex)
+                      ? 'bg-yellow-500/30 text-yellow-400 hover:bg-yellow-500/40 shadow-yellow-500/20'
+                      : 'bg-gray-700/70 text-gray-400 hover:bg-gray-600/70 hover:text-yellow-400 shadow-black/20'
+                  } ${favoritesLoading ? 'animate-pulse opacity-70' : ''}`}
+                  title={favoritePhrases.includes(currentPhraseIndex) ? 'Remover dos favoritos' : 'Favoritar essa mensagem'}
+                >
+                  {favoritesLoading ? (
+                    <div className="w-6 h-6 border-2 border-current border-t-transparent rounded-full animate-spin" />
+                  ) : (
+                    <StarIcon 
+                      size={24} 
+                      className={`transition-all duration-300 ${
+                        favoritePhrases.includes(currentPhraseIndex) 
+                          ? 'fill-current text-yellow-400 drop-shadow-sm' 
+                          : 'text-gray-400'
+                      }`} 
+                    />
+                  )}
+                </button>
+              </div>
             )}
 
             <div className="text-center">
@@ -460,9 +473,61 @@ export default function SimpleTrailContent({ trail, userPlan, slug }: SimpleTrai
           </div>
         </PageTransition>
 
+        {/* Lista de Frases Favoritadas - apenas para premium */}
+        {actualUserPlan === 'premium' && favoritePhrases.length > 0 && (
+          <PageTransition delay={600}>
+            <div className="mt-8">
+              <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                <StarIcon size={24} className="text-yellow-400" />
+                Suas Frases Favoritas ({favoritePhrases.length})
+              </h3>
+              <div className="grid gap-3">
+                {favoritePhrases.map((phraseIndex) => {
+                  const phrase = availablePhrases[phraseIndex]
+                  if (!phrase) return null
+                  return (
+                    <div 
+                      key={phraseIndex}
+                      onClick={() => setCurrentPhraseIndex(phraseIndex)}
+                      className={`p-4 rounded-lg border cursor-pointer transition-all duration-200 hover:scale-[1.02] ${
+                        phraseIndex === currentPhraseIndex 
+                          ? 'border-yellow-500 bg-yellow-900/20 shadow-lg shadow-yellow-500/10' 
+                          : 'border-gray-700 bg-gray-800/30 hover:border-gray-600 hover:bg-gray-800/50'
+                      }`}
+                    >
+                      <div className="flex items-center justify-between">
+                        <div className="flex-1">
+                          <p className="text-white font-medium mb-1">{phrase.english}</p>
+                          <p className="text-gray-400 text-sm mb-2">{phrase.portuguese}</p>
+                          <div className="flex items-center gap-2">
+                            <span className={`px-2 py-1 rounded text-xs font-medium ${
+                              phrase.level === 'básico' ? 'bg-green-500/20 text-green-400' :
+                              phrase.level === 'médio' ? 'bg-yellow-500/20 text-yellow-400' :
+                              'bg-red-500/20 text-red-400'
+                            }`}>
+                              {phrase.level}
+                            </span>
+                            <span className="text-gray-400 text-sm">{phrase.context}</span>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          {phraseIndex === currentPhraseIndex && (
+                            <span className="text-blue-400 text-sm font-medium">← Atual</span>
+                          )}
+                          <StarIcon size={18} className="text-yellow-400" />
+                        </div>
+                      </div>
+                    </div>
+                  )
+                })}
+              </div>
+            </div>
+          </PageTransition>
+        )}
+
         {/* Aviso para usuários free */}
         {actualUserPlan === 'free' && (
-          <PageTransition delay={600}>
+          <PageTransition delay={700}>
             <div className="mt-8 bg-gradient-to-r from-purple-900/30 to-cyan-900/30 border border-purple-500/30 rounded-xl p-6 text-center">
               <h3 className="text-lg font-bold text-white mb-2">🌟 Upgrade para Premium</h3>
               <p className="text-gray-300 mb-4">
