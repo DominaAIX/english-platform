@@ -284,7 +284,7 @@ export default function ChatContent() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="h-full flex flex-col">
       {/* Header */}
       <PageTransition delay={0}>
         <header className="bg-gray-900/50 border-b border-gray-700 p-4 flex-shrink-0">

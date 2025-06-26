@@ -133,10 +133,10 @@ export default function LevelTestPage() {
 
   if (showResult && testResult) {
     return (
-      <AnimatedContainer className="min-h-screen">
+      <AnimatedContainer className="h-screen overflow-hidden flex flex-col">
         {/* Header */}
         <PageTransition delay={0}>
-          <header className="bg-gray-900/50 border-b border-gray-700 p-4">
+          <header className="bg-gray-900/50 border-b border-gray-700 p-4 flex-shrink-0">
             <div className="max-w-4xl mx-auto flex justify-between items-center">
               <button 
                 onClick={handleLogoClick}
@@ -156,7 +156,8 @@ export default function LevelTestPage() {
           </header>
         </PageTransition>
 
-        <div className="max-w-4xl mx-auto p-6">
+        <div className="flex-1 overflow-y-auto">
+          <div className="max-w-4xl mx-auto p-6 min-h-full flex flex-col justify-center">
           <PageTransition delay={200}>
             <div className="text-center mb-8">
               <div className="text-6xl mb-4">{getLevelIcon(testResult.level)}</div>
@@ -217,6 +218,7 @@ export default function LevelTestPage() {
               </div>
             </div>
           </PageTransition>
+          </div>
         </div>
       </AnimatedContainer>
     )
@@ -224,10 +226,10 @@ export default function LevelTestPage() {
 
   if (!hasStarted) {
     return (
-      <AnimatedContainer className="min-h-screen">
+      <AnimatedContainer className="h-screen overflow-hidden flex flex-col">
         {/* Header */}
         <PageTransition delay={0}>
-          <header className="bg-gray-900/50 border-b border-gray-700 p-4">
+          <header className="bg-gray-900/50 border-b border-gray-700 p-4 flex-shrink-0">
             <div className="max-w-4xl mx-auto flex justify-between items-center">
               <button 
                 onClick={handleLogoClick}
@@ -247,7 +249,8 @@ export default function LevelTestPage() {
           </header>
         </PageTransition>
 
-        <div className="max-w-4xl mx-auto p-6 flex items-center justify-center min-h-[80vh]">
+        <div className="flex-1 overflow-y-auto flex items-center justify-center">
+          <div className="max-w-4xl mx-auto p-6 w-full">
           <PageTransition delay={200}>
             <div className="bg-gray-900/50 border border-gray-700 rounded-xl p-8 text-center max-w-2xl">
               <div className="text-6xl mb-6"></div>
@@ -278,16 +281,17 @@ export default function LevelTestPage() {
               </button>
             </div>
           </PageTransition>
+          </div>
         </div>
       </AnimatedContainer>
     )
   }
 
   return (
-    <AnimatedContainer className="min-h-screen">
+    <AnimatedContainer className="h-screen overflow-hidden flex flex-col">
       {/* Header */}
       <PageTransition delay={0}>
-        <header className="bg-gray-900/50 border-b border-gray-700 p-4">
+        <header className="bg-gray-900/50 border-b border-gray-700 p-4 flex-shrink-0">
           <div className="max-w-4xl mx-auto flex justify-between items-center">
             <button 
               onClick={handleLogoClick}
@@ -304,7 +308,8 @@ export default function LevelTestPage() {
         </header>
       </PageTransition>
 
-      <div className="max-w-4xl mx-auto p-6">
+      <div className="flex-1 overflow-y-auto">
+        <div className="max-w-4xl mx-auto p-6 min-h-full flex flex-col">
         {/* Progress Bar */}
         <PageTransition delay={200}>
           <div className="mb-8">
@@ -400,6 +405,7 @@ export default function LevelTestPage() {
             </button>
           </div>
         </PageTransition>
+        </div>
       </div>
     </AnimatedContainer>
   )

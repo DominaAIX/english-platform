@@ -152,7 +152,7 @@ export default function CertificacaoA1A2Page() {
 
   if (!isPremium) {
     return (
-      <AnimatedContainer className="min-h-screen">
+      <AnimatedContainer className="h-screen overflow-hidden flex flex-col">
         <PageTransition delay={0}>
           <header className="bg-gray-900/50 border-b border-gray-700 p-4">
             <div className="max-w-4xl mx-auto flex justify-between items-center">
@@ -200,7 +200,7 @@ export default function CertificacaoA1A2Page() {
   }
 
   return (
-    <AnimatedContainer className="min-h-screen">
+    <AnimatedContainer className="h-screen overflow-hidden flex flex-col">
       {/* Header */}
       <PageTransition delay={0}>
         <header className="bg-gray-900/50 border-b border-gray-700 p-4">
