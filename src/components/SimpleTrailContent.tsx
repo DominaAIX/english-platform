@@ -49,6 +49,7 @@ export default function SimpleTrailContent({ trail, userPlan, slug }: SimpleTrai
   const [isPlayingAudio, setIsPlayingAudio] = useState(false)
   const [favoritePhrases, setFavoritePhrases] = useState<number[]>([])
   const [favoritesLoading, setFavoritesLoading] = useState(false)
+  const [favoriteMessage, setFavoriteMessage] = useState<string>('')
   const [freeLimitations, setFreeLimitations] = useState<FreeLimitationStatus>({
     isBlocked: false,
     phrasesUsed: 0,
@@ -147,42 +148,72 @@ export default function SimpleTrailContent({ trail, userPlan, slug }: SimpleTrai
   }
 
   const handleToggleFavorite = async () => {
-    if (!user || !slug || actualUserPlan !== 'premium' || !currentPhrase) return
+    if (!user || !slug || actualUserPlan !== 'premium' || !currentPhrase) {
+      console.log('Favoritos: Verificação falhou', { user: !!user, slug, actualUserPlan, currentPhrase: !!currentPhrase })
+      return
+    }
+
+    console.log('Tentando alterar favorito:', { phraseIndex: currentPhraseIndex, userId: user.id, slug })
 
     const phraseIndex = currentPhraseIndex
     const isCurrentlyFavorite = favoritePhrases.includes(phraseIndex)
 
-    // Atualizar estado local imediatamente
+    console.log('Estado atual:', { isCurrentlyFavorite, favoritePhrases })
+
+    setFavoritesLoading(true)
+    setFavoriteMessage('')
+
+    // Atualizar estado local imediatamente para feedback visual
     setFavoritePhrases(prev => {
-      if (isCurrentlyFavorite) {
-        return prev.filter(index => index !== phraseIndex)
-      } else {
-        return [...prev, phraseIndex]
-      }
+      const newState = isCurrentlyFavorite 
+        ? prev.filter(index => index !== phraseIndex)
+        : [...prev, phraseIndex]
+      console.log('Novo estado local:', newState)
+      return newState
     })
 
     // Salvar no banco de dados
     try {
+      let result
       if (isCurrentlyFavorite) {
-        await removeFromFavorites(user.id, slug, phraseIndex)
+        result = await removeFromFavorites(user.id, slug, phraseIndex)
+        console.log('Resultado remoção:', result)
+        if (result) {
+          setFavoriteMessage('⭐ Removido dos favoritos')
+        }
       } else {
-        await addToFavorites(user.id, {
+        result = await addToFavorites(user.id, {
           trail_slug: slug,
           phrase_index: phraseIndex,
           phrase_english: currentPhrase.english,
           phrase_portuguese: currentPhrase.portuguese
         })
+        console.log('Resultado adição:', result)
+        if (result) {
+          setFavoriteMessage('⭐ Adicionado aos favoritos!')
+        }
+      }
+      
+      if (!result) {
+        throw new Error('Operação falhou')
       }
     } catch (error) {
       console.error('Erro ao salvar favorito:', error)
+      setFavoriteMessage('❌ Erro ao salvar favorito')
+      
       // Reverter estado local se houver erro
       setFavoritePhrases(prev => {
-        if (isCurrentlyFavorite) {
-          return [...prev, phraseIndex]
-        } else {
-          return prev.filter(index => index !== phraseIndex)
-        }
+        return isCurrentlyFavorite 
+          ? [...prev, phraseIndex]
+          : prev.filter(index => index !== phraseIndex)
       })
+    } finally {
+      setFavoritesLoading(false)
+      
+      // Limpar mensagem após 3 segundos
+      setTimeout(() => {
+        setFavoriteMessage('')
+      }, 3000)
     }
   }
 
@@ -337,9 +368,36 @@ export default function SimpleTrailContent({ trail, userPlan, slug }: SimpleTrai
 
         {/* Frase Principal */}
         <PageTransition delay={400}>
-          <div className="bg-gradient-to-br from-gray-900/50 to-gray-800/50 border border-gray-700/50 rounded-xl p-8 mb-8">
+          <div className="relative bg-gradient-to-br from-gray-900/50 to-gray-800/50 border border-gray-700/50 rounded-xl p-8 mb-8">
+            {/* Estrela de favorito no canto superior direito - apenas para premium */}
+            {actualUserPlan === 'premium' && (
+              <button
+                onClick={handleToggleFavorite}
+                disabled={favoritesLoading}
+                className={`absolute top-4 right-4 p-3 rounded-full transition-all duration-300 transform hover:scale-110 shadow-lg ${
+                  favoritePhrases.includes(currentPhraseIndex)
+                    ? 'bg-yellow-500/30 text-yellow-400 hover:bg-yellow-500/40 shadow-yellow-500/20'
+                    : 'bg-gray-700/70 text-gray-400 hover:bg-gray-600/70 hover:text-yellow-400 shadow-black/20'
+                } ${favoritesLoading ? 'animate-pulse opacity-70' : ''}`}
+                title={favoritePhrases.includes(currentPhraseIndex) ? 'Remover dos favoritos' : 'Adicionar aos favoritos'}
+              >
+                {favoritesLoading ? (
+                  <div className="w-6 h-6 border-2 border-current border-t-transparent rounded-full animate-spin" />
+                ) : (
+                  <StarIcon 
+                    size={24} 
+                    className={`transition-all duration-300 ${
+                      favoritePhrases.includes(currentPhraseIndex) 
+                        ? 'fill-current text-yellow-400 drop-shadow-sm' 
+                        : 'text-gray-400'
+                    }`} 
+                  />
+                )}
+              </button>
+            )}
+
             <div className="text-center">
-              <h2 className="text-2xl font-bold text-white mb-4">
+              <h2 className="text-2xl font-bold text-white mb-4 pr-12">
                 {currentPhrase.english}
               </h2>
               
@@ -365,27 +423,18 @@ export default function SimpleTrailContent({ trail, userPlan, slug }: SimpleTrai
                 >
                   {showTranslation ? 'Ocultar' : 'Ver Tradução'}
                 </button>
-
-                {/* Botão de favorito - apenas para premium */}
-                {actualUserPlan === 'premium' && (
-                  <button
-                    onClick={handleToggleFavorite}
-                    disabled={favoritesLoading}
-                    className={`px-6 py-2 rounded-full font-semibold transition-colors flex items-center gap-2 ${
-                      favoritePhrases.includes(currentPhraseIndex)
-                        ? 'bg-yellow-600 hover:bg-yellow-700 text-white'
-                        : 'bg-gray-600 hover:bg-gray-700 text-white'
-                    }`}
-                  >
-                    <StarIcon size={20} />
-                    {favoritePhrases.includes(currentPhraseIndex) ? 'Favoritado' : 'Favoritar'}
-                  </button>
-                )}
               </div>
               
               <div className="text-sm text-gray-400">
                 Contexto: {currentPhrase.context} • Nível: {currentPhrase.level}
               </div>
+              
+              {/* Mensagem de feedback para favoritos */}
+              {favoriteMessage && (
+                <div className="mt-4 px-4 py-2 rounded-lg bg-blue-900/20 border border-blue-500/30 text-blue-300 text-center text-sm font-medium animate-fade-in">
+                  {favoriteMessage}
+                </div>
+              )}
             </div>
           </div>
         </PageTransition>
