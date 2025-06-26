@@ -377,25 +377,6 @@ export default function LevelTestPage() {
               ))}
             </div>
 
-            {/* Feedback after answer */}
-            {showAnswerFeedback && (
-              <div className={`mt-6 p-4 rounded-lg ${
-                currentSelectedAnswer === currentQuestion.correctAnswer 
-                  ? 'bg-green-900/30 border border-green-500/30' 
-                  : 'bg-red-900/30 border border-red-500/30'
-              }`}>
-                <div className="flex items-center gap-3">
-                  <span className="text-2xl">
-                    {currentSelectedAnswer === currentQuestion.correctAnswer ? '✅' : '❌'}
-                  </span>
-                  <span className={`font-semibold ${
-                    currentSelectedAnswer === currentQuestion.correctAnswer ? 'text-green-400' : 'text-red-400'
-                  }`}>
-                    {currentSelectedAnswer === currentQuestion.correctAnswer ? 'Resposta Correta!' : 'Resposta Incorreta!'}
-                  </span>
-                </div>
-              </div>
-            )}
           </div>
         </PageTransition>
 

@@ -103,37 +103,6 @@ export default function CompleteSentenceExercise({
         </div>
       </div>
 
-      {/* Resultado */}
-      {showResult && (
-        <div className={`mb-6 p-4 rounded-lg ${
-          isCorrect 
-            ? 'bg-green-900/30 border border-green-500/30' 
-            : 'bg-red-900/30 border border-red-500/30'
-        }`}>
-          <div className="flex items-center gap-3 mb-2">
-            <span className="text-2xl">
-              {isCorrect ? '✅' : '❌'}
-            </span>
-            <span className={`font-semibold ${
-              isCorrect ? 'text-green-400' : 'text-red-400'
-            }`}>
-              {isCorrect ? 'Correto!' : 'Incorreto!'}
-            </span>
-          </div>
-          
-          {!isCorrect && (
-            <div className="text-gray-300 text-sm">
-              <p>A resposta correta é: <strong>{exerciseData.options[exerciseData.correctAnswer]}</strong></p>
-            </div>
-          )}
-          
-          {isCorrect && (
-            <div className="text-green-300 text-sm">
-              Excelente! Você completou a frase corretamente.
-            </div>
-          )}
-        </div>
-      )}
 
       {/* Botões de ação */}
       <div className="flex gap-3 justify-center">

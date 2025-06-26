@@ -179,34 +179,14 @@ export default function DragDropExercise({ exercise, onComplete }: DragDropExerc
         </button>
       </div>
 
-      {/* Feedback */}
+      {/* Feedback Visual */}
       {isCompleted && (
-        <div className={`mt-4 p-4 rounded-lg ${
+        <div className={`mt-4 p-4 rounded-lg border-2 ${
           isCorrect 
-            ? 'bg-green-900/30 border border-green-500/50 text-green-300' 
-            : 'bg-red-900/30 border border-red-500/50 text-red-300'
+            ? 'bg-green-900/30 border-green-500/50' 
+            : 'bg-red-900/30 border-red-500/50'
         }`}>
-          {isCorrect ? (
-            <div>
-              <div className="flex items-center gap-2 mb-2">
-                <span className="text-2xl">🎉</span>
-                <span className="font-semibold">Parabéns! Resposta correta!</span>
-              </div>
-              <div className="text-sm text-gray-300">
-                "{exercise.correctSentence}"
-              </div>
-            </div>
-          ) : (
-            <div>
-              <div className="flex items-center gap-2 mb-2">
-                <span className="text-2xl">❌</span>
-                <span className="font-semibold">Tente novamente!</span>
-              </div>
-              <div className="text-sm text-gray-300">
-                Resposta correta: "{exercise.correctSentence}"
-              </div>
-            </div>
-          )}
+          {/* Apenas feedback visual por cor */}
         </div>
       )}
     </div>

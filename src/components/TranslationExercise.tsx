@@ -149,52 +149,6 @@ export default function TranslationExercise({
         </div>
       )}
 
-      {/* Resultado */}
-      {showResult && !showMinimalFeedback && (
-        <div className={`mb-6 p-4 rounded-lg ${
-          isCorrect 
-            ? 'bg-green-900/30 border border-green-500/30' 
-            : 'bg-red-900/30 border border-red-500/30'
-        }`}>
-          <div className="flex items-center justify-center gap-3">
-            <span className="text-4xl">
-              {isCorrect ? '✅' : '❌'}
-            </span>
-            <span className={`font-semibold ${
-              isCorrect ? 'text-green-400' : 'text-red-400'
-            }`}>
-              {isCorrect ? 'Tradução Correta!' : 'Tradução Incorreta!'}
-            </span>
-          </div>
-          
-          {!isCorrect && (
-            <div className="space-y-2 mt-3">
-              <div className="text-gray-300 text-sm">
-                <p><strong>Sua resposta:</strong> {userAnswer}</p>
-              </div>
-              <div className="text-green-300 text-sm">
-                <p><strong>Resposta correta:</strong> {exerciseData.correctEnglish}</p>
-              </div>
-              {exerciseData.alternatives && exerciseData.alternatives.length > 0 && (
-                <div className="text-gray-300 text-sm">
-                  <p><strong>Outras respostas aceitas:</strong></p>
-                  <ul className="list-disc list-inside ml-2">
-                    {exerciseData.alternatives.map((alt, index) => (
-                      <li key={index}>{alt}</li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-            </div>
-          )}
-          
-          {isCorrect && (
-            <div className="text-green-300 text-sm mt-3">
-              Perfeito! Sua tradução está correta.
-            </div>
-          )}
-        </div>
-      )}
 
       {/* Botões de ação */}
       <div className="flex gap-3 justify-center">

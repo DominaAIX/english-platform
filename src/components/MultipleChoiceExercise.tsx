@@ -137,46 +137,6 @@ export default function MultipleChoiceExercise({
         </div>
       </div>
 
-      {/* Resultado */}
-      {showResult && !showMinimalFeedback && (
-        <div className={`mb-6 p-4 rounded-lg ${
-          isCorrect 
-            ? 'bg-green-900/30 border border-green-500/30' 
-            : 'bg-red-900/30 border border-red-500/30'
-        }`}>
-          <div className="flex items-center justify-center gap-3">
-            <span className="text-4xl">
-              {isCorrect ? '✅' : '❌'}
-            </span>
-            <span className={`font-semibold ${
-              isCorrect ? 'text-green-400' : 'text-red-400'
-            }`}>
-              {isCorrect ? 'Resposta Correta!' : 'Resposta Incorreta!'}
-            </span>
-          </div>
-          
-          {!isCorrect && (
-            <div className="text-gray-300 text-sm mb-2 mt-3">
-              <p>A resposta correta é: <strong>{String.fromCharCode(65 + exerciseData.correctAnswer)}. {exerciseData.options[exerciseData.correctAnswer]}</strong></p>
-            </div>
-          )}
-          
-          {exerciseData.explanation && (
-            <div className="bg-gray-800/50 rounded-lg p-3 mt-3">
-              <div className="text-cyan-400 text-sm font-medium mb-1">💡 Explicação:</div>
-              <div className="text-gray-300 text-sm">
-                {exerciseData.explanation}
-              </div>
-            </div>
-          )}
-          
-          {isCorrect && (
-            <div className="text-green-300 text-sm mt-3">
-              Excelente! Você escolheu a alternativa correta.
-            </div>
-          )}
-        </div>
-      )}
 
       {/* Botões de ação */}
       <div className="flex gap-3 justify-center">
