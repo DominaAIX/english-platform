@@ -21,9 +21,14 @@ export function useRequiredLevelTest() {
     const testResult = localStorage.getItem(`level_test_${user.id}`)
     const userLevel = localStorage.getItem(`user_level_${user.id}`)
     
+    console.log('🔍 Verificando teste para user:', user.id)
+    console.log('📋 Test result:', !!testResult, 'User level:', !!userLevel)
+    
     if (testResult && userLevel) {
+      console.log('✅ Usuário já fez o teste')
       setHasCompletedTest(true)
     } else {
+      console.log('❌ Usuário precisa fazer o teste')
       setHasCompletedTest(false)
     }
     

@@ -385,12 +385,46 @@ export default function DashboardContent() {
                 </p>
               </div>
 
-              <Link 
-                href="/teste-nivel"
-                className="bg-gradient-to-r from-yellow-600 to-orange-600 hover:from-yellow-700 hover:to-orange-700 px-8 py-4 rounded-full text-white font-bold text-lg transition-all duration-300 transform hover:scale-105 inline-block"
-              >
-                Fazer Teste de Nível Agora
-              </Link>
+              {/* Verificar se há inconsistência - usuário fez teste mas hook não detectou */}
+              {(() => {
+                if (user?.id) {
+                  const testResult = localStorage.getItem(`level_test_${user.id}`)
+                  const userLevel = localStorage.getItem(`user_level_${user.id}`)
+                  
+                  if (testResult && userLevel) {
+                    // Há inconsistência - usuário já fez teste mas needsLevelTest=true
+                    return (
+                      <div className="space-y-4">
+                        <Link 
+                          href="/teste-nivel?show=result"
+                          className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 px-8 py-4 rounded-full text-white font-bold text-lg transition-all duration-300 transform hover:scale-105 inline-block"
+                        >
+                          Ver Meu Resultado
+                        </Link>
+                        <button
+                          onClick={() => window.location.reload()}
+                          className="bg-gray-600 hover:bg-gray-500 px-6 py-2 rounded-full text-white font-semibold text-sm transition-colors"
+                        >
+                          Atualizar Página
+                        </button>
+                        <p className="text-gray-400 text-sm">
+                          Você já completou o teste de nível. Se ainda está vendo esta tela, clique em "Atualizar Página".
+                        </p>
+                      </div>
+                    )
+                  }
+                }
+                
+                // Caso normal - usuário realmente precisa fazer o teste
+                return (
+                  <Link 
+                    href="/teste-nivel"
+                    className="bg-gradient-to-r from-yellow-600 to-orange-600 hover:from-yellow-700 hover:to-orange-700 px-8 py-4 rounded-full text-white font-bold text-lg transition-all duration-300 transform hover:scale-105 inline-block"
+                  >
+                    Fazer Teste de Nível Agora
+                  </Link>
+                )
+              })()}
             </div>
           </div>
         </PageTransition>

@@ -121,9 +121,17 @@ export default function LevelTestPage() {
 
     // Salvar resultado
     if (user) {
+      console.log('💾 Salvando teste para user:', user.id)
       localStorage.setItem(`level_test_${user.id}`, JSON.stringify(result))
       // Salvar nível no perfil do usuário
       localStorage.setItem(`user_level_${user.id}`, level)
+      
+      // Verificar se foi salvo corretamente
+      const savedTest = localStorage.getItem(`level_test_${user.id}`)
+      const savedLevel = localStorage.getItem(`user_level_${user.id}`)
+      console.log('✅ Teste salvo:', !!savedTest, 'Nível salvo:', !!savedLevel)
+    } else {
+      console.error('❌ User não encontrado ao salvar teste')
     }
 
     setTestResult(result)
