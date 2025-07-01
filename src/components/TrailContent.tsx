@@ -318,7 +318,7 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
       </header>
       </PageTransition>
 
-      <div className="max-w-4xl mx-auto p-4">
+      <div className="max-w-4xl mx-auto p-2 sm:p-4">
         {/* Mensagem de limite global para usuários free */}
         {actualUserPlan === 'free' && !isPremium && hasReachedLimit && (
           <GlobalLimitMessage 
@@ -330,39 +330,39 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
 
         {/* Trail Header */}
         <PageTransition delay={200}>
-          <div className="relative mb-3">
+          <div className="relative mb-2">
             {/* Indicação de nível no canto superior direito */}
-            <div className="absolute top-0 right-0">
-              <span className="bg-green-500/20 text-green-300 px-3 py-1 rounded-full text-xs font-medium">
+            <div className="absolute top-0 right-0 sm:static sm:float-right sm:ml-2">
+              <span className="bg-green-500/20 text-green-300 px-2 py-1 rounded-full text-xs font-medium">
                 🟢 Iniciante
               </span>
             </div>
             
-            <div className="flex items-start gap-3">
+            <div className="flex items-start gap-2 sm:gap-3">
               {/* Ícone menor à esquerda */}
-              <div className="flex-shrink-0 mt-1">
+              <div className="flex-shrink-0">
                 {slug && iconMapping[slug] ? (() => {
                   const IconComponent = iconMapping[slug].component;
-                  return <IconComponent size={32} className={iconMapping[slug].color} />;
+                  return <IconComponent size={24} className={`${iconMapping[slug].color} sm:w-8 sm:h-8`} />;
                 })() : (
-                  <div className="text-2xl">{trail.icon}</div>
+                  <div className="text-xl sm:text-2xl">{trail.icon}</div>
                 )}
               </div>
               
               {/* Conteúdo principal */}
-              <div className="flex-1 text-left">
-                <h1 className="text-xl font-bold text-white mb-1">{trail.title}</h1>
-                <p className="text-gray-400 mb-2 text-sm">{trail.description}</p>
+              <div className="flex-1 text-left pr-16 sm:pr-0">
+                <h1 className="text-lg sm:text-xl font-bold text-white mb-1">{trail.title}</h1>
+                <p className="text-gray-400 mb-1 text-xs sm:text-sm hidden sm:block">{trail.description}</p>
                 
                 {/* Progress Bar */}
-                <div className="w-full bg-gray-700 rounded-full h-2 mb-1">
+                <div className="w-full bg-gray-700 rounded-full h-1.5 sm:h-2 mb-1">
                   <div 
-                    className="bg-gradient-to-r from-purple-500 to-cyan-400 h-2 rounded-full transition-all duration-300"
+                    className="bg-gradient-to-r from-purple-500 to-cyan-400 h-1.5 sm:h-2 rounded-full transition-all duration-300"
                     style={{ width: `${progress}%` }}
                   />
                 </div>
                 <div className="text-xs text-gray-400">
-                  Progresso: {Math.round(progress)}%
+                  {Math.round(progress)}%
                 </div>
               </div>
             </div>
@@ -370,12 +370,12 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
           
           {/* Filtro e Estatísticas por Nível - Apenas Premium */}
           {actualUserPlan === 'premium' && (
-            <div className="mt-2 space-y-1">
+            <div className="mt-1 sm:mt-2 space-y-1">
               {/* Botões de Filtro */}
-              <div className="flex flex-wrap gap-2 justify-center">
+              <div className="flex flex-wrap gap-1 sm:gap-2 justify-center">
                 <button
                   onClick={() => handleLevelChange('todas')}
-                  className={`px-3 py-2 rounded-lg text-xs font-medium transition-all duration-300 backdrop-blur-sm border ${
+                  className={`px-2 py-1 sm:px-3 sm:py-2 rounded text-xs font-medium transition-all duration-300 backdrop-blur-sm border ${
                     selectedLevel === 'todas' 
                       ? 'bg-gradient-to-r from-purple-500/30 to-cyan-500/30 border-purple-400/50 text-white shadow-lg shadow-purple-500/20 scale-105' 
                       : 'bg-white/5 border-white/10 text-gray-300 hover:bg-white/10 hover:border-white/20 hover:text-white hover:scale-102'
@@ -387,7 +387,7 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
                 </button>
                 <button
                   onClick={() => handleLevelChange('básico')}
-                  className={`px-3 py-2 rounded-lg text-xs font-medium transition-all duration-300 backdrop-blur-sm border ${
+                  className={`px-2 py-1 sm:px-3 sm:py-2 rounded text-xs font-medium transition-all duration-300 backdrop-blur-sm border ${
                     selectedLevel === 'básico' 
                       ? 'bg-gradient-to-r from-green-500/30 to-emerald-500/30 border-green-400/50 text-white shadow-lg shadow-green-500/20 scale-105' 
                       : 'bg-green-500/10 border-green-500/20 text-green-300 hover:bg-green-500/20 hover:border-green-400/40 hover:text-green-200 hover:scale-102'
@@ -399,7 +399,7 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
                 </button>
                 <button
                   onClick={() => handleLevelChange('médio')}
-                  className={`px-3 py-2 rounded-lg text-xs font-medium transition-all duration-300 backdrop-blur-sm border ${
+                  className={`px-2 py-1 sm:px-3 sm:py-2 rounded text-xs font-medium transition-all duration-300 backdrop-blur-sm border ${
                     selectedLevel === 'médio' 
                       ? 'bg-gradient-to-r from-yellow-500/30 to-orange-500/30 border-yellow-400/50 text-white shadow-lg shadow-yellow-500/20 scale-105' 
                       : 'bg-yellow-500/10 border-yellow-500/20 text-yellow-300 hover:bg-yellow-500/20 hover:border-yellow-400/40 hover:text-yellow-200 hover:scale-102'
@@ -411,7 +411,7 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
                 </button>
                 <button
                   onClick={() => handleLevelChange('avançado')}
-                  className={`px-3 py-2 rounded-lg text-xs font-medium transition-all duration-300 backdrop-blur-sm border ${
+                  className={`px-2 py-1 sm:px-3 sm:py-2 rounded text-xs font-medium transition-all duration-300 backdrop-blur-sm border ${
                     selectedLevel === 'avançado' 
                       ? 'bg-gradient-to-r from-red-500/30 to-pink-500/30 border-red-400/50 text-white shadow-lg shadow-red-500/20 scale-105' 
                       : 'bg-red-500/10 border-red-500/20 text-red-300 hover:bg-red-500/20 hover:border-red-400/40 hover:text-red-200 hover:scale-102'
