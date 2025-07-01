@@ -3445,3 +3445,53 @@ function generateWorkTrailProgressiveSteps(
   
   return steps
 }
+
+// Funções para gerenciar progressão de níveis
+export function getNextLevel(currentLevel: 'beginner' | 'intermediate' | 'advanced'): 'intermediate' | 'advanced' | null {
+  switch (currentLevel) {
+    case 'beginner':
+      return 'intermediate'
+    case 'intermediate':
+      return 'advanced'
+    case 'advanced':
+      return null // Já é o nível máximo
+  }
+}
+
+export function getLevelName(level: 'beginner' | 'intermediate' | 'advanced'): string {
+  switch (level) {
+    case 'beginner':
+      return 'Básico'
+    case 'intermediate':
+      return 'Intermediário'
+    case 'advanced':
+      return 'Avançado'
+  }
+}
+
+export function getRequiredTrailsForLevel(level: 'beginner' | 'intermediate' | 'advanced'): string[] {
+  switch (level) {
+    case 'beginner':
+      return ['trabalho'] // Precisa completar trilha trabalho para ir para intermediário
+    case 'intermediate':
+      return ['trabalho'] // Ainda usando trabalho como base, pode expandir para outras trilhas
+    case 'advanced':
+      return ['trabalho'] // Mesmo para avançado
+    default:
+      return ['trabalho']
+  }
+}
+
+export function canUserAdvanceToNextLevel(userId: string, currentLevel: 'beginner' | 'intermediate' | 'advanced'): boolean {
+  const requiredTrails = getRequiredTrailsForLevel(currentLevel)
+  
+  for (const trailId of requiredTrails) {
+    const progress = localStorage.getItem(`progressiveTrail_${trailId}_${userId}`)
+    if (!progress) return false
+    
+    const trailProgress = JSON.parse(progress)
+    if (trailProgress.progressPercentage < 100) return false
+  }
+  
+  return true
+}

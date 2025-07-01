@@ -14,7 +14,7 @@ import { PROFESSIONS } from '@/data/professions'
 import { useRequiredLevelTest } from '@/hooks/useRequiredLevelTest'
 import { checkCertificationCooldown } from '@/utils/certificationCooldown'
 import { getFreeUsageStatus, FreeLimitationStatus, cleanupOldSystems } from '@/utils/freeLimitations'
-import { getUserLevel } from '@/data/progressiveTrails'
+import { getUserLevel, getNextLevel, getLevelName, canUserAdvanceToNextLevel } from '@/data/progressiveTrails'
 
 export default function DashboardContent() {
   const { user, userProfile } = useAuth()
@@ -32,15 +32,20 @@ export default function DashboardContent() {
     canAccess: true
   })
   const [userLevel, setUserLevel] = useState<'beginner' | 'intermediate' | 'advanced'>('beginner')
+  const [canAdvanceLevel, setCanAdvanceLevel] = useState(false)
   
   // Usar o plano real do usuário autenticado do userProfile
   const userPlan = userProfile?.plan || 'free'
 
-  // Carregar nível do usuário
+  // Carregar nível do usuário e verificar se pode avançar
   useEffect(() => {
     if (user?.id) {
       const level = getUserLevel(user.id)
       setUserLevel(level)
+      
+      // Verificar se pode avançar para próximo nível
+      const canAdvance = canUserAdvanceToNextLevel(user.id, level)
+      setCanAdvanceLevel(canAdvance)
     }
   }, [user?.id])
 
@@ -51,7 +56,15 @@ export default function DashboardContent() {
       if (basicTrailProgress) {
         const progress = JSON.parse(basicTrailProgress)
         // Verificar se completou 100% da trilha básica
-        setHasCompletedBasicTrail(progress.progressPercentage >= 100)
+        const completed = progress.progressPercentage >= 100
+        setHasCompletedBasicTrail(completed)
+        
+        // Reatualizar se pode avançar quando completar trilha
+        if (completed) {
+          const level = getUserLevel(user.id)
+          const canAdvance = canUserAdvanceToNextLevel(user.id, level)
+          setCanAdvanceLevel(canAdvance)
+        }
       }
     }
   }, [user?.id])
@@ -613,19 +626,42 @@ export default function DashboardContent() {
                         ? 'text-white' 
                         : 'text-gray-400'
                     }`}>
-                      Próximo Nível
+                      {(() => {
+                        const nextLevel = getNextLevel(userLevel)
+                        if (!nextLevel) return 'Nível Máximo'
+                        
+                        if (canAdvanceLevel && hasCompletedBasicTrail && !certificationBlocked.isBlocked) {
+                          return `Estou Pronto para o ${getLevelName(nextLevel)}!`
+                        } else {
+                          return `Meu Próximo Nível: ${getLevelName(nextLevel)}`
+                        }
+                      })()}
                     </h3>
                     <p className={`mb-6 leading-relaxed text-sm ${
                       hasCompletedBasicTrail && !certificationBlocked.isBlocked 
                         ? 'text-gray-300' 
                         : 'text-gray-500'
                     }`}>
-                      {!hasCompletedBasicTrail 
-                        ? 'Avance nas trilhas progressivas para desbloquear o teste de certificação e evoluir para o próximo nível.'
-                        : certificationBlocked.isBlocked 
-                        ? 'Seu teste está temporariamente indisponível. Use este tempo para revisar as frases e se preparar melhor.'
-                        : 'Teste seu domínio completo das frases A1/A2 e conquiste seu certificado oficial para avançar no aprendizado.'
-                      }
+                      {(() => {
+                        const nextLevel = getNextLevel(userLevel)
+                        if (!nextLevel) {
+                          return 'Parabéns! Você já atingiu o nível máximo de inglês na nossa plataforma.'
+                        }
+                        
+                        if (!hasCompletedBasicTrail) {
+                          return `Complete a trilha de trabalho para desbloquear o teste de certificação e evoluir para o nível ${getLevelName(nextLevel)}.`
+                        }
+                        
+                        if (certificationBlocked.isBlocked) {
+                          return 'Seu teste está temporariamente indisponível. Use este tempo para revisar as frases e se preparar melhor.'
+                        }
+                        
+                        if (canAdvanceLevel) {
+                          return `Você completou todos os requisitos! Faça o teste de certificação para avançar para o nível ${getLevelName(nextLevel)}.`
+                        }
+                        
+                        return `Continue praticando para desbloquear o teste de certificação do nível ${getLevelName(nextLevel)}.`
+                      })()}
                     </p>
                     <div className="flex flex-wrap gap-2 justify-center mb-6">
                       {hasCompletedBasicTrail && !certificationBlocked.isBlocked ? (
@@ -657,12 +693,20 @@ export default function DashboardContent() {
                       ? 'text-emerald-400 group-hover:text-emerald-300' 
                       : 'text-gray-500'
                   }`}>
-                    {hasCompletedBasicTrail && !certificationBlocked.isBlocked 
-                      ? 'Fazer Teste →' 
-                      : !hasCompletedBasicTrail 
-                      ? 'Continue Estudando' 
-                      : 'Aguarde Liberação'
-                    }
+                    {(() => {
+                      const nextLevel = getNextLevel(userLevel)
+                      if (!nextLevel) return 'Nível Máximo Atingido'
+                      
+                      if (hasCompletedBasicTrail && !certificationBlocked.isBlocked) {
+                        return canAdvanceLevel 
+                          ? `Fazer Teste para ${getLevelName(nextLevel)} →`
+                          : 'Fazer Teste →'
+                      } else if (!hasCompletedBasicTrail) {
+                        return 'Continue Estudando'
+                      } else {
+                        return 'Aguarde Liberação'
+                      }
+                    })()}
                   </div>
                 </div>
               </div>
