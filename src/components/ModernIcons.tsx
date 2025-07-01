@@ -835,3 +835,75 @@ export const LightBulbIcon = ({ className = "", size = 20 }: IconProps) => (
     />
   </svg>
 )
+
+export const LevelBarsIcon = ({ className = "", size = 20 }: IconProps) => (
+  <svg 
+    width={size} 
+    height={size} 
+    viewBox="0 0 24 24" 
+    fill="none" 
+    className={className}
+  >
+    {/* Barra baixa */}
+    <rect 
+      x="3" 
+      y="15" 
+      width="4" 
+      height="6" 
+      fill="currentColor" 
+      fillOpacity="0.3"
+      rx="1"
+    />
+    {/* Barra média */}
+    <rect 
+      x="10" 
+      y="10" 
+      width="4" 
+      height="11" 
+      fill="currentColor" 
+      fillOpacity="0.2"
+      rx="1"
+    />
+    {/* Barra alta */}
+    <rect 
+      x="17" 
+      y="5" 
+      width="4" 
+      height="16" 
+      fill="currentColor" 
+      fillOpacity="0.1"
+      rx="1"
+    />
+    {/* Bordas */}
+    <rect 
+      x="3" 
+      y="15" 
+      width="4" 
+      height="6" 
+      stroke="currentColor" 
+      strokeWidth="1.5" 
+      fill="none"
+      rx="1"
+    />
+    <rect 
+      x="10" 
+      y="10" 
+      width="4" 
+      height="11" 
+      stroke="currentColor" 
+      strokeWidth="1.5" 
+      fill="none"
+      rx="1"
+    />
+    <rect 
+      x="17" 
+      y="5" 
+      width="4" 
+      height="16" 
+      stroke="currentColor" 
+      strokeWidth="1.5" 
+      fill="none"
+      rx="1"
+    />
+  </svg>
+)
