@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import Logo from './Logo'
 import { useAuth } from '@/contexts/AuthContext'
@@ -365,7 +366,15 @@ export default function ChatContent() {
                 }`}>
                   <div className="flex items-start gap-3">
                     {message.role === 'assistant' && (
-                      <div className="text-2xl">🤖</div>
+                      <div className="w-8 h-8 flex-shrink-0">
+                        <Image
+                          src="/images/robot-cute.png"
+                          alt="Robô Tutor AI"
+                          width={32}
+                          height={32}
+                          className="object-contain"
+                        />
+                      </div>
                     )}
                     <div className="flex-1">
                       <p className="leading-relaxed whitespace-pre-line">{message.content}</p>
@@ -408,7 +417,15 @@ export default function ChatContent() {
               <div className="flex justify-start">
                 <div className="bg-gray-800/50 border border-gray-700 p-4 rounded-2xl">
                   <div className="flex items-center gap-3">
-                    <div className="text-2xl">🤖</div>
+                    <div className="w-8 h-8 flex-shrink-0">
+                      <Image
+                        src="/images/robot-cute.png"
+                        alt="Robô Tutor AI"
+                        width={32}
+                        height={32}
+                        className="object-contain"
+                      />
+                    </div>
                     <div className="flex space-x-1">
                       <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
                       <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
