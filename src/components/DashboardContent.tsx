@@ -519,7 +519,19 @@ export default function DashboardContent() {
                   <div className="text-center flex-1 flex flex-col justify-between">
                     <div>
                       <div className="mb-6 group-hover:scale-110 transition-transform duration-300 flex justify-center">
-                        <span className="text-7xl">{hasCompletedTest ? '📊' : '🎯'}</span>
+                        {hasCompletedTest ? (
+                          <div className="w-20 h-20 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center shadow-lg">
+                            <svg className="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
+                              <path d="M12 2L15.09 8.26L22 9L17 14L18.18 21L12 17.77L5.82 21L7 14L2 9L8.91 8.26L12 2Z"/>
+                            </svg>
+                          </div>
+                        ) : (
+                          <div className="w-20 h-20 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center shadow-lg">
+                            <svg className="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
+                              <path d="M12 2C13.1 2 14 2.9 14 4C14 5.1 13.1 6 12 6C10.9 6 10 5.1 10 4C10 2.9 10.9 2 12 2ZM21 9V7L15 1L13 3L17.4 7.4L10.6 14.2L7.4 10.8L3 15.2L4.4 16.6L9 12L12.6 15.6L20.6 7.6C20.9 7.3 21 6.9 21 6.5V9H21Z"/>
+                            </svg>
+                          </div>
+                        )}
                       </div>
                       <h3 className="text-2xl font-bold text-white mb-4">
                         {hasCompletedTest ? 'Meu Nível' : 'Teste de Nível'}
