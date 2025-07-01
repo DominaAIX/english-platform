@@ -336,7 +336,7 @@ function ProgressiveTrailClient({ trailData, slug }: { trailData: any, slug: str
   const progress = userProgress ? userProgress.progressPercentage : 0
 
   return (
-    <AnimatedContainer className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900/20 to-cyan-900/20 flex flex-col">
+    <AnimatedContainer className="min-h-screen flex flex-col">
       {/* Header */}
       <PageTransition delay={0}>
         <header className="bg-black/20 backdrop-blur-sm border-b border-white/10 p-3 flex-shrink-0">
@@ -391,37 +391,24 @@ function ProgressiveTrailClient({ trailData, slug }: { trailData: any, slug: str
         {/* Trail Header INCRÍVEL */}
         <PageTransition delay={200}>
           <div className="text-center mb-8">
-            {/* Ícone com animação impressionante */}
-            <div className="relative mb-6">
-              <div className="absolute inset-0 animate-ping">
-                {slug === 'trabalho' ? (
-                  <WorkIcon size={80} className="text-cyan-400/20 mx-auto" />
-                ) : slug === 'viagens' ? (
-                  <TravelIcon size={80} className="text-emerald-400/20 mx-auto" />
-                ) : (
-                  <div className="text-8xl opacity-20 flex justify-center">{trailData.icon}</div>
-                )}
-              </div>
-              <div className="relative animate-bounce">
-                {slug === 'trabalho' ? (
-                  <WorkIcon size={80} className="text-cyan-400 mx-auto" />
-                ) : slug === 'viagens' ? (
-                  <TravelIcon size={80} className="text-emerald-400 mx-auto" />
-                ) : (
-                  <div className="text-8xl flex justify-center">{trailData.icon}</div>
-                )}
-              </div>
+            {/* Ícone menor e simples */}
+            <div className="mb-4 flex justify-center">
+              {slug === 'trabalho' ? (
+                <WorkIcon size={48} className="text-cyan-400" />
+              ) : slug === 'viagens' ? (
+                <TravelIcon size={48} className="text-emerald-400" />
+              ) : (
+                <span className="text-5xl">{trailData.icon}</span>
+              )}
             </div>
             
-            {/* Título celebrativo estilo teste de nível */}
+            {/* Título mais leve */}
             <div className="mb-6">
-              <h1 className="text-3xl sm:text-4xl font-black text-white mb-2 bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
-                {trailData.title} 🎆
+              <h1 className="text-2xl sm:text-3xl font-semibold text-white mb-2 bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
+                {trailData.title}
               </h1>
-              <h2 className="text-xl sm:text-2xl font-bold text-white">
-                Trilha <span className="bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent font-extrabold">
-                  Progressiva
-                </span>
+              <h2 className="text-lg sm:text-xl font-medium text-gray-300">
+                Trilha Progressiva
               </h2>
             </div>
             
@@ -442,18 +429,15 @@ function ProgressiveTrailClient({ trailData, slug }: { trailData: any, slug: str
               </span>
             </div>
             
-            {/* Progress Bar impressionante */}
-            <div className="relative mb-4">
-              <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-cyan-400 rounded-full blur-md opacity-30"></div>
-              <div className="relative w-full bg-white/10 backdrop-blur-sm rounded-full h-4 border border-white/20">
-                <div 
-                  className="bg-gradient-to-r from-purple-500 to-cyan-400 h-4 rounded-full transition-all duration-500 shadow-lg"
-                  style={{ width: `${progress}%` }}
-                />
-              </div>
+            {/* Progress Bar simples */}
+            <div className="w-full bg-gray-700 rounded-full h-3 mb-4">
+              <div 
+                className="bg-gradient-to-r from-purple-500 to-cyan-400 h-3 rounded-full transition-all duration-300"
+                style={{ width: `${progress}%` }}
+              />
             </div>
-            <div className="text-lg font-bold text-white">
-              Progresso: <span className="bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">{Math.round(progress)}%</span>
+            <div className="text-sm text-gray-400">
+              Progresso: {Math.round(progress)}%
             </div>
           </div>
         </PageTransition>
@@ -566,8 +550,8 @@ function ProgressiveTrailClient({ trailData, slug }: { trailData: any, slug: str
                       {/* English Phrase */}
                       <div className="mb-6">
                         <div className="flex items-center gap-3 mb-3">
-                          <h2 className="text-2xl font-bold text-white flex items-center gap-2">
-                            🇺🇸 English
+                          <h2 className="text-xl font-semibold text-white">
+                            English
                           </h2>
                           <button
                             onClick={() => speakPhrase(currentStep.phrase.english)}
@@ -579,7 +563,7 @@ function ProgressiveTrailClient({ trailData, slug }: { trailData: any, slug: str
                         </div>
                         <div className="relative">
                           <div className="absolute inset-0 bg-gradient-to-r from-purple-500/5 to-cyan-500/5 rounded-2xl blur-xl"></div>
-                          <p className="relative text-xl text-white leading-relaxed bg-white/5 backdrop-blur-sm p-6 rounded-2xl border border-white/10">
+                          <p className="relative text-lg text-white leading-relaxed bg-white/5 backdrop-blur-sm p-6 rounded-2xl border border-white/10">
                             {currentStep.phrase.english}
                           </p>
                         </div>
@@ -1042,12 +1026,6 @@ function ProgressiveTrailClient({ trailData, slug }: { trailData: any, slug: str
         />
       )}
       
-      {/* Decoração de fundo incrível */}
-      <div className="fixed inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-purple-500/5 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-cyan-500/5 rounded-full blur-3xl"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-purple-500/3 to-cyan-500/3 rounded-full blur-3xl"></div>
-      </div>
     </AnimatedContainer>
   )
 }
