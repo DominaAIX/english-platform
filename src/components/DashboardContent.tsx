@@ -741,13 +741,16 @@ export default function DashboardContent() {
               <div className="text-center flex-1 flex flex-col justify-between">
                 <div>
                   <div className="mb-6 group-hover:scale-110 transition-transform duration-300 flex justify-center">
-                    <div className="relative w-18 h-18 rounded-full overflow-hidden shadow-lg">
+                    <div className="relative w-18 h-18 flex items-center justify-center">
                       <Image
                         src="/images/robot-cute.png"
                         alt="Robô Tutor AI Super Fofo"
                         width={72}
                         height={72}
-                        className="object-cover w-full h-full"
+                        className="object-contain"
+                        style={{
+                          filter: 'drop-shadow(0 4px 12px rgba(0, 0, 0, 0.15)) drop-shadow(0 0 8px rgba(147, 197, 253, 0.2))',
+                        }}
                         priority
                       />
                     </div>
