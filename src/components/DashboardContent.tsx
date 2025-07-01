@@ -10,7 +10,7 @@ import { useAuth } from '@/contexts/AuthContext'
 import { useStats } from '@/contexts/StatsContext'
 import PageTransition from './PageTransition'
 import AnimatedContainer from './AnimatedContainer'
-import { WorkIcon, InterviewIcon, TravelIcon, BusinessIcon, CasualIcon, RestaurantIcon, ShoppingIcon, RobotIcon, LearningTrailIcon, ConversationIcon, TargetIcon, AudioIcon, GrammarIcon } from './ModernIcons'
+import { WorkIcon, InterviewIcon, TravelIcon, BusinessIcon, CasualIcon, RestaurantIcon, ShoppingIcon, RobotIcon, LearningTrailIcon, ConversationIcon, TargetIcon, AudioIcon, GrammarIcon, StarIcon } from './ModernIcons'
 import { PROFESSIONS } from '@/data/professions'
 import { useRequiredLevelTest } from '@/hooks/useRequiredLevelTest'
 import { checkCertificationCooldown } from '@/utils/certificationCooldown'
@@ -520,9 +520,7 @@ export default function DashboardContent() {
                     <div>
                       <div className="mb-6 group-hover:scale-110 transition-transform duration-300 flex justify-center">
                         {hasCompletedTest ? (
-                          <svg className="w-16 h-16 text-yellow-400" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2L15.09 8.26L22 9L17 14L18.18 21L12 17.77L5.82 21L7 14L2 9L8.91 8.26L12 2Z"/>
-                          </svg>
+                          <StarIcon size={64} className="text-yellow-400" />
                         ) : (
                           <TargetIcon size={64} className="text-yellow-400" />
                         )}
