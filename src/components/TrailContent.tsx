@@ -296,7 +296,7 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
     <AnimatedContainer className="min-h-screen">
       {/* Header ultra-compacto para mobile - v2 */}
       <PageTransition delay={0}>
-        <header className="sticky top-0 z-50 bg-gray-900/90 backdrop-blur-md border-b border-gray-700/50 p-2 md:p-3">
+        <header className="sticky top-0 z-50 bg-red-900/90 backdrop-blur-md border-b border-red-700/50 p-1 md:p-3">
           <div className="max-w-4xl mx-auto flex justify-between items-center">
             <button 
               onClick={handleLogoClick}
@@ -322,7 +322,7 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
       </header>
       </PageTransition>
 
-      <div className="max-w-4xl mx-auto p-1 sm:p-2 md:p-4">
+      <div className="max-w-4xl mx-auto p-0 sm:p-2 md:p-4">
         {/* Mensagem de limite global para usuários free */}
         {actualUserPlan === 'free' && !isPremium && hasReachedLimit && (
           <GlobalLimitMessage 
@@ -335,22 +335,22 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
         {/* Trail Header ultra-compacto */}
         <PageTransition delay={200}>
           <div className="mb-1 sm:mb-2">
-            {/* Layout mobile: linha única super compacta */}
-            <div className="flex items-center justify-between gap-2 mb-1 sm:hidden">
+            {/* Layout mobile: SUPER COMPACTO VERMELHO */}
+            <div className="flex items-center justify-between gap-1 mb-0 sm:hidden bg-red-600/20 p-2 rounded">
               {/* Ícone + título em linha */}
-              <div className="flex items-center gap-2 flex-1 min-w-0">
+              <div className="flex items-center gap-1 flex-1 min-w-0">
                 {slug && iconMapping[slug] ? (() => {
                   const IconComponent = iconMapping[slug].component;
-                  return <IconComponent size={20} className={iconMapping[slug].color} />;
+                  return <IconComponent size={16} className={iconMapping[slug].color} />;
                 })() : (
-                  <div className="text-lg">{trail.icon}</div>
+                  <div className="text-sm">{trail.icon}</div>
                 )}
-                <h1 className="text-base font-bold text-white truncate">{trail.title}</h1>
+                <h1 className="text-sm font-bold text-white truncate">{trail.title}</h1>
               </div>
               
               {/* Badge nível compacto */}
-              <span className="bg-green-500/20 text-green-300 px-2 py-0.5 rounded-full text-xs font-medium whitespace-nowrap">
-                🟢 Iniciante
+              <span className="bg-green-500/20 text-green-300 px-1 py-0.5 rounded text-xs font-medium whitespace-nowrap">
+                🟢
               </span>
             </div>
             
@@ -379,14 +379,14 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
               </div>
             </div>
             
-            {/* Progress Bar unificado */}
-            <div className="w-full bg-gray-700 rounded-full h-1 sm:h-2 mb-1">
+            {/* Progress Bar unificado MUITO FINO EM MOBILE */}
+            <div className="w-full bg-gray-700 rounded-full h-0.5 sm:h-2 mb-0.5 sm:mb-1 mx-2 sm:mx-0">
               <div 
-                className="bg-gradient-to-r from-purple-500 to-cyan-400 h-1 sm:h-2 rounded-full transition-all duration-300"
+                className="bg-gradient-to-r from-red-500 to-orange-400 h-0.5 sm:h-2 rounded-full transition-all duration-300"
                 style={{ width: `${progress}%` }}
               />
             </div>
-            <div className="text-xs text-gray-400">
+            <div className="text-xs text-gray-400 px-2 sm:px-0">
               {Math.round(progress)}%
             </div>
           </div>
