@@ -296,23 +296,21 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
     <AnimatedContainer className="min-h-screen">
       {/* Header */}
       <PageTransition delay={0}>
-        <header className="bg-gray-900/50 border-b border-gray-700 p-4">
+        <header className="bg-gray-900/50 border-b border-gray-700 p-3">
           <div className="max-w-4xl mx-auto flex justify-between items-center">
             <button 
               onClick={handleLogoClick}
-              className="flex items-center gap-3 hover:opacity-80 transition-opacity"
+              className="flex items-center gap-2 hover:opacity-80 transition-opacity"
             >
-              <Logo size="sm" />
-              <span className="text-white font-bold">Inglês pra Já</span>
+              <Logo size="xs" />
+              <span className="text-white font-bold text-sm">Inglês pra Já</span>
             </button>
           
-          <div className="flex items-center gap-4">
-            
-            
-            <div className="text-sm text-gray-400">
+          <div className="flex items-center gap-3">
+            <div className="text-xs text-gray-400">
               {completedPhrases.length}/{availablePhrases.length} frases
             </div>
-            <div className="w-8 h-8 rounded-full bg-gradient-to-r from-purple-500 to-cyan-500 flex items-center justify-center text-white font-bold text-sm">
+            <div className="w-6 h-6 rounded-full bg-gradient-to-r from-purple-500 to-cyan-500 flex items-center justify-center text-white font-bold text-xs">
               {user?.email?.charAt(0).toUpperCase() || 'U'}
             </div>
           </div>
@@ -320,7 +318,7 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
       </header>
       </PageTransition>
 
-      <div className="max-w-4xl mx-auto p-6">
+      <div className="max-w-4xl mx-auto p-4">
         {/* Mensagem de limite global para usuários free */}
         {actualUserPlan === 'free' && !isPremium && hasReachedLimit && (
           <GlobalLimitMessage 
@@ -332,79 +330,79 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
 
         {/* Trail Header */}
         <PageTransition delay={200}>
-          <div className="text-center mb-8">
-          <div className="mb-4 flex justify-center">
+          <div className="text-center mb-4">
+          <div className="mb-2 flex justify-center">
             {slug && iconMapping[slug] ? (() => {
               const IconComponent = iconMapping[slug].component;
-              return <IconComponent size={72} className={iconMapping[slug].color} />;
+              return <IconComponent size={48} className={iconMapping[slug].color} />;
             })() : (
-              <div className="text-6xl">{trail.icon}</div>
+              <div className="text-4xl">{trail.icon}</div>
             )}
           </div>
-          <h1 className="text-3xl font-bold text-white mb-2">{trail.title}</h1>
-          <p className="text-gray-400 mb-6">{trail.description}</p>
+          <h1 className="text-2xl font-bold text-white mb-1">{trail.title}</h1>
+          <p className="text-gray-400 mb-3 text-sm">{trail.description}</p>
           
           {/* Progress Bar */}
-          <div className="w-full bg-gray-700 rounded-full h-2 mb-4">
+          <div className="w-full bg-gray-700 rounded-full h-2 mb-2">
             <div 
               className="bg-gradient-to-r from-purple-500 to-cyan-400 h-2 rounded-full transition-all duration-300"
               style={{ width: `${progress}%` }}
             />
           </div>
-          <div className="text-sm text-gray-400">
+          <div className="text-xs text-gray-400">
             Progresso: {Math.round(progress)}%
           </div>
           
           {/* Filtro e Estatísticas por Nível - Apenas Premium */}
           {actualUserPlan === 'premium' && (
-            <div className="mt-4 space-y-3">
+            <div className="mt-3 space-y-2">
               {/* Botões de Filtro */}
-              <div className="flex flex-wrap gap-3 justify-center">
+              <div className="flex flex-wrap gap-2 justify-center">
                 <button
                   onClick={() => handleLevelChange('todas')}
-                  className={`px-5 py-3 rounded-xl text-sm font-medium transition-all duration-300 backdrop-blur-sm border ${
+                  className={`px-3 py-2 rounded-lg text-xs font-medium transition-all duration-300 backdrop-blur-sm border ${
                     selectedLevel === 'todas' 
                       ? 'bg-gradient-to-r from-purple-500/30 to-cyan-500/30 border-purple-400/50 text-white shadow-lg shadow-purple-500/20 scale-105' 
                       : 'bg-white/5 border-white/10 text-gray-300 hover:bg-white/10 hover:border-white/20 hover:text-white hover:scale-102'
                   }`}
                 >
-                  <span className="flex items-center gap-2">
+                  <span className="flex items-center gap-1">
                     📚 <span>Todas</span>
                   </span>
                 </button>
                 <button
                   onClick={() => handleLevelChange('básico')}
-                  className={`px-5 py-3 rounded-xl text-sm font-medium transition-all duration-300 backdrop-blur-sm border ${
+                  className={`px-3 py-2 rounded-lg text-xs font-medium transition-all duration-300 backdrop-blur-sm border ${
                     selectedLevel === 'básico' 
                       ? 'bg-gradient-to-r from-green-500/30 to-emerald-500/30 border-green-400/50 text-white shadow-lg shadow-green-500/20 scale-105' 
                       : 'bg-green-500/10 border-green-500/20 text-green-300 hover:bg-green-500/20 hover:border-green-400/40 hover:text-green-200 hover:scale-102'
                   }`}
                 >
-                  <span className="flex items-center gap-2">
+                  <span className="flex items-center gap-1">
                     🟢 <span>Básico</span>
                   </span>
                 </button>
                 <button
                   onClick={() => handleLevelChange('médio')}
-                  className={`px-5 py-3 rounded-xl text-sm font-medium transition-all duration-300 backdrop-blur-sm border ${
+                  className={`px-3 py-2 rounded-lg text-xs font-medium transition-all duration-300 backdrop-blur-sm border ${
                     selectedLevel === 'médio' 
                       ? 'bg-gradient-to-r from-yellow-500/30 to-orange-500/30 border-yellow-400/50 text-white shadow-lg shadow-yellow-500/20 scale-105' 
                       : 'bg-yellow-500/10 border-yellow-500/20 text-yellow-300 hover:bg-yellow-500/20 hover:border-yellow-400/40 hover:text-yellow-200 hover:scale-102'
                   }`}
                 >
-                  <span className="flex items-center gap-2">
+                  <span className="flex items-center gap-1">
                     🟡 <span>Intermediário</span>
                   </span>
                 </button>
                 <button
                   onClick={() => handleLevelChange('avançado')}
-                  className={`px-5 py-3 rounded-xl text-sm font-medium transition-all duration-300 backdrop-blur-sm border ${
+                  className={`px-3 py-2 rounded-lg text-xs font-medium transition-all duration-300 backdrop-blur-sm border ${
                     selectedLevel === 'avançado' 
                       ? 'bg-gradient-to-r from-red-500/30 to-pink-500/30 border-red-400/50 text-white shadow-lg shadow-red-500/20 scale-105' 
                       : 'bg-red-500/10 border-red-500/20 text-red-300 hover:bg-red-500/20 hover:border-red-400/40 hover:text-red-200 hover:scale-102'
                   }`}
                 >
-                  <span className="flex items-center gap-2">
+                  <span className="flex items-center gap-1">
                     🔴 <span>Avançado</span>
                   </span>
                 </button>
@@ -413,8 +411,8 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
               {/* Indicador do filtro ativo */}
               {selectedLevel !== 'todas' && (
                 <div className="text-center">
-                  <div className="inline-flex items-center gap-3 bg-gradient-to-r from-purple-500/20 to-cyan-500/20 backdrop-blur-sm border border-purple-400/30 text-purple-300 px-5 py-3 rounded-xl text-sm font-medium shadow-lg shadow-purple-500/10">
-                    <span className="flex items-center gap-2">
+                  <div className="inline-flex items-center gap-2 bg-gradient-to-r from-purple-500/20 to-cyan-500/20 backdrop-blur-sm border border-purple-400/30 text-purple-300 px-3 py-2 rounded-lg text-xs font-medium shadow-lg shadow-purple-500/10">
+                    <span className="flex items-center gap-1">
                       🎯 <span>Filtrando:</span> 
                       <span className="text-white font-semibold">
                         {selectedLevel === 'médio' ? 'Intermediário' : selectedLevel.charAt(0).toUpperCase() + selectedLevel.slice(1)}
@@ -422,7 +420,7 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
                     </span>
                     <button
                       onClick={() => handleLevelChange('todas')}
-                      className="ml-2 p-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-purple-200 hover:text-white transition-all duration-200 hover:scale-110"
+                      className="ml-1 p-1 rounded bg-white/10 hover:bg-white/20 text-purple-200 hover:text-white transition-all duration-200 hover:scale-110"
                       title="Limpar filtro"
                     >
                       ✕
