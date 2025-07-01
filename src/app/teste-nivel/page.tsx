@@ -326,22 +326,22 @@ export default function LevelTestPage() {
         </PageTransition>
 
         <div className="flex-1 overflow-y-auto flex items-center justify-center">
-          <div className="max-w-4xl mx-auto p-6 w-full">
+          <div className="max-w-4xl mx-auto p-4 w-full">
           <PageTransition delay={200}>
-            <div className="bg-gray-900/50 border border-gray-700 rounded-xl p-8 text-center max-w-2xl">
-              <div className="text-6xl mb-6"></div>
-              <h1 className="text-3xl font-bold text-white mb-4">
+            <div className="bg-gray-900/50 border border-gray-700 rounded-xl p-6 text-center max-w-2xl mx-auto">
+              <div className="text-4xl mb-4">📚</div>
+              <h1 className="text-2xl font-bold text-white mb-3">
                 Teste de Nível de Inglês
               </h1>
-              <p className="text-gray-300 mb-6 text-lg">
-                Responda 15 perguntas rápidas para descobrirmos seu nível atual de inglês. 
+              <p className="text-gray-300 mb-4 text-base">
+                Responda 20 perguntas rápidas para descobrirmos seu nível atual de inglês. 
                 Com base no resultado, vamos personalizar suas trilhas de aprendizado!
               </p>
               
-              <div className="bg-gray-800/50 rounded-lg p-6 mb-6">
-                <h3 className="text-white font-semibold mb-4">📋 Como funciona:</h3>
-                <ul className="text-gray-300 space-y-2 text-left">
-                  <li>• 15 perguntas de múltipla escolha</li>
+              <div className="bg-gray-800/50 rounded-lg p-4 mb-4">
+                <h3 className="text-white font-semibold mb-3 text-sm">📋 Como funciona:</h3>
+                <ul className="text-gray-300 space-y-1 text-left text-sm">
+                  <li>• 20 perguntas de múltipla escolha</li>
                   <li>• Questões de gramática, vocabulário e compreensão</li>
                   <li>• Níveis: Iniciante, Intermediário e Avançado</li>
                   <li>• Tempo estimado: 5-10 minutos</li>
@@ -351,7 +351,7 @@ export default function LevelTestPage() {
 
               <button 
                 onClick={startTest}
-                className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 px-8 py-4 rounded-full text-white font-bold text-lg transition-all duration-300 transform hover:scale-105"
+                className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 px-6 py-3 rounded-full text-white font-bold transition-all duration-300 transform hover:scale-105"
               >
                 Começar Teste
               </button>
@@ -388,7 +388,7 @@ export default function LevelTestPage() {
         <div className="max-w-4xl mx-auto p-6 min-h-full flex flex-col">
         {/* Progress Bar */}
         <PageTransition delay={200}>
-          <div className="mb-8">
+          <div className="mb-6">
             <div className="flex justify-between items-center mb-2">
               <span className="text-sm text-gray-400">Progresso do Teste</span>
               <span className="text-sm text-gray-400">{Math.round(progress)}%</span>
@@ -404,10 +404,10 @@ export default function LevelTestPage() {
 
         {/* Question */}
         <PageTransition delay={400}>
-          <div className="bg-gray-900/50 border border-gray-700 rounded-xl p-8 mb-8">
-            <div className="mb-6">
-              <div className="flex items-center gap-3 mb-4">
-                <span className={`px-3 py-1 rounded-full text-sm font-semibold ${
+          <div className="bg-gray-900/50 border border-gray-700 rounded-xl p-6 mb-6">
+            <div className="mb-4">
+              <div className="flex items-center gap-3 mb-3">
+                <span className={`px-2 py-1 rounded-full text-xs font-semibold ${
                   currentQuestion.difficulty === 'beginner' ? 'bg-green-500/20 text-green-400' :
                   currentQuestion.difficulty === 'intermediate' ? 'bg-yellow-500/20 text-yellow-400' :
                   'bg-red-500/20 text-red-400'
@@ -417,18 +417,18 @@ export default function LevelTestPage() {
                 </span>
               </div>
               
-              <h2 className="text-xl font-bold text-white mb-6">
+              <h2 className="text-lg font-bold text-white mb-4">
                 {currentQuestion.question}
               </h2>
             </div>
 
-            <div className="space-y-3">
+            <div className="space-y-2">
               {currentQuestion.options.map((option, index) => (
                 <button
                   key={index}
                   onClick={() => selectAnswer(index)}
                   disabled={showAnswerFeedback}
-                  className={`w-full p-4 rounded-lg text-left transition-all duration-200 ${
+                  className={`w-full p-3 rounded-lg text-left transition-all duration-200 ${
                     showAnswerFeedback && currentSelectedAnswer === index
                       ? currentSelectedAnswer === currentQuestion.correctAnswer
                         ? 'bg-green-600/30 border-2 border-green-400 text-green-300'
@@ -439,7 +439,7 @@ export default function LevelTestPage() {
                   } ${showAnswerFeedback ? 'cursor-not-allowed' : 'cursor-pointer'}`}
                 >
                   <div className="flex items-center gap-3">
-                    <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${
+                    <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
                       showAnswerFeedback && currentSelectedAnswer === index
                         ? currentSelectedAnswer === currentQuestion.correctAnswer
                           ? 'border-green-400 bg-green-600'
@@ -449,10 +449,10 @@ export default function LevelTestPage() {
                         : 'border-gray-500'
                     }`}>
                       {(selectedAnswers[currentQuestionIndex] === index || (showAnswerFeedback && currentSelectedAnswer === index)) && (
-                        <div className="w-3 h-3 bg-white rounded-full"></div>
+                        <div className="w-2 h-2 bg-white rounded-full"></div>
                       )}
                     </div>
-                    <span className="text-white font-medium">{option}</span>
+                    <span className="text-white font-medium text-sm">{option}</span>
                   </div>
                 </button>
               ))}
@@ -463,11 +463,11 @@ export default function LevelTestPage() {
 
         {/* Navigation */}
         <PageTransition delay={600}>
-          <div className="flex gap-4 justify-between">
+          <div className="flex gap-3 justify-between mt-4">
             <button
               onClick={previousQuestion}
               disabled={currentQuestionIndex === 0}
-              className="bg-gray-700 hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed px-6 py-3 rounded-full text-white font-semibold transition-colors"
+              className="bg-gray-700 hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed px-4 py-2 rounded-full text-white font-semibold text-sm transition-colors"
             >
               ← Anterior
             </button>
@@ -475,7 +475,7 @@ export default function LevelTestPage() {
             <button
               onClick={nextQuestion}
               disabled={!showAnswerFeedback}
-              className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 disabled:opacity-50 disabled:cursor-not-allowed px-6 py-3 rounded-full text-white font-semibold transition-all duration-300"
+              className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 disabled:opacity-50 disabled:cursor-not-allowed px-4 py-2 rounded-full text-white font-semibold text-sm transition-all duration-300"
             >
               {currentQuestionIndex === LEVEL_TEST_QUESTIONS.length - 1 ? 'Finalizar Teste' : 'Próxima →'}
             </button>
