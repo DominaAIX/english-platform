@@ -13,7 +13,7 @@ export default function Logo({ className = "", size = 'md' }: LogoProps) {
   return (
     <div className={`${sizes[size].container} flex items-center justify-center ${className}`}>
       <img 
-        src="/logo.png" 
+        src="/logo-new-design.png" 
         alt="Inglês pra Já"
         className={`${sizes[size].image} object-contain`}
       />
