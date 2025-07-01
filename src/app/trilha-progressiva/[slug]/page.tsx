@@ -722,7 +722,7 @@ function ProgressiveTrailClient({ trailData, slug }: { trailData: any, slug: str
                   {trailData.finalTest && (
                     <div className="bg-gray-800/30 border border-gray-600 rounded-xl p-4 mb-6">
                       <h3 className="text-white font-semibold text-lg mb-3 text-center">
-                        📋 Sobre o Exame de Certificação A1/A2
+                        📋 Sobre o Exame do Próximo Nível
                       </h3>
                       <div className="grid grid-cols-3 gap-4 text-center text-sm">
                         <div>

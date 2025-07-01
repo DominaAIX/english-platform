@@ -546,81 +546,123 @@ export default function DashboardContent() {
                 </div>
               </div>
 
-              {/* Teste de Certificação A1/A2 - SEMPRE APARECE, MAS BLOQUEADO ATÉ COMPLETAR TRILHA */}
-              <div className={`group bg-gradient-to-br from-blue-900/30 to-cyan-900/30 border-2 border-blue-500/30 rounded-3xl p-8 transition-all duration-300 h-full flex flex-col relative ${
+              {/* Próximo Nível - Exame de Certificação */}
+              <div className={`group relative overflow-hidden rounded-3xl transition-all duration-500 h-full flex flex-col ${
                 !hasCompletedBasicTrail || certificationBlocked.isBlocked
-                  ? 'opacity-60 cursor-not-allowed' 
-                  : 'hover:border-blue-400/50 cursor-pointer transform hover:scale-105'
+                  ? 'bg-gradient-to-br from-gray-800/40 to-gray-900/60 border-2 border-gray-600/30' 
+                  : 'bg-gradient-to-br from-emerald-900/30 via-teal-900/30 to-cyan-900/30 border-2 border-emerald-500/30 hover:border-emerald-400/50 cursor-pointer transform hover:scale-105 hover:shadow-2xl hover:shadow-emerald-500/20'
               }`}>
+                {/* Efeito de brilho animado quando disponível */}
+                {hasCompletedBasicTrail && !certificationBlocked.isBlocked && (
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -skew-x-12 transform translate-x-[-100%] group-hover:translate-x-[200%] transition-transform duration-1000"></div>
+                )}
+
                 {/* Link condicional */}
                 {hasCompletedBasicTrail && !certificationBlocked.isBlocked && (
                   <Link href="/certificacao-a1-a2" className="absolute inset-0 z-20" />
                 )}
 
-                {/* Overlay de bloqueio */}
+                {/* Estado bloqueado com design melhorado */}
                 {(!hasCompletedBasicTrail || certificationBlocked.isBlocked) && (
-                  <div className="absolute inset-0 bg-black/50 rounded-3xl flex items-center justify-center z-10">
-                    <div className="text-center">
-                      <div className="text-6xl mb-2"></div>
-                      <div className="text-red-400 font-bold text-lg">BLOQUEADO</div>
-                      <div className="text-gray-300 text-sm">
-                        {!hasCompletedBasicTrail 
-                          ? 'Complete uma trilha progressiva primeiro'
-                          : certificationBlocked.timeRemaining
-                        }
+                  <div className="absolute inset-0 rounded-3xl flex items-center justify-center z-10 bg-gradient-to-br from-gray-900/80 to-gray-800/80 backdrop-blur-sm">
+                    <div className="text-center space-y-4">
+                      <div className="relative">
+                        <div className="text-6xl mb-2 filter grayscale">🎯</div>
+                        <div className="absolute -top-2 -right-2 text-2xl">⏰</div>
+                      </div>
+                      <div className="space-y-2">
+                        <div className="text-orange-400 font-bold text-lg">Em Breve</div>
+                        <div className="text-gray-300 text-sm max-w-xs leading-relaxed">
+                          {!hasCompletedBasicTrail 
+                            ? 'Complete uma trilha progressiva para desbloquear'
+                            : `Aguarde ${certificationBlocked.timeRemaining} para o próximo teste`
+                          }
+                        </div>
+                      </div>
+                      <div className="flex gap-1 justify-center">
+                        <div className="w-2 h-2 bg-orange-400 rounded-full animate-pulse"></div>
+                        <div className="w-2 h-2 bg-orange-400 rounded-full animate-pulse" style={{ animationDelay: '0.2s' }}></div>
+                        <div className="w-2 h-2 bg-orange-400 rounded-full animate-pulse" style={{ animationDelay: '0.4s' }}></div>
                       </div>
                     </div>
                   </div>
                 )}
                 
-                <div className="text-center flex-1 flex flex-col justify-between">
+                <div className="relative z-5 text-center flex-1 flex flex-col justify-between p-8">
                   <div>
-                    <div className="mb-6 group-hover:scale-110 transition-transform duration-300 flex justify-center">
-                      <span className="text-7xl">
-                        
-                      </span>
+                    <div className={`mb-6 transition-all duration-300 flex justify-center ${
+                      hasCompletedBasicTrail && !certificationBlocked.isBlocked 
+                        ? 'group-hover:scale-110 group-hover:rotate-6' 
+                        : ''
+                    }`}>
+                      <div className="relative">
+                        <span className={`text-7xl ${
+                          hasCompletedBasicTrail && !certificationBlocked.isBlocked 
+                            ? 'filter drop-shadow-lg' 
+                            : 'filter grayscale opacity-50'
+                        }`}>
+                          🚀
+                        </span>
+                        {hasCompletedBasicTrail && !certificationBlocked.isBlocked && (
+                          <div className="absolute -top-2 -right-2 text-2xl animate-bounce">✨</div>
+                        )}
+                      </div>
                     </div>
-                    <h3 className="text-2xl font-bold text-white mb-4">
-                      Certificação A1/A2
+                    <h3 className={`text-2xl font-bold mb-4 ${
+                      hasCompletedBasicTrail && !certificationBlocked.isBlocked 
+                        ? 'text-white' 
+                        : 'text-gray-400'
+                    }`}>
+                      Próximo Nível
                     </h3>
-                    <p className="text-gray-300 mb-6 leading-relaxed">
+                    <p className={`mb-6 leading-relaxed text-sm ${
+                      hasCompletedBasicTrail && !certificationBlocked.isBlocked 
+                        ? 'text-gray-300' 
+                        : 'text-gray-500'
+                    }`}>
                       {!hasCompletedBasicTrail 
-                        ? 'Complete ao menos uma trilha progressiva para desbloquear o exame de certificação A1/A2.'
+                        ? 'Avance nas trilhas progressivas para desbloquear o teste de certificação e evoluir para o próximo nível.'
                         : certificationBlocked.isBlocked 
-                        ? `Teste bloqueado por mais ${certificationBlocked.timeRemaining}. Aguarde para fazer o próximo teste.`
-                        : 'Teste seu domínio das 145 frases essenciais A1/A2 e ganhe seu certificado oficial.'
+                        ? 'Seu teste está temporariamente indisponível. Use este tempo para revisar as frases e se preparar melhor.'
+                        : 'Teste seu domínio completo das frases A1/A2 e conquiste seu certificado oficial para avançar no aprendizado.'
                       }
                     </p>
                     <div className="flex flex-wrap gap-2 justify-center mb-6">
-                      <span className={`px-3 py-1 rounded-full text-sm ${
-                        !hasCompletedBasicTrail || certificationBlocked.isBlocked
-                          ? 'bg-red-500/20 text-red-300' 
-                          : 'bg-blue-500/20 text-blue-300'
-                      }`}>
-                        {!hasCompletedBasicTrail || certificationBlocked.isBlocked ? 'Bloqueado' : '35 Questões'}
-                      </span>
-                      <span className={`px-3 py-1 rounded-full text-sm ${
-                        !hasCompletedBasicTrail || certificationBlocked.isBlocked
-                          ? 'bg-red-500/20 text-red-300' 
-                          : 'bg-cyan-500/20 text-cyan-300'
-                      }`}>
-                        {!hasCompletedBasicTrail || certificationBlocked.isBlocked ? 'Indisponível' : '20 Min'}
-                      </span>
-                      <span className={`px-3 py-1 rounded-full text-sm ${
-                        !hasCompletedBasicTrail || certificationBlocked.isBlocked
-                          ? 'bg-red-500/20 text-red-300' 
-                          : 'bg-blue-500/20 text-blue-300'
-                      }`}>
-                        {!hasCompletedBasicTrail || certificationBlocked.isBlocked ? 'Indisponível' : 'Certificado'}
-                      </span>
+                      {hasCompletedBasicTrail && !certificationBlocked.isBlocked ? (
+                        <>
+                          <span className="px-3 py-1 rounded-full text-xs bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                            35 Questões
+                          </span>
+                          <span className="px-3 py-1 rounded-full text-xs bg-teal-500/20 text-teal-300 border border-teal-500/30">
+                            ~20 Min
+                          </span>
+                          <span className="px-3 py-1 rounded-full text-xs bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">
+                            Certificado
+                          </span>
+                        </>
+                      ) : (
+                        <>
+                          <span className="px-3 py-1 rounded-full text-xs bg-gray-500/20 text-gray-400 border border-gray-500/30">
+                            {!hasCompletedBasicTrail ? 'Bloqueado' : 'Aguardando'}
+                          </span>
+                          <span className="px-3 py-1 rounded-full text-xs bg-gray-500/20 text-gray-400 border border-gray-500/30">
+                            Premium
+                          </span>
+                        </>
+                      )}
                     </div>
                   </div>
-                  <div className={`font-semibold transition-colors ${
-                    !hasCompletedBasicTrail || certificationBlocked.isBlocked
-                      ? 'text-red-400' 
-                      : 'text-blue-400 group-hover:text-blue-300'
+                  <div className={`font-semibold transition-all duration-300 ${
+                    hasCompletedBasicTrail && !certificationBlocked.isBlocked
+                      ? 'text-emerald-400 group-hover:text-emerald-300' 
+                      : 'text-gray-500'
                   }`}>
-                    {!hasCompletedBasicTrail || certificationBlocked.isBlocked ? 'Bloqueado' : 'Fazer Teste →'}
+                    {hasCompletedBasicTrail && !certificationBlocked.isBlocked 
+                      ? 'Fazer Teste →' 
+                      : !hasCompletedBasicTrail 
+                      ? 'Continue Estudando' 
+                      : 'Aguarde Liberação'
+                    }
                   </div>
                 </div>
               </div>
