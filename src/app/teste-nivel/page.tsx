@@ -189,22 +189,22 @@ export default function LevelTestPage() {
 
   if (showResult && testResult) {
     return (
-      <AnimatedContainer className="h-screen overflow-hidden flex flex-col">
-        {/* Header */}
+      <AnimatedContainer className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900/20 to-cyan-900/20">
+        {/* Header compacto */}
         <PageTransition delay={0}>
-          <header className="bg-gray-900/50 border-b border-gray-700 p-4 flex-shrink-0">
+          <header className="bg-black/20 backdrop-blur-sm border-b border-white/10 p-3">
             <div className="max-w-4xl mx-auto flex justify-between items-center">
               <button 
                 onClick={handleLogoClick}
-                className="flex items-center gap-3 hover:opacity-80 transition-opacity"
+                className="flex items-center gap-2 hover:opacity-80 transition-opacity"
               >
-                <Logo size="sm" />
-                <span className="text-white font-bold">Inglês pra Já</span>
+                <Logo size="xs" />
+                <span className="text-white font-bold text-sm">Inglês pra Já</span>
               </button>
               
               <Link 
                 href="/dashboard"
-                className="bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-full text-white font-semibold transition-colors text-sm"
+                className="bg-white/10 hover:bg-white/20 backdrop-blur-sm px-3 py-1.5 rounded-full text-white text-xs font-medium transition-all duration-300 border border-white/20"
               >
                 ← Dashboard
               </Link>
@@ -212,88 +212,121 @@ export default function LevelTestPage() {
           </header>
         </PageTransition>
 
-        <div className="flex-1 overflow-y-auto">
-          <div className="max-w-4xl mx-auto p-6 min-h-full flex flex-col justify-center">
+        <div className="max-w-2xl mx-auto p-4 pt-8">
+          {/* Celebração com animação */}
           <PageTransition delay={200}>
-            <div className="text-center mb-8">
-              <div className="text-6xl mb-4">{getLevelIcon(testResult.level)}</div>
-              <h1 className="text-3xl font-bold text-white mb-2">
-                Resultado do Teste de Nível
-              </h1>
-              <p className="text-gray-400">
-                Teste realizado em {new Date(testResult.completedAt).toLocaleDateString('pt-BR')}
-              </p>
-            </div>
-          </PageTransition>
-
-          <PageTransition delay={400}>
-            <div className={`bg-gradient-to-r ${getLevelColor(testResult.level)}/20 border border-current/30 rounded-xl p-8 mb-8`}>
-              <div className="text-center">
-                <h2 className="text-2xl font-bold text-white mb-4">
-                  Seu nível: <span className="capitalize">{testResult.level}</span>
+            <div className="text-center mb-6">
+              {/* Ícone grande com animação */}
+              <div className="relative mb-6">
+                <div className="absolute inset-0 animate-ping">
+                  <div className="text-8xl opacity-20">{getLevelIcon(testResult.level)}</div>
+                </div>
+                <div className="relative text-8xl animate-bounce">
+                  {getLevelIcon(testResult.level)}
+                </div>
+              </div>
+              
+              {/* Título celebrativo */}
+              <div className="mb-4">
+                <h1 className="text-4xl font-black text-white mb-2 bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
+                  Parabéns! 🎉
+                </h1>
+                <h2 className="text-2xl font-bold text-white">
+                  Seu nível é <span className={`capitalize ${getLevelColor(testResult.level)} font-extrabold`}>
+                    {testResult.level === 'beginner' ? 'Iniciante' : testResult.level === 'intermediate' ? 'Intermediário' : 'Avançado'}
+                  </span>
                 </h2>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-white mb-2">
-                      {testResult.score}%
-                    </div>
-                    <div className="text-gray-300">Pontuação</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-white mb-2">
-                      {testResult.correctAnswers}/{testResult.totalQuestions}
-                    </div>
-                    <div className="text-gray-300">Acertos</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-white mb-2 capitalize">
-                      {testResult.level}
-                    </div>
-                    <div className="text-gray-300">Nível</div>
-                  </div>
-                </div>
-                
-                <p className="text-gray-300 text-lg mb-6">
-                  {getLevelDescription(testResult.level)}
-                </p>
-
-                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center max-w-md mx-auto">
-                  <Link 
-                    href="/dashboard"
-                    className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 px-6 sm:px-8 py-3 rounded-full text-white font-semibold text-sm sm:text-base transition-all duration-300 text-center"
-                  >
-                    Começar Trilhas
-                  </Link>
-                  
-                  {cooldownStatus?.canRetake ? (
-                    <button
-                      onClick={retakeTest}
-                      className="bg-gray-700 hover:bg-gray-600 px-6 sm:px-8 py-3 rounded-full text-white font-semibold text-sm sm:text-base transition-colors"
-                    >
-                      Refazer Teste
-                    </button>
-                  ) : (
-                    <div className="text-center">
-                      <button
-                        disabled
-                        className="bg-gray-800 cursor-not-allowed px-6 sm:px-8 py-3 rounded-full text-gray-500 font-semibold text-sm sm:text-base"
-                      >
-                        Refazer Teste
-                      </button>
-                      <p className="text-gray-400 text-xs mt-2">
-                        Disponível em {cooldownStatus?.timeRemaining}
-                      </p>
-                      {cooldownStatus?.nextAvailableDate && (
-                        <p className="text-gray-500 text-xs">
-                          {formatDate(cooldownStatus.nextAvailableDate)}
-                        </p>
-                      )}
-                    </div>
-                  )}
-                </div>
               </div>
             </div>
           </PageTransition>
+
+          {/* Card principal com estatísticas */}
+          <PageTransition delay={400}>
+            <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg border border-white/20 rounded-3xl p-6 mb-6 shadow-2xl">
+              
+              {/* Score destaque */}
+              <div className="text-center mb-6">
+                <div className="relative inline-block">
+                  <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-cyan-500 rounded-full blur-lg opacity-30"></div>
+                  <div className="relative bg-gradient-to-r from-purple-600 to-cyan-600 rounded-full p-6">
+                    <div className="text-4xl font-black text-white">{testResult.score}%</div>
+                    <div className="text-sm text-purple-100 font-medium">Pontuação</div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Estatísticas em grid */}
+              <div className="grid grid-cols-2 gap-4 mb-6">
+                <div className="bg-white/5 rounded-2xl p-4 text-center border border-white/10">
+                  <div className="text-2xl font-bold text-green-400 mb-1">
+                    {testResult.correctAnswers}
+                  </div>
+                  <div className="text-xs text-gray-300">Acertos</div>
+                </div>
+                <div className="bg-white/5 rounded-2xl p-4 text-center border border-white/10">
+                  <div className="text-2xl font-bold text-red-400 mb-1">
+                    {testResult.totalQuestions - testResult.correctAnswers}
+                  </div>
+                  <div className="text-xs text-gray-300">Erros</div>
+                </div>
+              </div>
+              
+              {/* Descrição motivacional */}
+              <div className="bg-gradient-to-r from-purple-500/10 to-cyan-500/10 rounded-2xl p-4 mb-6 border border-purple-500/20">
+                <p className="text-white text-center text-sm leading-relaxed">
+                  {getLevelDescription(testResult.level)}
+                </p>
+              </div>
+
+              {/* Botões de ação */}
+              <div className="space-y-3">
+                <Link 
+                  href="/dashboard"
+                  className="w-full bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 px-6 py-4 rounded-2xl text-white font-bold text-center transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-purple-500/25 flex items-center justify-center gap-3"
+                >
+                  <span>🚀</span>
+                  <span>Começar Trilhas Personalizadas</span>
+                </Link>
+                
+                {cooldownStatus?.canRetake ? (
+                  <button
+                    onClick={retakeTest}
+                    className="w-full bg-white/10 hover:bg-white/20 backdrop-blur-sm px-6 py-3 rounded-2xl text-white font-medium text-center transition-all duration-300 border border-white/20 flex items-center justify-center gap-2"
+                  >
+                    <span>🔄</span>
+                    <span>Refazer Teste</span>
+                  </button>
+                ) : (
+                  <div className="w-full bg-red-500/10 border border-red-500/30 rounded-2xl p-4 text-center">
+                    <div className="text-red-400 font-medium mb-2 flex items-center justify-center gap-2">
+                      <span>⏰</span>
+                      <span>Refazer Teste</span>
+                    </div>
+                    <p className="text-red-300 text-sm mb-1">
+                      Disponível em {cooldownStatus?.timeRemaining}
+                    </p>
+                    {cooldownStatus?.nextAvailableDate && (
+                      <p className="text-red-400/70 text-xs">
+                        {formatDate(cooldownStatus.nextAvailableDate)}
+                      </p>
+                    )}
+                  </div>
+                )}
+              </div>
+              
+              {/* Informação adicional */}
+              <div className="text-center mt-4">
+                <p className="text-gray-400 text-xs">
+                  Teste realizado em {new Date(testResult.completedAt).toLocaleDateString('pt-BR')}
+                </p>
+              </div>
+            </div>
+          </PageTransition>
+          
+          {/* Decoração de fundo */}
+          <div className="fixed inset-0 pointer-events-none overflow-hidden">
+            <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-purple-500/5 rounded-full blur-3xl"></div>
+            <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-cyan-500/5 rounded-full blur-3xl"></div>
           </div>
         </div>
       </AnimatedContainer>
