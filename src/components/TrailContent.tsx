@@ -294,23 +294,27 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
 
   return (
     <AnimatedContainer className="min-h-screen">
-      {/* Header */}
+      {/* Header ultra-compacto para mobile */}
       <PageTransition delay={0}>
-        <header className="bg-gray-900/50 border-b border-gray-700 p-3">
+        <header className="sticky top-0 z-50 bg-gray-900/90 backdrop-blur-md border-b border-gray-700/50 p-2 md:p-3">
           <div className="max-w-4xl mx-auto flex justify-between items-center">
             <button 
               onClick={handleLogoClick}
-              className="flex items-center gap-2 hover:opacity-80 transition-opacity"
+              className="flex items-center gap-1 md:gap-2 hover:opacity-80 transition-opacity"
             >
               <Logo size="xs" />
-              <span className="text-white font-bold text-sm">Inglês pra Já</span>
+              <span className="text-white font-bold text-xs md:text-sm">Inglês pra Já</span>
             </button>
           
-          <div className="flex items-center gap-3">
-            <div className="text-xs text-gray-400">
+          <div className="flex items-center gap-2 md:gap-3">
+            <div className="text-xs text-gray-400 hidden sm:block">
               {completedPhrases.length}/{availablePhrases.length} frases
             </div>
-            <div className="w-6 h-6 rounded-full bg-gradient-to-r from-purple-500 to-cyan-500 flex items-center justify-center text-white font-bold text-xs">
+            {/* Contador compacto apenas para mobile */}
+            <div className="text-xs text-gray-400 sm:hidden">
+              {completedPhrases.length}/{availablePhrases.length}
+            </div>
+            <div className="w-5 h-5 md:w-6 md:h-6 rounded-full bg-gradient-to-r from-purple-500 to-cyan-500 flex items-center justify-center text-white font-bold text-xs">
               {user?.email?.charAt(0).toUpperCase() || 'U'}
             </div>
           </div>
@@ -318,7 +322,7 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
       </header>
       </PageTransition>
 
-      <div className="max-w-4xl mx-auto p-2 sm:p-4">
+      <div className="max-w-4xl mx-auto p-1 sm:p-2 md:p-4">
         {/* Mensagem de limite global para usuários free */}
         {actualUserPlan === 'free' && !isPremium && hasReachedLimit && (
           <GlobalLimitMessage 
@@ -328,107 +332,126 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
           />
         )}
 
-        {/* Trail Header */}
+        {/* Trail Header ultra-compacto */}
         <PageTransition delay={200}>
-          <div className="relative mb-2">
-            {/* Indicação de nível no canto superior direito */}
-            <div className="absolute top-0 right-0 sm:static sm:float-right sm:ml-2">
-              <span className="bg-green-500/20 text-green-300 px-2 py-1 rounded-full text-xs font-medium">
+          <div className="mb-1 sm:mb-2">
+            {/* Layout mobile: linha única super compacta */}
+            <div className="flex items-center justify-between gap-2 mb-1 sm:hidden">
+              {/* Ícone + título em linha */}
+              <div className="flex items-center gap-2 flex-1 min-w-0">
+                {slug && iconMapping[slug] ? (() => {
+                  const IconComponent = iconMapping[slug].component;
+                  return <IconComponent size={20} className={iconMapping[slug].color} />;
+                })() : (
+                  <div className="text-lg">{trail.icon}</div>
+                )}
+                <h1 className="text-base font-bold text-white truncate">{trail.title}</h1>
+              </div>
+              
+              {/* Badge nível compacto */}
+              <span className="bg-green-500/20 text-green-300 px-2 py-0.5 rounded-full text-xs font-medium whitespace-nowrap">
                 🟢 Iniciante
               </span>
             </div>
             
-            <div className="flex items-start gap-2 sm:gap-3">
-              {/* Ícone menor à esquerda */}
-              <div className="flex-shrink-0">
-                {slug && iconMapping[slug] ? (() => {
-                  const IconComponent = iconMapping[slug].component;
-                  return <IconComponent size={24} className={`${iconMapping[slug].color} sm:w-8 sm:h-8`} />;
-                })() : (
-                  <div className="text-xl sm:text-2xl">{trail.icon}</div>
-                )}
+            {/* Layout desktop: mantém original */}
+            <div className="hidden sm:block relative">
+              <div className="absolute top-0 right-0">
+                <span className="bg-green-500/20 text-green-300 px-2 py-1 rounded-full text-xs font-medium">
+                  🟢 Iniciante
+                </span>
               </div>
               
-              {/* Conteúdo principal */}
-              <div className="flex-1 text-left pr-16 sm:pr-0">
-                <h1 className="text-lg sm:text-xl font-bold text-white mb-1">{trail.title}</h1>
-                <p className="text-gray-400 mb-1 text-xs sm:text-sm hidden sm:block">{trail.description}</p>
-                
-                {/* Progress Bar */}
-                <div className="w-full bg-gray-700 rounded-full h-1.5 sm:h-2 mb-1">
-                  <div 
-                    className="bg-gradient-to-r from-purple-500 to-cyan-400 h-1.5 sm:h-2 rounded-full transition-all duration-300"
-                    style={{ width: `${progress}%` }}
-                  />
+              <div className="flex items-start gap-3">
+                <div className="flex-shrink-0">
+                  {slug && iconMapping[slug] ? (() => {
+                    const IconComponent = iconMapping[slug].component;
+                    return <IconComponent size={32} className={iconMapping[slug].color} />;
+                  })() : (
+                    <div className="text-2xl">{trail.icon}</div>
+                  )}
                 </div>
-                <div className="text-xs text-gray-400">
-                  {Math.round(progress)}%
+                
+                <div className="flex-1 text-left pr-20">
+                  <h1 className="text-xl font-bold text-white mb-1">{trail.title}</h1>
+                  <p className="text-gray-400 mb-2 text-sm">{trail.description}</p>
                 </div>
               </div>
+            </div>
+            
+            {/* Progress Bar unificado */}
+            <div className="w-full bg-gray-700 rounded-full h-1 sm:h-2 mb-1">
+              <div 
+                className="bg-gradient-to-r from-purple-500 to-cyan-400 h-1 sm:h-2 rounded-full transition-all duration-300"
+                style={{ width: `${progress}%` }}
+              />
+            </div>
+            <div className="text-xs text-gray-400">
+              {Math.round(progress)}%
             </div>
           </div>
           
           {/* Filtro e Estatísticas por Nível - Apenas Premium */}
           {actualUserPlan === 'premium' && (
             <div className="mt-1 sm:mt-2 space-y-1">
-              {/* Botões de Filtro */}
-              <div className="flex flex-wrap gap-1 sm:gap-2 justify-center">
+              {/* Botões de Filtro ultra-compactos */}
+              <div className="flex flex-wrap gap-1 justify-center">
                 <button
                   onClick={() => handleLevelChange('todas')}
-                  className={`px-2 py-1 sm:px-3 sm:py-2 rounded text-xs font-medium transition-all duration-300 backdrop-blur-sm border ${
+                  className={`px-1.5 py-0.5 sm:px-3 sm:py-2 rounded text-xs font-medium transition-all duration-300 backdrop-blur-sm border ${
                     selectedLevel === 'todas' 
                       ? 'bg-gradient-to-r from-purple-500/30 to-cyan-500/30 border-purple-400/50 text-white shadow-lg shadow-purple-500/20 scale-105' 
                       : 'bg-white/5 border-white/10 text-gray-300 hover:bg-white/10 hover:border-white/20 hover:text-white hover:scale-102'
                   }`}
                 >
                   <span className="flex items-center gap-1">
-                    📚 <span>Todas</span>
+                    📚 <span className="hidden sm:inline">Todas</span>
                   </span>
                 </button>
                 <button
                   onClick={() => handleLevelChange('básico')}
-                  className={`px-2 py-1 sm:px-3 sm:py-2 rounded text-xs font-medium transition-all duration-300 backdrop-blur-sm border ${
+                  className={`px-1.5 py-0.5 sm:px-3 sm:py-2 rounded text-xs font-medium transition-all duration-300 backdrop-blur-sm border ${
                     selectedLevel === 'básico' 
                       ? 'bg-gradient-to-r from-green-500/30 to-emerald-500/30 border-green-400/50 text-white shadow-lg shadow-green-500/20 scale-105' 
                       : 'bg-green-500/10 border-green-500/20 text-green-300 hover:bg-green-500/20 hover:border-green-400/40 hover:text-green-200 hover:scale-102'
                   }`}
                 >
                   <span className="flex items-center gap-1">
-                    🟢 <span>Básico</span>
+                    🟢 <span className="hidden sm:inline">Básico</span>
                   </span>
                 </button>
                 <button
                   onClick={() => handleLevelChange('médio')}
-                  className={`px-2 py-1 sm:px-3 sm:py-2 rounded text-xs font-medium transition-all duration-300 backdrop-blur-sm border ${
+                  className={`px-1.5 py-0.5 sm:px-3 sm:py-2 rounded text-xs font-medium transition-all duration-300 backdrop-blur-sm border ${
                     selectedLevel === 'médio' 
                       ? 'bg-gradient-to-r from-yellow-500/30 to-orange-500/30 border-yellow-400/50 text-white shadow-lg shadow-yellow-500/20 scale-105' 
                       : 'bg-yellow-500/10 border-yellow-500/20 text-yellow-300 hover:bg-yellow-500/20 hover:border-yellow-400/40 hover:text-yellow-200 hover:scale-102'
                   }`}
                 >
                   <span className="flex items-center gap-1">
-                    🟡 <span>Intermediário</span>
+                    🟡 <span className="hidden sm:inline">Intermediário</span>
                   </span>
                 </button>
                 <button
                   onClick={() => handleLevelChange('avançado')}
-                  className={`px-2 py-1 sm:px-3 sm:py-2 rounded text-xs font-medium transition-all duration-300 backdrop-blur-sm border ${
+                  className={`px-1.5 py-0.5 sm:px-3 sm:py-2 rounded text-xs font-medium transition-all duration-300 backdrop-blur-sm border ${
                     selectedLevel === 'avançado' 
                       ? 'bg-gradient-to-r from-red-500/30 to-pink-500/30 border-red-400/50 text-white shadow-lg shadow-red-500/20 scale-105' 
                       : 'bg-red-500/10 border-red-500/20 text-red-300 hover:bg-red-500/20 hover:border-red-400/40 hover:text-red-200 hover:scale-102'
                   }`}
                 >
                   <span className="flex items-center gap-1">
-                    🔴 <span>Avançado</span>
+                    🔴 <span className="hidden sm:inline">Avançado</span>
                   </span>
                 </button>
               </div>
               
-              {/* Indicador do filtro ativo */}
+              {/* Indicador do filtro ativo - compacto para mobile */}
               {selectedLevel !== 'todas' && (
                 <div className="text-center">
-                  <div className="inline-flex items-center gap-2 bg-gradient-to-r from-purple-500/20 to-cyan-500/20 backdrop-blur-sm border border-purple-400/30 text-purple-300 px-3 py-2 rounded-lg text-xs font-medium shadow-lg shadow-purple-500/10">
+                  <div className="inline-flex items-center gap-1 sm:gap-2 bg-gradient-to-r from-purple-500/20 to-cyan-500/20 backdrop-blur-sm border border-purple-400/30 text-purple-300 px-2 py-1 sm:px-3 sm:py-2 rounded text-xs font-medium shadow-lg shadow-purple-500/10">
                     <span className="flex items-center gap-1">
-                      🎯 <span>Filtrando:</span> 
+                      🎯 <span className="hidden sm:inline">Filtrando:</span> 
                       <span className="text-white font-semibold">
                         {selectedLevel === 'médio' ? 'Intermediário' : selectedLevel.charAt(0).toUpperCase() + selectedLevel.slice(1)}
                       </span>
