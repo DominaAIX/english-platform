@@ -798,7 +798,7 @@ export default function DashboardContent() {
                   <div className="mb-6 group-hover:scale-110 transition-transform duration-300 flex justify-center">
                     <div className="relative w-24 h-24 flex items-center justify-center">
                       <Image
-                        src="/images/robot-cute.png"
+                        src="/images/robot-cute-new.png"
                         alt="Robô Tutor AI Super Fofo"
                         width={96}
                         height={96}

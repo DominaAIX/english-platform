@@ -368,7 +368,7 @@ export default function ChatContent() {
                     {message.role === 'assistant' && (
                       <div className="w-8 h-8 flex-shrink-0">
                         <Image
-                          src="/images/robot-cute.png"
+                          src="/images/robot-cute-new.png"
                           alt="Robô Tutor AI"
                           width={32}
                           height={32}
@@ -419,7 +419,7 @@ export default function ChatContent() {
                   <div className="flex items-center gap-3">
                     <div className="w-8 h-8 flex-shrink-0">
                       <Image
-                        src="/images/robot-cute.png"
+                        src="/images/robot-cute-new.png"
                         alt="Robô Tutor AI"
                         width={32}
                         height={32}
