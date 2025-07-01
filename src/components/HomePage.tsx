@@ -7,7 +7,7 @@ import Logo from '@/components/Logo'
 import PageTransition from '@/components/PageTransition'
 import AnimatedContainer from '@/components/AnimatedContainer'
 import { ConversationIcon, SendIcon, AIIcon, TargetIcon, AudioIcon, SignUpIcon } from '@/components/ModernIcons'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { useAuth } from '@/contexts/AuthContext'
 
@@ -16,7 +16,27 @@ export default function HomePage() {
   const [showAuthModal, setShowAuthModal] = useState(false)
   const [isClosingMenu, setIsClosingMenu] = useState(false)
   const router = useRouter()
-  const { user } = useAuth()
+  const { user, loading } = useAuth()
+
+  const checkUserLevelTest = (userId: string): boolean => {
+    const testResult = localStorage.getItem(`level_test_${userId}`)
+    const userLevel = localStorage.getItem(`user_level_${userId}`)
+    return !!(testResult && userLevel)
+  }
+
+  // Redirecionar usuários logados automaticamente
+  useEffect(() => {
+    if (loading) return
+    
+    if (user) {
+      const hasCompletedTest = checkUserLevelTest(user.id)
+      if (hasCompletedTest) {
+        router.push('/dashboard')
+      } else {
+        router.push('/teste-nivel')
+      }
+    }
+  }, [user, loading, router])
 
   const handleButtonClick = (route: string) => {
     if (user) {

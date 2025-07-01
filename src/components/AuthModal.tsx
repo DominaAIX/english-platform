@@ -20,6 +20,12 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
 
   if (!isOpen) return null
 
+  const checkUserLevelTest = (userId: string): boolean => {
+    const testResult = localStorage.getItem(`level_test_${userId}`)
+    const userLevel = localStorage.getItem(`user_level_${userId}`)
+    return !!(testResult && userLevel)
+  }
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
@@ -40,15 +46,25 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
         if (error) throw error
         setMessage('Verifique seu email para confirmar a conta!')
       } else {
-        const { error } = await supabase.auth.signInWithPassword({
+        const { data, error } = await supabase.auth.signInWithPassword({
           email,
           password
         })
         
         if (error) throw error
         onClose()
-        // Redirecionar para dashboard após login bem-sucedido
-        router.push('/dashboard')
+        
+        // Verificar se o usuário já fez o teste de nível
+        if (data.user) {
+          const hasCompletedTest = checkUserLevelTest(data.user.id)
+          if (hasCompletedTest) {
+            router.push('/dashboard')
+          } else {
+            router.push('/teste-nivel')
+          }
+        } else {
+          router.push('/dashboard')
+        }
       }
     } catch (error: any) {
       setMessage(error.message)
@@ -65,7 +81,7 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-          redirectTo: `${window.location.origin}/dashboard`
+          redirectTo: `${window.location.origin}/auth/callback`
         }
       })
       
