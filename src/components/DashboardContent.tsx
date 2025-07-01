@@ -553,12 +553,12 @@ export default function DashboardContent() {
               {/* Card de Teste/Nível - Mais estreito quando já fez o teste */}
               <Link href={hasCompletedTest ? "/teste-nivel?show=result" : "/teste-nivel"} 
                     className={hasCompletedTest ? 'md:col-span-1' : 'md:col-span-2'}>
-                <div className="group bg-gradient-to-br from-yellow-900/30 to-orange-900/30 border-2 border-yellow-500/30 rounded-3xl p-6 hover:border-yellow-400/50 transition-all duration-300 cursor-pointer transform hover:scale-105 h-full flex flex-col">
+                <div className={`group bg-gradient-to-br from-yellow-900/30 to-orange-900/30 border-2 border-yellow-500/30 rounded-3xl hover:border-yellow-400/50 transition-all duration-300 cursor-pointer transform hover:scale-105 h-full flex flex-col ${hasCompletedTest ? 'p-4' : 'p-6'}`}>
                   <div className="text-center flex-1 flex flex-col justify-between">
                     <div>
-                      <div className="mb-4 group-hover:scale-110 transition-transform duration-300 flex justify-center">
+                      <div className={`group-hover:scale-110 transition-transform duration-300 flex justify-center ${hasCompletedTest ? 'mb-2' : 'mb-4'}`}>
                         {hasCompletedTest ? (
-                          <LevelBarsIcon size={48} className="text-yellow-400" />
+                          <LevelBarsIcon size={32} className="text-yellow-400" />
                         ) : (
                           <TargetIcon size={64} className="text-yellow-400" />
                         )}
@@ -567,18 +567,18 @@ export default function DashboardContent() {
                       {hasCompletedTest ? (
                         // Card compacto para usuário que já fez o teste
                         <>
-                          <h3 className="text-xl font-bold text-white mb-2">
+                          <h3 className="text-lg font-bold text-white mb-2">
                             Meu Nível
                           </h3>
-                          <div className="mb-4">
-                            <div className="text-lg font-semibold text-gray-300 mb-2">
+                          <div className="mb-2">
+                            <div className="text-base font-semibold text-yellow-300 mb-1">
                               {(() => {
                                 const testLevel = getUserTestLevel()
                                 console.log('🔍 Debug testLevel:', testLevel) // Debug log
                                 return testLevel ? formatLevel(testLevel) : 'Carregando...'
                               })()}
                             </div>
-                            <span className="bg-green-500/20 text-green-300 px-3 py-1 rounded-full text-sm">
+                            <span className="bg-green-500/20 text-green-300 px-2 py-1 rounded-full text-xs">
                               Concluído
                             </span>
                           </div>
