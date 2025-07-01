@@ -368,13 +368,10 @@ function ProgressiveTrailClient({ trailData, slug }: { trailData: any, slug: str
             
             {/* Bottom row on mobile, inline on desktop */}
             <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center">
-              <div className="text-xs sm:text-sm text-gray-400 mb-2 sm:mb-0">
-                Passo {currentStepIndex + 1} de {progressiveSteps.length}
-              </div>
               
               {/* Contador para usuários free */}
               {userPlan === 'free' && !freeLimitations.isBlocked && (
-                <div className="bg-blue-900/20 border border-blue-500/30 rounded-lg px-2 sm:px-3 py-1 sm:py-2">
+                <div className="bg-blue-900/20 border border-blue-500/30 rounded-lg px-2 sm:px-3 py-1 sm:py-2 mt-2 sm:mt-0">
                   <div className="text-blue-400 text-xs font-medium">Plano Gratuito</div>
                   <div className="text-white text-xs sm:text-sm font-bold">
                     {freeLimitations.phrasesUsed}/{freeLimitations.maxPhrases} frases hoje
@@ -512,7 +509,7 @@ function ProgressiveTrailClient({ trailData, slug }: { trailData: any, slug: str
                              currentStep.type === 'lesson' ? '🎯' : '📝'}
                           </span>
                         </div>
-                        <h2 className="text-xl font-bold bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
+                        <h2 className="text-xl font-bold text-white">
                           {currentStep.type === 'phrase' ? 'Aprender Frase' : 
                            currentStep.type === 'exercise' ? 'Exercício' :
                            currentStep.type === 'module' ? 'Módulo' :
