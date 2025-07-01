@@ -741,7 +741,16 @@ export default function DashboardContent() {
               <div className="text-center flex-1 flex flex-col justify-between">
                 <div>
                   <div className="mb-6 group-hover:scale-110 transition-transform duration-300 flex justify-center">
-                    <RobotIcon size={72} className="text-purple-400" />
+                    <div className="relative w-18 h-18 rounded-full overflow-hidden shadow-lg">
+                      <Image
+                        src="/images/robot-cute.png"
+                        alt="Robô Tutor AI Super Fofo"
+                        width={72}
+                        height={72}
+                        className="object-cover w-full h-full"
+                        priority
+                      />
+                    </div>
                   </div>
                   <h2 className="text-2xl font-bold text-white mb-4">
                     Conversar com Tutor AI
