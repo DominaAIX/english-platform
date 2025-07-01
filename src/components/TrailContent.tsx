@@ -294,7 +294,7 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
 
   return (
     <AnimatedContainer className="min-h-screen">
-      {/* Header ultra-compacto para mobile */}
+      {/* Header ultra-compacto para mobile - v2 */}
       <PageTransition delay={0}>
         <header className="sticky top-0 z-50 bg-gray-900/90 backdrop-blur-md border-b border-gray-700/50 p-2 md:p-3">
           <div className="max-w-4xl mx-auto flex justify-between items-center">
