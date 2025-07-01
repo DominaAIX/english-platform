@@ -41,10 +41,12 @@ export default function DashboardContent() {
   useEffect(() => {
     if (user?.id) {
       const level = getUserLevel(user.id)
+      console.log('🎯 Dashboard - Nível do usuário:', level)
       setUserLevel(level)
       
       // Verificar se pode avançar para próximo nível
       const canAdvance = canUserAdvanceToNextLevel(user.id, level)
+      console.log('🎯 Dashboard - Pode avançar:', canAdvance)
       setCanAdvanceLevel(canAdvance)
     }
   }, [user?.id])
@@ -628,12 +630,14 @@ export default function DashboardContent() {
                     }`}>
                       {(() => {
                         const nextLevel = getNextLevel(userLevel)
-                        if (!nextLevel) return 'Nível Máximo'
+                        console.log('🎯 Dashboard render - userLevel:', userLevel, 'nextLevel:', nextLevel, 'canAdvanceLevel:', canAdvanceLevel)
+                        
+                        if (!nextLevel) return 'Nível Máximo Atingido! 🏆'
                         
                         if (canAdvanceLevel && hasCompletedBasicTrail && !certificationBlocked.isBlocked) {
-                          return `Estou Pronto para o ${getLevelName(nextLevel)}!`
+                          return `🚀 Estou Pronto para o ${getLevelName(nextLevel)}!`
                         } else {
-                          return `Meu Próximo Nível: ${getLevelName(nextLevel)}`
+                          return `📚 Meu Próximo Nível: ${getLevelName(nextLevel)}`
                         }
                       })()}
                     </h3>
