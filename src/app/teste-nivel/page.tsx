@@ -16,6 +16,7 @@ import {
   getLevelColor,
   getLevelIcon
 } from '@/data/levelTest'
+import { checkLevelTestCooldown, formatDate, LevelTestCooldownStatus } from '@/utils/levelTestCooldown'
 
 export default function LevelTestPage() {
   const { user, userProfile } = useAuth()
@@ -27,13 +28,19 @@ export default function LevelTestPage() {
   const [hasStarted, setHasStarted] = useState(false)
   const [currentSelectedAnswer, setCurrentSelectedAnswer] = useState<number | null>(null)
   const [showAnswerFeedback, setShowAnswerFeedback] = useState(false)
+  const [cooldownStatus, setCooldownStatus] = useState<LevelTestCooldownStatus | null>(null)
+  const [showCooldownWarning, setShowCooldownWarning] = useState(false)
 
   // Verificar se usuário é premium
   const isPremium = userProfile?.plan === 'premium'
 
-  // Verificar se já fez o teste
+  // Verificar se já fez o teste e status do cooldown
   useEffect(() => {
     if (user) {
+      // Verificar cooldown
+      const cooldown = checkLevelTestCooldown(user.id)
+      setCooldownStatus(cooldown)
+      
       const savedTest = localStorage.getItem(`level_test_${user.id}`)
       if (savedTest) {
         const result: LevelTestResult = JSON.parse(savedTest)
@@ -54,12 +61,6 @@ export default function LevelTestPage() {
     }
   }
 
-  const startTest = () => {
-    setHasStarted(true)
-    setCurrentQuestionIndex(0)
-    setSelectedAnswers([])
-    setShowResult(false)
-  }
 
   const selectAnswer = (answerIndex: number) => {
     if (showAnswerFeedback) return // Prevent selecting if feedback is already shown
@@ -118,15 +119,50 @@ export default function LevelTestPage() {
   }
 
   const retakeTest = () => {
-    if (user) {
-      localStorage.removeItem(`level_test_${user.id}`)
-      localStorage.removeItem(`user_level_${user.id}`)
+    if (!user) return
+    
+    // Verificar cooldown antes de permitir refazer
+    const cooldown = checkLevelTestCooldown(user.id)
+    if (!cooldown.canRetake) {
+      // Não pode refazer ainda, mostrar na tela de resultado
+      return
     }
+    
+    // Limpar dados antigos
+    localStorage.removeItem(`level_test_${user.id}`)
+    localStorage.removeItem(`user_level_${user.id}`)
+    
     setTestResult(null)
     setShowResult(false)
     setHasStarted(false)
     setCurrentQuestionIndex(0)
     setSelectedAnswers([])
+    setCooldownStatus(null)
+  }
+
+  const startTest = () => {
+    if (!user) return
+    
+    // Verificar se já fez o teste antes
+    const savedTest = localStorage.getItem(`level_test_${user.id}`)
+    if (savedTest) {
+      // Já fez o teste, mostrar aviso sobre cooldown
+      setShowCooldownWarning(true)
+    } else {
+      // Primeiro teste, pode começar
+      setHasStarted(true)
+      setCurrentQuestionIndex(0)
+      setSelectedAnswers([])
+      setShowResult(false)
+    }
+  }
+
+  const confirmStartTest = () => {
+    setShowCooldownWarning(false)
+    setHasStarted(true)
+    setCurrentQuestionIndex(0)
+    setSelectedAnswers([])
+    setShowResult(false)
   }
 
   // REMOVIDO: Agora tanto free quanto premium podem fazer o teste de nível
@@ -208,12 +244,32 @@ export default function LevelTestPage() {
                   >
                     Começar Trilhas
                   </Link>
-                  <button
-                    onClick={retakeTest}
-                    className="bg-gray-700 hover:bg-gray-600 px-6 sm:px-8 py-3 rounded-full text-white font-semibold text-sm sm:text-base transition-colors"
-                  >
-                    Refazer Teste
-                  </button>
+                  
+                  {cooldownStatus?.canRetake ? (
+                    <button
+                      onClick={retakeTest}
+                      className="bg-gray-700 hover:bg-gray-600 px-6 sm:px-8 py-3 rounded-full text-white font-semibold text-sm sm:text-base transition-colors"
+                    >
+                      Refazer Teste
+                    </button>
+                  ) : (
+                    <div className="text-center">
+                      <button
+                        disabled
+                        className="bg-gray-800 cursor-not-allowed px-6 sm:px-8 py-3 rounded-full text-gray-500 font-semibold text-sm sm:text-base"
+                      >
+                        Refazer Teste
+                      </button>
+                      <p className="text-gray-400 text-xs mt-2">
+                        Disponível em {cooldownStatus?.timeRemaining}
+                      </p>
+                      {cooldownStatus?.nextAvailableDate && (
+                        <p className="text-gray-500 text-xs">
+                          {formatDate(cooldownStatus.nextAvailableDate)}
+                        </p>
+                      )}
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
@@ -407,6 +463,45 @@ export default function LevelTestPage() {
         </PageTransition>
         </div>
       </div>
+      {/* Modal de Aviso sobre Cooldown */}
+      {showCooldownWarning && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
+          <div className="bg-gray-900 rounded-2xl p-6 md:p-8 max-w-md w-full border border-yellow-500/50">
+            <div className="text-center">
+              <div className="text-6xl mb-4">⚠️</div>
+              <h2 className="text-2xl font-bold text-white mb-4">
+                Atenção: Teste de Nível
+              </h2>
+              <div className="text-gray-300 mb-6 space-y-3">
+                <p>
+                  Você está prestes a refazer o teste de nível. 
+                </p>
+                <p className="text-yellow-400 font-semibold">
+                  ⏰ Após finalizar este teste, você só poderá fazer um novo teste de nível após 14 dias.
+                </p>
+                <p className="text-sm text-gray-400">
+                  Esta medida garante que o teste reflita seu progresso real e evita tentativas excessivas.
+                </p>
+              </div>
+              
+              <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                <button
+                  onClick={() => setShowCooldownWarning(false)}
+                  className="bg-gray-700 hover:bg-gray-600 px-6 py-3 rounded-full text-white font-semibold transition-colors"
+                >
+                  Cancelar
+                </button>
+                <button
+                  onClick={confirmStartTest}
+                  className="bg-gradient-to-r from-yellow-600 to-orange-600 hover:from-yellow-700 hover:to-orange-700 px-6 py-3 rounded-full text-white font-semibold transition-all duration-300"
+                >
+                  Entendi, Começar Teste
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </AnimatedContainer>
   )
 }
