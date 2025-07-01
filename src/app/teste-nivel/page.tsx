@@ -43,12 +43,24 @@ export default function LevelTestPage() {
       
       const savedTest = localStorage.getItem(`level_test_${user.id}`)
       if (savedTest) {
-        const result: LevelTestResult = JSON.parse(savedTest)
-        setTestResult(result)
-        setShowResult(true)
+        // Se chegou aqui através de URL direta e já fez o teste, 
+        // verificar se veio de um link específico para ver resultado
+        const urlParams = new URLSearchParams(window.location.search)
+        const showResults = urlParams.get('show') === 'result'
+        
+        if (showResults) {
+          // Mostrar resultado se explicitamente solicitado
+          const result: LevelTestResult = JSON.parse(savedTest)
+          setTestResult(result)
+          setShowResult(true)
+        } else {
+          // Caso contrário, redirecionar para dashboard
+          router.push('/dashboard')
+          return
+        }
       }
     }
-  }, [user])
+  }, [user, router])
 
   const currentQuestion = LEVEL_TEST_QUESTIONS[currentQuestionIndex]
   const progress = ((currentQuestionIndex + 1) / LEVEL_TEST_QUESTIONS.length) * 100

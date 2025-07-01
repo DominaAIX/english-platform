@@ -480,34 +480,49 @@ export default function DashboardContent() {
             
             <div className={`grid gap-6 mb-8 ${hasCompletedBasicTrail ? 'md:grid-cols-3' : 'md:grid-cols-2'}`}>
               {/* Teste de Nível */}
-              <Link href="/teste-nivel">
+              <Link href={hasCompletedTest ? "/teste-nivel?show=result" : "/teste-nivel"}>
                 <div className="group bg-gradient-to-br from-yellow-900/30 to-orange-900/30 border-2 border-yellow-500/30 rounded-3xl p-8 hover:border-yellow-400/50 transition-all duration-300 cursor-pointer transform hover:scale-105 h-full flex flex-col">
                   <div className="text-center flex-1 flex flex-col justify-between">
                     <div>
                       <div className="mb-6 group-hover:scale-110 transition-transform duration-300 flex justify-center">
-                        <span className="text-7xl"></span>
+                        <span className="text-7xl">{hasCompletedTest ? '📊' : '🎯'}</span>
                       </div>
                       <h3 className="text-2xl font-bold text-white mb-4">
-                        Teste de Nível
+                        {hasCompletedTest ? 'Meu Nível' : 'Teste de Nível'}
                       </h3>
                       <p className="text-gray-300 mb-6 leading-relaxed">
-                        Descubra seu nível atual de inglês com 15 perguntas rápidas. 
-                        Resultado personaliza suas trilhas de aprendizado.
+                        {hasCompletedTest 
+                          ? 'Veja seu resultado atual e quando poderá refazer o teste de nível.'
+                          : 'Descubra seu nível atual de inglês com 15 perguntas rápidas. Resultado personaliza suas trilhas de aprendizado.'
+                        }
                       </p>
                       <div className="flex flex-wrap gap-2 justify-center mb-6">
-                        <span className="bg-yellow-500/20 text-yellow-300 px-3 py-1 rounded-full text-sm">
-                          15 Questões
-                        </span>
-                        <span className="bg-orange-500/20 text-orange-300 px-3 py-1 rounded-full text-sm">
-                          5-10 Min
-                        </span>
-                        <span className="bg-yellow-500/20 text-yellow-300 px-3 py-1 rounded-full text-sm">
-                          Personalizado
-                        </span>
+                        {hasCompletedTest ? (
+                          <>
+                            <span className="bg-green-500/20 text-green-300 px-3 py-1 rounded-full text-sm">
+                              Concluído
+                            </span>
+                            <span className="bg-blue-500/20 text-blue-300 px-3 py-1 rounded-full text-sm">
+                              Ver Resultado
+                            </span>
+                          </>
+                        ) : (
+                          <>
+                            <span className="bg-yellow-500/20 text-yellow-300 px-3 py-1 rounded-full text-sm">
+                              15 Questões
+                            </span>
+                            <span className="bg-orange-500/20 text-orange-300 px-3 py-1 rounded-full text-sm">
+                              5-10 Min
+                            </span>
+                            <span className="bg-yellow-500/20 text-yellow-300 px-3 py-1 rounded-full text-sm">
+                              Personalizado
+                            </span>
+                          </>
+                        )}
                       </div>
                     </div>
                     <div className="text-yellow-400 group-hover:text-yellow-300 transition-colors font-semibold">
-                      Fazer Teste →
+                      {hasCompletedTest ? 'Ver Resultado →' : 'Fazer Teste →'}
                     </div>
                   </div>
                 </div>
