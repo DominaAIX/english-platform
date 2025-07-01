@@ -390,15 +390,15 @@ function ProgressiveTrailClient({ trailData, slug }: { trailData: any, slug: str
         <div className="max-w-7xl mx-auto p-4 sm:p-6 min-h-full flex flex-col">
         {/* Trail Header INCRÍVEL */}
         <PageTransition delay={200}>
-          <div className="text-center mb-8">
-            {/* Ícone menor e simples */}
-            <div className="mb-4 flex justify-center">
+          <div className="relative text-center mb-8">
+            {/* Ícone da maleta no canto superior direito */}
+            <div className="absolute top-0 right-0">
               {slug === 'trabalho' ? (
-                <WorkIcon size={48} className="text-cyan-400" />
+                <WorkIcon size={24} className="text-cyan-400/60" />
               ) : slug === 'viagens' ? (
-                <TravelIcon size={48} className="text-emerald-400" />
+                <TravelIcon size={24} className="text-emerald-400/60" />
               ) : (
-                <span className="text-5xl">{trailData.icon}</span>
+                <span className="text-2xl opacity-60">{trailData.icon}</span>
               )}
             </div>
             
