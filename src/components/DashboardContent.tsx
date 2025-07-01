@@ -581,7 +581,6 @@ export default function DashboardContent() {
                     <div className="text-center space-y-4">
                       <div className="relative">
                         <div className="text-6xl mb-2 filter grayscale">🎯</div>
-                        <div className="absolute -top-2 -right-2 text-2xl">⏰</div>
                       </div>
                       <div className="space-y-2">
                         <div className="text-orange-400 font-bold text-lg">
@@ -596,7 +595,7 @@ export default function DashboardContent() {
                             ? (() => {
                                 const nextLevel = getNextLevel(userLevel)
                                 if (!nextLevel) return 'Nível máximo atingido'
-                                return `Complete a trilha de trabalho para fazer o teste de ${getLevelName(nextLevel)}`
+                                return `Complete ao menos uma trilha progressiva do básico para fazer o teste ${getLevelName(nextLevel)}`
                               })()
                             : `Aguarde ${certificationBlocked.timeRemaining} para o próximo teste`
                           }
