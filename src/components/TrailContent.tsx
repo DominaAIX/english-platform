@@ -330,32 +330,47 @@ export default function TrailContent({ trail, userPlan, slug }: TrailContentProp
 
         {/* Trail Header */}
         <PageTransition delay={200}>
-          <div className="text-center mb-4">
-          <div className="mb-2 flex justify-center">
-            {slug && iconMapping[slug] ? (() => {
-              const IconComponent = iconMapping[slug].component;
-              return <IconComponent size={48} className={iconMapping[slug].color} />;
-            })() : (
-              <div className="text-4xl">{trail.icon}</div>
-            )}
-          </div>
-          <h1 className="text-2xl font-bold text-white mb-1">{trail.title}</h1>
-          <p className="text-gray-400 mb-3 text-sm">{trail.description}</p>
-          
-          {/* Progress Bar */}
-          <div className="w-full bg-gray-700 rounded-full h-2 mb-2">
-            <div 
-              className="bg-gradient-to-r from-purple-500 to-cyan-400 h-2 rounded-full transition-all duration-300"
-              style={{ width: `${progress}%` }}
-            />
-          </div>
-          <div className="text-xs text-gray-400">
-            Progresso: {Math.round(progress)}%
+          <div className="relative mb-3">
+            {/* Indicação de nível no canto superior direito */}
+            <div className="absolute top-0 right-0">
+              <span className="bg-green-500/20 text-green-300 px-3 py-1 rounded-full text-xs font-medium">
+                🟢 Iniciante
+              </span>
+            </div>
+            
+            <div className="flex items-start gap-3">
+              {/* Ícone menor à esquerda */}
+              <div className="flex-shrink-0 mt-1">
+                {slug && iconMapping[slug] ? (() => {
+                  const IconComponent = iconMapping[slug].component;
+                  return <IconComponent size={32} className={iconMapping[slug].color} />;
+                })() : (
+                  <div className="text-2xl">{trail.icon}</div>
+                )}
+              </div>
+              
+              {/* Conteúdo principal */}
+              <div className="flex-1 text-left">
+                <h1 className="text-xl font-bold text-white mb-1">{trail.title}</h1>
+                <p className="text-gray-400 mb-2 text-sm">{trail.description}</p>
+                
+                {/* Progress Bar */}
+                <div className="w-full bg-gray-700 rounded-full h-2 mb-1">
+                  <div 
+                    className="bg-gradient-to-r from-purple-500 to-cyan-400 h-2 rounded-full transition-all duration-300"
+                    style={{ width: `${progress}%` }}
+                  />
+                </div>
+                <div className="text-xs text-gray-400">
+                  Progresso: {Math.round(progress)}%
+                </div>
+              </div>
+            </div>
           </div>
           
           {/* Filtro e Estatísticas por Nível - Apenas Premium */}
           {actualUserPlan === 'premium' && (
-            <div className="mt-3 space-y-2">
+            <div className="mt-2 space-y-1">
               {/* Botões de Filtro */}
               <div className="flex flex-wrap gap-2 justify-center">
                 <button
