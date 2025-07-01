@@ -12,23 +12,34 @@ export function useRequiredLevelTest() {
 
   useEffect(() => {
     if (!user) {
+      console.log('🔍 useRequiredLevelTest: sem usuário logado')
       setIsLoading(false)
       return
     }
 
+    console.log('🔍 useRequiredLevelTest: verificando teste para user:', user.id, user.email)
+    
     // AGORA TODOS OS USUÁRIOS (FREE E PREMIUM) PRECISAM FAZER O TESTE
     // Verificar se já fez o teste de nível
     const testResult = localStorage.getItem(`level_test_${user.id}`)
     const userLevel = localStorage.getItem(`user_level_${user.id}`)
     
-    console.log('🔍 Verificando teste para user:', user.id)
-    console.log('📋 Test result:', !!testResult, 'User level:', !!userLevel)
+    console.log('📋 Dados do localStorage:')
+    console.log('  - level_test_' + user.id + ':', testResult ? 'EXISTS' : 'NULL')
+    console.log('  - user_level_' + user.id + ':', userLevel ? userLevel : 'NULL')
+    
+    // Verificar todas as chaves do localStorage para debug
+    if (typeof window !== 'undefined') {
+      const allKeys = Object.keys(localStorage)
+      const levelKeys = allKeys.filter(key => key.includes('level') || key.includes(user.id))
+      console.log('🔍 Chaves relacionadas no localStorage:', levelKeys)
+    }
     
     if (testResult && userLevel) {
-      console.log('✅ Usuário já fez o teste')
+      console.log('✅ Usuário já fez o teste - permitindo acesso ao dashboard')
       setHasCompletedTest(true)
     } else {
-      console.log('❌ Usuário precisa fazer o teste')
+      console.log('❌ Usuário precisa fazer o teste - bloqueando acesso')
       setHasCompletedTest(false)
     }
     

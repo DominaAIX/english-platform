@@ -197,12 +197,24 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       setSession(null)
       setLoading(false)
       
-      // Limpar localStorage (limites, favoritos, etc.)
+      // Limpar localStorage (apenas dados temporários, preservar testes de nível)
       if (typeof window !== 'undefined') {
         const keysToRemove = []
         for (let i = 0; i < localStorage.length; i++) {
           const key = localStorage.key(i)
-          if (key && (key.startsWith('user_limits_') || key.startsWith('user_'))) {
+          if (key && (
+            key.startsWith('user_limits_') || 
+            key.startsWith('user_usage_') ||
+            key.startsWith('user_stats_') ||
+            key.startsWith('user_favorites_') ||
+            key.startsWith('user_premium_') ||
+            key.startsWith('user_ai_messages_') ||
+            key.startsWith('user_phrases_')
+          )) {
+            // Remover apenas dados temporários, preservar:
+            // - level_test_* (testes de nível)
+            // - user_level_* (níveis dos usuários)
+            // - progressiveTrail_* (progresso das trilhas)
             keysToRemove.push(key)
           }
         }
@@ -210,6 +222,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           localStorage.removeItem(key)
           console.log('🗑️ Removido do localStorage:', key)
         })
+        console.log('📋 Dados preservados: testes de nível, níveis e progresso das trilhas')
       }
       
       console.log('✅ Estado local limpo com sucesso')

@@ -40,17 +40,27 @@ export default function DashboardContent() {
 
   // Função para obter nível do teste de nível
   const getUserTestLevel = () => {
-    if (!user?.id) return null
+    if (!user?.id) {
+      console.log('❌ getUserTestLevel: sem user.id')
+      return null
+    }
     
+    console.log('🔍 getUserTestLevel: buscando para user.id:', user.id)
     const testResult = localStorage.getItem(`level_test_${user.id}`)
+    console.log('📋 getUserTestLevel: testResult raw:', testResult)
+    
     if (testResult) {
       try {
         const result = JSON.parse(testResult)
+        console.log('✅ getUserTestLevel: resultado parseado:', result)
+        console.log('🎯 getUserTestLevel: level encontrado:', result.level)
         return result.level
-      } catch {
+      } catch (error) {
+        console.error('❌ getUserTestLevel: erro ao parsear:', error)
         return null
       }
     }
+    console.log('❌ getUserTestLevel: sem testResult no localStorage')
     return null
   }
 
@@ -560,23 +570,18 @@ export default function DashboardContent() {
                           <h3 className="text-xl font-bold text-white mb-2">
                             Meu Nível
                           </h3>
-                          {(() => {
-                            const testLevel = getUserTestLevel()
-                            return testLevel ? (
-                              <div className="mb-4">
-                                <div className="text-2xl font-bold text-yellow-400 mb-1">
-                                  {formatLevel(testLevel)}
-                                </div>
-                                <span className="bg-green-500/20 text-green-300 px-3 py-1 rounded-full text-sm">
-                                  Concluído
-                                </span>
-                              </div>
-                            ) : (
-                              <p className="text-gray-300 text-sm mb-4">
-                                Ver resultado
-                              </p>
-                            )
-                          })()}
+                          <div className="mb-4">
+                            <div className="text-lg font-semibold text-gray-300 mb-2">
+                              {(() => {
+                                const testLevel = getUserTestLevel()
+                                console.log('🔍 Debug testLevel:', testLevel) // Debug log
+                                return testLevel ? formatLevel(testLevel) : 'Carregando...'
+                              })()}
+                            </div>
+                            <span className="bg-green-500/20 text-green-300 px-3 py-1 rounded-full text-sm">
+                              Concluído
+                            </span>
+                          </div>
                         </>
                       ) : (
                         // Card normal para usuário que não fez o teste
