@@ -457,45 +457,121 @@ export const RobotIcon = ({ className = "", size = 20 }: IconProps) => (
     fill="none" 
     className={className}
   >
+    <defs>
+      {/* Gradientes futuristas */}
+      <linearGradient id="robotBody" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#3b82f6" stopOpacity="0.9" />
+        <stop offset="50%" stopColor="#6366f1" stopOpacity="0.8" />
+        <stop offset="100%" stopColor="#8b5cf6" stopOpacity="0.9" />
+      </linearGradient>
+      
+      <linearGradient id="robotHead" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#06b6d4" stopOpacity="0.9" />
+        <stop offset="100%" stopColor="#3b82f6" stopOpacity="0.8" />
+      </linearGradient>
+      
+      <linearGradient id="robotEyes" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#00f5ff" />
+        <stop offset="100%" stopColor="#0ea5e9" />
+      </linearGradient>
+      
+      <radialGradient id="eyeGlow">
+        <stop offset="0%" stopColor="#00f5ff" stopOpacity="0.8" />
+        <stop offset="70%" stopColor="#0ea5e9" stopOpacity="0.4" />
+        <stop offset="100%" stopColor="transparent" />
+      </radialGradient>
+      
+      <filter id="glow">
+        <feGaussianBlur stdDeviation="0.5" result="coloredBlur"/>
+        <feMerge> 
+          <feMergeNode in="coloredBlur"/>
+          <feMergeNode in="SourceGraphic"/>
+        </feMerge>
+      </filter>
+    </defs>
+    
+    {/* Sombra de fundo */}
+    <circle cx="12" cy="13" r="9" fill="url(#robotBody)" fillOpacity="0.1" />
+    
+    {/* Antena */}
+    <line x1="12" y1="5" x2="12" y2="3" stroke="url(#robotHead)" strokeWidth="2" strokeLinecap="round" />
+    <circle cx="12" cy="2.5" r="1" fill="url(#robotEyes)" filter="url(#glow)" />
+    
+    {/* Cabeça principal */}
+    <rect 
+      x="7" 
+      y="5" 
+      width="10" 
+      height="8" 
+      rx="4" 
+      fill="url(#robotHead)" 
+      stroke="currentColor" 
+      strokeWidth="0.5"
+      strokeOpacity="0.3"
+    />
+    
+    {/* Brilho na cabeça */}
+    <ellipse cx="10" cy="7" rx="2" ry="1" fill="white" fillOpacity="0.3" />
+    
+    {/* Olhos brilhantes */}
+    <circle cx="9.5" cy="9" r="1.2" fill="url(#eyeGlow)" />
+    <circle cx="14.5" cy="9" r="1.2" fill="url(#eyeGlow)" />
+    <circle cx="9.5" cy="9" r="0.8" fill="url(#robotEyes)" filter="url(#glow)" />
+    <circle cx="14.5" cy="9" r="0.8" fill="url(#robotEyes)" filter="url(#glow)" />
+    
+    {/* Pupila brilhante */}
+    <circle cx="9.5" cy="9" r="0.3" fill="white" />
+    <circle cx="14.5" cy="9" r="0.3" fill="white" />
+    
+    {/* Sorriso feliz */}
+    <path 
+      d="M10 11.5Q12 13 14 11.5" 
+      stroke="url(#robotEyes)" 
+      strokeWidth="1.5" 
+      strokeLinecap="round"
+      fill="none"
+      filter="url(#glow)"
+    />
+    
+    {/* Corpo futurista */}
     <rect 
       x="6" 
-      y="8" 
+      y="13" 
       width="12" 
-      height="12" 
+      height="9" 
       rx="3" 
-      fill="currentColor" 
-      fillOpacity="0.2"
+      fill="url(#robotBody)"
+      stroke="currentColor" 
+      strokeWidth="0.5"
+      strokeOpacity="0.3"
     />
+    
+    {/* Painel central brilhante */}
     <rect 
-      x="6" 
-      y="8" 
-      width="12" 
-      height="12" 
-      rx="3" 
-      stroke="currentColor" 
-      strokeWidth="1.5"
+      x="10" 
+      y="15" 
+      width="4" 
+      height="5" 
+      rx="1" 
+      fill="url(#robotEyes)" 
+      fillOpacity="0.6"
+      filter="url(#glow)"
     />
-    <path 
-      d="M12 8V5C12 3.89543 11.1046 3 10 3H14C12.8954 3 12 3.89543 12 5V8" 
-      stroke="currentColor" 
-      strokeWidth="1.5" 
-      strokeLinecap="round"
-    />
-    <circle cx="9.5" cy="12" r="1" fill="currentColor" />
-    <circle cx="14.5" cy="12" r="1" fill="currentColor" />
-    <path 
-      d="M10 16H14" 
-      stroke="currentColor" 
-      strokeWidth="1.5" 
-      strokeLinecap="round"
-    />
-    <path 
-      d="M4 10H6M18 10H20M4 14H6M18 14H20" 
-      stroke="currentColor" 
-      strokeWidth="1.5" 
-      strokeLinecap="round"
-    />
-    <circle cx="12" cy="12" r="8" fill="currentColor" fillOpacity="0.05" />
+    
+    {/* Detalhes do painel */}
+    <rect x="10.5" y="15.5" width="3" height="0.5" rx="0.25" fill="white" fillOpacity="0.8" />
+    <rect x="10.5" y="16.5" width="2" height="0.5" rx="0.25" fill="white" fillOpacity="0.6" />
+    <rect x="10.5" y="17.5" width="2.5" height="0.5" rx="0.25" fill="white" fillOpacity="0.7" />
+    
+    {/* Braços/conectores */}
+    <rect x="4" y="16" width="2" height="1" rx="0.5" fill="url(#robotHead)" />
+    <rect x="18" y="16" width="2" height="1" rx="0.5" fill="url(#robotHead)" />
+    <circle cx="4" cy="16.5" r="0.8" fill="url(#robotEyes)" fillOpacity="0.6" />
+    <circle cx="20" cy="16.5" r="0.8" fill="url(#robotEyes)" fillOpacity="0.6" />
+    
+    {/* Luzes indicadoras */}
+    <circle cx="8" cy="18.5" r="0.4" fill="url(#robotEyes)" filter="url(#glow)" />
+    <circle cx="16" cy="18.5" r="0.4" fill="url(#robotEyes)" filter="url(#glow)" />
   </svg>
 )
 
