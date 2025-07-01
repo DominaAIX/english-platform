@@ -41,12 +41,10 @@ export default function DashboardContent() {
   useEffect(() => {
     if (user?.id) {
       const level = getUserLevel(user.id)
-      console.log('🎯 Dashboard - Nível do usuário:', level)
       setUserLevel(level)
       
       // Verificar se pode avançar para próximo nível
       const canAdvance = canUserAdvanceToNextLevel(user.id, level)
-      console.log('🎯 Dashboard - Pode avançar:', canAdvance)
       setCanAdvanceLevel(canAdvance)
     }
   }, [user?.id])
@@ -586,10 +584,20 @@ export default function DashboardContent() {
                         <div className="absolute -top-2 -right-2 text-2xl">⏰</div>
                       </div>
                       <div className="space-y-2">
-                        <div className="text-orange-400 font-bold text-lg">Em Breve</div>
+                        <div className="text-orange-400 font-bold text-lg">
+                          {(() => {
+                            const nextLevel = getNextLevel(userLevel)
+                            if (!nextLevel) return 'Nível Máximo'
+                            return `Teste para ${getLevelName(nextLevel)}`
+                          })()}
+                        </div>
                         <div className="text-gray-300 text-sm max-w-xs leading-relaxed">
                           {!hasCompletedBasicTrail 
-                            ? 'Complete uma trilha progressiva para desbloquear'
+                            ? (() => {
+                                const nextLevel = getNextLevel(userLevel)
+                                if (!nextLevel) return 'Nível máximo atingido'
+                                return `Complete a trilha de trabalho para fazer o teste de ${getLevelName(nextLevel)}`
+                              })()
                             : `Aguarde ${certificationBlocked.timeRemaining} para o próximo teste`
                           }
                         </div>
@@ -630,7 +638,6 @@ export default function DashboardContent() {
                     }`}>
                       {(() => {
                         const nextLevel = getNextLevel(userLevel)
-                        console.log('🎯 Dashboard render - userLevel:', userLevel, 'nextLevel:', nextLevel, 'canAdvanceLevel:', canAdvanceLevel)
                         
                         if (!nextLevel) return 'Nível Máximo Atingido! 🏆'
                         
