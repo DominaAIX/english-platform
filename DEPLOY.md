@@ -73,7 +73,7 @@ git checkout main
 
 # Ver diferenças entre staging e main
 git diff main..staging
-erro
+
 # Fazer merge de staging para main
 git checkout main
 git merge staging
