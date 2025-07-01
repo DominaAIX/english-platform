@@ -496,33 +496,6 @@ function ProgressiveTrailClient({ trailData, slug }: { trailData: any, slug: str
             <div className="max-w-4xl mx-auto">
               {userProgress && userProgress.progressPercentage < 100 && currentStep && (!freeLimitations.isBlocked || userPlan === 'premium') ? (
                 <div>
-                  {/* Informação do passo atual ELEGANTE */}
-                  <div className="mb-6">
-                    <div className="bg-gradient-to-r from-white/5 to-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-4">
-                      <div className="flex items-center gap-3 mb-2">
-                        <div className="relative">
-                          <div className="absolute inset-0 animate-pulse bg-purple-500/20 rounded-full"></div>
-                          <span className="relative text-3xl">
-                            {currentStep.type === 'phrase' ? '💬' : 
-                             currentStep.type === 'exercise' ? '🧩' :
-                             currentStep.type === 'module' ? '📚' :
-                             currentStep.type === 'lesson' ? '🎯' : '📝'}
-                          </span>
-                        </div>
-                        <h2 className="text-xl font-bold text-white">
-                          {currentStep.type === 'phrase' ? 'Aprender Frase' : 
-                           currentStep.type === 'exercise' ? 'Exercício' :
-                           currentStep.type === 'module' ? 'Módulo' :
-                           currentStep.type === 'lesson' ? 'Aula' : 'Conteúdo'}
-                        </h2>
-                        {currentStep.isCompleted && (
-                          <span className="bg-gradient-to-r from-green-500/10 to-emerald-500/10 backdrop-blur-sm border border-green-500/20 text-green-400 px-4 py-2 rounded-full text-sm font-bold shadow-lg">
-                            ✓ Concluído
-                          </span>
-                        )}
-                      </div>
-                    </div>
-                  </div>
 
 
                   {/* Conteúdo do passo */}
@@ -604,6 +577,32 @@ function ProgressiveTrailClient({ trailData, slug }: { trailData: any, slug: str
                               </div>
                             )}
                           </div>
+                        )}
+                      </div>
+
+                      {/* Título da atividade dentro do card */}
+                      <div className="flex items-center justify-between mb-4 pt-4 border-t border-white/10">
+                        <div className="flex items-center gap-3">
+                          <div className="relative">
+                            <div className="absolute inset-0 animate-pulse bg-purple-500/20 rounded-full"></div>
+                            <span className="relative text-2xl">
+                              {currentStep.type === 'phrase' ? '💬' : 
+                               currentStep.type === 'exercise' ? '🧩' :
+                               currentStep.type === 'module' ? '📚' :
+                               currentStep.type === 'lesson' ? '🎯' : '📝'}
+                            </span>
+                          </div>
+                          <h3 className="text-lg font-bold text-white">
+                            {currentStep.type === 'phrase' ? 'Aprender Frase' : 
+                             currentStep.type === 'exercise' ? 'Exercício' :
+                             currentStep.type === 'module' ? 'Módulo' :
+                             currentStep.type === 'lesson' ? 'Aula' : 'Conteúdo'}
+                          </h3>
+                        </div>
+                        {currentStep.isCompleted && (
+                          <span className="bg-gradient-to-r from-green-500/10 to-emerald-500/10 backdrop-blur-sm border border-green-500/20 text-green-400 px-3 py-1 rounded-full text-sm font-bold shadow-lg">
+                            ✓ Concluído
+                          </span>
                         )}
                       </div>
 
