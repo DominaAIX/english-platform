@@ -2229,43 +2229,71 @@ const trailsData = {
         english: "The air conditioning isn't working.",
         portuguese: "O ar condicionado não está funcionando.",
         level: 'básico',
-        context: 'Hotel'
+        context: 'Hotel',
+        situations: [
+          'Reportando problema: "Excuse me, the air conditioning isn\'t working in room 205. Can you send someone to fix it?"',
+          'Ligando para recepção: "Hi, this is room 312. The air conditioning isn\'t working and it\'s quite warm in here."'
+        ]
       },
       {
         english: "Can I get extra towels?",
         portuguese: "Posso ter toalhas extras?",
         level: 'básico',
-        context: 'Hotel'
+        context: 'Hotel',
+        situations: [
+          'Pedindo housekeeping: "Can I get extra towels? We\'re a family of four and need more than what\'s provided."',
+          'Na recepção: "Can I get extra towels sent to room 408? The ones we have are quite worn."'
+        ]
       },
       {
         english: "Where is the fitness center?",
         portuguese: "Onde fica a academia?",
         level: 'básico',
-        context: 'Hotel'
+        context: 'Hotel',
+        situations: [
+          'Procurando facilidades: "I\'d like to work out this morning. Where is the fitness center?"',
+          'Pergunta no check-in: "Where is the fitness center and what are the operating hours?"'
+        ]
       },
       {
         english: "What's the WiFi password?",
         portuguese: "Qual é a senha do WiFi?",
         level: 'básico',
-        context: 'Hotel'
+        context: 'Hotel',
+        situations: [
+          'Precisando de internet: "I need to check my emails. What\'s the WiFi password for guests?"',
+          'Problema de conexão: "My laptop isn\'t connecting to the network. What\'s the WiFi password?"'
+        ]
       },
       {
         english: "I need to charge my phone.",
         portuguese: "Preciso carregar meu telefone.",
         level: 'básico',
-        context: 'Hotel'
+        context: 'Hotel',
+        situations: [
+          'Problema técnico: "I need to charge my phone but I forgot my charger. Do you have one I can borrow?"',
+          'Procurando tomada: "I need to charge my phone. Are there any outlets near the lobby seating area?"'
+        ]
       },
       {
         english: "Can you call a taxi for me?",
         portuguese: "Você pode chamar um táxi para mim?",
         level: 'básico',
-        context: 'Hotel'
+        context: 'Hotel',
+        situations: [
+          'Saindo do hotel: "I need to get to the airport in 30 minutes. Can you call a taxi for me?"',
+          'Pedindo ajuda: "Can you call a taxi for me? I need to go to the business district downtown."'
+        ]
       },
       {
         english: "I'd like to make a dinner reservation.",
         portuguese: "Gostaria de fazer uma reserva para jantar.",
         level: 'médio',
-        context: 'Hotel'
+        context: 'Hotel',
+        situations: [
+          'No restaurante do hotel: "I\'d like to make a dinner reservation for two at 7 PM tonight."',
+          'Pedindo ajuda ao concierge: "I\'d like to make a dinner reservation at a good local restaurant. Can you recommend one?"'
+        ]
       },
       {
         english: "Is room service available?",
@@ -2381,49 +2409,81 @@ const trailsData = {
         english: "Do you have a table for two?",
         portuguese: "Vocês têm uma mesa para dois?",
         level: 'básico',
-        context: 'Restaurante'
+        context: 'Restaurante',
+        situations: [
+          'Chegando ao restaurante: "Good evening, do you have a table for two? We don\'t have a reservation."',
+          'Pergunta ao host: "Do you have a table for two available now, or should we wait?"'
+        ]
       },
       {
         english: "Can I see the menu, please?",
         portuguese: "Posso ver o cardápio, por favor?",
         level: 'básico',
-        context: 'Restaurante'
+        context: 'Restaurante',
+        situations: [
+          'Sentando à mesa: "Thank you for seating us. Can I see the menu, please?"',
+          'Pedindo ao garçom: "Can I see the menu, please? And do you have any daily specials?"'
+        ]
       },
       {
         english: "What do you recommend?",
         portuguese: "O que você recomenda?",
         level: 'básico',
-        context: 'Restaurante'
+        context: 'Restaurante',
+        situations: [
+          'Pedindo sugestão: "This is our first time here. What do you recommend as your most popular dish?"',
+          'Indeciso no cardápio: "I can\'t decide between these options. What do you recommend?"'
+        ]
       },
       {
         english: "I'm allergic to nuts.",
         portuguese: "Sou alérgico a nozes.",
         level: 'médio',
-        context: 'Restaurante'
+        context: 'Restaurante',
+        situations: [
+          'Informando restrição: "Before I order, I need to let you know that I\'m allergic to nuts. Which dishes are safe for me?"',
+          'Pergunta importante: "I\'m allergic to nuts. Can you check if this dish contains any nuts or nut oils?"'
+        ]
       },
       {
         english: "Can I have the check, please?",
         portuguese: "Posso ter a conta, por favor?",
         level: 'básico',
-        context: 'Restaurante'
+        context: 'Restaurante',
+        situations: [
+          'Final da refeição: "We\'ve finished our meal and it was delicious. Can I have the check, please?"',
+          'Chamando o garçom: "Excuse me, can I have the check, please? We need to leave soon."'
+        ]
       },
       {
         english: "I'll have the salmon.",
         portuguese: "Vou querer o salmão.",
         level: 'básico',
-        context: 'Restaurante'
+        context: 'Restaurante',
+        situations: [
+          'Fazendo pedido: "I\'ll have the salmon, please. How is it prepared?"',
+          'Decidindo prato: "After looking at the menu, I\'ll have the salmon with vegetables."'
+        ]
       },
       {
         english: "Is this dish spicy?",
         portuguese: "Este prato é picante?",
         level: 'básico',
-        context: 'Restaurante'
+        context: 'Restaurante',
+        situations: [
+          'Pergunta antes de pedir: "Is this dish spicy? I don\'t handle spicy food very well."',
+          'Verificando tempero: "Is this dish spicy or mild? I\'m ordering for someone who doesn\'t like spicy food."'
+        ]
       },
       {
         english: "Can we split the bill?",
         portuguese: "Podemos dividir a conta?",
         level: 'básico',
-        context: 'Restaurante'
+        context: 'Restaurante',
+        situations: [
+          'Pagamento em grupo: "Can we split the bill between the four of us equally?"',
+          'Entre amigos: "Can we split the bill? We\'d like to pay separately for what we ordered."'
+        ]
       },
       {
         english: "I'd like my steak medium-rare.",
@@ -2563,31 +2623,51 @@ const trailsData = {
         english: "How do I get to the city center?",
         portuguese: "Como chego ao centro da cidade?",
         level: 'básico',
-        context: 'Transporte'
+        context: 'Transporte',
+        situations: [
+          'Perguntando direções: "Excuse me, I\'m new here. How do I get to the city center from the airport?"',
+          'No hotel: "How do I get to the city center? Is there public transportation nearby?"'
+        ]
       },
       {
         english: "Where is the nearest subway station?",
         portuguese: "Onde fica a estação de metrô mais próxima?",
         level: 'básico',
-        context: 'Transporte'
+        context: 'Transporte',
+        situations: [
+          'Procurando transporte: "I need to catch the subway. Where is the nearest subway station?"',
+          'Pergunta na rua: "Excuse me, where is the nearest subway station? I need to get downtown."'
+        ]
       },
       {
         english: "How much is a one-way ticket?",
         portuguese: "Quanto custa uma passagem só de ida?",
         level: 'básico',
-        context: 'Transporte'
+        context: 'Transporte',
+        situations: [
+          'Na bilheteria: "How much is a one-way ticket to downtown? And do you accept credit cards?"',
+          'Comprando passagem: "How much is a one-way ticket on this bus route?"'
+        ]
       },
       {
         english: "Does this bus go to the airport?",
         portuguese: "Este ônibus vai para o aeroporto?",
         level: 'básico',
-        context: 'Transporte'
+        context: 'Transporte',
+        situations: [
+          'No ponto de ônibus: "Excuse me, does this bus go to the airport? I have a flight in two hours."',
+          'Confirmando rota: "Does this bus go to the airport, or do I need to transfer somewhere?"'
+        ]
       },
       {
         english: "I'd like to rent a car.",
         portuguese: "Gostaria de alugar um carro.",
         level: 'básico',
-        context: 'Transporte'
+        context: 'Transporte',
+        situations: [
+          'Na locadora: "Good morning, I\'d like to rent a car for three days. What options do you have available?"',
+          'Fazendo reserva: "I\'d like to rent a car for my business trip. Do you have any compact cars available?"'
+        ]
       },
       {
         english: "Can you call me a taxi?",
@@ -2715,31 +2795,51 @@ const trailsData = {
         english: "How much does this cost?",
         portuguese: "Quanto custa isso?",
         level: 'básico',
-        context: 'Compras'
+        context: 'Compras',
+        situations: [
+          'Na loja: "Excuse me, how much does this cost? I don\'t see a price tag."',
+          'Interessado em produto: "This looks nice. How much does this cost?"'
+        ]
       },
       {
         english: "Do you accept credit cards?",
         portuguese: "Vocês aceitam cartão de crédito?",
         level: 'básico',
-        context: 'Compras'
+        context: 'Compras',
+        situations: [
+          'Antes de comprar: "Do you accept credit cards, or is it cash only?"',
+          'No caixa: "Do you accept credit cards? I don\'t have enough cash with me."'
+        ]
       },
       {
         english: "Can I try this on?",
         portuguese: "Posso experimentar isso?",
         level: 'básico',
-        context: 'Compras'
+        context: 'Compras',
+        situations: [
+          'Loja de roupas: "I like this jacket. Can I try this on? Where are the fitting rooms?"',
+          'Experimentando roupa: "Can I try this on to see if it fits properly?"'
+        ]
       },
       {
         english: "Do you have this in a different size?",
         portuguese: "Vocês têm isso em um tamanho diferente?",
         level: 'básico',
-        context: 'Compras'
+        context: 'Compras',
+        situations: [
+          'Tamanho errado: "This is too small for me. Do you have this in a different size?"',
+          'Procurando opções: "I love this style, but do you have this in a different size? Maybe a large?"'
+        ]
       },
       {
         english: "I'm just browsing, thanks.",
         portuguese: "Estou só olhando, obrigado.",
         level: 'básico',
-        context: 'Compras'
+        context: 'Compras',
+        situations: [
+          'Vendedor se aproxima: "Can I help you find anything?" - "I\'m just browsing, thanks. I\'ll let you know if I need assistance."',
+          'Recusando ajuda educadamente: "I\'m just browsing, thanks. I\'m not looking for anything specific right now."'
+        ]
       },
       {
         english: "Can I get a discount?",
