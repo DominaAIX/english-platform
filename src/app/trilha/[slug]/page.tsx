@@ -1,4 +1,4 @@
-import TrailContent from '@/components/TrailContent'
+import SimpleTrailContent from '@/components/SimpleTrailContent'
 
 const trailsData = {
   trabalho: {
@@ -4954,7 +4954,7 @@ export default async function TrailPage({ params }: TrailPageProps) {
 
   return (
     <div className="min-h-screen">
-      <TrailContent 
+      <SimpleTrailContent 
         trail={trailData as any}
         userPlan="free" // Fallback - será substituído pelo plano real do usuário
         slug={slug}
