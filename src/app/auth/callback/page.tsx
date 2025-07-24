@@ -8,24 +8,12 @@ export default function AuthCallbackPage() {
   const { user, loading } = useAuth()
   const router = useRouter()
 
-  const checkUserLevelTest = (userId: string): boolean => {
-    const testResult = localStorage.getItem(`level_test_${userId}`)
-    const userLevel = localStorage.getItem(`user_level_${userId}`)
-    return !!(testResult && userLevel)
-  }
-
   useEffect(() => {
     if (loading) return
 
     if (user) {
-      // Verificar se o usuário já fez o teste de nível
-      const hasCompletedTest = checkUserLevelTest(user.id)
-      
-      if (hasCompletedTest) {
-        router.push('/dashboard')
-      } else {
-        router.push('/teste-nivel')
-      }
+      // Redirecionar diretamente ao dashboard
+      router.push('/dashboard')
     } else {
       // Se não tem usuário após o callback, redirecionar para home
       router.push('/')

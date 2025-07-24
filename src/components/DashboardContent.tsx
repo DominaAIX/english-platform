@@ -10,21 +10,15 @@ import { useAuth } from '@/contexts/AuthContext'
 import { useStats } from '@/contexts/StatsContext'
 import PageTransition from './PageTransition'
 import AnimatedContainer from './AnimatedContainer'
-import { WorkIcon, InterviewIcon, TravelIcon, BusinessIcon, CasualIcon, RestaurantIcon, ShoppingIcon, RobotIcon, LearningTrailIcon, ConversationIcon, TargetIcon, AudioIcon, GrammarIcon, LevelBarsIcon } from './ModernIcons'
+import { WorkIcon, TravelIcon, BusinessIcon, CasualIcon, RestaurantIcon, ShoppingIcon, LearningTrailIcon, ConversationIcon, TargetIcon, AudioIcon, GrammarIcon } from './ModernIcons'
 import { PROFESSIONS } from '@/data/professions'
-import { useRequiredLevelTest } from '@/hooks/useRequiredLevelTest'
-import { checkCertificationCooldown } from '@/utils/certificationCooldown'
 import { getFreeUsageStatus, FreeLimitationStatus, cleanupOldSystems } from '@/utils/freeLimitations'
-import { getUserLevel, getNextLevel, getLevelName, canUserAdvanceToNextLevel } from '@/data/progressiveTrails'
 
 export default function DashboardContent() {
   const { user, userProfile } = useAuth()
   const router = useRouter()
   const [hoveredCard, setHoveredCard] = useState<string | null>(null)
   const { stats, getTotalPhrasesPracticed, getPremiumTimeFormatted } = useStats()
-  const { needsLevelTest, hasCompletedTest, isLoading } = useRequiredLevelTest()
-  const [certificationBlocked, setCertificationBlocked] = useState({ isBlocked: false, timeRemaining: '' })
-  const [hasCompletedBasicTrail, setHasCompletedBasicTrail] = useState(false)
   const [freeLimitations, setFreeLimitations] = useState<FreeLimitationStatus>({
     isBlocked: false,
     phrasesUsed: 0,
@@ -32,100 +26,13 @@ export default function DashboardContent() {
     timeRemaining: '',
     canAccess: true
   })
-  const [userLevel, setUserLevel] = useState<'beginner' | 'intermediate' | 'advanced'>('beginner')
-  const [canAdvanceLevel, setCanAdvanceLevel] = useState(false)
   
   // Usar o plano real do usuário autenticado do userProfile
   const userPlan = userProfile?.plan || 'free'
 
-  // Função para obter nível do teste de nível
-  const getUserTestLevel = () => {
-    if (!user?.id) {
-      console.log('❌ getUserTestLevel: sem user.id')
-      return null
-    }
-    
-    console.log('🔍 getUserTestLevel: buscando para user.id:', user.id)
-    const testResult = localStorage.getItem(`level_test_${user.id}`)
-    console.log('📋 getUserTestLevel: testResult raw:', testResult)
-    
-    if (testResult) {
-      try {
-        const result = JSON.parse(testResult)
-        console.log('✅ getUserTestLevel: resultado parseado:', result)
-        console.log('🎯 getUserTestLevel: level encontrado:', result.level)
-        return result.level
-      } catch (error) {
-        console.error('❌ getUserTestLevel: erro ao parsear:', error)
-        return null
-      }
-    }
-    console.log('❌ getUserTestLevel: sem testResult no localStorage')
-    return null
-  }
 
-  // Função para formatar nível em português
-  const formatLevel = (level: string) => {
-    switch (level) {
-      case 'beginner': return 'Básico'
-      case 'intermediate': return 'Intermediário'  
-      case 'advanced': return 'Avançado'
-      default: return level
-    }
-  }
 
-  // Carregar nível do usuário e verificar se pode avançar
-  useEffect(() => {
-    if (user?.id) {
-      const level = getUserLevel(user.id)
-      setUserLevel(level)
-      
-      // Verificar se pode avançar para próximo nível
-      const canAdvance = canUserAdvanceToNextLevel(user.id, level)
-      setCanAdvanceLevel(canAdvance)
-    }
-  }, [user?.id])
 
-  // Verificar se completou trilha básica (trabalho)
-  useEffect(() => {
-    if (user?.id) {
-      const basicTrailProgress = localStorage.getItem(`progressiveTrail_trabalho_${user.id}`)
-      if (basicTrailProgress) {
-        const progress = JSON.parse(basicTrailProgress)
-        // Verificar se completou 100% da trilha básica
-        const completed = progress.progressPercentage >= 100
-        setHasCompletedBasicTrail(completed)
-        
-        // Reatualizar se pode avançar quando completar trilha
-        if (completed) {
-          const level = getUserLevel(user.id)
-          const canAdvance = canUserAdvanceToNextLevel(user.id, level)
-          setCanAdvanceLevel(canAdvance)
-        }
-      }
-    }
-  }, [user?.id])
-
-  // Verificar bloqueio de certificação
-  useEffect(() => {
-    if (user?.id) {
-      const cooldownStatus = checkCertificationCooldown(user.id)
-      setCertificationBlocked(cooldownStatus)
-    }
-  }, [user?.id])
-
-  // Atualizar contador a cada minuto
-  useEffect(() => {
-    if (certificationBlocked.isBlocked) {
-      const interval = setInterval(() => {
-        if (user?.id) {
-          const cooldownStatus = checkCertificationCooldown(user.id)
-          setCertificationBlocked(cooldownStatus)
-        }
-      }, 60000)
-      return () => clearInterval(interval)
-    }
-  }, [certificationBlocked.isBlocked, user?.id])
 
   // Verificar limitações para usuários free
   useEffect(() => {
@@ -317,9 +224,9 @@ export default function DashboardContent() {
     }
   ]
 
-  // Função para verificar se a trilha é recomendada para o nível do usuário
+  // Função para verificar se a trilha é recomendada (sempre true no novo sistema)
   const isRecommendedTrail = (trailLevel: string) => {
-    return trailLevel === userLevel
+    return true
   }
 
   return (
@@ -362,11 +269,11 @@ export default function DashboardContent() {
               {getGreeting()}, {getUserDisplayName()}!
             </h1>
             <p className="text-gray-400 text-lg">
-              {needsLevelTest ? 'Primeiro, vamos descobrir seu nível de inglês!' : 'Como você gostaria de praticar inglês hoje?'}
+              Como você gostaria de praticar inglês hoje?
             </p>
             
             {/* Contador de uso para usuários Free */}
-            {userPlan === 'free' && hasCompletedTest && !freeLimitations.isBlocked && (
+            {userPlan === 'free' && !freeLimitations.isBlocked && (
               <div className="mt-6 bg-blue-900/20 border border-blue-500/30 rounded-xl p-4 max-w-md mx-auto">
                 <div className="text-center">
                   <div className="text-blue-400 text-sm font-medium mb-2">🆓 Plano Gratuito</div>
@@ -391,92 +298,9 @@ export default function DashboardContent() {
           </div>
         </PageTransition>
 
-        {/* Tela obrigatória de teste de nível para usuários Premium */}
-        {needsLevelTest && (
-        <PageTransition>
-          <div className="max-w-4xl mx-auto mb-12">
-            <div className="bg-gradient-to-r from-yellow-900/50 to-orange-900/50 border-2 border-yellow-500/50 rounded-xl p-8 text-center">
-              <div className="text-6xl mb-6"></div>
-              <h2 className="text-3xl font-bold text-white mb-4">
-                Vamos começar?
-              </h2>
-              <p className="text-gray-300 mb-6 text-lg max-w-2xl mx-auto">
-                Para personalizar sua experiência de aprendizado, precisamos conhecer seu nível atual de inglês. 
-                Este teste rápido vai determinar quais conteúdos e exercícios são adequados para você.
-              </p>
-              
-              <div className="bg-gray-900/50 rounded-lg p-6 mb-6">
-                <h3 className="text-white font-semibold mb-4">O que esperar:</h3>
-                <ul className="text-gray-300 space-y-2 text-left max-w-md mx-auto">
-                  <li>• 20 perguntas de múltipla escolha</li>
-                  <li>• Tempo estimado: 8-12 minutos</li>
-                  <li>• Resultado determina seu conteúdo personalizado</li>
-                  <li>• Necessário para acessar trilhas progressivas</li>
-                </ul>
-              </div>
-
-              <div className="bg-yellow-900/30 border border-yellow-500/30 rounded-lg p-4 mb-6">
-                <p className="text-yellow-300 text-sm">
-                  Você precisa completar este teste para acessar todas as funcionalidades da plataforma.
-                </p>
-              </div>
-
-              {/* Verificar se há inconsistência - usuário fez teste mas hook não detectou */}
-              {(() => {
-                if (user?.id) {
-                  const testResult = localStorage.getItem(`level_test_${user.id}`)
-                  const userLevel = localStorage.getItem(`user_level_${user.id}`)
-                  
-                  if (testResult && userLevel) {
-                    // Há inconsistência - usuário já fez teste mas needsLevelTest=true
-                    return (
-                      <div className="space-y-4">
-                        <Link 
-                          href="/teste-nivel?show=result"
-                          className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 px-8 py-4 rounded-full text-white font-bold text-lg transition-all duration-300 transform hover:scale-105 inline-block"
-                        >
-                          Ver Meu Resultado
-                        </Link>
-                        <button
-                          onClick={() => window.location.reload()}
-                          className="bg-gray-600 hover:bg-gray-500 px-6 py-2 rounded-full text-white font-semibold text-sm transition-colors"
-                        >
-                          Atualizar Página
-                        </button>
-                        <p className="text-gray-400 text-sm">
-                          Você já completou o teste de nível. Se ainda está vendo esta tela, clique em "Atualizar Página".
-                        </p>
-                      </div>
-                    )
-                  }
-                }
-                
-                // Caso normal - usuário realmente precisa fazer o teste
-                return (
-                  <Link 
-                    href="/teste-nivel"
-                    className="bg-gradient-to-r from-yellow-600 to-orange-600 hover:from-yellow-700 hover:to-orange-700 px-8 py-4 rounded-full text-white font-bold text-lg transition-all duration-300 transform hover:scale-105 inline-block"
-                  >
-                    Fazer Teste de Nível Agora
-                  </Link>
-                )
-              })()}
-            </div>
-          </div>
-        </PageTransition>
-        )}
-
-        {/* SE PRECISA DO TESTE, PARAR AQUI - NÃO MOSTRAR MAIS NADA */}
-        {needsLevelTest && (
-          <div />
-        )}
-
-        {/* Só renderizar o resto se NÃO precisar do teste */}
-        {!needsLevelTest && (
-          <>
 
         {/* Tela de limitações para usuários Free após atingir o limite */}
-        {userPlan === 'free' && hasCompletedTest && freeLimitations.isBlocked && (
+        {userPlan === 'free' && freeLimitations.isBlocked && (
         <PageTransition>
           <div className="max-w-4xl mx-auto mb-12">
             <div className="bg-gradient-to-r from-red-900/50 to-orange-900/50 border-2 border-red-500/50 rounded-xl p-8 text-center">
@@ -535,300 +359,8 @@ export default function DashboardContent() {
         </PageTransition>
         )}
 
-        {/* Features - Teste de Nível e Trilhas Progressivas para todos os usuários */}
-        {hasCompletedTest && (
-        <PageTransition>
-          <div className="mb-12">
-            <div className="text-center mb-8">
-              <h2 className="text-3xl font-bold text-white mb-4">
-                Aprendizado Progressivo
-              </h2>
-              <p className="text-gray-400 text-lg max-w-3xl mx-auto">
-                Descubra seu nível e siga trilhas estruturadas. Exercícios práticos, favoritos, filtros avançados e acesso ilimitado. {userPlan === 'free' ? '5 frases/dia no plano gratuito - faça upgrade para acesso completo!' : 'Acesso premium ativo!'}
-              </p>
-            </div>
-            
-            <div className={`grid gap-6 mb-8 ${hasCompletedBasicTrail ? 'md:grid-cols-4' : hasCompletedTest ? 'md:grid-cols-3' : 'md:grid-cols-2'}`}>
-              {/* Teste de Nível */}
-              {/* Card de Teste/Nível - Mais estreito quando já fez o teste */}
-              <Link href={hasCompletedTest ? "/teste-nivel?show=result" : "/teste-nivel"} 
-                    className={hasCompletedTest ? 'md:col-span-1' : 'md:col-span-2'}>
-                <div className={`group bg-gradient-to-br from-yellow-900/30 to-orange-900/30 border-2 border-yellow-500/30 rounded-3xl hover:border-yellow-400/50 transition-all duration-300 cursor-pointer transform hover:scale-105 h-full flex flex-col ${hasCompletedTest ? 'p-4' : 'p-6'}`}>
-                  <div className="text-center flex-1 flex flex-col justify-between">
-                    <div>
-                      <div className={`group-hover:scale-110 transition-transform duration-300 flex justify-center ${hasCompletedTest ? 'mb-2' : 'mb-4'}`}>
-                        {hasCompletedTest ? (
-                          <LevelBarsIcon size={32} className="text-yellow-400" />
-                        ) : (
-                          <TargetIcon size={64} className="text-yellow-400" />
-                        )}
-                      </div>
-                      
-                      {hasCompletedTest ? (
-                        // Card compacto para usuário que já fez o teste
-                        <>
-                          <h3 className="text-lg font-bold text-white mb-2">
-                            Meu Nível
-                          </h3>
-                          <div className="mb-2">
-                            <div className="text-base font-semibold text-yellow-300 mb-1">
-                              {(() => {
-                                const testLevel = getUserTestLevel()
-                                console.log('🔍 Debug testLevel:', testLevel) // Debug log
-                                return testLevel ? formatLevel(testLevel) : 'Carregando...'
-                              })()}
-                            </div>
-                            <span className="bg-green-500/20 text-green-300 px-2 py-1 rounded-full text-xs">
-                              Concluído
-                            </span>
-                          </div>
-                        </>
-                      ) : (
-                        // Card normal para usuário que não fez o teste
-                        <>
-                          <h3 className="text-2xl font-bold text-white mb-4">
-                            Teste de Nível
-                          </h3>
-                          <p className="text-gray-300 mb-6 leading-relaxed">
-                            Descubra seu nível atual de inglês com 15 perguntas rápidas. Resultado personaliza suas trilhas de aprendizado.
-                          </p>
-                          <div className="flex flex-wrap gap-2 justify-center mb-6">
-                            <span className="bg-yellow-500/20 text-yellow-300 px-3 py-1 rounded-full text-sm">
-                              15 Questões
-                            </span>
-                            <span className="bg-orange-500/20 text-orange-300 px-3 py-1 rounded-full text-sm">
-                              5-10 Min
-                            </span>
-                            <span className="bg-yellow-500/20 text-yellow-300 px-3 py-1 rounded-full text-sm">
-                              Personalizado
-                            </span>
-                          </div>
-                        </>
-                      )}
-                    </div>
-                    <div className="text-yellow-400 group-hover:text-yellow-300 transition-colors font-semibold text-sm">
-                      {hasCompletedTest ? 'Ver Detalhes →' : 'Fazer Teste →'}
-                    </div>
-                  </div>
-                </div>
-              </Link>
 
-              {/* Trilhas Progressivas */}
-              <div className="group bg-gradient-to-br from-green-900/30 to-emerald-900/30 border-2 border-green-500/30 rounded-3xl p-8 hover:border-green-400/50 transition-all duration-300 h-full flex flex-col">
-                <div className="text-center flex-1 flex flex-col justify-between">
-                  <div>
-                    <div className="mb-6 group-hover:scale-110 transition-transform duration-300 flex justify-center">
-                      <TargetIcon size={64} className="text-green-400" />
-                    </div>
-                    <h3 className="text-2xl font-bold text-white mb-4">
-                      Trilhas Progressivas
-                    </h3>
-                    <p className="text-gray-300 mb-6 leading-relaxed">
-                      Trilhas estruturadas baseadas no seu nível. Frases + exercícios obrigatórios 
-                      para garantir o aprendizado efetivo.
-                    </p>
-                    <div className="flex flex-wrap gap-2 justify-center mb-6">
-                      <span className="bg-green-500/20 text-green-300 px-3 py-1 rounded-full text-sm">
-                        Progressivo
-                      </span>
-                      <span className="bg-emerald-500/20 text-emerald-300 px-3 py-1 rounded-full text-sm">
-                        Exercícios
-                      </span>
-                    </div>
-
-                    {/* Trilhas Disponíveis */}
-                    <div className="grid grid-cols-2 gap-3 mb-6">
-                      <Link href="/trilha-progressiva/trabalho" className="group/trail">
-                        <div className="relative bg-cyan-900/20 border border-cyan-500/30 rounded-xl p-3 hover:border-cyan-400/50 transition-all duration-300 hover:bg-cyan-900/30">
-                          <div className="flex flex-col items-center">
-                            <WorkIcon size={24} className="text-cyan-300 mb-2" />
-                            <span className="text-white text-xs font-semibold">Trabalho</span>
-                          </div>
-                        </div>
-                      </Link>
-                      
-                      <Link href="/trilha-progressiva/viagens" className="group/trail">
-                        <div className="relative bg-emerald-900/20 border border-emerald-500/30 rounded-xl p-3 hover:border-emerald-400/50 transition-all duration-300 hover:bg-emerald-900/30">
-                          <div className="flex flex-col items-center">
-                            <TravelIcon size={24} className="text-emerald-300 mb-2" />
-                            <span className="text-white text-xs font-semibold">Viagens</span>
-                          </div>
-                        </div>
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Próximo Nível - Exame de Certificação */}
-              <div className={`group relative overflow-hidden rounded-3xl transition-all duration-500 h-full flex flex-col ${
-                !hasCompletedBasicTrail || certificationBlocked.isBlocked
-                  ? 'bg-gradient-to-br from-gray-800/40 to-gray-900/60 border-2 border-gray-600/30' 
-                  : 'bg-gradient-to-br from-emerald-900/30 via-teal-900/30 to-cyan-900/30 border-2 border-emerald-500/30 hover:border-emerald-400/50 cursor-pointer transform hover:scale-105 hover:shadow-2xl hover:shadow-emerald-500/20'
-              }`}>
-                {/* Efeito de brilho animado quando disponível */}
-                {hasCompletedBasicTrail && !certificationBlocked.isBlocked && (
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -skew-x-12 transform translate-x-[-100%] group-hover:translate-x-[200%] transition-transform duration-1000"></div>
-                )}
-
-                {/* Link condicional */}
-                {hasCompletedBasicTrail && !certificationBlocked.isBlocked && (
-                  <Link href="/certificacao-a1-a2" className="absolute inset-0 z-20" />
-                )}
-
-                {/* Estado bloqueado com design melhorado */}
-                {(!hasCompletedBasicTrail || certificationBlocked.isBlocked) && (
-                  <div className="absolute inset-0 rounded-3xl flex items-center justify-center z-10 bg-gradient-to-br from-gray-900/80 to-gray-800/80 backdrop-blur-sm">
-                    <div className="text-center space-y-4">
-                      <div className="relative">
-                        <div className="text-6xl mb-2 filter grayscale">🎯</div>
-                      </div>
-                      <div className="space-y-2">
-                        <div className="text-orange-400 font-bold text-lg">
-                          {(() => {
-                            const nextLevel = getNextLevel(userLevel)
-                            if (!nextLevel) return 'Nível Máximo'
-                            return `Teste para ${getLevelName(nextLevel)}`
-                          })()}
-                        </div>
-                        <div className="text-gray-300 text-sm max-w-xs leading-relaxed">
-                          {!hasCompletedBasicTrail 
-                            ? (() => {
-                                const nextLevel = getNextLevel(userLevel)
-                                if (!nextLevel) return 'Nível máximo atingido'
-                                return `Complete ao menos uma trilha progressiva do básico para fazer o teste ${getLevelName(nextLevel)}`
-                              })()
-                            : `Aguarde ${certificationBlocked.timeRemaining} para o próximo teste`
-                          }
-                        </div>
-                      </div>
-                      <div className="flex gap-1 justify-center">
-                        <div className="w-2 h-2 bg-orange-400 rounded-full animate-pulse"></div>
-                        <div className="w-2 h-2 bg-orange-400 rounded-full animate-pulse" style={{ animationDelay: '0.2s' }}></div>
-                        <div className="w-2 h-2 bg-orange-400 rounded-full animate-pulse" style={{ animationDelay: '0.4s' }}></div>
-                      </div>
-                    </div>
-                  </div>
-                )}
-                
-                <div className="relative z-5 text-center flex-1 flex flex-col justify-between p-8">
-                  <div>
-                    <div className={`mb-6 transition-all duration-300 flex justify-center ${
-                      hasCompletedBasicTrail && !certificationBlocked.isBlocked 
-                        ? 'group-hover:scale-110 group-hover:rotate-6' 
-                        : ''
-                    }`}>
-                      <div className="relative">
-                        <span className={`text-7xl ${
-                          hasCompletedBasicTrail && !certificationBlocked.isBlocked 
-                            ? 'filter drop-shadow-lg' 
-                            : 'filter grayscale opacity-50'
-                        }`}>
-                          🚀
-                        </span>
-                        {hasCompletedBasicTrail && !certificationBlocked.isBlocked && (
-                          <div className="absolute -top-2 -right-2 text-2xl animate-bounce">✨</div>
-                        )}
-                      </div>
-                    </div>
-                    <h3 className={`text-2xl font-bold mb-4 ${
-                      hasCompletedBasicTrail && !certificationBlocked.isBlocked 
-                        ? 'text-white' 
-                        : 'text-gray-400'
-                    }`}>
-                      {(() => {
-                        const nextLevel = getNextLevel(userLevel)
-                        
-                        if (!nextLevel) return 'Nível Máximo Atingido! 🏆'
-                        
-                        if (canAdvanceLevel && hasCompletedBasicTrail && !certificationBlocked.isBlocked) {
-                          return `🚀 Estou Pronto para o ${getLevelName(nextLevel)}!`
-                        } else {
-                          return `📚 Meu Próximo Nível: ${getLevelName(nextLevel)}`
-                        }
-                      })()}
-                    </h3>
-                    <p className={`mb-6 leading-relaxed text-sm ${
-                      hasCompletedBasicTrail && !certificationBlocked.isBlocked 
-                        ? 'text-gray-300' 
-                        : 'text-gray-500'
-                    }`}>
-                      {(() => {
-                        const nextLevel = getNextLevel(userLevel)
-                        if (!nextLevel) {
-                          return 'Parabéns! Você já atingiu o nível máximo de inglês na nossa plataforma.'
-                        }
-                        
-                        if (!hasCompletedBasicTrail) {
-                          return `Complete a trilha de trabalho para desbloquear o teste de certificação e evoluir para o nível ${getLevelName(nextLevel)}.`
-                        }
-                        
-                        if (certificationBlocked.isBlocked) {
-                          return 'Seu teste está temporariamente indisponível. Use este tempo para revisar as frases e se preparar melhor.'
-                        }
-                        
-                        if (canAdvanceLevel) {
-                          return `Você completou todos os requisitos! Faça o teste de certificação para avançar para o nível ${getLevelName(nextLevel)}.`
-                        }
-                        
-                        return `Continue praticando para desbloquear o teste de certificação do nível ${getLevelName(nextLevel)}.`
-                      })()}
-                    </p>
-                    <div className="flex flex-wrap gap-2 justify-center mb-6">
-                      {hasCompletedBasicTrail && !certificationBlocked.isBlocked ? (
-                        <>
-                          <span className="px-3 py-1 rounded-full text-xs bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
-                            35 Questões
-                          </span>
-                          <span className="px-3 py-1 rounded-full text-xs bg-teal-500/20 text-teal-300 border border-teal-500/30">
-                            ~20 Min
-                          </span>
-                          <span className="px-3 py-1 rounded-full text-xs bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">
-                            Certificado
-                          </span>
-                        </>
-                      ) : (
-                        <>
-                          <span className="px-3 py-1 rounded-full text-xs bg-gray-500/20 text-gray-400 border border-gray-500/30">
-                            {!hasCompletedBasicTrail ? 'Bloqueado' : 'Aguardando'}
-                          </span>
-                          <span className="px-3 py-1 rounded-full text-xs bg-gray-500/20 text-gray-400 border border-gray-500/30">
-                            Premium
-                          </span>
-                        </>
-                      )}
-                    </div>
-                  </div>
-                  <div className={`font-semibold transition-all duration-300 ${
-                    hasCompletedBasicTrail && !certificationBlocked.isBlocked
-                      ? 'text-emerald-400 group-hover:text-emerald-300' 
-                      : 'text-gray-500'
-                  }`}>
-                    {(() => {
-                      const nextLevel = getNextLevel(userLevel)
-                      if (!nextLevel) return 'Nível Máximo Atingido'
-                      
-                      if (hasCompletedBasicTrail && !certificationBlocked.isBlocked) {
-                        return canAdvanceLevel 
-                          ? `Fazer Teste para ${getLevelName(nextLevel)} →`
-                          : 'Fazer Teste →'
-                      } else if (!hasCompletedBasicTrail) {
-                        return 'Continue Estudando'
-                      } else {
-                        return 'Aguarde Liberação'
-                      }
-                    })()}
-                  </div>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </PageTransition>
-        )}
-
-        {/* Main Options - Mostra para todos após completar teste */}
-        {!needsLevelTest && (
+        {/* Main Options - Mostra para todos */}
         <PageTransition>
           <div className="grid md:grid-cols-2 gap-8 mb-12 items-stretch">
             {/* Chat com Tutor AI */}
@@ -948,13 +480,6 @@ export default function DashboardContent() {
                         <p className="text-white/70 text-xs leading-relaxed">
                           {trail.desc.split(',')[0]}
                         </p>
-                        {isRecommended && (
-                          <div className="mt-2">
-                            <span className="bg-yellow-500/20 text-yellow-300 px-2 py-1 rounded-full text-xs font-medium">
-                              Seu nível: {userLevel === 'beginner' ? 'Básico' : userLevel === 'intermediate' ? 'Intermediário' : 'Avançado'}
-                            </span>
-                          </div>
-                        )}
                       </div>
                       
                       {/* Efeito de brilho no hover */}
@@ -969,8 +494,6 @@ export default function DashboardContent() {
           </div>
         </div>
         </PageTransition>
-        )}
-
         {/* Conjugador de Verbos */}
         <PageTransition>
           <div className="mb-12">
@@ -1227,7 +750,6 @@ export default function DashboardContent() {
         )}
 
         {/* Premium User Benefits - Aparece para todos */}
-        {(
         <PageTransition>
           <div className="bg-gradient-to-r from-yellow-900/30 to-orange-900/30 border-2 border-yellow-500/50 rounded-2xl p-6 mt-8">
           <div className="text-center">
@@ -1283,8 +805,6 @@ export default function DashboardContent() {
           </div>
           </div>
         </PageTransition>
-        )}
-
         {/* Quick Actions */}
         <PageTransition>
           <div className="mt-8 text-center">
@@ -1363,8 +883,6 @@ export default function DashboardContent() {
           </div>
         </div>
         </PageTransition>
-        </>
-        )}
       </div>
     </AnimatedContainer>
   )

@@ -18,23 +18,12 @@ export default function HomePage() {
   const router = useRouter()
   const { user, loading } = useAuth()
 
-  const checkUserLevelTest = (userId: string): boolean => {
-    const testResult = localStorage.getItem(`level_test_${userId}`)
-    const userLevel = localStorage.getItem(`user_level_${userId}`)
-    return !!(testResult && userLevel)
-  }
-
   // Redirecionar usuários logados automaticamente
   useEffect(() => {
     if (loading) return
     
     if (user) {
-      const hasCompletedTest = checkUserLevelTest(user.id)
-      if (hasCompletedTest) {
-        router.push('/dashboard')
-      } else {
-        router.push('/teste-nivel')
-      }
+      router.push('/dashboard')
     }
   }, [user, loading, router])
 

@@ -20,11 +20,6 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
 
   if (!isOpen) return null
 
-  const checkUserLevelTest = (userId: string): boolean => {
-    const testResult = localStorage.getItem(`level_test_${userId}`)
-    const userLevel = localStorage.getItem(`user_level_${userId}`)
-    return !!(testResult && userLevel)
-  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -54,17 +49,8 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
         if (error) throw error
         onClose()
         
-        // Verificar se o usuário já fez o teste de nível
-        if (data.user) {
-          const hasCompletedTest = checkUserLevelTest(data.user.id)
-          if (hasCompletedTest) {
-            router.push('/dashboard')
-          } else {
-            router.push('/teste-nivel')
-          }
-        } else {
-          router.push('/dashboard')
-        }
+        // Redirecionar diretamente ao dashboard
+        router.push('/dashboard')
       }
     } catch (error: any) {
       setMessage(error.message)
