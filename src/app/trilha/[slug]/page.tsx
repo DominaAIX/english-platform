@@ -57,31 +57,51 @@ const trailsData = {
         english: "Can we touch base about the project status?",
         portuguese: "Podemos conversar sobre o status do projeto?",
         level: 'médio',
-        context: 'Check-in'
+        context: 'Check-in',
+        situations: [
+          'Por telefone: "Hi Sarah, can we touch base about the project status this afternoon?"',
+          'Encontrando colega: "When you have a moment, can we touch base about the project status?"'
+        ]
       },
       {
         english: "I'll keep you in the loop on any updates.",
         portuguese: "Vou te manter informado sobre qualquer atualização.",
         level: 'médio',
-        context: 'Comunicação'
+        context: 'Comunicação',
+        situations: [
+          'Final de reunião: "Thanks for joining. I\'ll keep you in the loop on any updates."',
+          'Por email: "I\'ll keep you in the loop on any updates regarding the client\'s decision."'
+        ]
       },
       {
         english: "We need to think outside the box for this solution.",
         portuguese: "Precisamos pensar fora da caixa para esta solução.",
         level: 'avançado',
-        context: 'Criatividade'
+        context: 'Criatividade',
+        situations: [
+          'Brainstorming: "The usual approach isn\'t working. We need to think outside the box for this solution."',
+          'Apresentando desafio: "This problem requires creativity. We need to think outside the box for this solution."'
+        ]
       },
       {
         english: "Let's table this discussion for now.",
         portuguese: "Vamos deixar esta discussão para depois.",
         level: 'avançado',
-        context: 'Pausa na discussão'
+        context: 'Pausa na discussão',
+        situations: [
+          'Controlando reunião: "We\'re running out of time. Let\'s table this discussion for now."',
+          'Evitando conflito: "This is getting heated. Let\'s table this discussion for now and cool down."'
+        ]
       },
       {
         english: "Can you walk me through the process?",
         portuguese: "Você pode me explicar o processo passo a passo?",
         level: 'básico',
-        context: 'Explicação'
+        context: 'Explicação',
+        situations: [
+          'Treinamento: "I\'m new to this system. Can you walk me through the process?"',
+          'Reunião técnica: "Before we start, can you walk me through the process so everyone understands?"'
+        ]
       },
 
       // ========== CATEGORIA: REUNIÕES (40 frases) ==========
@@ -89,31 +109,51 @@ const trailsData = {
         english: "Let's kick off this meeting.",
         portuguese: "Vamos começar esta reunião.",
         level: 'básico',
-        context: 'Reuniões'
+        context: 'Reuniões',
+        situations: [
+          'Iniciando reunião: "Good morning everyone! Let\'s kick off this meeting by reviewing last week\'s actions."',
+          'Após chat informal: "Alright team, let\'s kick off this meeting. We have a lot to cover today."'
+        ]
       },
       {
         english: "Can everyone see my screen?",
         portuguese: "Todos conseguem ver minha tela?",
         level: 'básico',
-        context: 'Reuniões'
+        context: 'Reuniões',
+        situations: [
+          'Compartilhando tela: "I\'m about to share my presentation. Can everyone see my screen?"',
+          'Problema técnico: "I just shared my screen. Can everyone see my screen or should I try again?"'
+        ]
       },
       {
         english: "You're on mute.",
         portuguese: "Você está no mudo.",
         level: 'básico',
-        context: 'Reuniões'
+        context: 'Reuniões',
+        situations: [
+          'Alguém tentando falar: "Sorry Sarah, you\'re on mute. We can\'t hear you."',
+          'Interrompendo gentilmente: "John, you\'re on mute. Could you unmute yourself?"'
+        ]
       },
       {
         english: "Can you speak up? You're breaking up.",
         portuguese: "Você pode falar mais alto? Está cortando.",
         level: 'básico',
-        context: 'Reuniões'
+        context: 'Reuniões',
+        situations: [
+          'Problema de áudio: "Sorry Mike, can you speak up? You\'re breaking up and we\'re missing parts."',
+          'Conexão ruim: "Can you speak up? You\'re breaking up. Maybe try turning off your video?"'
+        ]
       },
       {
         english: "Let's go around the room for introductions.",
         portuguese: "Vamos fazer uma rodada de apresentações.",
         level: 'médio',
-        context: 'Reuniões'
+        context: 'Reuniões',
+        situations: [
+          'Primeira reunião: "We have some new team members today. Let\'s go around the room for introductions."',
+          'Reunindo equipes: "Since we\'re working together now, let\'s go around the room for introductions."'
+        ]
       },
       {
         english: "I'd like to add something to the agenda.",
