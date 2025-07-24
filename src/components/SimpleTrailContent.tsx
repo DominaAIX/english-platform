@@ -16,6 +16,7 @@ interface Phrase {
   portuguese: string
   level: 'básico' | 'médio' | 'avançado'
   context: string
+  situations?: string[] // Exemplos de situações práticas
 }
 
 interface Trail {
@@ -425,9 +426,24 @@ export default function SimpleTrailContent({ trail, userPlan, slug }: SimpleTrai
                 </button>
               </div>
               
-              <div className="text-sm text-gray-400">
+              <div className="text-sm text-gray-400 mb-4">
                 Contexto: {currentPhrase.context} • Nível: {currentPhrase.level}
               </div>
+              
+              {/* Exemplos de uso */}
+              {currentPhrase.situations && currentPhrase.situations.length > 0 && (
+                <div className="bg-gray-800/30 border border-gray-700/50 rounded-lg p-4 text-left">
+                  <h4 className="text-white font-semibold mb-3 text-center">💡 Exemplos de uso:</h4>
+                  <div className="space-y-2">
+                    {currentPhrase.situations.map((situation, index) => (
+                      <div key={index} className="flex items-start gap-2">
+                        <span className="text-cyan-400 font-bold mt-1">•</span>
+                        <p className="text-gray-300 text-sm">{situation}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
               
               {/* Mensagem de feedback para favoritos */}
               {favoriteMessage && (
