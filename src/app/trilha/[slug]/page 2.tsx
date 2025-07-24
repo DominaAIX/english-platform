@@ -1,4 +1,5 @@
-import TrailContent from '@/components/TrailContent'
+import Link from 'next/link'
+import SimpleTrailContent from '@/components/SimpleTrailContent'
 
 const trailsData = {
   trabalho: {
@@ -11,61 +12,101 @@ const trailsData = {
         english: "Could you please send me the report by Friday?",
         portuguese: "Você poderia me enviar o relatório até sexta-feira?",
         level: 'básico',
-        context: 'Solicitação de entrega'
+        context: 'Solicitação de entrega',
+        situations: [
+          'Em uma reunião: "Could you please send me the report by Friday so I can review it?"',
+          'Por email: "Hi Sarah, could you please send me the monthly report by Friday?"'
+        ]
       },
       {
         english: "I'd like to schedule a meeting for next week.",
         portuguese: "Gostaria de agendar uma reunião para a próxima semana.",
         level: 'básico',
-        context: 'Agendamento'
+        context: 'Agendamento',
+        situations: [
+          'Ao telefone: "Hi John, I\'d like to schedule a meeting for next week to discuss the project."',
+          'Por email: "I\'d like to schedule a meeting for next week. Are you available Tuesday morning?"'
+        ]
       },
       {
         english: "The deadline has been moved to next month.",
         portuguese: "O prazo foi movido para o próximo mês.",
         level: 'médio',
-        context: 'Alteração de prazo'
+        context: 'Alteração de prazo',
+        situations: [
+          'Informando a equipe: "Good news everyone, the deadline has been moved to next month."',
+          'Em email para cliente: "I wanted to inform you that the deadline has been moved to next month."'
+        ]
       },
       {
         english: "I appreciate your feedback on this proposal.",
         portuguese: "Agradeço seu feedback sobre esta proposta.",
         level: 'básico',
-        context: 'Agradecimento'
+        context: 'Agradecimento',
+        situations: [
+          'Após apresentação: "Thank you for listening. I appreciate your feedback on this proposal."',
+          'Respondendo email: "Hi Mark, I appreciate your feedback on this proposal. I\'ll make the changes."'
+        ]
       },
       {
         english: "Let's circle back on this issue tomorrow.",
         portuguese: "Vamos retomar esta questão amanhã.",
         level: 'médio',
-        context: 'Adiamento'
+        context: 'Adiamento',
+        situations: [
+          'Em reunião: "This is complex. Let\'s circle back on this issue tomorrow with more data."',
+          'Por chat: "Let\'s circle back on this issue tomorrow when we have clearer requirements."'
+        ]
       },
       {
         english: "Can we touch base about the project status?",
         portuguese: "Podemos conversar sobre o status do projeto?",
         level: 'médio',
-        context: 'Check-in'
+        context: 'Check-in',
+        situations: [
+          'Por telefone: "Hi Sarah, can we touch base about the project status this afternoon?"',
+          'Encontrando colega: "When you have a moment, can we touch base about the project status?"'
+        ]
       },
       {
         english: "I'll keep you in the loop on any updates.",
         portuguese: "Vou te manter informado sobre qualquer atualização.",
         level: 'médio',
-        context: 'Comunicação'
+        context: 'Comunicação',
+        situations: [
+          'Final de reunião: "Thanks for joining. I\'ll keep you in the loop on any updates."',
+          'Por email: "I\'ll keep you in the loop on any updates regarding the client\'s decision."'
+        ]
       },
       {
         english: "We need to think outside the box for this solution.",
         portuguese: "Precisamos pensar fora da caixa para esta solução.",
         level: 'avançado',
-        context: 'Criatividade'
+        context: 'Criatividade',
+        situations: [
+          'Brainstorming: "The usual approach isn\'t working. We need to think outside the box for this solution."',
+          'Apresentando desafio: "This problem requires creativity. We need to think outside the box for this solution."'
+        ]
       },
       {
         english: "Let's table this discussion for now.",
         portuguese: "Vamos deixar esta discussão para depois.",
         level: 'avançado',
-        context: 'Pausa na discussão'
+        context: 'Pausa na discussão',
+        situations: [
+          'Controlando reunião: "We\'re running out of time. Let\'s table this discussion for now."',
+          'Evitando conflito: "This is getting heated. Let\'s table this discussion for now and cool down."'
+        ]
       },
       {
         english: "Can you walk me through the process?",
         portuguese: "Você pode me explicar o processo passo a passo?",
         level: 'básico',
-        context: 'Explicação'
+        context: 'Explicação',
+        situations: [
+          'Treinamento: "I\'m new to this system. Can you walk me through the process?"',
+          'Reunião técnica: "Before we start, can you walk me through the process so everyone understands?"'
+        ]
       },
 
       // ========== CATEGORIA: REUNIÕES (40 frases) ==========
@@ -73,91 +114,151 @@ const trailsData = {
         english: "Let's kick off this meeting.",
         portuguese: "Vamos começar esta reunião.",
         level: 'básico',
-        context: 'Reuniões'
+        context: 'Reuniões',
+        situations: [
+          'Iniciando reunião: "Good morning everyone! Let\'s kick off this meeting by reviewing last week\'s actions."',
+          'Após chat informal: "Alright team, let\'s kick off this meeting. We have a lot to cover today."'
+        ]
       },
       {
         english: "Can everyone see my screen?",
         portuguese: "Todos conseguem ver minha tela?",
         level: 'básico',
-        context: 'Reuniões'
+        context: 'Reuniões',
+        situations: [
+          'Compartilhando tela: "I\'m about to share my presentation. Can everyone see my screen?"',
+          'Problema técnico: "I just shared my screen. Can everyone see my screen or should I try again?"'
+        ]
       },
       {
         english: "You're on mute.",
         portuguese: "Você está no mudo.",
         level: 'básico',
-        context: 'Reuniões'
+        context: 'Reuniões',
+        situations: [
+          'Alguém tentando falar: "Sorry Sarah, you\'re on mute. We can\'t hear you."',
+          'Interrompendo gentilmente: "John, you\'re on mute. Could you unmute yourself?"'
+        ]
       },
       {
         english: "Can you speak up? You're breaking up.",
         portuguese: "Você pode falar mais alto? Está cortando.",
         level: 'básico',
-        context: 'Reuniões'
+        context: 'Reuniões',
+        situations: [
+          'Problema de áudio: "Sorry Mike, can you speak up? You\'re breaking up and we\'re missing parts."',
+          'Conexão ruim: "Can you speak up? You\'re breaking up. Maybe try turning off your video?"'
+        ]
       },
       {
         english: "Let's go around the room for introductions.",
         portuguese: "Vamos fazer uma rodada de apresentações.",
         level: 'médio',
-        context: 'Reuniões'
+        context: 'Reuniões',
+        situations: [
+          'Primeira reunião: "We have some new team members today. Let\'s go around the room for introductions."',
+          'Reunindo equipes: "Since we\'re working together now, let\'s go around the room for introductions."'
+        ]
       },
       {
         english: "I'd like to add something to the agenda.",
         portuguese: "Gostaria de acrescentar algo à agenda.",
         level: 'médio',
-        context: 'Reuniões'
+        context: 'Reuniões',
+        situations: [
+          'Início da reunião: "Before we start, I\'d like to add something to the agenda if that\'s okay."',
+          'Questão urgente: "Sorry to interrupt, but I\'d like to add something to the agenda - it\'s quite urgent."'
+        ]
       },
       {
         english: "Can we park that discussion for later?",
         portuguese: "Podemos deixar essa discussão para depois?",
         level: 'avançado',
-        context: 'Reuniões'
+        context: 'Reuniões',
+        situations: [
+          'Controlando tempo: "This is important but we\'re running late. Can we park that discussion for later?"',
+          'Focando na agenda: "That\'s a good point, but can we park that discussion for later? Let\'s stay on topic."'
+        ]
       },
       {
         english: "Let's dive deeper into this topic.",
         portuguese: "Vamos nos aprofundar neste tópico.",
         level: 'médio',
-        context: 'Reuniões'
+        context: 'Reuniões',
+        situations: [
+          'Explorando questão: "This seems critical to our success. Let\'s dive deeper into this topic."',
+          'Após visão geral: "Now that everyone understands the basics, let\'s dive deeper into this topic."'
+        ]
       },
       {
         english: "I have a hard stop at 3 PM.",
         portuguese: "Tenho que sair às 15h em ponto.",
         level: 'avançado',
-        context: 'Reuniões'
+        context: 'Reuniões',
+        situations: [
+          'Limitando tempo: "Just so you know, I have a hard stop at 3 PM for another meeting."',
+          'Início de reunião: "I can participate fully, but I have a hard stop at 3 PM today."'
+        ]
       },
       {
         english: "Can we take this offline?",
         portuguese: "Podemos discutir isso separadamente?",
         level: 'avançado',
-        context: 'Reuniões'
+        context: 'Reuniões',
+        situations: [
+          'Discussão muito específica: "This is getting quite technical. Can we take this offline after the meeting?"',
+          'Evitando longas discussões: "This involves just you two. Can we take this offline and update the team later?"'
+        ]
       },
       {
         english: "Let's circle back to this next week.",
         portuguese: "Vamos retomar isso na próxima semana.",
         level: 'médio',
-        context: 'Reuniões'
+        context: 'Reuniões',
+        situations: [
+          'Encerrando tópico: "We need more information to decide. Let\'s circle back to this next week."',
+          'Falta de tempo: "This is important but we\'re out of time. Let\'s circle back to this next week."'
+        ]
       },
       {
         english: "I'd like to piggyback on what Sarah said.",
         portuguese: "Gostaria de complementar o que a Sarah disse.",
         level: 'avançado',
-        context: 'Reuniões'
+        context: 'Reuniões',
+        situations: [
+          'Concordando e adicionando: "Great point, Sarah. I\'d like to piggyback on what Sarah said about the timeline."',
+          'Complementando ideia: "I\'d like to piggyback on what Sarah said and add that we should also consider the budget."'
+        ]
       },
       {
         english: "Can we get a consensus on this?",
         portuguese: "Podemos chegar a um consenso sobre isso?",
         level: 'médio',
-        context: 'Reuniões'
+        context: 'Reuniões',
+        situations: [
+          'Buscando acordo: "We\'ve heard different opinions. Can we get a consensus on this approach?"',
+          'Tomando decisão: "Before we move forward, can we get a consensus on this strategy?"'
+        ]
       },
       {
         english: "Let's put this to a vote.",
         portuguese: "Vamos votar sobre isso.",
         level: 'básico',
-        context: 'Reuniões'
+        context: 'Reuniões',
+        situations: [
+          'Durante reunião de equipe: "We have two options here. Let\'s put this to a vote and see what the team thinks."',
+          'Em decisão de projeto: "I think we\'ve discussed this enough. Let\'s put this to a vote and move forward."'
+        ]
       },
       {
         english: "I need to step out for a moment.",
         portuguese: "Preciso me ausentar por um momento.",
         level: 'básico',
-        context: 'Reuniões'
+        context: 'Reuniões',
+        situations: [
+          'Durante reunião: "Sorry everyone, I need to step out for a moment. Please continue without me."',
+          'Em call importante: "I need to step out for a moment to take an urgent call. I\'ll be right back."'
+        ]
       },
       {
         english: "Can we stick to the agenda?",
@@ -229,51 +330,31 @@ const trailsData = {
         english: "Let's brainstorm some solutions.",
         portuguese: "Vamos fazer um brainstorm de soluções.",
         level: 'médio',
-        context: 'Reuniões',
-        situations: [
-          'Enfrentando problema: "We\'ve identified the issue. Now let\'s brainstorm some solutions together."',
-          'Sessão criativa: "No wrong answers here - let\'s brainstorm some solutions and see what we come up with."'
-        ]
+        context: 'Reuniões'
       },
       {
         english: "Can we do a quick temperature check?",
         portuguese: "Podemos fazer uma verificação rápida?",
         level: 'avançado',
-        context: 'Reuniões',
-        situations: [
-          'Verificando opiniões: "Before we finalize this, can we do a quick temperature check? How does everyone feel?"',
-          'Após apresentação: "Can we do a quick temperature check on this proposal? Any concerns or questions?"'
-        ]
+        context: 'Reuniões'
       },
       {
         english: "I need to jump on another call.",
         portuguese: "Preciso entrar em outra chamada.",
         level: 'médio',
-        context: 'Reuniões',
-        situations: [
-          'Saindo da reunião: "Thanks everyone. I need to jump on another call but please continue without me."',
-          'Conflito de horário: "Sorry, I need to jump on another call with the client. Can you send me the notes?"'
-        ]
+        context: 'Reuniões'
       },
       {
         english: "Let's wrap this up.",
         portuguese: "Vamos finalizar isso.",
         level: 'básico',
-        context: 'Reuniões',
-        situations: [
-          'Encerrando reunião: "We\'ve covered everything on the agenda. Let\'s wrap this up and get back to work."',
-          'Controlando tempo: "We\'re running over time. Let\'s wrap this up and schedule a follow-up if needed."'
-        ]
+        context: 'Reuniões'
       },
       {
         english: "Can we get some concrete next steps?",
         portuguese: "Podemos definir próximos passos concretos?",
         level: 'médio',
-        context: 'Reuniões',
-        situations: [
-          'Finalizando discussão: "Great discussion everyone. Can we get some concrete next steps with owners and dates?"',
-          'Após brainstorm: "We have lots of good ideas. Can we get some concrete next steps to move forward?"'
-        ]
+        context: 'Reuniões'
       },
       {
         english: "I'd like to challenge that assumption.",
@@ -4946,7 +5027,13 @@ export default async function TrailPage({ params }: TrailPageProps) {
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-white mb-4">Trilha não encontrada</h1>
-          <p className="text-gray-400">Esta trilha não existe ou ainda não foi criada.</p>
+          <p className="text-gray-400 mb-6">Esta trilha não existe ou ainda não foi criada.</p>
+          <Link 
+            href="/dashboard"
+            className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 px-6 py-3 rounded-full text-white font-semibold transition-all duration-300"
+          >
+            ← Voltar ao Dashboard
+          </Link>
         </div>
       </div>
     )
@@ -4954,8 +5041,8 @@ export default async function TrailPage({ params }: TrailPageProps) {
 
   return (
     <div className="min-h-screen">
-      <TrailContent 
-        trail={trailData as any}
+      <SimpleTrailContent 
+        trail={trailData}
         userPlan="free" // Fallback - será substituído pelo plano real do usuário
         slug={slug}
       />
