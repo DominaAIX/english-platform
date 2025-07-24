@@ -50,7 +50,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       const userEmail = user.data.user?.email
       
       // Usuários premium conhecidos - forçar premium
-      if (userEmail === 'denis_esteban@icloud.com' || userEmail === 'teste@premium.com') {
+      if (userEmail === 'denis_esteban@icloud.com' || userEmail === 'teste@premium.com' || userEmail === 'user.premium@test.com') {
         const premiumProfile: UserProfile = {
           id: userId,
           email: userEmail,
