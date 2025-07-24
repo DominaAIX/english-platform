@@ -2179,31 +2179,51 @@ const trailsData = {
         english: "I have a reservation under the name Smith.",
         portuguese: "Tenho uma reserva no nome Smith.",
         level: 'básico',
-        context: 'Hotel'
+        context: 'Hotel',
+        situations: [
+          'Check-in no hotel: "Good evening, I have a reservation under the name Smith for tonight."',
+          'Confirmando reserva: "Hi, I have a reservation under the name Smith. Can you confirm the room details?"'
+        ]
       },
       {
         english: "What time is check-out?",
         portuguese: "Que horas é o check-out?",
         level: 'básico',
-        context: 'Hotel'
+        context: 'Hotel',
+        situations: [
+          'Planejando saída: "I need to plan my departure. What time is check-out tomorrow?"',
+          'Primeira pergunta: "What time is check-out? And can I extend if needed?"'
+        ]
       },
       {
         english: "Can I have a wake-up call at 7 AM?",
         portuguese: "Posso ter uma chamada de despertar às 7h?",
         level: 'básico',
-        context: 'Hotel'
+        context: 'Hotel',
+        situations: [
+          'Pedindo serviço: "I have an early meeting tomorrow. Can I have a wake-up call at 7 AM?"',
+          'Na recepção: "Can I have a wake-up call at 7 AM? I don\'t trust my phone alarm."'
+        ]
       },
       {
         english: "I'd like to extend my stay.",
         portuguese: "Gostaria de estender minha estadia.",
         level: 'médio',
-        context: 'Hotel'
+        context: 'Hotel',
+        situations: [
+          'Mudando planos: "My business meetings are running longer than expected. I\'d like to extend my stay for two more nights."',
+          'Gostando do hotel: "I\'d like to extend my stay if possible. Are there any rooms available for tomorrow night?"'
+        ]
       },
       {
         english: "Is there a safe in the room?",
         portuguese: "Há um cofre no quarto?",
         level: 'básico',
-        context: 'Hotel'
+        context: 'Hotel',
+        situations: [
+          'Preocupação com segurança: "I have some valuable items with me. Is there a safe in the room?"',
+          'Pergunta durante check-in: "Is there a safe in the room where I can store my laptop and documents?"'
+        ]
       },
       {
         english: "The air conditioning isn't working.",
