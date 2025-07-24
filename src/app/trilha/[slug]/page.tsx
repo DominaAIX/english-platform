@@ -11,25 +11,41 @@ const trailsData = {
         english: "Could you please send me the report by Friday?",
         portuguese: "Você poderia me enviar o relatório até sexta-feira?",
         level: 'básico',
-        context: 'Solicitação de entrega'
+        context: 'Solicitação de entrega',
+        situations: [
+          'Em uma reunião: "Could you please send me the report by Friday so I can review it?"',
+          'Por email: "Hi Sarah, could you please send me the monthly report by Friday?"'
+        ]
       },
       {
         english: "I'd like to schedule a meeting for next week.",
         portuguese: "Gostaria de agendar uma reunião para a próxima semana.",
         level: 'básico',
-        context: 'Agendamento'
+        context: 'Agendamento',
+        situations: [
+          'Ao telefone: "Hi John, I\'d like to schedule a meeting for next week to discuss the project."',
+          'Por email: "I\'d like to schedule a meeting for next week. Are you available Tuesday morning?"'
+        ]
       },
       {
         english: "The deadline has been moved to next month.",
         portuguese: "O prazo foi movido para o próximo mês.",
         level: 'médio',
-        context: 'Alteração de prazo'
+        context: 'Alteração de prazo',
+        situations: [
+          'Informando a equipe: "Good news everyone, the deadline has been moved to next month."',
+          'Em email para cliente: "I wanted to inform you that the deadline has been moved to next month."'
+        ]
       },
       {
         english: "I appreciate your feedback on this proposal.",
         portuguese: "Agradeço seu feedback sobre esta proposta.",
         level: 'básico',
-        context: 'Agradecimento'
+        context: 'Agradecimento',
+        situations: [
+          'Após apresentação: "Thank you for listening. I appreciate your feedback on this proposal."',
+          'Respondendo email: "Hi Mark, I appreciate your feedback on this proposal. I\'ll make the changes."'
+        ]
       },
       {
         english: "Let's circle back on this issue tomorrow.",

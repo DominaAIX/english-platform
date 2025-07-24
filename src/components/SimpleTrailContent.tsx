@@ -430,9 +430,9 @@ export default function SimpleTrailContent({ trail, userPlan, slug }: SimpleTrai
                 Contexto: {currentPhrase.context} • Nível: {currentPhrase.level}
               </div>
               
-              {/* Exemplos de uso */}
-              {currentPhrase.situations && currentPhrase.situations.length > 0 && (
-                <div className="bg-gray-800/30 border border-gray-700/50 rounded-lg p-4 text-left">
+              {/* Exemplos de uso - só aparecem após ver tradução */}
+              {showTranslation && currentPhrase.situations && currentPhrase.situations.length > 0 && (
+                <div className="bg-gray-800/30 border border-gray-700/50 rounded-lg p-4 text-left mt-4">
                   <h4 className="text-white font-semibold mb-3 text-center">💡 Exemplos de uso:</h4>
                   <div className="space-y-2">
                     {currentPhrase.situations.map((situation, index) => (
