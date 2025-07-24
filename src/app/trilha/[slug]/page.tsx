@@ -1603,121 +1603,201 @@ const trailsData = {
         english: "I need to run this by my team first.",
         portuguese: "Preciso passar isso pela minha equipe primeiro.",
         level: 'médio',
-        context: 'Negociação'
+        context: 'Negociação',
+        situations: [
+          'Ganhando tempo: "This sounds interesting, but I need to run this by my team first before I can commit."',
+          'Decisão importante: "I need to run this by my team first. Can we schedule a follow-up meeting next week?"'
+        ]
       },
       {
         english: "Let's explore some alternative options.",
         portuguese: "Vamos explorar algumas opções alternativas.",
         level: 'médio',
-        context: 'Negociação'
+        context: 'Negociação',
+        situations: [
+          'Buscando soluções: "The current proposal isn\'t working for us. Let\'s explore some alternative options."',
+          'Criatividade na negociação: "Let\'s explore some alternative options that could benefit both parties."'
+        ]
       },
       {
         english: "I'm willing to be flexible on the terms.",
         portuguese: "Estou disposto a ser flexível nos termos.",
         level: 'médio',
-        context: 'Negociação'
+        context: 'Negociação',
+        situations: [
+          'Mostrando abertura: "I want to make this work. I\'m willing to be flexible on the terms if you can meet our main requirements."',
+          'Fechando negócio: "I\'m willing to be flexible on the terms, but the timeline is non-negotiable for us."'
+        ]
       },
       {
         english: "That's outside our budget range.",
         portuguese: "Isso está fora da nossa faixa orçamentária.",
         level: 'básico',
-        context: 'Negociação'
+        context: 'Negociação',
+        situations: [
+          'Rejeitando preço: "I appreciate the proposal, but that\'s outside our budget range. Can you work with $10,000?"',
+          'Sendo direto: "That\'s outside our budget range. What\'s the best price you can offer?"'
+        ]
       },
       {
         english: "Can we structure this as a phased approach?",
         portuguese: "Podemos estruturar isso como uma abordagem em fases?",
         level: 'avançado',
-        context: 'Negociação'
+        context: 'Negociação',
+        situations: [
+          'Reduzindo risco: "This is a big investment for us. Can we structure this as a phased approach to minimize risk?"',
+          'Proposta criativa: "Can we structure this as a phased approach? Start with a pilot and expand based on results?"'
+        ]
       },
       {
         english: "I need to understand the value proposition better.",
         portuguese: "Preciso entender melhor a proposta de valor.",
         level: 'avançado',
-        context: 'Negociação'
+        context: 'Negociação',
+        situations: [
+          'Antes de decidir: "The price seems high for what you’re offering. I need to understand the value proposition better before we proceed."',
+          'Comparando opções: "I’ve seen similar solutions for less money. Can you help me understand the value proposition better?"'
+        ]
       },
       {
         english: "Let's put our cards on the table.",
         portuguese: "Vamos colocar as cartas na mesa.",
         level: 'avançado',
-        context: 'Negociação'
+        context: 'Negociação',
+        situations: [
+          'Sendo direto: "We’ve been dancing around this for hours. Let’s put our cards on the table and talk real numbers."',
+          'Buscando transparência: "I think we’re both wasting time. Let’s put our cards on the table about what we really need."'
+        ]
       },
       {
         english: "I'm not comfortable with those terms.",
         portuguese: "Não me sinto confortável com esses termos.",
         level: 'médio',
-        context: 'Negociação'
+        context: 'Negociação',
+        situations: [
+          'Rejeitando educadamente: "I appreciate the offer, but I’m not comfortable with those terms. Can we discuss alternatives?"',
+          'Expressando preocupação: "The payment schedule is too aggressive. I’m not comfortable with those terms for this project."'
+        ]
       },
       {
         english: "Can we revisit the pricing structure?",
         portuguese: "Podemos revisar a estrutura de preços?",
         level: 'médio',
-        context: 'Negociação'
+        context: 'Negociação',
+        situations: [
+          'Questionando preços: "The upfront cost is too high for our budget. Can we revisit the pricing structure with monthly payments?"',
+          'Buscando flexibilidade: "I like the proposal, but the pricing doesn’t work for us. Can we revisit the pricing structure?"'
+        ]
       },
       {
         english: "I think we're close to a deal.",
         portuguese: "Acho que estamos perto de um acordo.",
         level: 'médio',
-        context: 'Negociação'
+        context: 'Negociação',
+        situations: [
+          'Otimismo na conclusão: "We’ve resolved most of the major issues. I think we’re close to a deal - what do you think?"',
+          'Encorajando acordo: "Both sides have made good compromises. I think we’re close to a deal that works for everyone."'
+        ]
       },
       {
         english: "Let's iron out the details.",
         portuguese: "Vamos resolver os detalhes.",
         level: 'avançado',
-        context: 'Negociação'
+        context: 'Negociação',
+        situations: [
+          'Finalizando acordo: "Great! We have agreement on the main terms. Now let’s iron out the details like delivery dates and payment schedule."',
+          'Próximos passos: "The concept looks good to both parties. Let’s iron out the details so we can get contracts signed."'
+        ]
       },
       {
         english: "I'd like to sweeten the deal.",
         portuguese: "Gostaria de melhorar a oferta.",
         level: 'avançado',
-        context: 'Negociação'
+        context: 'Negociação',
+        situations: [
+          'Adicionando valor: "I can see you’re hesitating. I’d like to sweeten the deal by including free training for your team."',
+          'Fechando negócio: "To get this deal done today, I’d like to sweeten the deal with an additional 10% discount."'
+        ]
       },
       {
         english: "That's a deal-breaker for us.",
         portuguese: "Isso é um impedimento para nós.",
         level: 'avançado',
-        context: 'Negociação'
+        context: 'Negociação',
+        situations: [
+          'Linha vermelha: "I’m sorry, but requiring exclusivity for 5 years - that’s a deal-breaker for us."',
+          'Sendo claro: "We can negotiate on many things, but changing our core methodology - that’s a deal-breaker for us."'
+        ]
       },
       {
         english: "Can we include some performance incentives?",
         portuguese: "Podemos incluir alguns incentivos de performance?",
         level: 'avançado',
-        context: 'Negociação'
+        context: 'Negociação',
+        situations: [
+          'Estruturando acordo: "The base rate works for us. Can we include some performance incentives for exceeding targets?"',
+          'Motivando resultado: "I want us both to win. Can we include some performance incentives tied to specific outcomes?"'
+        ]
       },
       {
         english: "I need some time to think this over.",
         portuguese: "Preciso de um tempo para pensar sobre isso.",
         level: 'básico',
-        context: 'Negociação'
+        context: 'Negociação',
+        situations: [
+          'Precisando refletir: "This is a big decision for our company. I need some time to think this over before committing."',
+          'Consultando equipe: "The proposal looks interesting, but I need some time to think this over and discuss with my team."'
+        ]
       },
       {
         english: "Let's draft a preliminary agreement.",
         portuguese: "Vamos rascunhar um acordo preliminar.",
         level: 'avançado',
-        context: 'Negociação'
+        context: 'Negociação',
+        situations: [
+          'Avançando no processo: "I think we’re aligned on the main points. Let’s draft a preliminary agreement to formalize this."',
+          'Próximo passo: "Great progress today! Should we let the lawyers draft a preliminary agreement based on what we’ve discussed?"'
+        ]
       },
       {
         english: "I think we can make this work.",
         portuguese: "Acho que podemos fazer isso funcionar.",
         level: 'básico',
-        context: 'Negociação'
+        context: 'Negociação',
+        situations: [
+          'Mostrando interesse: "Your proposal needs some adjustments, but I think we can make this work if we’re both flexible."',
+          'Otimismo cauteloso: "There are still some challenges, but I think we can make this work with the right approach."'
+        ]
       },
       {
         english: "What are your non-negotiables?",
         portuguese: "Quais são seus pontos inegociáveis?",
         level: 'avançado',
-        context: 'Negociação'
+        context: 'Negociação',
+        situations: [
+          'Entendendo limites: "Before we go further, let me ask: what are your non-negotiables? I want to respect your boundaries."',
+          'Evitando perda de tempo: "Let's be efficient about this. What are your non-negotiables so we can focus on areas with flexibility?"'
+        ]
       },
       {
         english: "Let's shake on it.",
         portuguese: "Vamos apertar as mãos.",
         level: 'básico',
-        context: 'Negociação'
+        context: 'Negociação',
+        situations: [
+          'Fechando acordo: "Perfect! We have a deal then. Let's shake on it before we call the lawyers."',
+          'Confirmando acordo: "I think we've covered everything important. Let's shake on it and move forward with the partnership."'
+        ]
       },
       {
         english: "I'm confident we can reach an agreement.",
         portuguese: "Estou confiante de que podemos chegar a um acordo.",
         level: 'médio',
-        context: 'Negociação'
+        context: 'Negociação',
+        situations: [
+          'Finalizando negociação: "We’ve made great progress today. I’m confident we can reach an agreement that works for both companies."',
+          'Encorajando parceiro: "I know there are still some details to work out, but I’m confident we can reach an agreement soon."'
+        ]
       },
 
       // ========== CATEGORIA: GESTÃO DE TEMPO (20 frases) ==========
@@ -1725,121 +1805,201 @@ const trailsData = {
         english: "I'm running behind schedule today.",
         portuguese: "Estou atrasado na programação hoje.",
         level: 'básico',
-        context: 'Gestão de tempo'
+        context: 'Gestão de tempo',
+        situations: [
+          'Explicando atraso: "Sorry I\'m late to the meeting. I\'m running behind schedule today due to an urgent client call."',
+          'Reorganizando agenda: "I\'m running behind schedule today. Can we reschedule our 3 PM meeting to tomorrow?"'
+        ]
       },
       {
         english: "Can we push this meeting back 30 minutes?",
         portuguese: "Podemos adiar esta reunião por 30 minutos?",
         level: 'básico',
-        context: 'Gestão de tempo'
+        context: 'Gestão de tempo',
+        situations: [
+          'Conflito de horário: "My previous meeting is running long. Can we push this meeting back 30 minutes?"',
+          'Preparando melhor: "I need more time to prepare the presentation. Can we push this meeting back 30 minutes?"'
+        ]
       },
       {
         english: "I need to prioritize my tasks for today.",
         portuguese: "Preciso priorizar minhas tarefas para hoje.",
         level: 'básico',
-        context: 'Gestão de tempo'
+        context: 'Gestão de tempo',
+        situations: [
+          'Planejando o dia: "I have too many things on my plate. I need to prioritize my tasks for today."',
+          'Conversando com chefe: "With the new urgent project, I need to prioritize my tasks for today. What should I focus on first?"'
+        ]
       },
       {
         english: "Let's do a quick time check.",
         portuguese: "Vamos fazer uma verificação rápida do tempo.",
         level: 'básico',
-        context: 'Gestão de tempo'
+        context: 'Gestão de tempo',
+        situations: [
+          'Durante reunião longa: "We\'ve been discussing this for a while. Let\'s do a quick time check - we have 15 minutes left."',
+          'Controlando agenda: "Before we move to the next topic, let\'s do a quick time check to make sure we stay on track."'
+        ]
       },
       {
         english: "I'm blocked until I get approval on this.",
         portuguese: "Estou bloqueado até conseguir aprovação nisto.",
         level: 'médio',
-        context: 'Gestão de tempo'
+        context: 'Gestão de tempo',
+        situations: [
+          'Explicando atraso: "I can\'t proceed with the next phase because I\'m blocked until I get approval on this budget."',
+          'Status update: "The project is on hold - I\'m blocked until I get approval on this new requirement from legal."'
+        ]
       },
       {
         english: "Can we timebox this discussion to 15 minutes?",
         portuguese: "Podemos limitar esta discussão a 15 minutos?",
         level: 'avançado',
-        context: 'Gestão de tempo'
+        context: 'Gestão de tempo',
+        situations: [
+          'Controlando reunião: "This topic could go on forever. Can we timebox this discussion to 15 minutes and make a decision?"',
+          'Agenda apertada: "We have several topics to cover. Can we timebox this discussion to 15 minutes so we don\'t run over?"'
+        ]
       },
       {
         english: "I'm trying to batch similar tasks together.",
         portuguese: "Estou tentando agrupar tarefas similares.",
         level: 'avançado',
-        context: 'Gestão de tempo'
+        context: 'Gestão de tempo',
+        situations: [
+          'Explicando método: "To be more efficient, I\'m trying to batch similar tasks together - like doing all my emails at once."',
+          'Otimizando tempo: "Instead of switching between different types of work, I\'m trying to batch similar tasks together."'
+        ]
       },
       {
         english: "This is eating up too much of my bandwidth.",
         portuguese: "Isso está consumindo muito do meu tempo.",
         level: 'avançado',
-        context: 'Gestão de tempo'
+        context: 'Gestão de tempo',
+        situations: [
+          'Sobrecarga de trabalho: "These daily status meetings are eating up too much of my bandwidth. Can we make them weekly?"',
+          'Pedindo ajuda: "This administrative work is eating up too much of my bandwidth. Can someone else handle it?"'
+        ]
       },
       {
         english: "Let's set a realistic timeline for this project.",
         portuguese: "Vamos definir um cronograma realista para este projeto.",
         level: 'médio',
-        context: 'Gestão de tempo'
+        context: 'Gestão de tempo',
+        situations: [
+          'Planejamento inicial: "Before we start, let’s set a realistic timeline for this project based on our available resources."',
+          'Ajustando expectativas: "The client wants it in 2 weeks, but let’s set a realistic timeline for this project - I think we need 4 weeks."'
+        ]
       },
       {
         english: "I need to block off some focus time.",
         portuguese: "Preciso reservar um tempo para concentração.",
         level: 'médio',
-        context: 'Gestão de tempo'
+        context: 'Gestão de tempo',
+        situations: [
+          'Pedindo espaço: "I have a complex report to write. I need to block off some focus time this afternoon with no meetings."',
+          'Gerenciando interrupções: "These constant emails are killing my productivity. I need to block off some focus time to get this done."'
+        ]
       },
       {
         english: "Can we fast-track this process?",
         portuguese: "Podemos acelerar este processo?",
         level: 'médio',
-        context: 'Gestão de tempo'
+        context: 'Gestão de tempo',
+        situations: [
+          'Urgência: "We have a tight deadline from the client. Can we fast-track this process by skipping some of the usual reviews?"',
+          'Oportunidade: "This could be a game-changer for us. Can we fast-track this process to get to market before competitors?"'
+        ]
       },
       {
         english: "I'm trying to optimize my workflow.",
         portuguese: "Estou tentando otimizar meu fluxo de trabalho.",
         level: 'avançado',
-        context: 'Gestão de tempo'
+        context: 'Gestão de tempo',
+        situations: [
+          'Melhoria contínua: "I’m trying to optimize my workflow by using automation tools for repetitive tasks."',
+          'Explicando mudanças: "I’m trying to optimize my workflow, so I’ll be organizing my tasks differently starting next week."'
+        ]
       },
       {
         english: "Let's identify the critical path.",
         portuguese: "Vamos identificar o caminho crítico.",
         level: 'avançado',
-        context: 'Gestão de tempo'
+        context: 'Gestão de tempo',
+        situations: [
+          'Planejamento de projeto: "We have multiple dependencies here. Let’s identify the critical path so we know where delays will hurt us most."',
+          'Priorizando tarefas: "Time is running short. Let’s identify the critical path and focus our resources on those essential tasks."'
+        ]
       },
       {
         english: "I need to delegate some of these tasks.",
         portuguese: "Preciso delegar algumas dessas tarefas.",
         level: 'médio',
-        context: 'Gestão de tempo'
+        context: 'Gestão de tempo',
+        situations: [
+          'Sobrecarga: "I’m completely swamped this week. I need to delegate some of these tasks to keep the project on track."',
+          'Desenvolvimento da equipe: "To help the team grow, I need to delegate some of these tasks and give others more responsibility."'
+        ]
       },
       {
         english: "Can we run these processes in parallel?",
         portuguese: "Podemos executar esses processos em paralelo?",
         level: 'avançado',
-        context: 'Gestão de tempo'
+        context: 'Gestão de tempo',
+        situations: [
+          'Otimizando tempo: "Instead of doing design then development sequentially, can we run these processes in parallel to save time?"',
+          'Acelerar projeto: "We’re behind schedule. Can we run these processes in parallel instead of waiting for each phase to complete?"'
+        ]
       },
       {
         english: "I'm trying to minimize context switching.",
         portuguese: "Estou tentando minimizar a troca de contexto.",
         level: 'avançado',
-        context: 'Gestão de tempo'
+        context: 'Gestão de tempo',
+        situations: [
+          'Explicando método: "I’m trying to minimize context switching by working on similar tasks in blocks rather than jumping between projects."',
+          'Pedindo concentração: "I’m trying to minimize context switching today, so can we schedule all my calls back-to-back this afternoon?"'
+        ]
       },
       {
         english: "Let's establish some buffer time.",
         portuguese: "Vamos estabelecer um tempo de folga.",
         level: 'médio',
-        context: 'Gestão de tempo'
+        context: 'Gestão de tempo',
+        situations: [
+          'Planejamento conservador: "This timeline looks tight. Let’s establish some buffer time in case we run into unexpected issues."',
+          'Gestão de risco: "Given the complexity of this project, let’s establish some buffer time between major milestones."'
+        ]
       },
       {
         english: "I need to reschedule our one-on-one.",
         portuguese: "Preciso reagendar nossa reunião individual.",
         level: 'básico',
-        context: 'Gestão de tempo'
+        context: 'Gestão de tempo',
+        situations: [
+          'Conflito de agenda: "Something urgent came up. I need to reschedule our one-on-one from Thursday to Friday."',
+          'Viagem de trabalho: "I’ll be traveling next week. I need to reschedule our one-on-one to the week after."'
+        ]
       },
       {
         english: "Can we compress the timeline?",
         portuguese: "Podemos comprimir o cronograma?",
         level: 'médio',
-        context: 'Gestão de tempo'
+        context: 'Gestão de tempo',
+        situations: [
+          'Pressão de prazo: "The client moved up the launch date. Can we compress the timeline without sacrificing quality?"',
+          'Oportunidade urgente: "We have a chance to beat competitors to market. Can we compress the timeline for this feature?"'
+        ]
       },
       {
         english: "I'm working to eliminate time wasters.",
         portuguese: "Estou trabalhando para eliminar desperdiçadores de tempo.",
         level: 'avançado',
-        context: 'Gestão de tempo'
+        context: 'Gestão de tempo',
+        situations: [
+          'Melhoria de produtividade: "I’m working to eliminate time wasters like unnecessary meetings and excessive email checking."',
+          'Otimização pessoal: "To be more effective, I’m working to eliminate time wasters and focus on high-impact activities."'
+        ]
       }
     ],
     exercises: [
@@ -2967,121 +3127,201 @@ const trailsData = {
         english: "I need help!",
         portuguese: "Preciso de ajuda!",
         level: 'básico',
-        context: 'Emergência'
+        context: 'Emergência',
+        situations: [
+          'Situação de perigo: "Help! I need help! Someone call the police!"',
+          'Pedindo socorro: "Excuse me, I need help! My friend is injured and we need assistance."'
+        ]
       },
       {
         english: "Call the police!",
         portuguese: "Chame a polícia!",
         level: 'básico',
-        context: 'Emergência'
+        context: 'Emergência',
+        situations: [
+          'Crime em andamento: "There\'s a robbery happening! Call the police immediately!"',
+          'Situação perigosa: "Call the police! I just witnessed an accident and people are hurt."'
+        ]
       },
       {
         english: "I need to go to the hospital.",
         portuguese: "Preciso ir ao hospital.",
         level: 'básico',
-        context: 'Emergência'
+        context: 'Emergência',
+        situations: [
+          'Problema de saúde: "I\'m feeling very sick and have chest pain. I need to go to the hospital."',
+          'Ferimento: "I think I broke my arm. I need to go to the hospital right away."'
+        ]
       },
       {
         english: "Where is the nearest pharmacy?",
         portuguese: "Onde fica a farmácia mais próxima?",
         level: 'básico',
-        context: 'Emergência'
+        context: 'Emergência',
+        situations: [
+          'Precisando de remédio: "My child has a fever. Where is the nearest pharmacy that\'s open now?"',
+          'Emergência médica: "I need to buy medicine urgently. Where is the nearest pharmacy?"'
+        ]
       },
       {
         english: "I lost my passport.",
         portuguese: "Perdi meu passaporte.",
         level: 'básico',
-        context: 'Emergência'
+        context: 'Emergência',
+        situations: [
+          'Na polícia: "I need to file a report. I lost my passport and all my identification documents."',
+          'No consulado: "I lost my passport while traveling. What do I need to do to get a replacement?"'
+        ]
       },
       {
         english: "Someone stole my wallet.",
         portuguese: "Alguém roubou minha carteira.",
         level: 'básico',
-        context: 'Emergência'
+        context: 'Emergência',
+        situations: [
+          'Reportando à polícia: "I was at the market when someone stole my wallet. I need to file a police report."',
+          'No hotel: "Someone stole my wallet this morning. Can you help me contact the police and my bank?"'
+        ]
       },
       {
         english: "I need to contact my embassy.",
         portuguese: "Preciso contatar minha embaixada.",
         level: 'médio',
-        context: 'Emergência'
+        context: 'Emergência',
+        situations: [
+          'Perdeu documentos: "I lost all my documents including my passport. I need to contact my embassy immediately."',
+          'Problemas legais: "I\'m having legal issues and need consular assistance. How can I contact my embassy?"'
+        ]
       },
       {
         english: "Can you call an ambulance?",
         portuguese: "Você pode chamar uma ambulância?",
         level: 'básico',
-        context: 'Emergência'
+        context: 'Emergência',
+        situations: [
+          'Emergência médica: "My friend fell and isn\'t responding. Can you call an ambulance immediately?"',
+          'Acidente grave: "There\'s been a serious car accident. Can you call an ambulance? Someone is badly injured."'
+        ]
       },
       {
         english: "I'm having chest pain.",
         portuguese: "Estou com dor no peito.",
         level: 'médio',
-        context: 'Emergência'
+        context: 'Emergência',
+        situations: [
+          'No hospital: "I’m having severe chest pain that started an hour ago. I think I need immediate medical attention."',
+          'Chamando emergência: "I’m having chest pain and shortness of breath. I think I need to go to the emergency room."'
+        ]
       },
       {
         english: "I'm allergic to this medication.",
         portuguese: "Sou alérgico a este medicamento.",
         level: 'médio',
-        context: 'Emergência'
+        context: 'Emergência',
+        situations: [
+          'Na farmácia: "Wait, I can’t take this. I’m allergic to this medication. Do you have an alternative?"',
+          'Com médico: "Before you prescribe anything, I need to tell you I’m allergic to this medication."'
+        ]
       },
       {
         english: "I need to file a police report.",
         portuguese: "Preciso registrar um boletim de ocorrência.",
         level: 'avançado',
-        context: 'Emergência'
+        context: 'Emergência',
+        situations: [
+          'Após roubo: "My wallet was stolen this morning. I need to file a police report for insurance purposes."',
+          'Acidente de trânsito: "There was a car accident and we need to exchange information. Do I need to file a police report?"'
+        ]
       },
       {
         english: "My car broke down.",
         portuguese: "Meu carro quebrou.",
         level: 'básico',
-        context: 'Emergência'
+        context: 'Emergência',
+        situations: [
+          'Ligando para assistência: "I’m stranded on the highway. My car broke down and I need a tow truck."',
+          'Pedindo ajuda: "My car broke down in the parking lot. Do you know a good mechanic nearby?"'
+        ]
       },
       {
         english: "I locked my keys in the car.",
         portuguese: "Tranquei as chaves no carro.",
         level: 'médio',
-        context: 'Emergência'
+        context: 'Emergência',
+        situations: [
+          'Pedindo ajuda: "I’m so embarrassed. I locked my keys in the car with the engine running. Can you help me?"',
+          'Chamando chaveiro: "I locked my keys in the car at the shopping mall. How quickly can a locksmith get here?"'
+        ]
       },
       {
         english: "I need roadside assistance.",
         portuguese: "Preciso de assistência na estrada.",
         level: 'avançado',
-        context: 'Emergência'
+        context: 'Emergência',
+        situations: [
+          'Pneu furado: "I have a flat tire on a busy road. I need roadside assistance because I don’t have the tools to change it."',
+          'Bateria descarregada: "My car won’t start - the battery is dead. I need roadside assistance for a jump start."'
+        ]
       },
       {
         english: "There's been an accident.",
         portuguese: "Houve um acidente.",
         level: 'básico',
-        context: 'Emergência'
+        context: 'Emergência',
+        situations: [
+          'Ligando para 911: "There’s been an accident on Highway 101 near the mall. We need police and an ambulance."',
+          'Informando ao chefe: "I’m going to be late to the meeting. There’s been an accident and traffic is completely stopped."'
+        ]
       },
       {
         english: "I feel dizzy.",
         portuguese: "Estou me sentindo tonto.",
         level: 'básico',
-        context: 'Emergência'
+        context: 'Emergência',
+        situations: [
+          'No médico: "I’ve been feeling dizzy for the past two hours, especially when I stand up quickly."',
+          'Pedindo ajuda: "I feel dizzy and nauseous. Can you help me sit down and maybe get me some water?"'
+        ]
       },
       {
         english: "I need a doctor who speaks English.",
         portuguese: "Preciso de um médico que fale inglês.",
         level: 'médio',
-        context: 'Emergência'
+        context: 'Emergência',
+        situations: [
+          'No hospital: "This is very urgent and I need a doctor who speaks English. I can’t explain my symptoms in another language."',
+          'Na recepção: "I have a medical emergency but I need a doctor who speaks English. Is there one available?"'
+        ]
       },
       {
         english: "Where is the nearest hospital?",
         portuguese: "Onde fica o hospital mais próximo?",
         level: 'básico',
-        context: 'Emergência'
+        context: 'Emergência',
+        situations: [
+          'Emergência médica: "My friend is having severe chest pain. Where is the nearest hospital? We need to get there immediately."',
+          'Acidente: "There’s been an accident and someone is injured. Where is the nearest hospital with an emergency room?"'
+        ]
       },
       {
         english: "I need travel insurance assistance.",
         portuguese: "Preciso de assistência do seguro viagem.",
         level: 'avançado',
-        context: 'Emergência'
+        context: 'Emergência',
+        situations: [
+          'Problema médico: "I had to go to the emergency room abroad. I need travel insurance assistance to cover the medical bills."',
+          'Cancelamento de viagem: "My flight was cancelled due to a family emergency. I need travel insurance assistance for the additional costs."'
+        ]
       },
       {
         english: "My flight was cancelled due to weather.",
         portuguese: "Meu voo foi cancelado devido ao tempo.",
         level: 'médio',
-        context: 'Emergência'
+        context: 'Emergência',
+        situations: [
+          'No aeroporto: "My flight was cancelled due to weather. When is the next available flight to the same destination?"',
+          'Ligando para a companhia: "My connecting flight was cancelled due to weather. Can you rebook me on the next flight without extra charges?"'
+        ]
       },
 
       // ========== CATEGORIA: TURISMO (20 frases) ==========
@@ -4982,7 +5222,11 @@ const trailsData = {
         english: "I'd like to follow up on our conversation.",
         portuguese: "Gostaria de dar seguimento à nossa conversa.",
         level: 'avançado',
-        context: 'Follow-up'
+        context: 'Follow-up',
+        situations: [
+          'E-mail pós-evento: "Thank you for the insightful discussion yesterday. I’d like to follow up on our conversation about the partnership opportunity."',
+          'Ligação de negócios: "I’d like to follow up on our conversation from last week. Do you still have interest in exploring that collaboration?"'
+        ]
       },
       {
         english: "Have you attended this conference before?",
@@ -5006,7 +5250,11 @@ const trailsData = {
         english: "Could you introduce me to your colleague?",
         portuguese: "Você poderia me apresentar ao seu colega?",
         level: 'médio',
-        context: 'Apresentação'
+        context: 'Apresentação',
+        situations: [
+          'Networking no evento: "I’d love to meet the head of marketing. Could you introduce me to your colleague when she’s free?"',
+          'Oportunidade de colaboração: "I think our projects could align well. Could you introduce me to your colleague who handles partnerships?"'
+        ]
       },
       {
         english: "What trends do you see in your industry?",
@@ -5018,7 +5266,11 @@ const trailsData = {
         english: "I'm impressed by your company's growth.",
         portuguese: "Estou impressionado com o crescimento da sua empresa.",
         level: 'avançado',
-        context: 'Negócios'
+        context: 'Negócios',
+        situations: [
+          'Networking elogioso: "I’ve been following your company in the news. I’m impressed by your company’s growth, especially in the Asian market."',
+          'Conversa de negócios: "Your latest quarterly results were outstanding. I’m impressed by your company’s growth despite the challenging economy."'
+        ]
       },
       {
         english: "Are you planning to attend next year?",
@@ -5036,7 +5288,11 @@ const trailsData = {
         english: "I'd be interested in a collaboration.",
         portuguese: "Eu estaria interessado em uma colaboração.",
         level: 'avançado',
-        context: 'Parceria'
+        context: 'Parceria',
+        situations: [
+          'Proposta direta: "Your technology complements ours perfectly. I’d be interested in a collaboration to create a joint solution."',
+          'Explorando oportunidades: "We serve similar markets but different use cases. I’d be interested in a collaboration to expand our offerings."'
+        ]
       },
       {
         english: "Thank you for sharing your insights.",
@@ -5060,7 +5316,11 @@ const trailsData = {
         english: "What's your biggest challenge right now?",
         portuguese: "Qual seu maior desafio agora?",
         level: 'avançado',
-        context: 'Negócios'
+        context: 'Negócios',
+        situations: [
+          'Conversa aprofundada: "I’d love to understand your business better. What’s your biggest challenge right now in the market?"',
+          'Identificando oportunidades: "As we explore potential partnerships, what’s your biggest challenge right now that we might help solve?"'
+        ]
       },
       {
         english: "I appreciate you taking the time to chat.",
@@ -5072,13 +5332,21 @@ const trailsData = {
         english: "Have a great rest of the conference!",
         portuguese: "Tenha um ótimo resto de conferência!",
         level: 'médio',
-        context: 'Despedida'
+        context: 'Despedida',
+        situations: [
+          'Despedida temporária: "I need to run to my next session, but it was great chatting. Have a great rest of the conference!"',
+          'Final de conversa: "Thanks for all the great insights about the industry. Have a great rest of the conference!"'
+        ]
       },
       {
         english: "I hope our paths cross again soon.",
         portuguese: "Espero que nossos caminhos se cruzem novamente em breve.",
         level: 'avançado',
-        context: 'Despedida'
+        context: 'Despedida',
+        situations: [
+          'Despedida esperançosa: "This was such a valuable conversation. I hope our paths cross again soon, maybe at next year’s conference."',
+          'Networking futível: "You’re doing amazing work in this space. I hope our paths cross again soon - I’d love to collaborate."'
+        ]
       },
 
       // ========== ADDITIONAL NETWORKING PHRASES ==========
@@ -5128,13 +5396,21 @@ const trailsData = {
         english: "I'm working on something similar.",
         portuguese: "Estou trabalhando em algo similar.",
         level: 'médio',
-        context: 'Trabalho'
+        context: 'Trabalho',
+        situations: [
+          'Encontrando commonalities: "I’m working on something similar in our marketing department. Maybe we can share best practices."',
+          'Colaboração potencial: "That sounds interesting! I’m working on something similar. We should compare notes sometime."'
+        ]
       },
       {
         english: "You should meet my colleague, Sarah.",
         portuguese: "Você deveria conhecer minha colega, Sarah.",
         level: 'básico',
-        context: 'Apresentação'
+        context: 'Apresentação',
+        situations: [
+          'Facilitando networking: "You should meet my colleague, Sarah. She’s working on a similar project and might have some great insights."',
+          'Conectando pessoas: "You should meet my colleague, Sarah. You both work in data analytics and would have a lot to discuss."'
+        ]
       },
       {
         english: "I've heard great things about your company.",
@@ -5272,43 +5548,71 @@ const trailsData = {
         english: "What's your elevator pitch?",
         portuguese: "Qual é seu elevator pitch?",
         level: 'avançado',
-        context: 'Negócios'
+        context: 'Negócios',
+        situations: [
+          'Conhecendo negócio: "I’d love to learn more about what you do. What’s your elevator pitch for your startup?"',
+          'Networking rápido: "We only have a few minutes before the next session. What’s your elevator pitch?"'
+        ]
       },
       {
         english: "I see a lot of potential for synergy.",
         portuguese: "Vejo muito potencial para sinergia.",
         level: 'avançado',
-        context: 'Parceria'
+        context: 'Parceria',
+        situations: [
+          'Identificando oportunidade: "You handle the software and we handle the hardware. I see a lot of potential for synergy between our companies."',
+          'Proposta de parceria: "Our customer bases barely overlap but our expertise complements each other. I see a lot of potential for synergy."'
+        ]
       },
       {
         english: "Our values seem very aligned.",
         portuguese: "Nossos valores parecem muito alinhados.",
         level: 'avançado',
-        context: 'Negócios'
+        context: 'Negócios',
+        situations: [
+          'Explorando parceria: "After hearing your presentation, our values seem very aligned. We should explore ways to work together."',
+          'Construindo rapport: "I love your focus on sustainability and social impact. Our values seem very aligned with that mission."'
+        ]
       },
       {
         english: "I'd love to explore partnership opportunities.",
         portuguese: "Adoraria explorar oportunidades de parceria.",
         level: 'avançado',
-        context: 'Parceria'
+        context: 'Parceria',
+        situations: [
+          'Interesse formal: "Your platform could integrate well with our services. I’d love to explore partnership opportunities with your team."',
+          'Follow-up direto: "This conversation has been very insightful. I’d love to explore partnership opportunities between our companies."'
+        ]
       },
       {
         english: "What's your market strategy?",
         portuguese: "Qual é sua estratégia de mercado?",
         level: 'avançado',
-        context: 'Negócios'
+        context: 'Negócios',
+        situations: [
+          'Conversa estratégica: "Your growth numbers are impressive. What’s your market strategy for expanding internationally?"',
+          'Aprendendo com competidor: "You’ve captured significant market share quickly. What’s your market strategy that’s working so well?"'
+        ]
       },
       {
         english: "We're looking for strategic partners.",
         portuguese: "Estamos procurando parceiros estratégicos.",
         level: 'avançado',
-        context: 'Parceria'
+        context: 'Parceria',
+        situations: [
+          'Oportunidade direta: "We’re expanding into new markets and we’re looking for strategic partners who understand the local landscape."',
+          'Networking aberto: "I should mention that we’re looking for strategic partners in the fintech space. Do you know anyone who might be interested?"'
+        ]
       },
       {
         english: "Your solution addresses a real pain point.",
         portuguese: "Sua solução aborda um ponto problemático real.",
         level: 'avançado',
-        context: 'Negócios'
+        context: 'Negócios',
+        situations: [
+          'Reconhecendo valor: "This is exactly what our industry needs. Your solution addresses a real pain point that we’ve been struggling with."',
+          'Validando produto: "I can see why you’re growing so fast. Your solution addresses a real pain point that many companies face."'
+        ]
       },
       {
         english: "What's your competitive advantage?",
@@ -5326,7 +5630,11 @@ const trailsData = {
         english: "We might be able to help each other.",
         portuguese: "Poderíamos nos ajudar mutuamente.",
         level: 'médio',
-        context: 'Colaboração'
+        context: 'Colaboração',
+        situations: [
+          'Proposta win-win: "You need clients in Brazil and we need software expertise. We might be able to help each other."',
+          'Identificando sinergia: "It sounds like we have complementary strengths. We might be able to help each other grow our businesses."'
+        ]
       },
 
       // ========== EVENT LOGISTICS & PRACTICAL PHRASES ==========
@@ -5388,7 +5696,11 @@ const trailsData = {
         english: "Are the slides available for download?",
         portuguese: "Os slides estão disponíveis para download?",
         level: 'médio',
-        context: 'Recursos'
+        context: 'Recursos',
+        situations: [
+          'Após presentação: "Great presentation! Are the slides available for download? I’d like to share them with my team."',
+          'Para estudar depois: "There was a lot of valuable information in that talk. Are the slides available for download so I can review them later?"'
+        ]
       },
 
       // ========== FOLLOW-UP & CLOSING PHRASES ==========
@@ -5396,37 +5708,61 @@ const trailsData = {
         english: "Let's grab coffee sometime.",
         portuguese: "Vamos tomar um café em algum momento.",
         level: 'básico',
-        context: 'Follow-up'
+        context: 'Follow-up',
+        situations: [
+          'Networking informal: "This has been a great conversation. Let’s grab coffee sometime to continue discussing that project idea."',
+          'Construindo relacionamento: "I’d love to learn more about your work. Let’s grab coffee sometime next week if you’re available."'
+        ]
       },
       {
         english: "I'll send you that article I mentioned.",
         portuguese: "Vou te enviar aquele artigo que mencionei.",
         level: 'médio',
-        context: 'Follow-up'
+        context: 'Follow-up',
+        situations: [
+          'Prometendo recurso: "That study would be perfect for your research. I’ll send you that article I mentioned as soon as I get back to the office."',
+          'Follow-up útil: "Thanks for the great discussion about market trends. I’ll send you that article I mentioned - it has some relevant data."'
+        ]
       },
       {
         english: "Feel free to reach out anytime.",
         portuguese: "Sinta-se à vontade para entrar em contato a qualquer momento.",
         level: 'médio',
-        context: 'Contato'
+        context: 'Contato',
+        situations: [
+          'Oferecendo ajuda: "I have experience in that area and would be happy to help. Feel free to reach out anytime with questions."',
+          'Mantendo porta aberta: "Even if this partnership doesn’t work out, I enjoyed our conversation. Feel free to reach out anytime."'
+        ]
       },
       {
         english: "I look forward to hearing from you.",
         portuguese: "Aguardo ansiosamente seu contato.",
         level: 'médio',
-        context: 'Follow-up'
+        context: 'Follow-up',
+        situations: [
+          'Final de proposta: "I’ve sent you the detailed proposal we discussed. I look forward to hearing from you with your thoughts."',
+          'Conclusão profissional: "Thank you for considering our partnership proposal. I look forward to hearing from you soon."'
+        ]
       },
       {
         english: "It was a pleasure meeting you.",
         portuguese: "Foi um prazer conhecê-lo.",
         level: 'básico',
-        context: 'Despedida'
+        context: 'Despedida',
+        situations: [
+          'Final de networking: "Thank you for the insightful conversation about industry trends. It was a pleasure meeting you."',
+          'Despedida profissional: "I hope we can work together in the future. It was a pleasure meeting you at the conference."'
+        ]
       },
       {
         english: "I'll be in touch soon.",
         portuguese: "Entrarei em contato em breve.",
         level: 'médio',
-        context: 'Follow-up'
+        context: 'Follow-up',
+        situations: [
+          'Promessa de contato: "I need to discuss this with my team first, but I’ll be in touch soon with our decision."',
+          'Próximo passo: "Let me review the proposal details you shared. I’ll be in touch soon to schedule our next meeting."'
+        ]
       },
       {
         english: "Don't hesitate to contact me.",
