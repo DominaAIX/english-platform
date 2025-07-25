@@ -427,7 +427,7 @@ export default function SimpleTrailContent({ trail, userPlan, slug }: SimpleTrai
               </div>
               
               <div className="text-sm text-gray-400 mb-4">
-                Contexto: {currentPhrase.context} • Nível: {currentPhrase.level}
+                Contexto: {currentPhrase.context} • Nível: {currentPhrase.level} • 🔥 v2.1 (DEBUG)
               </div>
               
               {/* Exemplos de uso - aparecem apenas após clicar Ver Tradução */}
