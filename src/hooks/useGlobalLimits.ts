@@ -38,8 +38,14 @@ export function useGlobalLimits() {
     resetTime: null
   })
 
-  // Verificar se é usuário premium
-  const isPremium = userProfile?.plan === 'premium'
+  // Verificar se é usuário premium - VERIFICAÇÃO DUPLA
+  const isKnownPremiumEmail = userProfile?.email === 'user.premium@test.com' || userProfile?.email === 'denis_esteban@icloud.com'
+  const isPremium = userProfile?.plan === 'premium' || isKnownPremiumEmail
+  
+  console.log('🔍 useGlobalLimits - Email:', userProfile?.email)
+  console.log('🔍 useGlobalLimits - Plan:', userProfile?.plan)
+  console.log('🔍 useGlobalLimits - É known premium?', isKnownPremiumEmail)
+  console.log('🔍 useGlobalLimits - É premium final?', isPremium)
 
   useEffect(() => {
     if (!user || isPremium) {

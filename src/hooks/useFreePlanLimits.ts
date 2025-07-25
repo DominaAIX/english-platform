@@ -18,8 +18,14 @@ export function useFreePlanLimits() {
   const FREE_MESSAGE_LIMIT = 3
   const COOLDOWN_HOURS = 24
 
-  // Verificar se usuário é premium
-  const isPremium = userProfile?.plan === 'premium'
+  // Verificar se usuário é premium - VERIFICAÇÃO DUPLA
+  const isKnownPremiumEmail = userProfile?.email === 'user.premium@test.com' || userProfile?.email === 'denis_esteban@icloud.com'
+  const isPremium = userProfile?.plan === 'premium' || isKnownPremiumEmail
+  
+  console.log('🔍 useFreePlanLimits - Email:', userProfile?.email)
+  console.log('🔍 useFreePlanLimits - Plan:', userProfile?.plan)
+  console.log('🔍 useFreePlanLimits - É known premium?', isKnownPremiumEmail)
+  console.log('🔍 useFreePlanLimits - É premium final?', isPremium)
 
   // Chave única para cada usuário no localStorage
   const getStorageKey = () => user?.id ? `free_plan_limits_${user.id}` : null

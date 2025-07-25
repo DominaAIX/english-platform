@@ -52,9 +52,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       // Usuários premium conhecidos - forçar premium
       const premiumEmails = ['denis_esteban@icloud.com', 'teste@premium.com', 'user.premium@test.com', 'use.premium@test.com']
       console.log('🔍 Verificando email:', userEmail, 'contra lista premium:', premiumEmails)
+      console.log('🔍 Email é user.premium@test.com?', userEmail === 'user.premium@test.com')
+      console.log('🔍 Email está na lista?', premiumEmails.includes(userEmail || ''))
       
-      // FORÇA PREMIUM para user.premium@test.com
-      if (userEmail === 'user.premium@test.com' || premiumEmails.includes(userEmail || '')) {
+      // FORÇA PREMIUM para user.premium@test.com - VERIFICAÇÃO TRIPLA
+      if (userEmail === 'user.premium@test.com' || userEmail === 'use.premium@test.com' || premiumEmails.includes(userEmail || '')) {
         const premiumProfile: UserProfile = {
           id: userId,
           email: userEmail,
@@ -63,7 +65,12 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         }
         console.log('✅ PERFIL PREMIUM FORÇADO PARA:', userEmail, premiumProfile)
         console.log('🚀 PLANO:', premiumProfile.plan)
+        console.log('🔥🔥🔥 USUÁRIO PREMIUM FORÇADO - DEFINITIVO! 🔥🔥🔥')
         setUserProfile(premiumProfile) // Forçar set do estado também
+        
+        // GARANTIR que o perfil premium seja persistido
+        localStorage.setItem(`premium_user_${userId}`, 'true')
+        
         return premiumProfile
       }
       
