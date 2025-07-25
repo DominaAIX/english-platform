@@ -399,7 +399,7 @@ export default function SimpleTrailContent({ trail, userPlan, slug }: SimpleTrai
 
             <div className="text-center">
               <h2 className="text-2xl font-bold text-white mb-4 pr-12">
-                {currentPhrase.english}
+                🚨 TEST v3.0 🚨 {currentPhrase.english}
               </h2>
               
               {showTranslation && (
