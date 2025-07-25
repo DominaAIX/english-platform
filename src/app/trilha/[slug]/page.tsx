@@ -5065,61 +5065,101 @@ const trailsData = {
         english: "How much is the entrance fee?",
         portuguese: "Quanto custa a entrada?",
         level: 'básico',
-        context: 'Ingressos'
+        context: 'Ingressos',
+        situations: [
+          'Na bilheteria: "I\'m interested in visiting today. How much is the entrance fee for one adult?"',
+          'Planejando orçamento: "Before I decide to visit, how much is the entrance fee? I\'m traveling on a budget."'
+        ]
       },
       {
         english: "Where can I buy tickets?",
         portuguese: "Onde posso comprar ingressos?",
         level: 'básico',
-        context: 'Ingressos'
+        context: 'Ingressos',
+        situations: [
+          'Chegando no local: "I just arrived and I\'m ready to visit. Where can I buy tickets?"',
+          'Procurando bilheteria: "Where can I buy tickets? I don\'t see a ticket office around here."'
+        ]
       },
       {
         english: "What time does it close?",
         portuguese: "Que horas fecha?",
         level: 'básico',
-        context: 'Horários'
+        context: 'Horários',
+        situations: [
+          'Planejando visita: "I want to make sure I have enough time to see everything. What time does it close?"',
+          'Chegando tarde: "It\'s already 4 PM. What time does it close? Do I still have time for a visit?"'
+        ]
       },
       {
         english: "How do I get there?",
         portuguese: "Como chego lá?",
         level: 'básico',
-        context: 'Direções'
+        context: 'Direções',
+        situations: [
+          'Pedindo direções: "I\'m staying downtown and want to visit the museum. How do I get there by public transport?"',
+          'Opções de transporte: "How do I get there from the airport? Should I take a taxi, bus, or metro?"'
+        ]
       },
       {
         english: "Is there a guided tour?",
         portuguese: "Há tour guiado?",
         level: 'básico',
-        context: 'Tours'
+        context: 'Tours',
+        situations: [
+          'Querendo mais informações: "I want to learn about the history and details. Is there a guided tour available?"',
+          'Primeira visita: "This is my first time here. Is there a guided tour that explains everything?"'
+        ]
       },
       {
         english: "Can I take pictures here?",
         portuguese: "Posso tirar fotos aqui?",
         level: 'básico',
-        context: 'Fotografia'
+        context: 'Fotografia',
+        situations: [
+          'Respeitando regras: "This is beautiful and I\'d love to capture it. Can I take pictures here?"',
+          'Verificando permissão: "Can I take pictures here or are there restrictions? I want to follow the rules."'
+        ]
       },
       {
         english: "What time do you open?",
         portuguese: "Que horas vocês abrem?",
         level: 'básico',
-        context: 'Horários'
+        context: 'Horários',
+        situations: [
+          'Planejando dia: "I want to start early tomorrow. What time do you open in the morning?"',
+          'Chegando cedo: "What time do you open? I\'d like to be one of the first visitors to avoid crowds."'
+        ]
       },
       {
         english: "Is there a student discount?",
         portuguese: "Há desconto para estudante?",
         level: 'básico',
-        context: 'Desconto'
+        context: 'Desconto',
+        situations: [
+          'Economizando: "I\'m a college student and money is tight. Is there a student discount available?"',
+          'Com documentação: "Is there a student discount? I have my student ID card with me as proof."'
+        ]
       },
       {
         english: "How long does the tour last?",
         portuguese: "Quanto tempo dura o tour?",
         level: 'médio',
-        context: 'Tours'
+        context: 'Tours',
+        situations: [
+          'Planejando agenda: "I have other plans today. How long does the tour last? I need to know for scheduling."',
+          'Organizando tempo: "How long does the tour last? I want to plan my day and see other attractions too."'
+        ]
       },
       {
         english: "Can I book tickets online?",
         portuguese: "Posso comprar ingressos online?",
         level: 'médio',
-        context: 'Reserva'
+        context: 'Reserva',
+        situations: [
+          'Evitando filas: "I hate waiting in lines. Can I book tickets online and skip the queue?"',
+          'Planejando viagem: "Can I book tickets online before my trip? I want to guarantee my entry."'
+        ]
       },
 
       // ========== FRASES PREMIUM ==========
@@ -5137,19 +5177,31 @@ const trailsData = {
         english: "Is there an audio guide?",
         portuguese: "Há um guia de áudio?",
         level: 'médio',
-        context: 'Guia'
+        context: 'Guia',
+        situations: [
+          'Visitando sozinho: "I\'m exploring on my own. Is there an audio guide that can provide detailed information?"',
+          'Em outro idioma: "Is there an audio guide available in English? I want to understand the exhibits better."'
+        ]
       },
       {
         english: "What's the history of this place?",
         portuguese: "Qual é a história deste lugar?",
         level: 'médio',
-        context: 'História'
+        context: 'História',
+        situations: [
+          'Curiosidade histórica: "This building looks ancient and fascinating. What\'s the history of this place?"',
+          'Para guia: "What\'s the history of this place? I\'d love to hear some interesting stories or legends."'
+        ]
       },
       {
         english: "Are there any festivals this week?",
         portuguese: "Há algum festival esta semana?",
         level: 'médio',
-        context: 'Eventos'
+        context: 'Eventos',
+        situations: [
+          'Turista curioso: "I\'m visiting for a few days. Are there any festivals this week that I shouldn\'t miss?"',
+          'Experiência cultural: "Are there any festivals this week? I\'d love to experience local culture and traditions."'
+        ]
       },
       {
         english: "Can you recommend a local restaurant?",
@@ -5165,13 +5217,21 @@ const trailsData = {
         english: "Where is the best viewpoint?",
         portuguese: "Onde fica o melhor mirante?",
         level: 'básico',
-        context: 'Vista'
+        context: 'Vista',
+        situations: [
+          'Para fotos: "I want to take some great photos of the city skyline. Where is the best viewpoint around here?"',
+          'Admirando paisagem: "Where is the best viewpoint to see the sunset? I heard there\'s an amazing spot nearby."'
+        ]
       },
       {
         english: "Is it safe to walk here at night?",
         portuguese: "É seguro caminhar aqui à noite?",
         level: 'médio',
-        context: 'Segurança'
+        context: 'Segurança',
+        situations: [
+          'Preocupação com segurança: "I\'m staying nearby and planning to walk back to my hotel. Is it safe to walk here at night?"',
+          'Vida noturna: "Is it safe to walk here at night? I\'d like to explore the nightlife in this area."'
+        ]
       },
       {
         english: "Can I get a map of the area?",
@@ -5187,25 +5247,41 @@ const trailsData = {
         english: "What's the local specialty?",
         portuguese: "Qual é a especialidade local?",
         level: 'básico',
-        context: 'Cultura'
+        context: 'Cultura',
+        situations: [
+          'Descobrindo culinária: "I want to try something authentic and traditional. What\'s the local specialty that I absolutely must taste?"',
+          'No restaurante: "What\'s the local specialty here? I\'d like to order something representative of this region."'
+        ]
       },
       {
         english: "Are there any free activities?",
         portuguese: "Há alguma atividade gratuita?",
         level: 'básico',
-        context: 'Atividades'
+        context: 'Atividades',
+        situations: [
+          'Viajando com orçamento apertado: "I\'m traveling on a budget. Are there any free activities or attractions I can enjoy here?"',
+          'Economizando: "Are there any free activities like walking tours, parks, or museums with free admission days?"'
+        ]
       },
       {
         english: "How do I get to the old town?",
         portuguese: "Como chego à cidade velha?",
         level: 'básico',
-        context: 'Direções'
+        context: 'Direções',
+        situations: [
+          'Pedindo direções: "I want to visit the historic center. How do I get to the old town from here?"',
+          'Opções de transporte: "How do I get to the old town? Should I take the bus, metro, or is it walking distance?"'
+        ]
       },
       {
         english: "Is this area wheelchair accessible?",
         portuguese: "Esta área é acessível para cadeira de rodas?",
         level: 'avançado',
-        context: 'Acessibilidade'
+        context: 'Acessibilidade',
+        situations: [
+          'Verificando acessibilidade: "I\'m traveling with someone who uses a wheelchair. Is this area wheelchair accessible?"',
+          'Planejando visita: "Is this area wheelchair accessible? We need to plan our route carefully for accessibility."'
+        ]
       },
       {
         english: "What are the must-see attractions?",
@@ -5221,43 +5297,71 @@ const trailsData = {
         english: "Are there guided tours available?",
         portuguese: "Há tours guiados disponíveis?",
         level: 'médio',
-        context: 'Tours'
+        context: 'Tours',
+        situations: [
+          'Querendo guia: "I\'d like to learn more about this place. Are there guided tours available today?"',
+          'Planejando visita: "Are there guided tours available? I prefer having an expert explain the history and details."'
+        ]
       },
       {
         english: "Can I bring my camera inside?",
         portuguese: "Posso levar minha câmera para dentro?",
         level: 'médio',
-        context: 'Fotografia'
+        context: 'Fotografia',
+        situations: [
+          'Check de segurança: "I have a professional camera with me. Can I bring my camera inside or are there restrictions?"',
+          'Verificando regras: "Can I bring my camera inside? I want to take photos but I don\'t want to break any rules."'
+        ]
       },
       {
         english: "What's the best time to visit?",
         portuguese: "Qual é a melhor hora para visitar?",
         level: 'médio',
-        context: 'Planejamento'
+        context: 'Planejamento',
+        situations: [
+          'Evitando multidões: "I want to avoid crowds and enjoy the experience. What\'s the best time to visit - early morning?"',
+          'Melhor experiência: "What\'s the best time to visit for the most beautiful views and ideal weather conditions?"'
+        ]
       },
       {
         english: "Do you offer group discounts?",
         portuguese: "Vocês oferecem desconto para grupo?",
         level: 'avançado',
-        context: 'Desconto'
+        context: 'Desconto',
+        situations: [
+          'Viagem em grupo: "We\'re a group of 15 people visiting together. Do you offer group discounts for large parties?"',
+          'Organizando excursão: "I\'m organizing a school trip with 20 students. Do you offer group discounts for educational visits?"'
+        ]
       },
       {
         english: "Is there a dress code here?",
         portuguese: "Há código de vestimenta aqui?",
         level: 'avançado',
-        context: 'Etiqueta'
+        context: 'Etiqueta',
+        situations: [
+          'Local religioso: "I\'m visiting this temple and want to be respectful. Is there a dress code here?"',
+          'Verificando apropriado: "Is there a dress code here? I want to make sure my clothes are appropriate for this place."'
+        ]
       },
       {
         english: "Can I get a refund if it rains?",
         portuguese: "Posso ter reembolso se chover?",
         level: 'avançado',
-        context: 'Política'
+        context: 'Política',
+        situations: [
+          'Atividade ao ar livre: "This is an outdoor tour and the weather looks uncertain. Can I get a refund if it rains?"',
+          'Política de cancelamento: "Can I get a refund if it rains and the experience is cancelled or significantly affected?"'
+        ]
       },
       {
         english: "Where can I store my luggage?",
         portuguese: "Onde posso guardar minha bagagem?",
         level: 'médio',
-        context: 'Bagagem'
+        context: 'Bagagem',
+        situations: [
+          'Entre voos: "I have a long layover and want to explore the city. Where can I store my luggage?"',
+          'Após checkout: "I checked out of my hotel but my flight is tonight. Where can I store my luggage for the day?"'
+        ]
       }
     ],
     exercises: [
@@ -5265,31 +5369,51 @@ const trailsData = {
         id: 'passeios-ex-1',
         correctSentence: 'How much is the ticket?',
         words: ['How', 'much', 'is', 'the', 'ticket?'],
-        translation: 'Quanto custa o ingresso?'
+        translation: 'Quanto custa o ingresso?',
+        situations: [
+          'Na bilheteria: "I\'d like to visit the museum today. How much is the ticket for one adult?"',
+          'Comparando preços: "How much is the ticket? I want to see if it fits in my daily budget."'
+        ]
       },
       {
         id: 'passeios-ex-2',
         correctSentence: 'What time does it open?',
         words: ['What', 'time', 'does', 'it', 'open?'],
-        translation: 'Que horas abre?'
+        translation: 'Que horas abre?',
+        situations: [
+          'Planejando o dia: "I want to be one of the first visitors. What time does it open in the morning?"',
+          'Chegando cedo: "What time does it open? I\'d like to start my sightseeing early to avoid crowds."'
+        ]
       },
       {
         id: 'passeios-ex-3',
         correctSentence: 'Where is the entrance?',
         words: ['Where', 'is', 'the', 'entrance?'],
-        translation: 'Onde fica a entrada?'
+        translation: 'Onde fica a entrada?',
+        situations: [
+          'Procurando entrada: "I\'m here for the tour but I can\'t find the way in. Where is the entrance?"',
+          'Lugar grande: "This building is huge and confusing. Where is the entrance for visitors?"'
+        ]
       },
       {
         id: 'passeios-ex-4',
         correctSentence: 'Can I take photos here?',
         words: ['Can', 'I', 'take', 'photos', 'here?'],
-        translation: 'Posso tirar fotos aqui?'
+        translation: 'Posso tirar fotos aqui?',
+        situations: [
+          'Respeitando regras: "This is beautiful and I\'d love to capture it. Can I take photos here?"',
+          'Verificando permissão: "Can I take photos here or are there restrictions? I want to follow the rules."'
+        ]
       },
       {
         id: 'passeios-ex-5',
         correctSentence: 'Is there a guided tour?',
         words: ['Is', 'there', 'a', 'guided', 'tour?'],
-        translation: 'Há tour guiado?'
+        translation: 'Há tour guiado?',
+        situations: [
+          'Querendo mais informações: "I want to learn about the history and details. Is there a guided tour available?"',
+          'Primeira visita: "This is my first time here. Is there a guided tour that explains everything?"'
+        ]
       }
     ]
   },
