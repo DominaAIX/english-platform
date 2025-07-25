@@ -2197,7 +2197,11 @@ const trailsData = {
         english: "I need to declare these items.",
         portuguese: "Preciso declarar esses itens.",
         level: 'médio',
-        context: 'Aeroporto'
+        context: 'Aeroporto',
+        situations: [
+          'Na alfândega: "I have some expensive electronics with me. I need to declare these items."',
+          'Trazendo presentes: "I brought gifts worth over $500 from abroad. I need to declare these items."'
+        ]
       },
       {
         english: "My flight has been delayed.",
@@ -2877,13 +2881,21 @@ const trailsData = {
         english: "I'd like my steak medium-rare.",
         portuguese: "Gostaria do meu bife mal passado.",
         level: 'médio',
-        context: 'Restaurante'
+        context: 'Restaurante',
+        situations: [
+          'Fazendo pedido: "I\'d like my steak medium-rare, please. Not too bloody, but still pink in the middle."',
+          'Especificando preparo: "For the ribeye, I\'d like my steak medium-rare. Is that how the chef recommends it?"'
+        ]
       },
       {
         english: "Do you have vegetarian options?",
         portuguese: "Vocês têm opções vegetarianas?",
         level: 'básico',
-        context: 'Restaurante'
+        context: 'Restaurante',
+        situations: [
+          'Perguntando ao garçom: "I don\'t eat meat. Do you have vegetarian options on the menu?"',
+          'Verificando cardápio: "Do you have vegetarian options? I can\'t find any meat-free dishes on this menu."'
+        ]
       },
       {
         english: "Can I substitute the fries?",
@@ -3393,121 +3405,201 @@ const trailsData = {
         english: "Can I get a discount?",
         portuguese: "Posso ter um desconto?",
         level: 'básico',
-        context: 'Compras'
+        context: 'Compras',
+        situations: [
+          'Comprando vários itens: "I\'m buying several items. Can I get a discount for purchasing multiple pieces?"',
+          'Produto caro: "This is quite expensive. Can I get a discount? I\'m a regular customer here."'
+        ]
       },
       {
         english: "What's your return policy?",
         portuguese: "Qual é sua política de devolução?",
         level: 'médio',
-        context: 'Compras'
+        context: 'Compras',
+        situations: [
+          'Antes de comprar: "Before I buy this expensive item, what\'s your return policy if it doesn\'t fit?"',
+          'Comprando presente: "I\'m buying this as a gift. What\'s your return policy in case they want to exchange it?"'
+        ]
       },
       {
         english: "I'd like to return this item.",
         portuguese: "Gostaria de devolver este item.",
         level: 'básico',
-        context: 'Compras'
+        context: 'Compras',
+        situations: [
+          'Com recibo: "I\'d like to return this item. I have the receipt and it\'s still in the original packaging."',
+          'Não serviu: "This shirt doesn\'t fit properly. I\'d like to return this item and get a refund."'
+        ]
       },
       {
         english: "Do you have this in stock?",
         portuguese: "Vocês têm isso em estoque?",
         level: 'básico',
-        context: 'Compras'
+        context: 'Compras',
+        situations: [
+          'Produto não encontrado: "I can\'t find this item on the shelves. Do you have this in stock in the storage room?"',
+          'Tamanho específico: "I need this in size Large. Do you have this in stock, or do I need to order it?"'
+        ]
       },
       {
         english: "Where is the fitting room?",
         portuguese: "Onde fica o provador?",
         level: 'básico',
-        context: 'Compras'
+        context: 'Compras',
+        situations: [
+          'Comprando roupas: "I\'d like to try these pants on. Where is the fitting room?"',
+          'Loja nova: "This is my first time in this store. Where is the fitting room located?"'
+        ]
       },
       {
         english: "Can I pay in cash?",
         portuguese: "Posso pagar em dinheiro?",
         level: 'básico',
-        context: 'Compras'
+        context: 'Compras',
+        situations: [
+          'Preferindo dinheiro: "I don\'t like using cards. Can I pay in cash for this purchase?"',
+          'Problema com cartão: "My credit card isn\'t working. Can I pay in cash instead?"'
+        ]
       },
       {
         english: "Is this on sale?",
         portuguese: "Isso está em promoção?",
         level: 'básico',
-        context: 'Compras'
+        context: 'Compras',
+        situations: [
+          'Produto com etiqueta: "I see a red tag on this item. Is this on sale or is that the regular price?"',
+          'Verificando preço: "This seems expensive for what it is. Is this on sale or is this the normal price?"'
+        ]
       },
       {
         english: "Can you hold this for me?",
         portuguese: "Você pode guardar isso para mim?",
         level: 'médio',
-        context: 'Compras'
+        context: 'Compras',
+        situations: [
+          'Continuando compras: "I\'m not ready to buy this yet, but I want it. Can you hold this for me while I shop for other items?"',
+          'Voltando depois: "I need to get money from the ATM. Can you hold this for me for about 20 minutes?"'
+        ]
       },
       {
         english: "Do you offer gift wrapping?",
         portuguese: "Vocês oferecem embrulho para presente?",
         level: 'médio',
-        context: 'Compras'
+        context: 'Compras',
+        situations: [
+          'Comprando presente: "This is for my friend\'s birthday. Do you offer gift wrapping service?"',
+          'Feriado: "It\'s Christmas season and this is a gift. Do you offer gift wrapping?"'
+        ]
       },
       {
         english: "I need a bag for this.",
         portuguese: "Preciso de uma sacola para isso.",
         level: 'básico',
-        context: 'Compras'
+        context: 'Compras',
+        situations: [
+          'Após pagamento: "I need a bag for this. Do you have something strong enough for these heavy items?"',
+          'Levando vários itens: "I\'m walking home and I need a bag for this. Something with handles would be perfect."'
+        ]
       },
       {
         english: "Can I see that item in the window?",
         portuguese: "Posso ver aquele item na vitrine?",
         level: 'médio',
-        context: 'Compras'
+        context: 'Compras',
+        situations: [
+          'Interesse em produto: "That dress in the window looks beautiful. Can I see that item in the window up close?"',
+          'Verificando detalhes: "Can I see that item in the window? I want to check the quality and price tag."'
+        ]
       },
       {
         english: "What time do you close?",
         portuguese: "Que horas vocês fecham?",
         level: 'básico',
-        context: 'Compras'
+        context: 'Compras',
+        situations: [
+          'Planejando tempo: "I need to think about this purchase. What time do you close today?"',
+          'Voltando depois: "I need to get more money. What time do you close? I want to come back later."'
+        ]
       },
       {
         english: "Do you ship internationally?",
         portuguese: "Vocês fazem envio internacional?",
         level: 'médio',
-        context: 'Compras'
+        context: 'Compras',
+        situations: [
+          'Comprando no exterior: "I\'m from Brazil and want to send this to my family. Do you ship internationally?"',
+          'Turista: "I\'m traveling and can\'t carry this home. Do you ship internationally to Canada?"'
+        ]
       },
       {
         english: "I'm looking for a gift.",
         portuguese: "Estou procurando um presente.",
         level: 'básico',
-        context: 'Compras'
+        context: 'Compras',
+        situations: [
+          'Pedindo ajuda: "I\'m looking for a gift for my girlfriend\'s birthday. What do you recommend?"',
+          'Aniversário: "I\'m looking for a gift for my 10-year-old nephew. Do you have anything age-appropriate?"'
+        ]
       },
       {
         english: "Can I exchange this for something else?",
         portuguese: "Posso trocar isso por outra coisa?",
         level: 'médio',
-        context: 'Compras'
+        context: 'Compras',
+        situations: [
+          'Produto não serviu: "This shirt is too small for me. Can I exchange this for something else in a larger size?"',
+          'Mudando de ideia: "I changed my mind about the color. Can I exchange this for something else in blue instead?"'
+        ]
       },
       {
         english: "Do you have a loyalty program?",
         portuguese: "Vocês têm programa de fidelidade?",
         level: 'médio',
-        context: 'Compras'
+        context: 'Compras',
+        situations: [
+          'Cliente regular: "I shop here frequently. Do you have a loyalty program with discounts or rewards?"',
+          'Primeira compra: "Before I make this purchase, do you have a loyalty program I can sign up for?"'
+        ]
       },
       {
         english: "I need to speak to a manager.",
         portuguese: "Preciso falar com um gerente.",
         level: 'médio',
-        context: 'Compras'
+        context: 'Compras',
+        situations: [
+          'Problema não resolvido: "This employee can\'t help me with my issue. I need to speak to a manager."',
+          'Reclamação: "I\'m not satisfied with the service I received. I need to speak to a manager."'
+        ]
       },
       {
         english: "Can you check if you have this in the back?",
         portuguese: "Você pode verificar se têm isso no estoque?",
         level: 'médio',
-        context: 'Compras'
+        context: 'Compras',
+        situations: [
+          'Produto esgotado: "I don\'t see my size on the rack. Can you check if you have this in the back?"',
+          'Item procurado: "This shelf is empty but I really need this item. Can you check if you have this in the back?"'
+        ]
       },
       {
         english: "I'd like to open a store account.",
         portuguese: "Gostaria de abrir uma conta na loja.",
         level: 'avançado',
-        context: 'Compras'
+        context: 'Compras',
+        situations: [
+          'Beneficios: "I shop here often and want the special discounts. I\'d like to open a store account."',
+          'Crédito: "I\'d like to open a store account to get the store credit card and payment options."'
+        ]
       },
       {
         english: "When will you restock this item?",
         portuguese: "Quando vocês vão repor este item?",
         level: 'médio',
-        context: 'Compras'
+        context: 'Compras',
+        situations: [
+          'Item esgotado: "This is exactly what I need but it\'s out of stock. When will you restock this item?"',
+          'Planejando compra: "I can wait a few days. When will you restock this item? I really want to buy it."'
+        ]
       },
 
       // ========== CATEGORIA: EMERGÊNCIA (20 frases) ==========
@@ -3975,7 +4067,11 @@ const trailsData = {
         english: "Where is the checkout?",
         portuguese: "Onde fica o caixa?",
         level: 'básico',
-        context: 'Orientação'
+        context: 'Orientação',
+        situations: [
+          'Pronto para pagar: "I\'ve finished shopping and I\'m ready to pay. Where is the checkout?"',
+          'Loja grande: "This store is huge and I\'m lost. Where is the checkout to pay for these items?"'
+        ]
       },
       {
         english: "Is this on sale?",
@@ -4389,31 +4485,51 @@ const trailsData = {
         english: "Excuse me, where can I find...?",
         portuguese: "Com licença, onde posso encontrar...?",
         level: 'básico',
-        context: 'Orientação'
+        context: 'Orientação',
+        situations: [
+          'Procurando produto: "Excuse me, where can I find the electronics section? I need to buy headphones."',
+          'Item específico: "Excuse me, where can I find organic vegetables? I don\'t see them in the regular produce section."'
+        ]
       },
       {
         english: "Is there an elevator?",
         portuguese: "Há elevador?",
         level: 'básico',
-        context: 'Orientação'
+        context: 'Orientação',
+        situations: [
+          'Com carrinho pesado: "I have a heavy shopping cart and need to go upstairs. Is there an elevator?"',
+          'Acessibilidade: "My grandmother is in a wheelchair. Is there an elevator to access the second floor?"'
+        ]
       },
       {
         english: "Where's the restroom?",
         portuguese: "Onde fica o banheiro?",
         level: 'básico',
-        context: 'Orientação'
+        context: 'Orientação',
+        situations: [
+          'Urgência: "Excuse me, this is urgent. Where\'s the restroom?"',
+          'Com crianças: "My child needs to use the bathroom. Where\'s the restroom?"'
+        ]
       },
       {
         english: "What floor is electronics on?",
         portuguese: "Em que andar fica eletrônicos?",
         level: 'básico',
-        context: 'Orientação'
+        context: 'Orientação',
+        situations: [
+          'Procurando seção: "I need to buy a phone charger. What floor is electronics on?"',
+          'Loja de departamentos: "This is a big store. What floor is electronics on? I need a laptop."'
+        ]
       },
       {
         english: "Do you have a store map?",
         portuguese: "Vocês têm um mapa da loja?",
         level: 'básico',
-        context: 'Orientação'
+        context: 'Orientação',
+        situations: [
+          'Loja grande: "This store is enormous and confusing. Do you have a store map to help me navigate?"',
+          'Primeira visita: "This is my first time here. Do you have a store map? I\'m looking for several departments."'
+        ]
       },
       {
         english: "I'm looking for customer service.",
@@ -4683,7 +4799,11 @@ const trailsData = {
         english: "Where can I buy souvenirs?",
         portuguese: "Onde posso comprar lembrancinhas?",
         level: 'básico',
-        context: 'Compras'
+        context: 'Compras',
+        situations: [
+          'Para família: "I want to bring something back for my family. Where can I buy souvenirs around here?"',
+          'Procurando autênticos: "Where can I buy souvenirs that are locally made? I prefer authentic items over mass-produced ones."'
+        ]
       },
       {
         english: "Is there an audio guide?",
@@ -4707,7 +4827,11 @@ const trailsData = {
         english: "Can you recommend a local restaurant?",
         portuguese: "Você pode recomendar um restaurante local?",
         level: 'básico',
-        context: 'Recomendação'
+        context: 'Recomendação',
+        situations: [
+          'Perguntando ao concierge: "Can you recommend a local restaurant with authentic cuisine? I want to try traditional dishes."',
+          'Para morador local: "Can you recommend a local restaurant where locals eat? I prefer authentic places over tourist spots."'
+        ]
       },
       {
         english: "Where is the best viewpoint?",
@@ -4725,7 +4849,11 @@ const trailsData = {
         english: "Can I get a map of the area?",
         portuguese: "Posso pegar um mapa da área?",
         level: 'básico',
-        context: 'Orientação'
+        context: 'Orientação',
+        situations: [
+          'No centro de informações: "Can I get a map of the area? I want to explore on foot and see all the main attractions."',
+          'Orientação: "Can I get a map of the area? I prefer having a physical map instead of using my phone all the time."'
+        ]
       },
       {
         english: "What's the local specialty?",
@@ -4755,7 +4883,11 @@ const trailsData = {
         english: "What are the must-see attractions?",
         portuguese: "Quais são as atrações imperdíveis?",
         level: 'médio',
-        context: 'Turismo'
+        context: 'Turismo',
+        situations: [
+          'Centro de informações: "Hi, I\'m visiting for just two days. What are the must-see attractions in this city?"',
+          'Perguntando a local: "I\'m a tourist and want to make the most of my time. What are the must-see attractions here?"'
+        ]
       },
       {
         english: "Are there guided tours available?",
@@ -5136,7 +5268,11 @@ const trailsData = {
         english: "Have you tried that new restaurant?",
         portuguese: "Você experimentou aquele restaurante novo?",
         level: 'médio',
-        context: 'Recomendação'
+        context: 'Recomendação',
+        situations: [
+          'Conversa com amigo: "Have you tried that new restaurant downtown? I\'ve been curious about their Italian menu."',
+          'Pedindo opinião: "Have you tried that new restaurant everyone\'s talking about? Is it worth the hype?"'
+        ]
       },
       {
         english: "I'm so glad we met up.",
@@ -6254,7 +6390,11 @@ const trailsData = {
         english: "I'll definitely recommend this event.",
         portuguese: "Definitivamente vou recomendar este evento.",
         level: 'médio',
-        context: 'Recomendação'
+        context: 'Recomendação',
+        situations: [
+          'Final de evento: "This conference was amazing. I\'ll definitely recommend this event to my colleagues."',
+          'Experiência positiva: "I\'ll definitely recommend this event to anyone interested in technology and innovation."'
+        ]
       },
 
       // ========== OPINION & DISCUSSION PHRASES ==========
