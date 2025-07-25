@@ -1776,7 +1776,7 @@ const trailsData = {
         context: 'Negociação',
         situations: [
           'Entendendo limites: "Before we go further, let me ask: what are your non-negotiables? I want to respect your boundaries."',
-          'Evitando perda de tempo: "Let's be efficient about this. What are your non-negotiables so we can focus on areas with flexibility?"'
+          'Evitando perda de tempo: "Let\'s be efficient about this. What are your non-negotiables so we can focus on areas with flexibility?"'
         ]
       },
       {
@@ -1785,8 +1785,8 @@ const trailsData = {
         level: 'básico',
         context: 'Negociação',
         situations: [
-          'Fechando acordo: "Perfect! We have a deal then. Let's shake on it before we call the lawyers."',
-          'Confirmando acordo: "I think we've covered everything important. Let's shake on it and move forward with the partnership."'
+          'Fechando acordo: "Perfect! We have a deal then. Let\'s shake on it before we call the lawyers."',
+          'Confirmando acordo: "I think we\'ve covered everything important. Let\'s shake on it and move forward with the partnership."'
         ]
       },
       {
@@ -3811,8 +3811,8 @@ const trailsData = {
         level: 'médio',
         context: 'Turismo',
         situations: [
-          'Centro de informações: "Hi, I'm visiting for just two days. What are the must-see attractions in this city?"',
-          'Perguntando a local: "I'm a tourist and want to make the most of my time. What are the must-see attractions here?"'
+          'Centro de informações: "Hi, I\'m visiting for just two days. What are the must-see attractions in this city?"',
+          'Perguntando a local: "I\'m a tourist and want to make the most of my time. What are the must-see attractions here?"'
         ]
       },
       {
