@@ -4442,7 +4442,7 @@ const trailsData = {
         context: 'Pagamento',
         situations: [
           'Comprando junto: "We\'re shopping together but paying separately. Can I split the payment between two cards?"',
-          'Limitando gasto: "This is expensive. Can I split the payment - half on credit and half cash?"
+          'Limitando gasto: "This is expensive. Can I split the payment - half on credit and half cash?"'
         ]
       },
       {
@@ -4452,7 +4452,7 @@ const trailsData = {
         context: 'Pagamento',
         situations: [
           'Cartão de débito: "The terminal is asking for a PIN. I need to insert my PIN for this debit transaction."',
-          'Segurança extra: "For security, I need to insert my PIN even though I tapped my card."
+          'Segurança extra: "For security, I need to insert my PIN even though I tapped my card."'
         ]
       },
       {
@@ -4462,7 +4462,7 @@ const trailsData = {
         context: 'Pagamento',
         situations: [
           'Compra cara: "This is a big purchase for me. Do you take installments or payment plans?"',
-          'Orçamento: "I\'d like to buy this but spread the cost. Do you take installments over several months?"
+          'Orçamento: "I\'d like to buy this but spread the cost. Do you take installments over several months?"'
         ]
       },
       {
@@ -4472,7 +4472,7 @@ const trailsData = {
         context: 'Pagamento',
         situations: [
           'Parcelamento específico: "This costs $300. Can I pay in three payments of $100 each month?"',
-          'Facilitando pagamento: "To make this more affordable, can I pay in three payments instead of all at once?"
+          'Facilitando pagamento: "To make this more affordable, can I pay in three payments instead of all at once?"'
         ]
       },
       {
