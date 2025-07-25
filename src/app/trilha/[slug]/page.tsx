@@ -5427,61 +5427,101 @@ const trailsData = {
         english: "Would you like to hang out?",
         portuguese: "Você gostaria de sair?",
         level: 'básico',
-        context: 'Convites'
+        context: 'Convites',
+        situations: [
+          'Fim de semana: "I\'m free this Saturday afternoon. Would you like to hang out and maybe go to the park?"',
+          'Após trabalho: "Would you like to hang out after work? We could grab dinner or see a movie."'
+        ]
       },
       {
         english: "Let's grab a coffee.",
         portuguese: "Vamos tomar um café.",
         level: 'básico',
-        context: 'Convites'
+        context: 'Convites',
+        situations: [
+          'Pausa no trabalho: "I need a break from this project. Let\'s grab a coffee and chat for a few minutes."',
+          'Encontrando amigo: "Let\'s grab a coffee this afternoon. I know a great café downtown."'
+        ]
       },
       {
         english: "What are you up to?",
         portuguese: "O que você está fazendo?",
         level: 'básico',
-        context: 'Conversa'
+        context: 'Conversa',
+        situations: [
+          'Por telefone: "Hey, I was just calling to see what are you up to today? Want to do something together?"',
+          'Encontrando por acaso: "Oh hi! What are you up to? I didn\'t expect to see you here."'
+        ]
       },
       {
         english: "How was your weekend?",
         portuguese: "Como foi seu fim de semana?",
         level: 'básico',
-        context: 'Conversa'
+        context: 'Conversa',
+        situations: [
+          'Segunda-feira: "Good morning! How was your weekend? Did you do anything fun or exciting?"',
+          'Conversa casual: "How was your weekend? I saw your photos on Instagram - looked like you had a great time!"'
+        ]
       },
       {
         english: "Want to join us?",
         portuguese: "Quer se juntar a nós?",
         level: 'básico',
-        context: 'Convites'
+        context: 'Convites',
+        situations: [
+          'Planos em grupo: "We\'re going to the beach this Sunday. Want to join us? It\'ll be fun!"',
+          'Convite espontaneo: "Want to join us for dinner? We\'re going to that new Italian restaurant."'
+        ]
       },
       {
         english: "What's new with you?",
         portuguese: "O que há de novo com você?",
         level: 'básico',
-        context: 'Conversa'
+        context: 'Conversa',
+        situations: [
+          'Reencontro: "It\'s been a while since we talked. What\'s new with you? Any exciting updates?"',
+          'Atualizações: "What\'s new with you? I heard you got a new job - congratulations!"'
+        ]
       },
       {
         english: "Are you free tonight?",
         portuguese: "Você está livre hoje à noite?",
         level: 'básico',
-        context: 'Convites'
+        context: 'Convites',
+        situations: [
+          'Convite última hora: "Are you free tonight? I just got tickets to a concert and my friend can\'t make it."',
+          'Planos de jantar: "Are you free tonight? I was thinking we could try that new restaurant we talked about."'
+        ]
       },
       {
         english: "Let's catch up soon.",
         portuguese: "Vamos nos atualizar em breve.",
         level: 'médio',
-        context: 'Planos'
+        context: 'Planos',
+        situations: [
+          'Saindo correndo: "I have to run to another meeting, but let\'s catch up soon. I want to hear all about your new job!"',
+          'Final de encontro: "This was great seeing you! Let\'s catch up soon - maybe next weekend?"'
+        ]
       },
       {
         english: "I had a great time!",
         portuguese: "Me diverti muito!",
         level: 'básico',
-        context: 'Agradecimento'
+        context: 'Agradecimento',
+        situations: [
+          'Após festa: "Thank you so much for inviting me to your party. I had a great time!"',
+          'Final de encontro: "I had a great time hanging out with you today. We should do this more often!"'
+        ]
       },
       {
         english: "Thanks for inviting me.",
         portuguese: "Obrigado por me convidar.",
         level: 'básico',
-        context: 'Agradecimento'
+        context: 'Agradecimento',
+        situations: [
+          'Chegando ao evento: "Hi everyone! Thanks for inviting me to your dinner party. This looks amazing!"',
+          'Por mensagem: "Thanks for inviting me to the movie tonight. I\'m really looking forward to it!"'
+        ]
       },
 
       // ========== FRASES PREMIUM (100+ frases adicionais) ==========
@@ -5490,211 +5530,351 @@ const trailsData = {
         english: "How's it going?",
         portuguese: "Como vai?",
         level: 'básico',
-        context: 'Cumprimento'
+        context: 'Cumprimento',
+        situations: [
+          'Encontro casual: "Hey Sarah! How\'s it going? I haven\'t seen you in ages!"',
+          'Cumprimento amigável: "How\'s it going? You look great! How have you been?"'
+        ]
       },
       {
         english: "Long time no see!",
         portuguese: "Quanto tempo sem nos ver!",
         level: 'básico',
-        context: 'Reencontro'
+        context: 'Reencontro',
+        situations: [
+          'Reencontro surpresa: "Oh my god, is that you? Long time no see! How have you been?"',
+          'Amigo antigo: "Long time no see! I was just thinking about you the other day. What a coincidence!"'
+        ]
       },
       {
         english: "What's up?",
         portuguese: "E aí?",
         level: 'básico',
-        context: 'Cumprimento'
+        context: 'Cumprimento',
+        situations: [
+          'Cumprimento informal: "Hey dude! What\'s up? Ready for the weekend?"',
+          'Chegando em grupo: "What\'s up guys? Sorry I\'m late - traffic was crazy!"'
+        ]
       },
       {
         english: "Let's hang out later.",
         portuguese: "Vamos sair mais tarde.",
         level: 'básico',
-        context: 'Convites'
+        context: 'Convites',
+        situations: [
+          'Durante trabalho: "I\'m swamped with work right now, but let\'s hang out later. Maybe around 6 PM?"',
+          'Fazendo planos: "Let\'s hang out later tonight. We could watch a movie or just chill at my place."'
+        ]
       },
       {
         english: "See you around!",
         portuguese: "Te vejo por aí!",
         level: 'básico',
-        context: 'Despedida'
+        context: 'Despedida',
+        situations: [
+          'Despedida casual: "I have to run now, but see you around! Maybe we\'ll bump into each other again soon."',
+          'Fim de encontro: "This was fun! See you around - let\'s definitely do this again sometime."'
+        ]
       },
       {
         english: "Take care!",
         portuguese: "Se cuida!",
         level: 'básico',
-        context: 'Despedida'
+        context: 'Despedida',
+        situations: [
+          'Despedida carinhosa: "It was so good seeing you! Take care! Drive safely on your way home."',
+          'Final de conversa: "I have to go now. Take care! Let\'s talk again soon."'
+        ]
       },
       {
         english: "How's your family?",
         portuguese: "Como está sua família?",
         level: 'básico',
-        context: 'Conversa'
+        context: 'Conversa',
+        situations: [
+          'Interesse genuíno: "How\'s your family? I remember you mentioned your kids were starting school."',
+          'Conversa atualizada: "How\'s your family doing? I saw the vacation photos you posted - looks like everyone had fun!"'
+        ]
       },
       {
         english: "Nice to see you again.",
         portuguese: "Legal te ver de novo.",
         level: 'básico',
-        context: 'Reencontro'
+        context: 'Reencontro',
+        situations: [
+          'Segundo encontro: "Hi there! Nice to see you again. How did that job interview go?"',
+          'Evento social: "Nice to see you again! I was hoping you\'d be at this party tonight."'
+        ]
       },
       {
         english: "You look great!",
         portuguese: "Você está ótimo!",
         level: 'básico',
-        context: 'Elogio'
+        context: 'Elogio',
+        situations: [
+          'Elogio sincero: "Wow, you look great! Have you been working out? You seem really healthy and happy."',
+          'Após mudança: "You look great! I love your new haircut - it really suits you!"'
+        ]
       },
       {
         english: "Let's get together sometime.",
         portuguese: "Vamos nos reunir alguma hora.",
         level: 'básico',
-        context: 'Planos'
+        context: 'Planos',
+        situations: [
+          'Despedida casual: "It was great running into you! Let\'s get together sometime soon - maybe for lunch?"',
+          'Final de conversa: "I miss hanging out with you. Let\'s get together sometime this week when you\'re free."'
+        ]
       },
       {
         english: "I missed you!",
         portuguese: "Senti sua falta!",
         level: 'básico',
-        context: 'Sentimento'
+        context: 'Sentimento',
+        situations: [
+          'Reencontro emocional: "I missed you so much! It\'s been way too long since we last talked."',
+          'Após separação: "Welcome back! I missed you while you were traveling. How was your trip?"'
+        ]
       },
       {
         english: "What do you think?",
         portuguese: "O que você acha?",
         level: 'básico',
-        context: 'Opinião'
+        context: 'Opinião',
+        situations: [
+          'Pedindo conselho: "I\'m thinking of dyeing my hair blue. What do you think? Too crazy or just right?"',
+          'Decisão de grupo: "We could either go to the movies or bowling tonight. What do you think sounds more fun?"'
+        ]
       },
       {
         english: "That sounds fun!",
         portuguese: "Isso parece divertido!",
         level: 'básico',
-        context: 'Entusiasmo'
+        context: 'Entusiasmo',
+        situations: [
+          'Respondendo convite: "A picnic in the park this Saturday? That sounds fun! Can I bring something?"',
+          'Planos propostos: "Karaoke night at your place? That sounds fun! I\'ll bring some snacks and drinks."'
+        ]
       },
       {
         english: "Count me in!",
         portuguese: "Pode contar comigo!",
         level: 'básico',
-        context: 'Aceitação'
+        context: 'Aceitação',
+        situations: [
+          'Atividade em grupo: "You\'re organizing a beach volleyball game? Count me in! I love playing sports."',
+          'Evento social: "Road trip to the mountains next weekend? Count me in! I need a break from the city."'
+        ]
       },
       {
         english: "I'm in!",
         portuguese: "Eu topo!",
         level: 'básico',
-        context: 'Aceitação'
+        context: 'Aceitação',
+        situations: [
+          'Atividade espontanea: "Pizza and movie night tonight? I\'m in! What time should I come over?"',
+          'Plano de grupo: "We\'re starting a book club. Want to join?" "I\'m in! I love reading and discussing books."'
+        ]
       },
       {
         english: "No way!",
         portuguese: "De jeito nenhum!",
         level: 'básico',
-        context: 'Surpresa'
+        context: 'Surpresa',
+        situations: [
+          'Incredulidade positiva: "You got the promotion? No way! That\'s incredible news! I\'m so happy for you."',
+          'Surpresa negativa: "They canceled the concert tonight? No way! I was really looking forward to it."'
+        ]
       },
       {
         english: "Are you serious?",
         portuguese: "Você está falando sério?",
         level: 'básico',
-        context: 'Surpresa'
+        context: 'Surpresa',
+        situations: [
+          'Notícia chocante: "I won the lottery!" "Are you serious? That\'s amazing! How much did you win?"',
+          'Confirmação: "I\'m thinking of quitting my job to travel the world." "Are you serious? That\'s a big decision!"'
+        ]
       },
       {
         english: "That's awesome!",
         portuguese: "Isso é incrível!",
         level: 'básico',
-        context: 'Entusiasmo'
+        context: 'Entusiasmo',
+        situations: [
+          'Conquista do amigo: "I finally finished writing my novel!" "That\'s awesome! I\'m so proud of you. Can I read it?"',
+          'Boa notícia: "My sister is getting married next month!" "That\'s awesome! I\'m so excited for her. Where\'s the wedding?"'
+        ]
       },
       {
         english: "Cool!",
         portuguese: "Legal!",
         level: 'básico',
-        context: 'Aprovação'
+        context: 'Aprovação',
+        situations: [
+          'Aprovando plano: "Let\'s meet at the new café downtown at 3 PM." "Cool! I\'ve been wanting to try that place."',
+          'Reagindo a notícia: "I got tickets to the concert you wanted to see." "Cool! Thank you so much for thinking of me."'
+        ]
       },
       {
         english: "Sounds good to me.",
         portuguese: "Parece bom para mim.",
         level: 'básico',
-        context: 'Concordância'
+        context: 'Concordância',
+        situations: [
+          'Concordando com plano: "Let\'s meet at 7 PM and then decide where to eat." "Sounds good to me. I\'ll see you then."',
+          'Aprovação de sugestão: "How about we split the cost of the Uber?" "Sounds good to me. That\'s fair for everyone."'
+        ]
       },
       {
         english: "I'm down for that.",
         portuguese: "Eu topo isso.",
         level: 'básico',
-        context: 'Aceitação'
+        context: 'Aceitação',
+        situations: [
+          'Atividade aventureira: "Want to try that new escape room downtown?" "I\'m down for that! It sounds challenging and fun."',
+          'Plano casual: "Movie marathon at my place this weekend?" "I\'m down for that. I\'ll bring the popcorn!"'
+        ]
       },
       {
         english: "Let me know!",
         portuguese: "Me avisa!",
         level: 'básico',
-        context: 'Comunicação'
+        context: 'Comunicação',
+        situations: [
+          'Aguardando confirmação: "I\'m not sure if I can make it to dinner yet. Let me know what time and I\'ll check my schedule."',
+          'Interesse em atualizações: "You\'re waiting to hear back about the job interview? Let me know how it goes - I\'m rooting for you!"'
+        ]
       },
       {
         english: "Text me later.",
         portuguese: "Me manda mensagem depois.",
         level: 'básico',
-        context: 'Comunicação'
+        context: 'Comunicação',
+        situations: [
+          'Despedida rápida: "I have to run to catch my bus, but text me later! I want to hear about your date."',
+          'Planejamento futuro: "I\'m not sure what time I\'ll be free tonight. Text me later and we\'ll figure out our plans."'
+        ]
       },
       {
         english: "Call me!",
         portuguese: "Me liga!",
         level: 'básico',
-        context: 'Comunicação'
+        context: 'Comunicação',
+        situations: [
+          'Pedido urgente: "I need to tell you something important but I can\'t text right now. Call me when you get this!"',
+          'Saudade: "I miss talking to you! Call me when you have some free time - I want to catch up properly."'
+        ]
       },
       {
         english: "What time works for you?",
         portuguese: "Que horas funciona para você?",
         level: 'básico',
-        context: 'Planejamento'
+        context: 'Planejamento',
+        situations: [
+          'Marcando encontro: "I\'d love to have lunch this week. What time works for you? I\'m flexible with my schedule."',
+          'Coordenando atividade: "Let\'s do that Zoom call tomorrow. What time works for you? Morning or afternoon?"'
+        ]
       },
       {
         english: "I can't make it.",
         portuguese: "Não vou conseguir ir.",
         level: 'básico',
-        context: 'Cancelamento'
+        context: 'Cancelamento',
+        situations: [
+          'Cancelamento de última hora: "I\'m so sorry, but I can\'t make it to dinner tonight. Something urgent came up at work."',
+          'Conflito de agenda: "I really want to come to your party, but I can\'t make it. I have a family commitment that day."'
+        ]
       },
       {
         english: "Maybe next time.",
         portuguese: "Talvez na próxima.",
         level: 'básico',
-        context: 'Adiamento'
+        context: 'Adiamento',
+        situations: [
+          'Declinando convite: "I can\'t join you for the concert tonight - I\'m not feeling well. Maybe next time?"',
+          'Adiando planos: "I\'m too tired to go out dancing tonight. Maybe next time when I have more energy?"'
+        ]
       },
       {
         english: "Rain check?",
         portuguese: "Fica para outra?",
         level: 'básico',
-        context: 'Adiamento'
+        context: 'Adiamento',
+        situations: [
+          'Cancelamento educado: "I just realized I have a work deadline tomorrow. Rain check on dinner? I promise I\'ll make it up to you."',
+          'Adiamento por circunstâncias: "My car broke down and I\'m stuck at home. Rain check on the movie? We can go next week instead."'
+        ]
       },
       {
         english: "You bet!",
         portuguese: "Com certeza!",
         level: 'básico',
-        context: 'Confirmação'
+        context: 'Confirmação',
+        situations: [
+          'Confirmação entusiasmada: "Will you be at my birthday party this Saturday?" "You bet! I wouldn\'t miss it for the world!"',
+          'Aceitação de ajuda: "Can you help me move this weekend?" "You bet! I\'ll bring my truck and we\'ll get it done."'
+        ]
       },
       {
         english: "Absolutely!",
         portuguese: "Absolutamente!",
         level: 'básico',
-        context: 'Confirmação'
+        context: 'Confirmação',
+        situations: [
+          'Concordância forte: "Do you think we should try that new sushi place?" "Absolutely! I\'ve been dying to try their omakase menu."',
+          'Confirmação de apoio: "Will you support me if I decide to change careers?" "Absolutely! I believe you can do anything you set your mind to."'
+        ]
       },
       {
         english: "For sure!",
         portuguese: "Com certeza!",
         level: 'básico',
-        context: 'Confirmação'
+        context: 'Confirmação',
+        situations: [
+          'Confirmação casual: "Are you coming to the barbecue this Sunday?" "For sure! Should I bring anything specific?"',
+          'Acordo definitivo: "Let\'s start meeting weekly to work out together." "For sure! That\'s exactly the motivation I need."'
+        ]
       },
       {
         english: "Good to see you!",
         portuguese: "Bom te ver!",
         level: 'básico',
-        context: 'Cumprimento'
+        context: 'Cumprimento',
+        situations: [
+          'Encontro inesperado: "Oh wow, good to see you! I had no idea you shopped at this grocery store too."',
+          'Chegada a evento: "Good to see you! Thanks for inviting me to your housewarming party. Your place looks amazing!"'
+        ]
       },
       {
         english: "How have you been?",
         portuguese: "Como você tem estado?",
         level: 'básico',
-        context: 'Conversa'
+        context: 'Conversa',
+        situations: [
+          'Reencontro após tempo: "It\'s been months since we last talked! How have you been? I hope everything\'s going well."',
+          'Interesse genuíno: "I heard you were going through some changes at work. How have you been handling everything?"'
+        ]
       },
       {
         english: "What's the plan?",
         portuguese: "Qual é o plano?",
         level: 'básico',
-        context: 'Planejamento'
+        context: 'Planejamento',
+        situations: [
+          'Organizando saída: "We\'re all meeting at 6 PM, but what\'s the plan after that? Dinner first or straight to the concert?"',
+          'Coordenando atividade: "I\'m ready for our road trip! What\'s the plan? Which route are we taking and where\'s our first stop?"'
+        ]
       },
       {
         english: "I'm excited!",
         portuguese: "Estou animado!",
         level: 'básico',
-        context: 'Entusiasmo'
+        context: 'Entusiasmo',
+        situations: [
+          'Antecipação de evento: "The music festival is just two days away! I\'m excited! I\'ve been waiting for this all year."',
+          'Planos com amigos: "Our camping trip is going to be amazing! I\'m excited! I already packed my hiking boots and guitar."'
+        ]
       },
 
       // MÉDIO (40 frases)
@@ -5702,19 +5882,31 @@ const trailsData = {
         english: "What's been keeping you busy?",
         portuguese: "O que tem te deixado ocupado?",
         level: 'médio',
-        context: 'Conversa'
+        context: 'Conversa',
+        situations: [
+          'Reencontro com amigo: "I feel like we haven\'t talked in forever! What\'s been keeping you busy? Any exciting projects?"',
+          'Conversa de acompanhamento: "You mentioned you had a lot going on last time we talked. What\'s been keeping you busy lately?"'
+        ]
       },
       {
         english: "We should do this more often.",
         portuguese: "Devíamos fazer isso mais vezes.",
         level: 'médio',
-        context: 'Sugestão'
+        context: 'Sugestão',
+        situations: [
+          'Após atividade divertida: "This hiking trip was amazing! We should do this more often - maybe once a month?"',
+          'Final de encontro: "I had such a great time catching up with you tonight. We should do this more often instead of just texting."'
+        ]
       },
       {
         english: "How do you know each other?",
         portuguese: "Como vocês se conhecem?",
         level: 'médio',
-        context: 'Apresentação'
+        context: 'Apresentação',
+        situations: [
+          'Curiosidade social: "You two seem like old friends! How do you know each other? Did you meet at work or school?"',
+          'Fazendo conexões: "I love meeting new people through friends. How do you know each other? There\'s always an interesting story!"'
+        ]
       },
       {
         english: "Have you tried that new restaurant?",
@@ -5730,217 +5922,361 @@ const trailsData = {
         english: "I'm so glad we met up.",
         portuguese: "Estou muito feliz que nos encontramos.",
         level: 'médio',
-        context: 'Sentimento'
+        context: 'Sentimento',
+        situations: [
+          'Genuína gratidão: "I\'m so glad we met up today. I really needed this conversation - you always give the best advice."',
+          'Valorizando amizade: "I\'m so glad we met up instead of just staying home. This spontaneous dinner was exactly what I needed!"'
+        ]
       },
       {
         english: "What are you in the mood for?",
         portuguese: "Do que você está com vontade?",
         level: 'médio',
-        context: 'Preferência'
+        context: 'Preferência',
+        situations: [
+          'Escolhendo atividade: "We have the whole evening free! What are you in the mood for? Movies, dinner, or maybe a walk in the park?"',
+          'Decidindo refeição: "I\'m treating you to lunch today! What are you in the mood for? Something light or are you really hungry?"'
+        ]
       },
       {
         english: "I can't believe it's been so long!",
         portuguese: "Não acredito que faz tanto tempo!",
         level: 'médio',
-        context: 'Reencontro'
+        context: 'Reencontro',
+        situations: [
+          'Reencontro emocional: "I can\'t believe it\'s been so long! Time really flies. You look exactly the same - in a good way!"',
+          'Surpresa pelo tempo: "I can\'t believe it\'s been so long since our last girls\' night! We used to do this every week in college."'
+        ]
       },
       {
         english: "You haven't changed a bit!",
         portuguese: "Você não mudou nada!",
         level: 'médio',
-        context: 'Elogio'
+        context: 'Elogio',
+        situations: [
+          'Elogio nostalgico: "You haven\'t changed a bit! You still have that same contagious laugh and positive energy I remember."',
+          'Reencontro após anos: "Wow, you haven\'t changed a bit! I would have recognized you anywhere, even after all these years."'
+        ]
       },
       {
         english: "What's your plan for the holidays?",
         portuguese: "Qual seu plano para as férias?",
         level: 'médio',
-        context: 'Planos'
+        context: 'Planos',
+        situations: [
+          'Conversa sazonal: "Christmas is just around the corner! What\'s your plan for the holidays? Staying in town or traveling?"',
+          'Planejamento antecipado: "I\'m already thinking about summer break. What\'s your plan for the holidays? Any exciting trips planned?"'
+        ]
       },
       {
         english: "I'm thinking of trying something new.",
         portuguese: "Estou pensando em tentar algo novo.",
         level: 'médio',
-        context: 'Mudança'
+        context: 'Mudança',
+        situations: [
+          'Considerando hobbies: "I\'m getting bored with my usual routine. I\'m thinking of trying something new - maybe rock climbing or pottery classes."',
+          'Mudança de carreira: "I\'ve been at this job for five years now. I\'m thinking of trying something new, maybe in a completely different field."'
+        ]
       },
       {
         english: "I completely forgot about that!",
         portuguese: "Esqueci completamente disso!",
         level: 'médio',
-        context: 'Memória'
+        context: 'Memória',
+        situations: [
+          'Lembrança súbita: "Oh my god, our high school reunion is next month! I completely forgot about that! Did you get the invitation too?"',
+          'Esquecimento de compromisso: "Your birthday party is this Saturday? I completely forgot about that! I need to buy a gift right away."'
+        ]
       },
       {
         english: "I'll keep you posted.",
         portuguese: "Te manterei informado.",
         level: 'médio',
-        context: 'Comunicação'
+        context: 'Comunicação',
+        situations: [
+          'Atualizações futuras: "I\'m still waiting to hear back about the job interview. I\'ll keep you posted as soon as I know anything!"',
+          'Planos em desenvolvimento: "We\'re still finalizing the details for the surprise party. I\'ll keep you posted about the time and what to bring."'
+        ]
       },
       {
         english: "It's been forever!",
         portuguese: "Faz uma eternidade!",
         level: 'médio',
-        context: 'Reencontro'
+        context: 'Reencontro',
+        situations: [
+          'Reencontro entusiasmado: "Oh my goodness, it\'s been forever! I\'ve missed you so much. How have you been? Tell me everything!"',
+          'Exagero afetuoso: "It\'s been forever since we last hung out - like, what, two whole weeks? I have so much to tell you!"'
+        ]
       },
       {
         english: "How's life treating you?",
         portuguese: "Como a vida está te tratando?",
         level: 'médio',
-        context: 'Conversa'
+        context: 'Conversa',
+        situations: [
+          'Pergunta cuidadosa: "I heard you\'ve been going through some big changes recently. How\'s life treating you these days?"',
+          'Interesse genuíno: "It\'s been a while since we really talked. How\'s life treating you? I hope everything\'s going well."'
+        ]
       },
       {
         english: "I've been meaning to call you.",
         portuguese: "Tenho querido te ligar.",
         level: 'médio',
-        context: 'Desculpa'
+        context: 'Desculpa',
+        situations: [
+          'Desculpa sincera: "I\'ve been meaning to call you for weeks! I\'ve been so busy with work, but that\'s no excuse. How are you?"',
+          'Reencontro inesperado: "What a coincidence running into you here! I\'ve been meaning to call you since your birthday last month."'
+        ]
       },
       {
         english: "You should come by sometime.",
         portuguese: "Você deveria aparecer algum dia.",
         level: 'médio',
-        context: 'Convite'
+        context: 'Convite',
+        situations: [
+          'Convite casual: "I just redecorated my apartment and I\'m really proud of it. You should come by sometime and see what I\'ve done!"',
+          'Hospitalidade: "I live just around the corner from you now. You should come by sometime - I\'ll cook dinner and we can catch up properly."'
+        ]
       },
       {
         english: "Let's not be strangers.",
         portuguese: "Não vamos ser estranhos.",
         level: 'médio',
-        context: 'Compromisso'
+        context: 'Compromisso',
+        situations: [
+          'Compromisso mútuo: "It was so great reconnecting with you tonight. Let\'s not be strangers - we should definitely stay in touch this time."',
+          'Após reconciliação: "I\'m glad we worked things out and talked through our differences. Let\'s not be strangers again, okay?"'
+        ]
       },
       {
         english: "I've been swamped with work.",
         portuguese: "Tenho estado atolado de trabalho.",
         level: 'médio',
-        context: 'Desculpa'
+        context: 'Desculpa',
+        situations: [
+          'Explicando ausência: "I\'m sorry I haven\'t been very social lately. I\'ve been swamped with work - this new project is consuming my life!"',
+          'Justificando atraso: "I\'ve been swamped with work these past few weeks, but things are finally calming down. Let\'s celebrate!"'
+        ]
       },
       {
         english: "Things have been crazy lately.",
         portuguese: "As coisas têm estado loucas ultimamente.",
         level: 'médio',
-        context: 'Vida'
+        context: 'Vida',
+        situations: [
+          'Explicando caos: "Things have been crazy lately - I moved apartments, started a new job, and my car broke down all in the same week!"',
+          'Vida corrida: "Sorry I haven\'t returned your calls. Things have been crazy lately with work, family, and everything in between."'
+        ]
       },
       {
         english: "I could really use a break.",
         portuguese: "Eu realmente preciso de uma pausa.",
         level: 'médio',
-        context: 'Cansaço'
+        context: 'Cansaço',
+        situations: [
+          'Pedido de folga: "I\'ve been working overtime for three weeks straight. I could really use a break - maybe a weekend getaway?"',
+          'Esgotamento mental: "This semester has been so stressful with all these exams. I could really use a break from studying."'
+        ]
       },
       {
         english: "What have you been up to lately?",
         portuguese: "O que você tem feito ultimamente?",
         level: 'médio',
-        context: 'Conversa'
+        context: 'Conversa',
+        situations: [
+          'Atualizando amizade: "I feel like we haven\'t really talked in ages! What have you been up to lately? Any exciting news?"',
+          'Interesse genuíno: "I saw some of your photos on social media. What have you been up to lately? It looks like you\'ve been having fun!"'
+        ]
       },
       {
         english: "I heard through the grapevine that...",
         portuguese: "Ouvi dizer que...",
         level: 'médio',
-        context: 'Fofoca'
+        context: 'Fofoca',
+        situations: [
+          'Fofoca amigável: "I heard through the grapevine that you\'re getting promoted! Is it true? I\'m so excited for you if it is!"',
+          'Compartilhando rumor: "I heard through the grapevine that our favorite restaurant is opening a second location. Have you heard anything about it?"'
+        ]
       },
       {
         english: "Speaking of which...",
         portuguese: "Falando nisso...",
         level: 'médio',
-        context: 'Transição'
+        context: 'Transição',
+        situations: [
+          'Mudança de assunto: "That movie was amazing! Speaking of which, have you seen the new superhero film that just came out?"',
+          'Lembrança relacionada: "I love your new haircut! Speaking of which, do you know a good salon? I need to find someone new."'
+        ]
       },
       {
         english: "That rings a bell.",
         portuguese: "Isso me soa familiar.",
         level: 'médio',
-        context: 'Memória'
+        context: 'Memória',
+        situations: [
+          'Reconhecimento parcial: "You mentioned Sarah from your college? That rings a bell - didn\'t she come to your birthday party last year?"',
+          'Memória vaga: "The name Johnson... that rings a bell. Wasn\'t he our math teacher in high school, or am I thinking of someone else?"'
+        ]
       },
       {
         english: "I'm all ears.",
         portuguese: "Sou todo ouvidos.",
         level: 'médio',
-        context: 'Atenção'
+        context: 'Atenção',
+        situations: [
+          'Pronto para ouvir: "You said you had some big news to share? I\'m all ears! I\'ve been curious about what you wanted to tell me."',
+          'Oferecendo atenção: "You look like you need to talk about something. I\'m all ears - what\'s going on?"'
+        ]
       },
       {
         english: "You crack me up!",
         portuguese: "Você me faz rir!",
         level: 'médio',
-        context: 'Humor'
+        context: 'Humor',
+        situations: [
+          'Reação a piada: "You crack me up! I can\'t stop laughing at that story about your cat getting stuck in the box."',
+          'Apreciação do humor: "Your impressions of our boss are hilarious! You crack me up every time you do that voice."'
+        ]
       },
       {
         english: "I'm feeling a bit under the weather.",
         portuguese: "Estou me sentindo meio mal.",
         level: 'médio',
-        context: 'Saúde'
+        context: 'Saúde',
+        situations: [
+          'Cancelando planos: "I\'m sorry, but I\'m feeling a bit under the weather today. Can we raincheck our dinner plans for next week?"',
+          'Explicando ausência: "I wasn\'t at work yesterday because I was feeling a bit under the weather. Nothing serious, just needed rest."'
+        ]
       },
       {
         english: "I'm on cloud nine!",
         portuguese: "Estou nas nuvens!",
         level: 'médio',
-        context: 'Felicidade'
+        context: 'Felicidade',
+        situations: [
+          'Extreme felicidade: "I just got accepted to my dream university! I\'m on cloud nine! I can\'t believe it actually happened."',
+          'Alegria contagiante: "My boyfriend proposed last night! I\'m on cloud nine! I keep staring at this beautiful ring."'
+        ]
       },
       {
         english: "Let's play it by ear.",
         portuguese: "Vamos ver como as coisas vão.",
         level: 'médio',
-        context: 'Flexibilidade'
+        context: 'Flexibilidade',
+        situations: [
+          'Planos flexíveis: "I\'m not sure what the weather will be like for our picnic. Let\'s play it by ear and decide in the morning."',
+          'Improvisação: "We don\'t need to plan every detail of our vacation. Let\'s play it by ear and see what interesting things we discover!"'
+        ]
       },
       {
         english: "I'm keeping my fingers crossed.",
         portuguese: "Estou torcendo.",
         level: 'médio',
-        context: 'Esperança'
+        context: 'Esperança',
+        situations: [
+          'Torcendo por amigo: "You have your big presentation tomorrow? I\'m keeping my fingers crossed that everything goes perfectly!"',
+          'Esperança própria: "I should hear back about the apartment application today. I\'m keeping my fingers crossed - I really love that place!"'
+        ]
       },
       {
         english: "It's a small world!",
         portuguese: "O mundo é pequeno!",
         level: 'médio',
-        context: 'Coincidência'
+        context: 'Coincidência',
+        situations: [
+          'Coincidência incrivel: "You went to the same elementary school as my cousin? It\'s a small world! You probably knew each other."',
+          'Conexão inesperada: "Your new boss used to work with my sister? It\'s a small world! She always said great things about him."'
+        ]
       },
       {
         english: "Better late than never.",
         portuguese: "Antes tarde do que nunca.",
         level: 'médio',
-        context: 'Atraso'
+        context: 'Atraso',
+        situations: [
+          'Chegando atrasado: "Sorry I\'m 20 minutes late to the party! Traffic was terrible, but better late than never, right?"',
+          'Justificando atraso: "I know I should have started this project weeks ago, but I\'m finally working on it now. Better late than never!"'
+        ]
       },
       {
         english: "I'm running late.",
         portuguese: "Estou atrasado.",
         level: 'médio',
-        context: 'Pontualidade'
+        context: 'Pontualidade',
+        situations: [
+          'Aviso de atraso: "I\'m running late for our coffee date! My previous meeting went over time. I\'ll be there in 15 minutes."',
+          'Desculpa antecipada: "I\'m running late because I couldn\'t find parking anywhere. Can you order for me? I\'ll have the usual."'
+        ]
       },
       {
         english: "My schedule is packed.",
         portuguese: "Minha agenda está lotada.",
         level: 'médio',
-        context: 'Ocupação'
+        context: 'Ocupação',
+        situations: [
+          'Explicando indisponibilidade: "I\'d love to meet up this week, but my schedule is packed with meetings and deadlines. How about next week?"',
+          'Demonstrando ocupação: "My schedule is packed until Friday, but I\'m free all weekend. Let\'s plan something fun then!"'
+        ]
       },
       {
         english: "I need to bounce.",
         portuguese: "Preciso vazar.",
         level: 'médio',
-        context: 'Partida'
+        context: 'Partida',
+        situations: [
+          'Saída rápida: "This party is great, but I need to bounce. I have an early morning meeting tomorrow. Thanks for inviting me!"',
+          'Despedida casual: "I need to bounce and pick up my kids from soccer practice. Let\'s do this again soon!"'
+        ]
       },
       {
         english: "Time flies when you're having fun.",
         portuguese: "O tempo voa quando você se diverte.",
         level: 'médio',
-        context: 'Tempo'
+        context: 'Tempo',
+        situations: [
+          'Surpresa temporal: "I can\'t believe it\'s already midnight! Time flies when you\'re having fun. We\'ve been talking for hours!"',
+          'Final de atividade: "Our game night went by so quickly! Time flies when you\'re having fun with good friends like you."'
+        ]
       },
       {
         english: "I'm having second thoughts.",
         portuguese: "Estou repensando.",
         level: 'médio',
-        context: 'Dúvida'
+        context: 'Dúvida',
+        situations: [
+          'Questionando decisão: "I was excited about the bungee jumping, but now I\'m having second thoughts. Maybe it\'s too dangerous?"',
+          'Reconsideração: "I already said yes to the job offer, but I\'m having second thoughts. The commute would be really long."'
+        ]
       },
       {
         english: "Let's call it a night.",
         portuguese: "Vamos encerrar a noite.",
         level: 'médio',
-        context: 'Finalização'
+        context: 'Finalização',
+        situations: [
+          'Final de festa: "It\'s already 2 AM and we all have work tomorrow. Let\'s call it a night and continue this conversation next time."',
+          'Cansaço: "This has been such a wonderful evening, but I\'m getting tired. Let\'s call it a night - I\'ll drive you home."'
+        ]
       },
       {
         english: "I'm beat.",
         portuguese: "Estou exausto.",
         level: 'médio',
-        context: 'Cansaço'
+        context: 'Cansaço',
+        situations: [
+          'Após atividade: "That hiking trail was amazing, but I\'m beat! My legs are going to be sore tomorrow. Worth it though!"',
+          'Final de dia: "I\'m beat after that long day at work. Let\'s just order pizza and watch Netflix tonight instead of going out."'
+        ]
       },
       {
         english: "Let's touch base soon.",
         portuguese: "Vamos nos falar em breve.",
         level: 'médio',
-        context: 'Comunicação'
+        context: 'Comunicação',
+        situations: [
+          'Despedida profissional: "Great catching up with you at the conference! Let\'s touch base soon about that collaboration idea we discussed."',
+          'Manutenção de contato: "I have to run now, but let\'s touch base soon. I want to hear how your new business venture is going!"'
+        ]
       },
 
       // AVANÇADO (35 frases)
@@ -5948,211 +6284,351 @@ const trailsData = {
         english: "This place brings back memories.",
         portuguese: "Este lugar traz memórias.",
         level: 'avançado',
-        context: 'Nostalgia'
+        context: 'Nostalgia',
+        situations: [
+          'Visita nostalgica: "This place brings back memories! We used to come here every Friday after school. Remember our long talks over milkshakes?"',
+          'Emoção do passado: "Walking through our old university campus... this place brings back memories of late-night studying and incredible friendships."'
+        ]
       },
       {
         english: "You should definitely give it a try.",
         portuguese: "Você definitivamente deveria tentar.",
         level: 'avançado',
-        context: 'Encorajamento'
+        context: 'Encorajamento',
+        situations: [
+          'Encorajamento forte: "I know you\'re nervous about the cooking class, but you should definitely give it a try. You\'re naturally talented in the kitchen!"',
+          'Recomendação entusiasmada: "This new yoga studio changed my life completely. You should definitely give it a try - I think you\'d love the community there."'
+        ]
       },
       {
         english: "I'm really looking forward to it.",
         portuguese: "Estou realmente ansioso por isso.",
         level: 'avançado',
-        context: 'Expectativa'
+        context: 'Expectativa',
+        situations: [
+          'Antecipação positiva: "Our weekend getaway to the mountains is coming up soon! I\'m really looking forward to it - I need this break."',
+          'Evento especial: "Thank you for inviting me to your wedding! I\'m really looking forward to it. It\'s going to be such a beautiful celebration."'
+        ]
       },
       {
         english: "That reminds me of something funny.",
         portuguese: "Isso me lembra de algo engraçado.",
         level: 'avançado',
-        context: 'História'
+        context: 'História',
+        situations: [
+          'Compartilhando história: "You mentioning your cat getting stuck... that reminds me of something funny that happened to my dog last week!"',
+          'Conexão humorística: "Your story about the cooking disaster reminds me of something funny from my own kitchen adventures. Want to hear it?"'
+        ]
       },
       {
         english: "Let's make this a regular thing.",
         portuguese: "Vamos fazer disso algo regular.",
         level: 'avançado',
-        context: 'Compromisso'
+        context: 'Compromisso',
+        situations: [
+          'Proposta de rotina: "These monthly book club meetings have been incredible! Let\'s make this a regular thing - maybe even twice a month?"',
+          'Compromisso mútuo: "I love our Saturday morning coffee dates. Let\'s make this a regular thing - it\'s become my favorite part of the week."'
+        ]
       },
       {
         english: "I hate to be the bearer of bad news, but...",
         portuguese: "Odeio ser o portador de más notícias, mas...",
         level: 'avançado',
-        context: 'Má notícia'
+        context: 'Má notícia',
+        situations: [
+          'Notícia difícil: "I hate to be the bearer of bad news, but the concert we were planning to go to next month has been canceled."',
+          'Informação importante: "I hate to be the bearer of bad news, but I heard our favorite restaurant is closing down next week."'
+        ]
       },
       {
         english: "I'm completely in awe of what you've accomplished.",
         portuguese: "Estou completamente impressionado com o que você conquistou.",
         level: 'avançado',
-        context: 'Admiração'
+        context: 'Admiração',
+        situations: [
+          'Admiração profunda: "Starting your own business while raising three kids? I\'m completely in awe of what you\'ve accomplished!"',
+          'Reconhecimento sincero: "Learning five languages fluently in just two years... I\'m completely in awe of what you\'ve accomplished."'
+        ]
       },
       {
         english: "You've really outdone yourself this time.",
         portuguese: "Você realmente se superou desta vez.",
         level: 'avançado',
-        context: 'Elogio'
+        context: 'Elogio',
+        situations: [
+          'Elogio impressionado: "This dinner party is absolutely incredible! You\'ve really outdone yourself this time - everything is perfect."',
+          'Reconhecimento de excelência: "Your presentation at the conference was phenomenal! You\'ve really outdone yourself this time."'
+        ]
       },
       {
         english: "I couldn't agree with you more.",
         portuguese: "Não poderia concordar mais com você.",
         level: 'avançado',
-        context: 'Concordância'
+        context: 'Concordância',
+        situations: [
+          'Concordância total: "You think we need more green spaces in the city? I couldn\'t agree with you more - it would improve everyone\'s quality of life."',
+          'Validação forte: "Travel really does broaden your perspective on life. I couldn\'t agree with you more - my experiences abroad changed me completely."'
+        ]
       },
       {
         english: "That's a tough pill to swallow.",
         portuguese: "Isso é difícil de engolir.",
         level: 'avançado',
-        context: 'Dificuldade'
+        context: 'Dificuldade',
+        situations: [
+          'Realidade dura: "Finding out that your best friend has been lying to you for months... that\'s a tough pill to swallow."',
+          'Aceitação difícil: "Learning that I didn\'t get the promotion I\'ve been working toward for two years... that\'s a tough pill to swallow."'
+        ]
       },
       {
         english: "I'm torn between two options.",
         portuguese: "Estou dividido entre duas opções.",
         level: 'avançado',
-        context: 'Indecisão'
+        context: 'Indecisão',
+        situations: [
+          'Dilema pessoal: "I\'m torn between two options: taking the high-paying job in another city or staying here close to family."',
+          'Decisão difícil: "For vacation, I\'m torn between two options - the relaxing beach resort or the adventurous mountain hiking trip."'
+        ]
       },
       {
         english: "It's worth keeping in mind that...",
         portuguese: "Vale a pena ter em mente que...",
         level: 'avançado',
-        context: 'Consideração'
+        context: 'Consideração',
+        situations: [
+          'Conselho ponderado: "Before you invest all your savings, it\'s worth keeping in mind that the market can be unpredictable."',
+          'Perspectiva importante: "When choosing a career, it\'s worth keeping in mind that passion often matters more than just salary."'
+        ]
       },
       {
         english: "I'm inclined to think that...",
         portuguese: "Estou inclinado a pensar que...",
         level: 'avançado',
-        context: 'Opinião'
+        context: 'Opinião',
+        situations: [
+          'Opinião cautelosa: "Based on what I\'ve observed, I\'m inclined to think that remote work will become the norm in many industries."',
+          'Julgamento refletido: "After hearing both sides of the story, I\'m inclined to think that there\'s probably some truth in both versions."'
+        ]
       },
       {
         english: "That's food for thought.",
         portuguese: "Isso dá o que pensar.",
         level: 'avançado',
-        context: 'Reflexão'
+        context: 'Reflexão',
+        situations: [
+          'Ideia provocativa: "You think that social media is changing how we form relationships? That\'s food for thought - I\'ve never considered that angle."',
+          'Ponto interessante: "The idea that happiness comes from gratitude rather than achievement... that\'s food for thought. I need to think about that."'
+        ]
       },
       {
         english: "I'm at a crossroads in my life.",
         portuguese: "Estou numa encruzilhada da minha vida.",
         level: 'avançado',
-        context: 'Decisão'
+        context: 'Decisão',
+        situations: [
+          'Momento decisivo: "I\'m at a crossroads in my life - should I go back to school for my master\'s degree or focus on building my career?"',
+          'Mudança importante: "After my divorce, I\'m at a crossroads in my life. I can either stay in this town or start fresh somewhere new."'
+        ]
       },
       {
         english: "It's a blessing in disguise.",
         portuguese: "É uma bênção disfarçada.",
         level: 'avançado',
-        context: 'Otimismo'
+        context: 'Otimismo',
+        situations: [
+          'Otimismo após dificuldade: "Losing that job was devastating at first, but it\'s a blessing in disguise - now I found my dream career!"',
+          'Perspectiva positiva: "Missing that flight was frustrating, but it\'s a blessing in disguise. I met my future spouse at the airport!"'
+        ]
       },
       {
         english: "You hit the nail on the head.",
         portuguese: "Você acertou em cheio.",
         level: 'avançado',
-        context: 'Precisão'
+        context: 'Precisão',
+        situations: [
+          'Acerto total: "You think the problem with our team is lack of communication? You hit the nail on the head - that\'s exactly the issue!"',
+          'Análise perfeita: "Your observation about why that restaurant failed is spot-on. You hit the nail on the head with the location analysis."'
+        ]
       },
       {
         english: "I'm walking on air!",
         portuguese: "Estou flutuando!",
         level: 'avançado',
-        context: 'Euforia'
+        context: 'Euforia',
+        situations: [
+          'Alegria extrema: "I just got accepted to Harvard! I\'m walking on air! I can\'t believe this is really happening to me!"',
+          'Felicidade eufórica: "After that amazing first date, I\'m walking on air! I think I\'ve found someone really special."'
+        ]
       },
       {
         english: "That's the tip of the iceberg.",
         portuguese: "Isso é só a ponta do iceberg.",
         level: 'avançado',
-        context: 'Revelação'
+        context: 'Revelação',
+        situations: [
+          'Problema maior: "You think the budget deficit is bad now? That\'s the tip of the iceberg - wait until you see next quarter\'s projections."',
+          'Revelação parcial: "The corruption scandal involving that politician? That\'s the tip of the iceberg - there\'s so much more they haven\'t revealed yet."'
+        ]
       },
       {
         english: "I'm keeping my options open.",
         portuguese: "Estou mantendo minhas opções em aberto.",
         level: 'avançado',
-        context: 'Flexibilidade'
+        context: 'Flexibilidade',
+        situations: [
+          'Flexibilidade estratégica: "I got accepted to three universities, but I\'m keeping my options open until I visit all the campuses."',
+          'Decisão ponderada: "Several companies have made me job offers, but I\'m keeping my options open until I negotiate the best package."'
+        ]
       },
       {
         english: "It's been weighing on my mind.",
         portuguese: "Isso tem pesado na minha mente.",
         level: 'avançado',
-        context: 'Preocupação'
+        context: 'Preocupação',
+        situations: [
+          'Preocupação persistente: "Our conversation about my career choices has been weighing on my mind. I think you\'re right about making a change."',
+          'Assunto difícil: "The decision about whether to move my elderly parents to assisted living... it\'s been weighing on my mind for months."'
+        ]
       },
       {
         english: "I'm grappling with some difficult decisions.",
         portuguese: "Estou lutando com algumas decisões difíceis.",
         level: 'avançado',
-        context: 'Dilema'
+        context: 'Dilema',
+        situations: [
+          'Luta interna: "I\'m grappling with some difficult decisions about my relationship. I love him, but we want different things in life."',
+          'Dilema complexo: "I\'m grappling with some difficult decisions about my elderly father\'s care while balancing my own family\'s needs."'
+        ]
       },
       {
         english: "It's a matter of perspective.",
         portuguese: "É uma questão de perspectiva.",
         level: 'avançado',
-        context: 'Análise'
+        context: 'Análise',
+        situations: [
+          'Relativizando situação: "You see the layoffs as a crisis, but I think it\'s a matter of perspective - it could be an opportunity for innovation."',
+          'Visão alternativa: "Some people think traveling alone is lonely, but it\'s a matter of perspective - I find it incredibly liberating and empowering."'
+        ]
       },
       {
         english: "I'm contemplating a major life change.",
         portuguese: "Estou contemplando uma grande mudança de vida.",
         level: 'avançado',
-        context: 'Transformação'
+        context: 'Transformação',
+        situations: [
+          'Mudança radical: "I\'m contemplating a major life change - leaving my corporate job to become a freelance artist. It\'s scary but exciting."',
+          'Decisão importante: "After years in the city, I\'m contemplating a major life change and moving to a small rural town to start a farm."'
+        ]
       },
       {
         english: "That experience was truly eye-opening.",
         portuguese: "Essa experiência foi realmente reveladora.",
         level: 'avançado',
-        context: 'Aprendizado'
+        context: 'Aprendizado',
+        situations: [
+          'Transformação pessoal: "Volunteering at the homeless shelter was truly eye-opening. It completely changed how I view social issues in our community."',
+          'Nova perspectiva: "Living in Japan for a year was truly eye-opening. It taught me so much about different approaches to work-life balance."'
+        ]
       },
       {
         english: "I'm having an existential crisis.",
         portuguese: "Estou tendo uma crise existencial.",
         level: 'avançado',
-        context: 'Introspecção'
+        context: 'Introspecção',
+        situations: [
+          'Questionamento profundo: "Turning 30 has me thinking... I\'m having an existential crisis about what I\'ve accomplished and where my life is going."',
+          'Busca de significado: "After my father\'s death, I\'m having an existential crisis about the meaning of life and what really matters."'
+        ]
       },
       {
         english: "It's a double-edged sword.",
         portuguese: "É uma faca de dois gumes.",
         level: 'avançado',
-        context: 'Ambiguidade'
+        context: 'Ambiguidade',
+        situations: [
+          'Benefício com custo: "Working from home is convenient, but it\'s a double-edged sword - I miss the social interaction and struggle with boundaries."',
+          'Vantagem com desvantagem: "Social media helps us stay connected, but it\'s a double-edged sword - it also increases anxiety and comparison."'
+        ]
       },
       {
         english: "I'm cautiously optimistic about the outcome.",
         portuguese: "Estou cautelosamente otimista sobre o resultado.",
         level: 'avançado',
-        context: 'Expectativa'
+        context: 'Expectativa',
+        situations: [
+          'Otimismo moderado: "The peace negotiations are progressing slowly, but I\'m cautiously optimistic about the outcome - both sides seem committed."',
+          'Esperança cuidadosa: "My cancer treatment is showing positive signs. I\'m cautiously optimistic about the outcome, but taking it one day at a time."'
+        ]
       },
       {
         english: "That's quite a paradigm shift.",
         portuguese: "Essa é uma grande mudança de paradigma.",
         level: 'avançado',
-        context: 'Transformação'
+        context: 'Transformação',
+        situations: [
+          'Mudança fundamental: "Moving from punitive to restorative justice in schools? That\'s quite a paradigm shift, but I think it could be revolutionary."',
+          'Nova abordagem: "Your company switching from hierarchical to completely flat management? That\'s quite a paradigm shift - how is everyone adapting?"'
+        ]
       },
       {
         english: "I'm trying to read between the lines.",
         portuguese: "Estou tentando ler nas entrelinhas.",
         level: 'avançado',
-        context: 'Interpretação'
+        context: 'Interpretação',
+        situations: [
+          'Interpretação cuidadosa: "My boss\'s email was very formal and brief. I\'m trying to read between the lines - is he unhappy with my work?"',
+          'Análise sutil: "Her response about the relationship was evasive. I\'m trying to read between the lines to understand what she really meant."'
+        ]
       },
       {
         english: "It's all about finding the right balance.",
         portuguese: "É tudo sobre encontrar o equilíbrio certo.",
         level: 'avançado',
-        context: 'Harmonia'
+        context: 'Harmonia',
+        situations: [
+          'Equilíbrio vida-trabalho: "Managing a career and family is challenging. It\'s all about finding the right balance between professional success and personal happiness."',
+          'Harmonia pessoal: "Staying healthy while enjoying life\'s pleasures... it\'s all about finding the right balance between discipline and indulgence."'
+        ]
       },
       {
         english: "I'm swimming against the current.",
         portuguese: "Estou nadando contra a corrente.",
         level: 'avançado',
-        context: 'Resistência'
+        context: 'Resistência',
+        situations: [
+          'Indo contra expectativas: "Everyone expects me to take over the family business, but I want to be an artist. I\'m swimming against the current."',
+          'Resistência à pressão: "All my friends are buying expensive cars and houses, but I\'m saving money. I feel like I\'m swimming against the current."'
+        ]
       },
       {
         english: "That's a watershed moment.",
         portuguese: "Esse é um momento decisivo.",
         level: 'avançado',
-        context: 'Marco'
+        context: 'Marco',
+        situations: [
+          'Momento transformador: "Getting that scholarship to study abroad was a watershed moment - it completely changed the trajectory of my life."',
+          'Marco histórico: "When our company decided to go fully remote, that was a watershed moment that revolutionized how we think about work."'
+        ]
       },
       {
         english: "I'm trying to bridge the gap between us.",
         portuguese: "Estou tentando diminuir a distância entre nós.",
         level: 'avançado',
-        context: 'Reconciliação'
+        context: 'Reconciliação',
+        situations: [
+          'Reparação de relacionamento: "Since our argument, things have been awkward. I\'m trying to bridge the gap between us by being more understanding."',
+          'Conexão perdida: "My teenage daughter and I barely talk anymore. I\'m trying to bridge the gap between us by showing interest in her hobbies."'
+        ]
       },
       {
         english: "It's time to turn over a new leaf.",
         portuguese: "É hora de virar uma nova página.",
         level: 'avançado',
-        context: 'Renovação'
+        context: 'Renovação',
+        situations: [
+          'Novo começo: "After years of unhealthy habits, I\'ve decided it\'s time to turn over a new leaf and start taking better care of myself."',
+          'Mudança de comportamento: "I\'ve been too negative lately and it\'s affecting my relationships. It\'s time to turn over a new leaf and focus on gratitude."'
+        ]
       }
     ],
     exercises: [
@@ -6160,31 +6636,51 @@ const trailsData = {
         id: 'amigos-ex-1',
         correctSentence: 'Would you like to hang out?',
         words: ['Would', 'you', 'like', 'to', 'hang', 'out?'],
-        translation: 'Você gostaria de sair?'
+        translation: 'Você gostaria de sair?',
+        situations: [
+          'Fim de semana: "I\'m free this Saturday afternoon. Would you like to hang out and maybe go to the park?"',
+          'Após trabalho: "Would you like to hang out after work? We could grab dinner or see a movie."'
+        ]
       },
       {
         id: 'amigos-ex-2',
         correctSentence: 'Let us grab a coffee.',
         words: ['Let', 'us', 'grab', 'a', 'coffee.'],
-        translation: 'Vamos tomar um café.'
+        translation: 'Vamos tomar um café.',
+        situations: [
+          'Pausa no trabalho: "I need a break from this project. Let us grab a coffee and chat for a few minutes."',
+          'Encontrando amigo: "Let us grab a coffee this afternoon. I know a great café downtown."'
+        ]
       },
       {
         id: 'amigos-ex-3',
         correctSentence: 'What are you up to?',
         words: ['What', 'are', 'you', 'up', 'to?'],
-        translation: 'O que você está fazendo?'
+        translation: 'O que você está fazendo?',
+        situations: [
+          'Por telefone: "Hey, I was just calling to see what are you up to today? Want to do something together?"',
+          'Encontrando por acaso: "Oh hi! What are you up to? I didn\'t expect to see you here."'
+        ]
       },
       {
         id: 'amigos-ex-4',
         correctSentence: 'How was your weekend?',
         words: ['How', 'was', 'your', 'weekend?'],
-        translation: 'Como foi seu fim de semana?'
+        translation: 'Como foi seu fim de semana?',
+        situations: [
+          'Segunda-feira: "Good morning! How was your weekend? Did you do anything fun or exciting?"',
+          'Conversa casual: "How was your weekend? I saw your photos on Instagram - looked like you had a great time!"'
+        ]
       },
       {
         id: 'amigos-ex-5',
         correctSentence: 'Want to join us?',
         words: ['Want', 'to', 'join', 'us?'],
-        translation: 'Quer se juntar a nós?'
+        translation: 'Quer se juntar a nós?',
+        situations: [
+          'Planos em grupo: "We\'re going to the beach this Sunday. Want to join us? It\'ll be fun!"',
+          'Convite espontaneo: "Want to join us for dinner? We\'re going to that new Italian restaurant."'
+        ]
       }
     ]
   },
