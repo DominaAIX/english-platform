@@ -4201,13 +4201,21 @@ const trailsData = {
         english: "Can I pay in cash?",
         portuguese: "Posso pagar em dinheiro?",
         level: 'básico',
-        context: 'Pagamento'
+        context: 'Pagamento',
+        situations: [
+          'Sem cartão: "I don\'t have my credit card with me today. Can I pay in cash?"',
+          'Preferindo dinheiro: "Can I pay in cash? I prefer not to use cards for small purchases."'
+        ]
       },
       {
         english: "Can you hold this for me?",
         portuguese: "Você pode guardar isso para mim?",
         level: 'médio',
-        context: 'Reserva'
+        context: 'Reserva',
+        situations: [
+          'Continuando compras: "I like this jacket but I want to keep shopping. Can you hold this for me for an hour?"',
+          'Decidindo depois: "Can you hold this for me while I check if I have enough money on my card?"'
+        ]
       },
       {
         english: "Do you offer gift wrapping?",
@@ -4479,7 +4487,11 @@ const trailsData = {
         english: "Is there a transaction fee?",
         portuguese: "Há taxa de transação?",
         level: 'avançado',
-        context: 'Pagamento'
+        context: 'Pagamento',
+        situations: [
+          'Verificando custos: "Before I pay with my card, is there a transaction fee for credit card payments?"',
+          'Comparando opções: "Is there a transaction fee if I use my debit card versus cash?"'
+        ]
       },
       
       // COMPRAS ONLINE - MÉDIO/AVANÇADO
@@ -4487,43 +4499,71 @@ const trailsData = {
         english: "What's the shipping cost?",
         portuguese: "Qual é o custo do frete?",
         level: 'médio',
-        context: 'Online'
+        context: 'Online',
+        situations: [
+          'Calculando total: "I like this item but what\'s the shipping cost? I want to know the total price."',
+          'Comparando opções: "What\'s the shipping cost for standard delivery versus express shipping?"'
+        ]
       },
       {
         english: "How long is delivery?",
         portuguese: "Quanto tempo demora a entrega?",
         level: 'médio',
-        context: 'Online'
+        context: 'Online',
+        situations: [
+          'Planejando compra: "I need this for next week. How long is delivery to my address?"',
+          'Decidindo shipping: "How long is delivery with regular shipping versus express?"'
+        ]
       },
       {
         english: "Can I track my order?",
         portuguese: "Posso rastrear meu pedido?",
         level: 'médio',
-        context: 'Online'
+        context: 'Online',
+        situations: [
+          'Após compra: "I just placed my order. Can I track my order to see when it will arrive?"',
+          'Verificando status: "It\'s been 3 days since I ordered. Can I track my order online?"'
+        ]
       },
       {
         english: "I need to update my address.",
         portuguese: "Preciso atualizar meu endereço.",
         level: 'médio',
-        context: 'Online'
+        context: 'Online',
+        situations: [
+          'Mudou endereço: "I moved last month. I need to update my address before placing this order."',
+          'Entrega diferente: "I need to update my address. I want this delivered to my office instead of home."'
+        ]
       },
       {
         english: "Is expedited shipping available?",
         portuguese: "Há entrega expressa disponível?",
         level: 'avançado',
-        context: 'Online'
+        context: 'Online',
+        situations: [
+          'Urgência: "I need this urgently for a meeting tomorrow. Is expedited shipping available?"',
+          'Pagando mais: "I\'m willing to pay extra for faster delivery. Is expedited shipping available?"'
+        ]
       },
       {
         english: "My package was damaged.",
         portuguese: "Meu pacote foi danificado.",
         level: 'médio',
-        context: 'Online'
+        context: 'Online',
+        situations: [
+          'Reclamando: "I received my order today but my package was damaged during shipping. What can you do?"',
+          'Pedindo solução: "My package was damaged and the item inside is broken. Can I get a replacement?"'
+        ]
       },
       {
         english: "I didn't receive my order.",
         portuguese: "Não recebi meu pedido.",
         level: 'médio',
-        context: 'Online'
+        context: 'Online',
+        situations: [
+          'Prazo vencido: "It\'s been a week past the delivery date. I didn\'t receive my order yet."',
+          'Investigando: "The tracking says it was delivered but I didn\'t receive my order. Can you check?"'
+        ]
       },
       
       // MERCADO/FEIRA - BÁSICO
@@ -4531,43 +4571,71 @@ const trailsData = {
         english: "How much per pound?",
         portuguese: "Quanto por libra?",
         level: 'básico',
-        context: 'Feira'
+        context: 'Feira',
+        situations: [
+          'Na feira: "These apples look great. How much per pound for the red ones?"',
+          'Comparando preços: "How much per pound for these tomatoes versus those organic ones?"'
+        ]
       },
       {
         english: "Are these apples fresh?",
         portuguese: "Essas maçãs estão frescas?",
         level: 'básico',
-        context: 'Feira'
+        context: 'Feira',
+        situations: [
+          'Verificando qualidade: "Are these apples fresh? They look good but I want to make sure."',
+          'Para cozinhar: "I\'m making a pie tonight. Are these apples fresh and good for baking?"'
+        ]
       },
       {
         english: "Can I taste this?",
         portuguese: "Posso provar isso?",
         level: 'básico',
-        context: 'Feira'
+        context: 'Feira',
+        situations: [
+          'Experimentando: "This cheese looks interesting. Can I taste this before buying?"',
+          'Verificando sabor: "I\'ve never tried this fruit before. Can I taste this to see if I like it?"'
+        ]
       },
       {
         english: "I'll take two pounds.",
         portuguese: "Vou levar duas libras.",
         level: 'básico',
-        context: 'Feira'
+        context: 'Feira',
+        situations: [
+          'Comprando quantidade: "These bananas are perfect. I\'ll take two pounds, please."',
+          'Após escolher: "I\'ve picked the ones I want. I\'ll take two pounds of these carrots."'
+        ]
       },
       {
         english: "What's the best price?",
         portuguese: "Qual é o melhor preço?",
         level: 'médio',
-        context: 'Negociação'
+        context: 'Negociação',
+        situations: [
+          'Negociando: "I\'m buying a lot today. What\'s the best price you can give me for these items?"',
+          'Pechinchando: "What\'s the best price for this? Can you do better than the marked price?"'
+        ]
       },
       {
         english: "These look good.",
         portuguese: "Esses parecem bons.",
         level: 'básico',
-        context: 'Aprovação'
+        context: 'Aprovação',
+        situations: [
+          'Escolhendo produtos: "I\'ve been looking at different options. These look good - I\'ll take them."',
+          'Elogiando qualidade: "These look good! Much better quality than the other store."'
+        ]
       },
       {
         english: "Do you have ripe bananas?",
         portuguese: "Vocês têm bananas maduras?",
         level: 'básico',
-        context: 'Feira'
+        context: 'Feira',
+        situations: [
+          'Para comer hoje: "I want to eat them today. Do you have ripe bananas that are ready to eat?"',
+          'Fazendo smoothie: "I\'m making a smoothie tonight. Do you have ripe bananas that are sweet?"'
+        ]
       },
       
       // FARMÁCIA - MÉDIO
@@ -4575,37 +4643,61 @@ const trailsData = {
         english: "I need something for a headache.",
         portuguese: "Preciso de algo para dor de cabeça.",
         level: 'médio',
-        context: 'Farmácia'
+        context: 'Farmácia',
+        situations: [
+          'Na farmácia: "I have a terrible headache. I need something for a headache that works fast."',
+          'Pedindo ajuda: "I need something for a headache. What do you recommend that\'s not too strong?"'
+        ]
       },
       {
         english: "Do I need a prescription?",
         portuguese: "Preciso de receita médica?",
         level: 'médio',
-        context: 'Farmácia'
+        context: 'Farmácia',
+        situations: [
+          'Perguntando sobre remédio: "I\'d like to buy this antibiotic. Do I need a prescription or can I get it over the counter?"',
+          'Verificando requisitos: "Do I need a prescription for this medicine, or can you sell it to me directly?"'
+        ]
       },
       {
         english: "What are the side effects?",
         portuguese: "Quais são os efeitos colaterais?",
         level: 'avançado',
-        context: 'Farmácia'
+        context: 'Farmácia',
+        situations: [
+          'Preocupação com segurança: "Before I take this medication, what are the side effects I should watch for?"',
+          'Informação importante: "What are the side effects of this medicine? I want to know what to expect."'
+        ]
       },
       {
         english: "Do you have the generic version?",
         portuguese: "Vocês têm a versão genérica?",
         level: 'avançado',
-        context: 'Farmácia'
+        context: 'Farmácia',
+        situations: [
+          'Economizando dinheiro: "This brand name is expensive. Do you have the generic version that\'s cheaper?"',
+          'Mesma fórmula: "Do you have the generic version of this medicine? It should have the same active ingredient."'
+        ]
       },
       {
         english: "How often should I take this?",
         portuguese: "Com que frequência devo tomar isso?",
         level: 'médio',
-        context: 'Farmácia'
+        context: 'Farmácia',
+        situations: [
+          'Seguindo instruções: "I want to take this correctly. How often should I take this medicine - once or twice a day?"',
+          'Dosagem correta: "How often should I take this? The label isn\'t clear about the timing."'
+        ]
       },
       {
         english: "Is this covered by insurance?",
         portuguese: "Isso é coberto pelo seguro?",
         level: 'avançado',
-        context: 'Farmácia'
+        context: 'Farmácia',
+        situations: [
+          'Verificando cobertura: "This medication is expensive. Is this covered by insurance or do I pay the full price?"',
+          'Consultando benefícios: "Before I buy this, is this covered by insurance? I have Blue Cross coverage."'
+        ]
       },
       
       // ELETRÔNICOS - MÉDIO/AVANÇADO
@@ -4613,43 +4705,71 @@ const trailsData = {
         english: "Does this come with a warranty?",
         portuguese: "Isso vem com garantia?",
         level: 'médio',
-        context: 'Eletrônicos'
+        context: 'Eletrônicos',
+        situations: [
+          'Comprando eletrônico: "This laptop is expensive. Does this come with a warranty in case something breaks?"',
+          'Segurança na compra: "Does this come with a warranty? I want protection if it stops working."'
+        ]
       },
       {
         english: "Can you show me how it works?",
         portuguese: "Pode me mostrar como funciona?",
         level: 'médio',
-        context: 'Demonstração'
+        context: 'Demonstração',
+        situations: [
+          'Produto novo: "I\'ve never used this type of device. Can you show me how it works before I buy it?"',
+          'Entendendo funções: "This has many features. Can you show me how it works? I want to understand all the options."'
+        ]
       },
       {
         english: "What's the battery life?",
         portuguese: "Qual é a duração da bateria?",
         level: 'médio',
-        context: 'Eletrônicos'
+        context: 'Eletrônicos',
+        situations: [
+          'Sobre celular: "I use my phone a lot during the day. What\'s the battery life - will it last all day?"',
+          'Comparando modelos: "What\'s the battery life on this model compared to the other one you showed me?"'
+        ]
       },
       {
         english: "Is this model newer?",
         portuguese: "Este modelo é mais novo?",
         level: 'médio',
-        context: 'Comparação'
+        context: 'Comparação',
+        situations: [
+          'Comparando opções: "You showed me two phones. Is this model newer than the other one?"',
+          'Querendo o mais recente: "I want the latest technology. Is this model newer or do you have something more recent?"'
+        ]
       },
       {
         english: "Do you offer tech support?",
         portuguese: "Vocês oferecem suporte técnico?",
         level: 'avançado',
-        context: 'Eletrônicos'
+        context: 'Eletrônicos',
+        situations: [
+          'Suporte pós-venda: "If I have problems setting this up, do you offer tech support or help with installation?"',
+          'Assistência técnica: "Do you offer tech support if something goes wrong? I\'m not very tech-savvy."'
+        ]
       },
       {
         english: "Can I trade in my old device?",
         portuguese: "Posso dar meu aparelho antigo como parte do pagamento?",
         level: 'avançado',
-        context: 'Eletrônicos'
+        context: 'Eletrônicos',
+        situations: [
+          'Trocando por novo: "I have an old iPhone that still works. Can I trade in my old device for credit toward this new one?"',
+          'Economizando dinheiro: "Can I trade in my old device? I\'d like to reduce the cost of this new tablet."'
+        ]
       },
       {
         english: "What's the return window?",
         portuguese: "Qual é o prazo para devolução?",
         level: 'avançado',
-        context: 'Política'
+        context: 'Política',
+        situations: [
+          'Segurança na compra: "In case I don\'t like it or it doesn\'t work, what\'s the return window - 30 days?"',
+          'Planejando teste: "I want to try this at home first. What\'s the return window if I need to bring it back?"'
+        ]
       },
       
       // COMPRAS GERAIS - BÁSICO/MÉDIO
@@ -4707,19 +4827,31 @@ const trailsData = {
         english: "I'm looking for customer service.",
         portuguese: "Estou procurando atendimento ao cliente.",
         level: 'médio',
-        context: 'Serviços'
+        context: 'Serviços',
+        situations: [
+          'Precisando ajuda: "I have a problem with my purchase. I\'m looking for customer service to help me resolve it."',
+          'Devolução: "I\'m looking for customer service. I need to return this item and get my money back."'
+        ]
       },
       {
         english: "Can I speak to a manager?",
         portuguese: "Posso falar com um gerente?",
         level: 'médio',
-        context: 'Reclamação'
+        context: 'Reclamação',
+        situations: [
+          'Problema sério: "This employee was very rude to me. Can I speak to a manager about this situation?"',
+          'Resolução de conflito: "I\'m not satisfied with this service. Can I speak to a manager to resolve this issue?"'
+        ]
       },
       {
         english: "I have a complaint.",
         portuguese: "Tenho uma reclamação.",
         level: 'médio',
-        context: 'Reclamação'
+        context: 'Reclamação',
+        situations: [
+          'Insatisfação: "I have a complaint about the service I received today. The staff was very unprofessional."',
+          'Produto defeituoso: "I have a complaint. This item broke after just one day and I want a full refund."'
+        ]
       },
       
       // PREÇOS E OFERTAS - BÁSICO/MÉDIO
@@ -4727,37 +4859,61 @@ const trailsData = {
         english: "Is there a student discount?",
         portuguese: "Há desconto para estudante?",
         level: 'médio',
-        context: 'Desconto'
+        context: 'Desconto',
+        situations: [
+          'Economizando: "I\'m a college student on a budget. Is there a student discount I can use?"',
+          'Com ID estudantil: "Is there a student discount? I have my student ID card with me."'
+        ]
       },
       {
         english: "Do you price match?",
         portuguese: "Vocês igualam preços?",
         level: 'avançado',
-        context: 'Preços'
+        context: 'Preços',
+        situations: [
+          'Melhor preço: "I found this same item cheaper at another store. Do you price match their offer?"',
+          'Comparando lojas: "Do you price match? I want to buy here but I saw a better price online."'
+        ]
       },
       {
         english: "When does the sale end?",
         portuguese: "Quando acaba a promoção?",
         level: 'básico',
-        context: 'Promoção'
+        context: 'Promoção',
+        situations: [
+          'Planejando compra: "I\'m interested in these discounted items. When does the sale end?"',
+          'Urgência: "When does the sale end? I need to know if I should buy this today or if I have more time."'
+        ]
       },
       {
         english: "Can I get a rain check?",
         portuguese: "Posso pegar um vale para quando houver estoque?",
         level: 'avançado',
-        context: 'Estoque'
+        context: 'Estoque',
+        situations: [
+          'Item em falta: "This sale item is out of stock. Can I get a rain check so I can buy it later at this price?"',
+          'Garantindo preço: "Can I get a rain check? I want to make sure I get this sale price when the item is back in stock."'
+        ]
       },
       {
         english: "Is this the final price?",
         portuguese: "Este é o preço final?",
         level: 'básico',
-        context: 'Preços'
+        context: 'Preços',
+        situations: [
+          'Verificando total: "Is this the final price or are there taxes and fees that will be added at checkout?"',
+          'Confirmando custo: "Before I buy this, is this the final price I\'ll pay, or will there be additional charges?"'
+        ]
       },
       {
         english: "Are there any hidden fees?",
         portuguese: "Há taxas escondidas?",
         level: 'avançado',
-        context: 'Preços'
+        context: 'Preços',
+        situations: [
+          'Desconfiando: "The price seems too good to be true. Are there any hidden fees I should know about?"',
+          'Transparencia: "Are there any hidden fees like processing charges, shipping, or handling fees added later?"'
+        ]
       },
       {
         english: "That's a bit expensive.",
