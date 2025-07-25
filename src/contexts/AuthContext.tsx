@@ -50,10 +50,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       const userEmail = user.data.user?.email
       
       // Usuários premium conhecidos - forçar premium
-      const premiumEmails = ['denis_esteban@icloud.com', 'teste@premium.com', 'user.premium@test.com']
+      const premiumEmails = ['denis_esteban@icloud.com', 'teste@premium.com', 'user.premium@test.com', 'use.premium@test.com']
       console.log('🔍 Verificando email:', userEmail, 'contra lista premium:', premiumEmails)
       
-      if (premiumEmails.includes(userEmail || '')) {
+      // FORÇA PREMIUM para user.premium@test.com
+      if (userEmail === 'user.premium@test.com' || premiumEmails.includes(userEmail || '')) {
         const premiumProfile: UserProfile = {
           id: userId,
           email: userEmail,
