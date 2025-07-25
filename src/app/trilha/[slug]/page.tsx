@@ -2163,175 +2163,291 @@ const trailsData = {
         english: "My flight has been delayed.",
         portuguese: "Meu voo foi atrasado.",
         level: 'básico',
-        context: 'Aeroporto'
+        context: 'Aeroporto',
+        situations: [
+          'Informando companheiro: "I just got a notification. My flight has been delayed by 2 hours due to bad weather."',
+          'Perguntando detalhes: "The board shows my flight has been delayed. Do you know how long the delay will be?"'
+        ]
       },
       {
         english: "Where can I find the departure lounge?",
         portuguese: "Onde posso encontrar a sala de embarque?",
         level: 'básico',
-        context: 'Aeroporto'
+        context: 'Aeroporto',
+        situations: [
+          'Após segurança: "I’ve just passed through security. Where can I find the departure lounge for gate A15?"',
+          'Primeira viagem: "This is my first time flying. Where can I find the departure lounge? I have 2 hours to wait."'
+        ]
       },
       {
         english: "Is there free WiFi at the airport?",
         portuguese: "Há WiFi gratuito no aeroporto?",
         level: 'básico',
-        context: 'Aeroporto'
+        context: 'Aeroporto',
+        situations: [
+          'Precisando trabalhar: "I need to check my emails during the layover. Is there free WiFi at the airport?"',
+          'No balcão de informações: "Excuse me, is there free WiFi at the airport? I need to video call my family."'
+        ]
       },
       {
         english: "I missed my connecting flight.",
         portuguese: "Perdi meu voo de conexão.",
         level: 'médio',
-        context: 'Aeroporto'
+        context: 'Aeroporto',
+        situations: [
+          'Situação urgente: "The first flight was delayed and I missed my connecting flight. What are my options?"',
+          'Pedindo ajuda: "I’m really stressed. I missed my connecting flight to London. Can you help me get on the next one?"'
+        ]
       },
       {
         english: "Can you help me with rebooking?",
         portuguese: "Você pode me ajudar com a remarcação?",
         level: 'médio',
-        context: 'Aeroporto'
+        context: 'Aeroporto',
+        situations: [
+          'Voo cancelado: "My flight was cancelled due to the storm. Can you help me with rebooking on the next available flight?"',
+          'Emergência familiar: "I have a family emergency and need to fly out earlier. Can you help me with rebooking?"'
+        ]
       },
       {
         english: "Where is the baggage claim area?",
         portuguese: "Onde fica a área de retirada de bagagem?",
         level: 'básico',
-        context: 'Aeroporto'
+        context: 'Aeroporto',
+        situations: [
+          'Chegando no destino: "I’ve just landed and this is my first time here. Where is the baggage claim area?"',
+          'Perguntando na imigração: "After I finish here, where is the baggage claim area? I need to collect my suitcase."'
+        ]
       },
       {
         english: "My luggage didn't arrive.",
         portuguese: "Minha bagagem não chegou.",
         level: 'básico',
-        context: 'Aeroporto'
+        context: 'Aeroporto',
+        situations: [
+          'Na esteira de bagagem: "I’ve been waiting for 30 minutes but my luggage didn’t arrive. What should I do?"',
+          'Reportando problema: "My luggage didn’t arrive on flight AA123 from New York. Can you help me locate it?"'
+        ]
       },
       {
         english: "I need to file a lost luggage report.",
         portuguese: "Preciso registrar um relatório de bagagem perdida.",
         level: 'médio',
-        context: 'Aeroporto'
+        context: 'Aeroporto',
+        situations: [
+          'Bagagem perdida: "My suitcase never showed up on the carousel. I need to file a lost luggage report."',
+          'Para seguro: "I need to file a lost luggage report for insurance purposes. Where do I go?"'
+        ]
       },
       {
         english: "What's the boarding time?",
         portuguese: "Qual é o horário de embarque?",
         level: 'básico',
-        context: 'Aeroporto'
+        context: 'Aeroporto',
+        situations: [
+          'Verificando horários: "My boarding pass says departure at 3:15. What’s the boarding time?"',
+          'Planejando tempo: "I want to grab some food before my flight. What’s the boarding time for flight 456?"'
+        ]
       },
       {
         english: "Is the flight on time?",
         portuguese: "O voo está no horário?",
         level: 'básico',
-        context: 'Aeroporto'
+        context: 'Aeroporto',
+        situations: [
+          'Verificando status: "I see some weather alerts on the news. Is the flight on time?"',
+          'No portão: "The departure board shows my gate, but is the flight on time? I don’t want to miss it."'
+        ]
       },
       {
         english: "I'd like to upgrade to business class.",
         portuguese: "Gostaria de fazer upgrade para classe executiva.",
         level: 'médio',
-        context: 'Aeroporto'
+        context: 'Aeroporto',
+        situations: [
+          'No check-in: "It’s a long flight and I’d like to upgrade to business class. Are there any seats available?"',
+          'Usando milhas: "I have frequent flyer miles. I’d like to upgrade to business class if possible."'
+        ]
       },
       {
         english: "Where can I get a trolley?",
         portuguese: "Onde posso pegar um carrinho?",
         level: 'básico',
-        context: 'Aeroporto'
+        context: 'Aeroporto',
+        situations: [
+          'Chegada com bagagem: "I have three heavy suitcases. Where can I get a trolley to help carry them?"',
+          'Chegando no aeroporto: "Where can I get a trolley? I need to transport my luggage to the check-in counter."'
+        ]
       },
       {
         english: "Is there a duty-free shop here?",
         portuguese: "Há uma loja duty-free aqui?",
         level: 'básico',
-        context: 'Aeroporto'
+        context: 'Aeroporto',
+        situations: [
+          'Procurando presenças: "I want to buy some gifts before my flight. Is there a duty-free shop here?"',
+          'Comprando perfume: "Is there a duty-free shop here? I need to buy some perfume that’s cheaper than at home."'
+        ]
       },
       {
         english: "I need assistance with my wheelchair.",
         portuguese: "Preciso de assistência com minha cadeira de rodas.",
         level: 'médio',
-        context: 'Aeroporto'
+        context: 'Aeroporto',
+        situations: [
+          'Chegada no aeroporto: "Hello, I need assistance with my wheelchair. Can someone help me get to my gate?"',
+          'Solicitando serviço: "I need assistance with my wheelchair throughout the airport. Where do I request this service?"'
+        ]
       },
       {
         english: "Can I change my seat assignment?",
         portuguese: "Posso mudar minha designação de assento?",
         level: 'médio',
-        context: 'Aeroporto'
+        context: 'Aeroporto',
+        situations: [
+          'Assento indesejado: "I’m in a middle seat between two strangers. Can I change my seat assignment?"',
+          'Viajando em grupo: "My family got separated. Can I change my seat assignment to sit together?"'
+        ]
       },
       {
         english: "Where is the nearest restroom?",
         portuguese: "Onde fica o banheiro mais próximo?",
         level: 'básico',
-        context: 'Aeroporto'
+        context: 'Aeroporto',
+        situations: [
+          'Urgência pessoal: "Excuse me, this is urgent. Where is the nearest restroom?"',
+          'Com crianças: "My child needs to use the bathroom. Where is the nearest restroom?"'
+        ]
       },
       {
         english: "I need to page someone.",
         portuguese: "Preciso chamar alguém pelo alto-falante.",
         level: 'avançado',
-        context: 'Aeroporto'
+        context: 'Aeroporto',
+        situations: [
+          'Pessoa perdida: "My friend is lost somewhere in the airport. I need to page someone - can you help?"',
+          'Encontro no aeroporto: "I’m supposed to meet my colleague here but can’t find him. I need to page someone."'
+        ]
       },
       {
         english: "What's the weight limit for checked bags?",
         portuguese: "Qual é o limite de peso para bagagens despachadas?",
         level: 'médio',
-        context: 'Aeroporto'
+        context: 'Aeroporto',
+        situations: [
+          'Verificando antes de despachar: "Before I check this suitcase, what’s the weight limit for checked bags?"',
+          'Evitando taxa extra: "What’s the weight limit for checked bags? I don’t want to pay overweight fees."'
+        ]
       },
       {
         english: "I have a layover here.",
         portuguese: "Tenho uma escala aqui.",
         level: 'médio',
-        context: 'Aeroporto'
+        context: 'Aeroporto',
+        situations: [
+          'Explicando situação: "I’m not staying in the city - I have a layover here for 4 hours before my next flight."',
+          'Perguntando sobre serviços: "I have a layover here for 6 hours. Are there places to rest or shower in the airport?"'
+        ]
       },
       {
         english: "Where can I store my luggage?",
         portuguese: "Onde posso guardar minha bagagem?",
         level: 'básico',
-        context: 'Aeroporto'
+        context: 'Aeroporto',
+        situations: [
+          'Longa conexão: "I have an 8-hour layover and want to explore the city. Where can I store my luggage?"',
+          'Check-in não aberto: "My flight isn’t until tonight but I have to leave my hotel now. Where can I store my luggage?"'
+        ]
       },
       {
         english: "I need a boarding pass reprint.",
         portuguese: "Preciso reimprimir meu cartão de embarque.",
         level: 'médio',
-        context: 'Aeroporto'
+        context: 'Aeroporto',
+        situations: [
+          'Cartão danificado: "My boarding pass got damaged when I spilled coffee on it. I need a boarding pass reprint."',
+          'Cartão perdido: "I can’t find my boarding pass anywhere. I need a boarding pass reprint before boarding starts."'
+        ]
       },
       {
         english: "Is there a pharmacy in the airport?",
         portuguese: "Há uma farmácia no aeroporto?",
         level: 'básico',
-        context: 'Aeroporto'
+        context: 'Aeroporto',
+        situations: [
+          'Precisando remédio: "I forgot to pack my headache medication. Is there a pharmacy in the airport?"',
+          'Emergência de saúde: "My child has a fever and I need medicine. Is there a pharmacy in the airport?"'
+        ]
       },
       {
         english: "I'm traveling with an infant.",
         portuguese: "Estou viajando com um bebê.",
         level: 'médio',
-        context: 'Aeroporto'
+        context: 'Aeroporto',
+        situations: [
+          'Informando na segurança: "I’m traveling with an infant and have baby formula and milk. Is that okay to bring through?"',
+          'Solicitando assistência: "I’m traveling with an infant. Do you have priority boarding or any special assistance?"'
+        ]
       },
       {
         english: "Where can I get travel insurance?",
         portuguese: "Onde posso conseguir seguro viagem?",
         level: 'médio',
-        context: 'Aeroporto'
+        context: 'Aeroporto',
+        situations: [
+          'Esqueceu de comprar: "I forgot to buy travel insurance online. Where can I get travel insurance here at the airport?"',
+          'Viagem de última hora: "This is a last-minute trip. Where can I get travel insurance before my flight?"'
+        ]
       },
       {
         english: "I need to cancel my flight.",
         portuguese: "Preciso cancelar meu voo.",
         level: 'básico',
-        context: 'Aeroporto'
+        context: 'Aeroporto',
+        situations: [
+          'Emergência familiar: "I just received bad news about my family. I need to cancel my flight and stay here."',
+          'Problemas de saúde: "I’m feeling very sick and can’t travel today. I need to cancel my flight."'
+        ]
       },
       {
         english: "What terminal is my departure from?",
         portuguese: "De qual terminal é minha partida?",
         level: 'básico',
-        context: 'Aeroporto'
+        context: 'Aeroporto',
+        situations: [
+          'Primeiro voo: "This is my first time at this airport. What terminal is my departure from for international flights?"',
+          'Transfer entre voos: "I just arrived and need to catch my connecting flight. What terminal is my departure from?"'
+        ]
       },
       {
         english: "I need special meal assistance.",
         portuguese: "Preciso de assistência para refeição especial.",
         level: 'médio',
-        context: 'Aeroporto'
+        context: 'Aeroporto',
+        situations: [
+          'Restrições alimentares: "I have severe allergies and I need special meal assistance. Can you note this in my booking?"',
+          'Dieta especial: "I’m vegetarian and I need special meal assistance for my long flight. Is this possible?"'
+        ]
       },
       {
         english: "Where is the airport information desk?",
         portuguese: "Onde fica o balcão de informações do aeroporto?",
         level: 'básico',
-        context: 'Aeroporto'
+        context: 'Aeroporto',
+        situations: [
+          'Perdido no aeroporto: "I’m completely lost. Where is the airport information desk? I need help finding my gate."',
+          'Informações gerais: "Where is the airport information desk? I need to ask about transportation to the city."'
+        ]
       },
       {
         english: "I'm here for an international transfer.",
         portuguese: "Estou aqui para uma transferência internacional.",
         level: 'avançado',
-        context: 'Aeroporto'
+        context: 'Aeroporto',
+        situations: [
+          'Na imigração: "I’m not entering the country - I’m here for an international transfer to my final destination."',
+          'Explicando situação: "I’m here for an international transfer. Do I need to go through customs or can I stay in the transit area?"'
+        ]
       },
 
       // ========== CATEGORIA: HOTEL (30 frases) ==========
@@ -2459,109 +2575,181 @@ const trailsData = {
         english: "Is room service available?",
         portuguese: "O serviço de quarto está disponível?",
         level: 'básico',
-        context: 'Hotel'
+        context: 'Hotel',
+        situations: [
+          'Tarde da noite: "I just arrived and I’m very tired. Is room service available? I’d like to order dinner."',
+          'Convenência: "I have work to do in my room. Is room service available for breakfast tomorrow morning?"'
+        ]
       },
       {
         english: "Can I store my luggage after checkout?",
         portuguese: "Posso guardar minha bagagem depois do checkout?",
         level: 'médio',
-        context: 'Hotel'
+        context: 'Hotel',
+        situations: [
+          'Voo tarde: "My flight isn’t until 8 PM but I need to check out now. Can I store my luggage after checkout?"',
+          'Explorando cidade: "Can I store my luggage after checkout? I want to explore the city before heading to the airport."'
+        ]
       },
       {
         english: "I need an iron and ironing board.",
         portuguese: "Preciso de um ferro e tábua de passar.",
         level: 'básico',
-        context: 'Hotel'
+        context: 'Hotel',
+        situations: [
+          'Reunião importante: "I have an important meeting tomorrow. I need an iron and ironing board for my shirt."',
+          'Roupa amassada: "My clothes got wrinkled in the suitcase. I need an iron and ironing board, please."'
+        ]
       },
       {
         english: "Where can I do laundry?",
         portuguese: "Onde posso lavar roupa?",
         level: 'básico',
-        context: 'Hotel'
+        context: 'Hotel',
+        situations: [
+          'Viagem longa: "I’ve been traveling for a week and my clothes are dirty. Where can I do laundry?"',
+          'Precisando lavar: "Where can I do laundry? I only brought a few clothes and need to wash them."'
+        ]
       },
       {
         english: "I locked myself out of my room.",
         portuguese: "Me tranquei para fora do meu quarto.",
         level: 'médio',
-        context: 'Hotel'
+        context: 'Hotel',
+        situations: [
+          'Situação embaraçosa: "This is so embarrassing. I locked myself out of my room and my key card is inside."',
+          'Pedindo ajuda: "Can you help me? I locked myself out of my room. I’m in room 205."'
+        ]
       },
       {
         english: "Can I have a different room?",
         portuguese: "Posso ter um quarto diferente?",
         level: 'básico',
-        context: 'Hotel'
+        context: 'Hotel',
+        situations: [
+          'Quarto com problemas: "The air conditioning isn’t working in my room. Can I have a different room?"',
+          'Vista ruim: "My room faces a construction site and it’s very noisy. Can I have a different room?"'
+        ]
       },
       {
         english: "The room is too noisy.",
         portuguese: "O quarto está muito barulhento.",
         level: 'básico',
-        context: 'Hotel'
+        context: 'Hotel',
+        situations: [
+          'Reclamando na recepção: "I couldn’t sleep last night because the room is too noisy. It’s right next to the elevator."',
+          'Pedindo solução: "The room is too noisy - there’s loud music from the street. Can you move me to a quieter room?"'
+        ]
       },
       {
         english: "I need a crib for my baby.",
         portuguese: "Preciso de um berço para meu bebê.",
         level: 'médio',
-        context: 'Hotel'
+        context: 'Hotel',
+        situations: [
+          'Check-in com bebê: "I’m traveling with my 8-month-old baby. I need a crib for my baby. Do you have one available?"',
+          'Esqueceu de pedir: "I forgot to mention when I booked - I need a crib for my baby. Is that possible?"'
+        ]
       },
       {
         english: "What time does the pool close?",
         portuguese: "Que horas a piscina fecha?",
         level: 'básico',
-        context: 'Hotel'
+        context: 'Hotel',
+        situations: [
+          'Planejando nadar: "I’d like to go for a swim after dinner. What time does the pool close?"',
+          'Com crianças: "My kids want to use the pool. What time does the pool close so we can plan our evening?"'
+        ]
       },
       {
         english: "Can I get a late checkout?",
         portuguese: "Posso ter um checkout tardio?",
         level: 'médio',
-        context: 'Hotel'
+        context: 'Hotel',
+        situations: [
+          'Voo tarde: "My flight isn’t until 6 PM. Can I get a late checkout until 2 PM?"',
+          'Reunião pela manhã: "I have meetings until noon tomorrow. Can I get a late checkout without extra charges?"'
+        ]
       },
       {
         english: "I need help with my bill.",
         portuguese: "Preciso de ajuda com minha conta.",
         level: 'básico',
-        context: 'Hotel'
+        context: 'Hotel',
+        situations: [
+          'Erro na conta: "There are charges I don’t recognize on my bill. I need help with my bill, please."',
+          'Dúvidas sobre cobraças: "I need help with my bill. Can you explain what this room service charge is for?"'
+        ]
       },
       {
         english: "Is there a business center?",
         portuguese: "Há um centro de negócios?",
         level: 'médio',
-        context: 'Hotel'
+        context: 'Hotel',
+        situations: [
+          'Viagem de negócios: "I need to print some documents and use a computer. Is there a business center?"',
+          'Trabalho remoto: "Is there a business center where I can work quietly and make video calls?"'
+        ]
       },
       {
         english: "Where can I park my car?",
         portuguese: "Onde posso estacionar meu carro?",
         level: 'básico',
-        context: 'Hotel'
+        context: 'Hotel',
+        situations: [
+          'Chegando de carro: "I just arrived by car. Where can I park my car? Is parking free for guests?"',
+          'Localizando estacionamento: "Where can I park my car overnight? Is there valet parking available?"'
+        ]
       },
       {
         english: "I need directions to downtown.",
         portuguese: "Preciso de direções para o centro.",
         level: 'básico',
-        context: 'Hotel'
+        context: 'Hotel',
+        situations: [
+          'Explorando cidade: "I want to do some shopping and sightseeing. I need directions to downtown."',
+          'Reunião de negócios: "I have a meeting in the financial district. I need directions to downtown from here."'
+        ]
       },
       {
         english: "Can you recommend local attractions?",
         portuguese: "Você pode recomendar atrações locais?",
         level: 'médio',
-        context: 'Hotel'
+        context: 'Hotel',
+        situations: [
+          'Turista pela primeira vez: "This is my first time visiting this city. Can you recommend local attractions worth seeing?"',
+          'Tempo livre: "I have a free afternoon tomorrow. Can you recommend local attractions that are walking distance from here?"'
+        ]
       },
       {
         english: "I'd like to book a spa treatment.",
         portuguese: "Gostaria de agendar um tratamento de spa.",
         level: 'médio',
-        context: 'Hotel'
+        context: 'Hotel',
+        situations: [
+          'Relaxamento: "I’ve had a stressful week of meetings. I’d like to book a spa treatment for tomorrow."',
+          'Presente para parceiro: "It’s my wife’s birthday. I’d like to book a spa treatment for her as a surprise."'
+        ]
       },
       {
         english: "The elevator is out of order.",
         portuguese: "O elevador está fora de ordem.",
         level: 'médio',
-        context: 'Hotel'
+        context: 'Hotel',
+        situations: [
+          'Informando problema: "I just wanted to let you know that the elevator is out of order on the 5th floor."',
+          'Pedindo alternativa: "The elevator is out of order and I’m on the 12th floor with heavy luggage. Can someone help me?"'
+        ]
       },
       {
         english: "Can I get a receipt for my stay?",
         portuguese: "Posso ter um recibo da minha estadia?",
         level: 'básico',
-        context: 'Hotel'
+        context: 'Hotel',
+        situations: [
+          'Para empresa: "This is a business trip. Can I get a receipt for my stay for reimbursement purposes?"',
+          'Controle financeiro: "Can I get a receipt for my stay? I need it for my expense records."'
+        ]
       },
 
       // ========== CATEGORIA: RESTAURANTE (30 frases) ==========
@@ -2661,121 +2849,201 @@ const trailsData = {
         english: "Can I substitute the fries?",
         portuguese: "Posso substituir as batatas fritas?",
         level: 'médio',
-        context: 'Restaurante'
+        context: 'Restaurante',
+        situations: [
+          'Preferência alimentar: "I’m trying to eat healthier. Can I substitute the fries for a salad instead?"',
+          'Não gosta de batata: "I don’t really like potatoes. Can I substitute the fries for vegetables?"'
+        ]
       },
       {
         english: "This isn't what I ordered.",
         portuguese: "Isso não é o que pedi.",
         level: 'básico',
-        context: 'Restaurante'
+        context: 'Restaurante',
+        situations: [
+          'Erro no pedido: "Excuse me, this isn’t what I ordered. I asked for the grilled chicken, not the fish."',
+          'Corrigindo garçom: "I’m sorry, but this isn’t what I ordered. I ordered the vegetarian pasta."'
+        ]
       },
       {
         english: "Could I get a to-go box?",
         portuguese: "Poderia pegar uma caixa para viagem?",
         level: 'básico',
-        context: 'Restaurante'
+        context: 'Restaurante',
+        situations: [
+          'Sobrou comida: "This portion was huge and I’m full. Could I get a to-go box for the rest?"',
+          'Levando para casa: "Could I get a to-go box? I’d like to take this home for dinner tomorrow."'
+        ]
       },
       {
         english: "What's the soup of the day?",
         portuguese: "Qual é a sopa do dia?",
         level: 'básico',
-        context: 'Restaurante'
+        context: 'Restaurante',
+        situations: [
+          'Perguntando especialidade: "I love trying new soups. What’s the soup of the day?"',
+          'Decidindo entrada: "What’s the soup of the day? I’m thinking of starting with soup."'
+        ]
       },
       {
         english: "I'd like to make a reservation.",
         portuguese: "Gostaria de fazer uma reserva.",
         level: 'básico',
-        context: 'Restaurante'
+        context: 'Restaurante',
+        situations: [
+          'Ligando para restaurante: "Hello, I’d like to make a reservation for four people tomorrow at 7 PM."',
+          'Planejando jantar: "I’d like to make a reservation for this Saturday evening. Do you have availability?"'
+        ]
       },
       {
         english: "Can we sit by the window?",
         portuguese: "Podemos sentar perto da janela?",
         level: 'básico',
-        context: 'Restaurante'
+        context: 'Restaurante',
+        situations: [
+          'Preferência por vista: "It’s such a beautiful day outside. Can we sit by the window?"',
+          'Ambiente romântico: "We’re celebrating our anniversary. Can we sit by the window for a nice view?"'
+        ]
       },
       {
         english: "I'll start with an appetizer.",
         portuguese: "Vou começar com uma entrada.",
         level: 'médio',
-        context: 'Restaurante'
+        context: 'Restaurante',
+        situations: [
+          'Montando refeição: "I’m quite hungry tonight. I’ll start with an appetizer, then the main course."',
+          'Compartilhando: "Let’s share something. I’ll start with an appetizer that we can all try."'
+        ]
       },
       {
         english: "What wines do you have by the glass?",
         portuguese: "Que vinhos vocês têm por taça?",
         level: 'médio',
-        context: 'Restaurante'
+        context: 'Restaurante',
+        situations: [
+          'Não quer garrafa: "I’m dining alone and don’t want a whole bottle. What wines do you have by the glass?"',
+          'Experimentando: "I’d like to try different wines with each course. What wines do you have by the glass?"'
+        ]
       },
       {
         english: "Is service charge included?",
         portuguese: "A taxa de serviço está inclusa?",
         level: 'médio',
-        context: 'Restaurante'
+        context: 'Restaurante',
+        situations: [
+          'Verificando conta: "Before I pay, is service charge included in this bill or should I add a tip?"',
+          'Estrangeiro perguntando: "I’m not familiar with local customs. Is service charge included or do I need to tip separately?"'
+        ]
       },
       {
         english: "Could I get extra sauce on the side?",
         portuguese: "Poderia ter molho extra à parte?",
         level: 'médio',
-        context: 'Restaurante'
+        context: 'Restaurante',
+        situations: [
+          'Gosta de molho: "I really love this sauce. Could I get extra sauce on the side?"',
+          'Controlando quantidade: "Could I get extra sauce on the side? I like to add it gradually while eating."'
+        ]
       },
       {
         english: "This food is cold.",
         portuguese: "Esta comida está fria.",
         level: 'básico',
-        context: 'Restaurante'
+        context: 'Restaurante',
+        situations: [
+          'Reclamando educadamente: "Excuse me, this food is cold. Could you please warm it up for me?"',
+          'Problema com pedido: "I’m sorry to bother you, but this food is cold. It should be served hot."'
+        ]
       },
       {
         english: "Do you accept credit cards?",
         portuguese: "Vocês aceitam cartão de crédito?",
         level: 'básico',
-        context: 'Restaurante'
+        context: 'Restaurante',
+        situations: [
+          'Antes de pedir: "Before we order, do you accept credit cards or only cash?"',
+          'Na hora de pagar: "Do you accept credit cards? I don’t have enough cash with me."'
+        ]
       },
       {
         english: "Can I see the dessert menu?",
         portuguese: "Posso ver o cardápio de sobremesas?",
         level: 'básico',
-        context: 'Restaurante'
+        context: 'Restaurante',
+        situations: [
+          'Após prato principal: "That was delicious! Can I see the dessert menu? I’d like something sweet."',
+          'Gosta de sobremesa: "Can I see the dessert menu? I never skip dessert when I eat out."'
+        ]
       },
       {
         english: "I'm on a diet.",
         portuguese: "Estou de dieta.",
         level: 'básico',
-        context: 'Restaurante'
+        context: 'Restaurante',
+        situations: [
+          'Escolhendo prato: "I’m on a diet, so I need something low in calories. What do you recommend?"',
+          'Recusando sobremesa: "The desserts look amazing, but I’m on a diet. I’ll just have coffee, please."'
+        ]
       },
       {
         english: "Could you make it less salty?",
         portuguese: "Vocês poderiam fazer com menos sal?",
         level: 'médio',
-        context: 'Restaurante'
+        context: 'Restaurante',
+        situations: [
+          'Restrição médica: "I have high blood pressure. Could you make it less salty when preparing my meal?"',
+          'Preferência pessoal: "I don’t like very salty food. Could you make it less salty than usual?"'
+        ]
       },
       {
         english: "We're ready to order.",
         portuguese: "Estamos prontos para pedir.",
         level: 'básico',
-        context: 'Restaurante'
+        context: 'Restaurante',
+        situations: [
+          'Sinalizando garçom: "Excuse me, we’ve decided on everything. We’re ready to order."',
+          'Após analisar cardápio: "We’ve looked at the menu and we’re ready to order now."'
+        ]
       },
       {
         english: "Can I get a refill?",
         portuguese: "Posso ter um refil?",
         level: 'básico',
-        context: 'Restaurante'
+        context: 'Restaurante',
+        situations: [
+          'Bebida vazia: "This soda is really good. Can I get a refill?"',
+          'Durante refeição: "Can I get a refill on my coffee? I’m still working on my meal."'
+        ]
       },
       {
         english: "I'd like to speak to the manager.",
         portuguese: "Gostaria de falar com o gerente.",
         level: 'médio',
-        context: 'Restaurante'
+        context: 'Restaurante',
+        situations: [
+          'Problema sério: "I’ve had a very unpleasant experience tonight. I’d like to speak to the manager, please."',
+          'Elogio especial: "The service was exceptional tonight. I’d like to speak to the manager to give compliments."'
+        ]
       },
       {
         english: "Do you have a kids menu?",
         portuguese: "Vocês têm cardápio infantil?",
         level: 'básico',
-        context: 'Restaurante'
+        context: 'Restaurante',
+        situations: [
+          'Família com crianças: "We have two young children with us. Do you have a kids menu with smaller portions?"',
+          'Criança exigente: "My daughter is very picky about food. Do you have a kids menu with simple options?"'
+        ]
       },
       {
         english: "Could we get some bread while we wait?",
         portuguese: "Poderíamos ter um pouco de pão enquanto esperamos?",
         level: 'médio',
-        context: 'Restaurante'
+        context: 'Restaurante',
+        situations: [
+          'Esperando pedido: "We’re quite hungry and the kitchen seems busy. Could we get some bread while we wait?"',
+          'Aberitivo simples: "Could we get some bread while we wait for our appetizers? Something to nibble on."'
+        ]
       },
 
       // ========== CATEGORIA: TRANSPORTE (25 frases) ==========
@@ -2833,121 +3101,201 @@ const trailsData = {
         english: "Can you call me a taxi?",
         portuguese: "Você pode chamar um táxi para mim?",
         level: 'básico',
-        context: 'Transporte'
+        context: 'Transporte',
+        situations: [
+          'Na recepção do hotel: "I need to get to the airport quickly. Can you call me a taxi?"',
+          'Pedindo ajuda: "It’s raining heavily and I can’t find any taxis. Can you call me a taxi?"'
+        ]
       },
       {
         english: "What time does the last train leave?",
         portuguese: "Que horas sai o último trem?",
         level: 'básico',
-        context: 'Transporte'
+        context: 'Transporte',
+        situations: [
+          'Planejando volta: "I’ll be working late tonight. What time does the last train leave to the suburbs?"',
+          'Na estação: "I don’t want to get stranded here. What time does the last train leave for downtown?"'
+        ]
       },
       {
         english: "I need to buy a metro card.",
         portuguese: "Preciso comprar um cartão do metrô.",
         level: 'básico',
-        context: 'Transporte'
+        context: 'Transporte',
+        situations: [
+          'Primeira vez no metrô: "I’m visiting from out of town. I need to buy a metro card - where can I get one?"',
+          'Cartão vazio: "My metro card is empty. I need to buy a metro card or add money to this one."'
+        ]
       },
       {
         english: "Which platform for the train to Boston?",
         portuguese: "Qual plataforma para o trem para Boston?",
         level: 'médio',
-        context: 'Transporte'
+        context: 'Transporte',
+        situations: [
+          'Na estação: "Excuse me, which platform for the train to Boston? I can’t find it on the departure board."',
+          'Com bagagem: "I have heavy luggage. Which platform for the train to Boston so I can find the elevator?"'
+        ]
       },
       {
         english: "Is this seat taken?",
         portuguese: "Este assento está ocupado?",
         level: 'básico',
-        context: 'Transporte'
+        context: 'Transporte',
+        situations: [
+          'No trem lotado: "Excuse me, is this seat taken? The train is very crowded today."',
+          'No ônibus: "Is this seat taken, or can I sit here? I have a long ride ahead."'
+        ]
       },
       {
         english: "I missed my stop.",
         portuguese: "Perdi minha parada.",
         level: 'básico',
-        context: 'Transporte'
+        context: 'Transporte',
+        situations: [
+          'Pedindo ajuda: "Oh no, I missed my stop because I was looking at my phone. How do I get back?"',
+          'Primeira vez na cidade: "I’m not familiar with this area and I missed my stop. Where should I get off to go back?"'
+        ]
       },
       {
         english: "How long does the journey take?",
         portuguese: "Quanto tempo demora a viagem?",
         level: 'básico',
-        context: 'Transporte'
+        context: 'Transporte',
+        situations: [
+          'Planejando horário: "I have a meeting at 3 PM downtown. How long does the journey take from here?"',
+          'Comprando passagem: "How long does the journey take to the airport? I need to catch a flight."'
+        ]
       },
       {
         english: "Can I get a transfer?",
         portuguese: "Posso pegar uma transferência?",
         level: 'médio',
-        context: 'Transporte'
+        context: 'Transporte',
+        situations: [
+          'Mudando de linha: "I need to switch to the blue line. Can I get a transfer with this ticket?"',
+          'Pagando tarifa: "Can I get a transfer to the bus, or do I need to pay another fare?"'
+        ]
       },
       {
         english: "Where do I validate my ticket?",
         portuguese: "Onde valido minha passagem?",
         level: 'médio',
-        context: 'Transporte'
+        context: 'Transporte',
+        situations: [
+          'Primeira viagem: "I just bought this ticket but I don’t see a conductor. Where do I validate my ticket?"',
+          'Sistema diferente: "The transport system here is different from my city. Where do I validate my ticket?"'
+        ]
       },
       {
         english: "Is there a direct route?",
         portuguese: "Há uma rota direta?",
         level: 'básico',
-        context: 'Transporte'
+        context: 'Transporte',
+        situations: [
+          'Evitando transferência: "I have heavy luggage. Is there a direct route to the hotel, or do I need to change trains?"',
+          'Economizando tempo: "I’m in a hurry. Is there a direct route to downtown from here?"'
+        ]
       },
       {
         english: "I need to get off at the next stop.",
         portuguese: "Preciso descer na próxima parada.",
         level: 'básico',
-        context: 'Transporte'
+        context: 'Transporte',
+        situations: [
+          'No ônibus lotado: "Excuse me, I need to get off at the next stop. Can I squeeze through please?"',
+          'Avisando motorista: "Driver, I need to get off at the next stop. Could you please open the doors?"'
+        ]
       },
       {
         english: "How often do buses run?",
         portuguese: "Com que frequência os ônibus passam?",
         level: 'médio',
-        context: 'Transporte'
+        context: 'Transporte',
+        situations: [
+          'Planejando viagem: "I need to get to work by 9 AM. How often do buses run on this route in the morning?"',
+          'No ponto de ônibus: "I just missed the bus. How often do buses run? Should I wait or call a taxi?"'
+        ]
       },
       {
         english: "Can I pay with exact change?",
         portuguese: "Posso pagar com troco exato?",
         level: 'médio',
-        context: 'Transporte'
+        context: 'Transporte',
+        situations: [
+          'No ônibus: "I only have coins and small bills. Can I pay with exact change, or do you give change?"',
+          'Preocupado com troco: "Can I pay with exact change? I don’t want to hold up the line waiting for change."'
+        ]
       },
       {
         english: "I'd like a window seat.",
         portuguese: "Gostaria de um assento na janela.",
         level: 'básico',
-        context: 'Transporte'
+        context: 'Transporte',
+        situations: [
+          'No trem de longa distância: "I’ll be traveling for 6 hours. I’d like a window seat to enjoy the scenery."',
+          'Reservando assento: "This is my first time on this route. I’d like a window seat if one is available."'
+        ]
       },
       {
         english: "Where can I catch a bus to downtown?",
         portuguese: "Onde posso pegar um ônibus para o centro?",
         level: 'básico',
-        context: 'Transporte'
+        context: 'Transporte',
+        situations: [
+          'Turista perdido: "I’m staying at a hotel outside the city. Where can I catch a bus to downtown?"',
+          'Economizando dinheiro: "Taxis are too expensive. Where can I catch a bus to downtown instead?"'
+        ]
       },
       {
         english: "Is this the right train?",
         portuguese: "Este é o trem certo?",
         level: 'básico',
-        context: 'Transporte'
+        context: 'Transporte',
+        situations: [
+          'Confirmando antes de embarcar: "Excuse me, is this the right train for Central Station? I don’t want to go the wrong direction."',
+          'Primeira vez na estação: "I’m new to this city. Is this the right train to get to the airport?"'
+        ]
       },
       {
         english: "I need a receipt for my fare.",
         portuguese: "Preciso de um recibo da minha passagem.",
         level: 'médio',
-        context: 'Transporte'
+        context: 'Transporte',
+        situations: [
+          'Viagem de negócios: "This is a business trip. I need a receipt for my fare to submit for reimbursement."',
+          'Controle de gastos: "I need a receipt for my fare for my expense tracking. Do you have one?"'
+        ]
       },
       {
         english: "Can I bring my luggage on board?",
         portuguese: "Posso levar minha bagagem a bordo?",
         level: 'médio',
-        context: 'Transporte'
+        context: 'Transporte',
+        situations: [
+          'Com bagagem grande: "I have a large suitcase. Can I bring my luggage on board, or does it need to go in cargo?"',
+          'Viagem do aeroporto: "Can I bring my luggage on board this bus? I’m coming from the airport."'
+        ]
       },
       {
         english: "Is there WiFi on this bus?",
         portuguese: "Há WiFi neste ônibus?",
         level: 'básico',
-        context: 'Transporte'
+        context: 'Transporte',
+        situations: [
+          'Viagem longa: "I have a 3-hour bus ride ahead. Is there WiFi on this bus so I can work?"',
+          'Precisando de internet: "I need to check my emails during the trip. Is there WiFi on this bus?"'
+        ]
       },
       {
         english: "What's the fare to the museum?",
         portuguese: "Qual é a tarifa para o museu?",
         level: 'básico',
-        context: 'Transporte'
+        context: 'Transporte',
+        situations: [
+          'Planejando visita: "I want to visit the art museum today. What’s the fare to the museum district?"',
+          'Comparando opções: "What’s the fare to the museum by bus versus by subway? Which is cheaper?"'
+        ]
       },
 
       // ========== CATEGORIA: COMPRAS (25 frases) ==========
@@ -3329,121 +3677,201 @@ const trailsData = {
         english: "What are the must-see attractions?",
         portuguese: "Quais são as atrações imperdíveis?",
         level: 'médio',
-        context: 'Turismo'
+        context: 'Turismo',
+        situations: [
+          'Centro de informações: "Hi, I'm visiting for just two days. What are the must-see attractions in this city?"',
+          'Perguntando a local: "I'm a tourist and want to make the most of my time. What are the must-see attractions here?"'
+        ]
       },
       {
         english: "How much is the entrance fee?",
         portuguese: "Quanto custa a entrada?",
         level: 'básico',
-        context: 'Turismo'
+        context: 'Turismo',
+        situations: [
+          'Na bilheteria do museu: "How much is the entrance fee for adults? Do you have any discounts?"',
+          'Planejando orçamento: "Before I decide to visit, how much is the entrance fee to this attraction?"'
+        ]
       },
       {
         english: "Are there guided tours available?",
         portuguese: "Há tours guiados disponíveis?",
         level: 'médio',
-        context: 'Turismo'
+        context: 'Turismo',
+        situations: [
+          'Querendo guia: "I’d like to learn more about the history of this place. Are there guided tours available?"',
+          'No museu: "Are there guided tours available in English? I want to understand the exhibits better."'
+        ]
       },
       {
         english: "Can I take pictures here?",
         portuguese: "Posso tirar fotos aqui?",
         level: 'básico',
-        context: 'Turismo'
+        context: 'Turismo',
+        situations: [
+          'No museu: "This artwork is beautiful. Can I take pictures here, or is photography prohibited?"',
+          'Em local histórico: "Can I take pictures here? I want to share this with my family back home."'
+        ]
       },
       {
         english: "What time do you open?",
         portuguese: "Que horas vocês abrem?",
         level: 'básico',
-        context: 'Turismo'
+        context: 'Turismo',
+        situations: [
+          'Planejando visita: "I want to be here first thing in the morning. What time do you open?"',
+          'Ligando antes: "What time do you open tomorrow? I’d like to plan my day around visiting."'
+        ]
       },
       {
         english: "Is there a student discount?",
         portuguese: "Há desconto para estudante?",
         level: 'básico',
-        context: 'Turismo'
+        context: 'Turismo',
+        situations: [
+          'Na bilheteria: "I\'m a university student with valid ID. Is there a student discount for admission?"',
+          'Economizando: "Is there a student discount? I\'m traveling on a tight budget and every saving helps."'
+        ]
       },
       {
         english: "How long does the tour last?",
         portuguese: "Quanto tempo dura o tour?",
         level: 'básico',
-        context: 'Turismo'
+        context: 'Turismo',
+        situations: [
+          'Planejando horário: "I have other plans later today. How long does the tour last?"',
+          'Decidindo participar: "How long does the tour last? I want to make sure I have enough time."'
+        ]
       },
       {
         english: "Can I book tickets online?",
         portuguese: "Posso comprar ingressos online?",
         level: 'básico',
-        context: 'Turismo'
+        context: 'Turismo',
+        situations: [
+          'Evitando filas: "Can I book tickets online to skip the line? I don\'t want to wait for hours."',
+          'Planejando antecipadamente: "Can I book tickets online in advance? I\'m visiting next month and want to secure my spot."'
+        ]
       },
       {
         english: "Where can I buy souvenirs?",
         portuguese: "Onde posso comprar lembrancinhas?",
         level: 'básico',
-        context: 'Turismo'
+        context: 'Turismo',
+        situations: [
+          'Para família: "I want to bring something back for my family. Where can I buy souvenirs around here?"',
+          'Procurando autênticos: "Where can I buy souvenirs that are locally made? I prefer authentic items over mass-produced ones."'
+        ]
       },
       {
         english: "Is there an audio guide?",
         portuguese: "Há um guia de áudio?",
         level: 'médio',
-        context: 'Turismo'
+        context: 'Turismo',
+        situations: [
+          'No museu: "Is there an audio guide available in English? I\'d like to learn more about each exhibit."',
+          'Visitando sozinho: "I\'m exploring on my own. Is there an audio guide that can provide detailed information?"'
+        ]
       },
       {
         english: "What's the history of this place?",
         portuguese: "Qual é a história deste lugar?",
         level: 'médio',
-        context: 'Turismo'
+        context: 'Turismo',
+        situations: [
+          'Curiosidade histórica: "This building looks ancient. What\'s the history of this place? When was it built?"',
+          'Para guia: "What\'s the history of this place? I\'d love to hear some interesting stories or legends."'
+        ]
       },
       {
         english: "Are there any festivals this week?",
         portuguese: "Há algum festival esta semana?",
         level: 'médio',
-        context: 'Turismo'
+        context: 'Turismo',
+        situations: [
+          'No centro de informações: "I\'m here for a few days. Are there any festivals this week that I shouldn\'t miss?"',
+          'Experiência cultural: "Are there any festivals this week? I\'d love to experience local culture and traditions."'
+        ]
       },
       {
         english: "Can you recommend a local restaurant?",
         portuguese: "Você pode recomendar um restaurante local?",
         level: 'básico',
-        context: 'Turismo'
+        context: 'Turismo',
+        situations: [
+          'Perguntando ao concierge: "Can you recommend a local restaurant with authentic cuisine? I want to try traditional dishes."',
+          'Para morador local: "Can you recommend a local restaurant where locals eat? I prefer authentic places over tourist spots."'
+        ]
       },
       {
         english: "Where is the best viewpoint?",
         portuguese: "Onde fica o melhor mirante?",
         level: 'básico',
-        context: 'Turismo'
+        context: 'Turismo',
+        situations: [
+          'Para fotos: "I want to take some great photos of the city. Where is the best viewpoint around here?"',
+          'Admirando paisagem: "Where is the best viewpoint to see the sunset? I heard there\'s an amazing spot nearby."'
+        ]
       },
       {
         english: "Is it safe to walk here at night?",
         portuguese: "É seguro caminhar aqui à noite?",
         level: 'médio',
-        context: 'Turismo'
+        context: 'Turismo',
+        situations: [
+          'Preocupação com segurança: "I\'m staying nearby and planning to walk back to my hotel. Is it safe to walk here at night?"',
+          'Planejando atividade noturna: "Is it safe to walk here at night? I\'d like to explore the nightlife in this area."'
+        ]
       },
       {
         english: "Can I get a map of the area?",
         portuguese: "Posso pegar um mapa da área?",
         level: 'básico',
-        context: 'Turismo'
+        context: 'Turismo',
+        situations: [
+          'No centro de informações: "Can I get a map of the area? I want to explore on foot and see all the main attractions."',
+          'Orientação: "Can I get a map of the area? I prefer having a physical map instead of using my phone all the time."'
+        ]
       },
       {
         english: "What's the local specialty?",
         portuguese: "Qual é a especialidade local?",
         level: 'básico',
-        context: 'Turismo'
+        context: 'Turismo',
+        situations: [
+          'Descobrindo culinária: "I want to try something authentic. What\'s the local specialty that I absolutely must taste?"',
+          'No restaurante: "What\'s the local specialty here? I\'d like to order something traditional and representative of this region."'
+        ]
       },
       {
         english: "Are there any free activities?",
         portuguese: "Há alguma atividade gratuita?",
         level: 'básico',
-        context: 'Turismo'
+        context: 'Turismo',
+        situations: [
+          'Viajando com orçamento apertado: "I\'m traveling on a budget. Are there any free activities or attractions I can enjoy here?"',
+          'Economizando: "Are there any free activities like walking tours, parks, or museums with free admission days?"'
+        ]
       },
       {
         english: "How do I get to the old town?",
         portuguese: "Como chego à cidade velha?",
         level: 'básico',
-        context: 'Turismo'
+        context: 'Turismo',
+        situations: [
+          'Pedindo direções: "I want to visit the historic center. How do I get to the old town from here?"',
+          'Transporte: "How do I get to the old town? Should I take the bus, metro, or is it walking distance?"'
+        ]
       },
       {
         english: "Is this area wheelchair accessible?",
         portuguese: "Esta área é acessível para cadeira de rodas?",
         level: 'avançado',
-        context: 'Turismo'
+        context: 'Turismo',
+        situations: [
+          'Verificando acessibilidade: "I\'m traveling with someone who uses a wheelchair. Is this area wheelchair accessible?"',
+          'Planejando visita: "Is this area wheelchair accessible? We need to plan our route carefully for accessibility."'
+        ]
       }
     ],
     exercises: [
