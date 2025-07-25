@@ -2045,61 +2045,101 @@ const trailsData = {
         english: "Where is the boarding gate for flight AA123?",
         portuguese: "Onde fica o portão de embarque do voo AA123?",
         level: 'básico',
-        context: 'Aeroporto'
+        context: 'Aeroporto',
+        situations: [
+          'Chegando no aeroporto: "Excuse me, where is the boarding gate for flight AA123? I can\'t find it on the departure board."',
+          'Com pressa: "Where is the boarding gate for flight AA123? My boarding time is in 20 minutes and I\'m lost."'
+        ]
       },
       {
         english: "I'd like to check in, please.",
         portuguese: "Gostaria de fazer o check-in, por favor.",
         level: 'básico',
-        context: 'Hotel'
+        context: 'Hotel',
+        situations: [
+          'Na recepção: "Good afternoon, I\'d like to check in, please. I have a reservation under the name Smith."',
+          'Chegando ao hotel: "Hi, I\'d like to check in, please. I booked a room online for tonight."'
+        ]
       },
       {
         english: "Is breakfast included in the room rate?",
         portuguese: "O café da manhã está incluso na diária?",
         level: 'básico',
-        context: 'Hotel'
+        context: 'Hotel',
+        situations: [
+          'Verificando amenidades: "Is breakfast included in the room rate, or do I need to pay extra for it?"',
+          'Planejando orçamento: "Before I confirm, is breakfast included in the room rate? I want to know the total cost."'
+        ]
       },
       {
         english: "Could you recommend a good restaurant nearby?",
         portuguese: "Você poderia recomendar um bom restaurante aqui perto?",
         level: 'básico',
-        context: 'Recomendação'
+        context: 'Recomendação',
+        situations: [
+          'Ao concierge: "Could you recommend a good restaurant nearby? I\'m looking for local cuisine, not tourist traps."',
+          'Procurando jantar: "Could you recommend a good restaurant nearby that\'s within walking distance?"'
+        ]
       },
       {
         english: "How much does a taxi to downtown cost?",
         portuguese: "Quanto custa um táxi para o centro?",
         level: 'básico',
-        context: 'Transporte'
+        context: 'Transporte',
+        situations: [
+          'Planejando transporte: "How much does a taxi to downtown cost? Is it cheaper than taking the metro?"',
+          'No hotel: "How much does a taxi to downtown cost from here? I need to budget for transportation."'
+        ]
       },
       {
         english: "I need to exchange some money.",
         portuguese: "Preciso trocar um pouco de dinheiro.",
         level: 'básico',
-        context: 'Câmbio'
+        context: 'Câmbio',
+        situations: [
+          'No banco: "I need to exchange some money. What\'s the current exchange rate for US dollars to euros?"',
+          'Em viagem: "I need to exchange some money. Where\'s the nearest currency exchange office?"'
+        ]
       },
       {
         english: "What time does the museum close?",
         portuguese: "Que horas o museu fecha?",
         level: 'básico',
-        context: 'Turismo'
+        context: 'Turismo',
+        situations: [
+          'Planejando visita: "What time does the museum close today? I want to make sure I have enough time to see everything."',
+          'Na entrada: "What time does the museum close? I\'d like to know how long I can stay."'
+        ]
       },
       {
         english: "Is there a pharmacy around here?",
         portuguese: "Há uma farmácia aqui por perto?",
         level: 'básico',
-        context: 'Emergência'
+        context: 'Emergência',
+        situations: [
+          'Precisando remédio: "Is there a pharmacy around here? I need to buy some pain medication."',
+          'Emergência: "Is there a pharmacy around here that\'s open 24 hours? I need medicine urgently."'
+        ]
       },
       {
         english: "Can I get a receipt, please?",
         portuguese: "Posso pegar um recibo, por favor?",
         level: 'básico',
-        context: 'Compras'
+        context: 'Compras',
+        situations: [
+          'Após compra: "Can I get a receipt, please? I need it for my expense report."',
+          'Para garantia: "Can I get a receipt, please? I want to keep it in case I need to return the item."'
+        ]
       },
       {
         english: "I'm looking for the tourist information center.",
         portuguese: "Estou procurando o centro de informações turísticas.",
         level: 'médio',
-        context: 'Orientação'
+        context: 'Orientação',
+        situations: [
+          'Chegando na cidade: "Excuse me, I\'m looking for the tourist information center. Can you point me in the right direction?"',
+          'Precisando de mapas: "I\'m looking for the tourist information center. I need city maps and attraction brochures."'
+        ]
       },
 
       // ========== CATEGORIA: AEROPORTO (35 frases) ==========
