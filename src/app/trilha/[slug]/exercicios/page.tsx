@@ -679,6 +679,666 @@ const trailsData: { [key: string]: Trail } = {
         correctSentence: 'I\'ll escalate this to my supervisor.',
         words: ['I\'ll', 'escalate', 'this', 'to', 'my', 'supervisor.'],
         translation: 'Vou escalar isso para meu supervisor.'
+      },
+      {
+        id: 'trabalho-ex-101',
+        correctSentence: 'We value your business.',
+        words: ['We', 'value', 'your', 'business.'],
+        translation: 'Valorizamos seu negócio.'
+      },
+      {
+        id: 'trabalho-ex-102',
+        correctSentence: 'Thank you for bringing this to our attention.',
+        words: ['Thank', 'you', 'for', 'bringing', 'this', 'to', 'our', 'attention.'],
+        translation: 'Obrigado por trazer isso à nossa atenção.'
+      },
+      {
+        id: 'trabalho-ex-103',
+        correctSentence: 'I\'ll follow up with you by email.',
+        words: ['I\'ll', 'follow', 'up', 'with', 'you', 'by', 'email.'],
+        translation: 'Vou acompanhar com você por email.'
+      },
+      {
+        id: 'trabalho-ex-104',
+        correctSentence: 'Let\'s circle back to this next week.',
+        words: ['Let\'s', 'circle', 'back', 'to', 'this', 'next', 'week.'],
+        translation: 'Vamos retomar isso na próxima semana.'
+      },
+      {
+        id: 'trabalho-ex-105',
+        correctSentence: 'I\'d like to piggyback on what Sarah said.',
+        words: ['I\'d', 'like', 'to', 'piggyback', 'on', 'what', 'Sarah', 'said.'],
+        translation: 'Gostaria de complementar o que a Sarah disse.'
+      },
+      {
+        id: 'trabalho-ex-106',
+        correctSentence: 'Can we get a consensus on this?',
+        words: ['Can', 'we', 'get', 'a', 'consensus', 'on', 'this?'],
+        translation: 'Podemos chegar a um consenso sobre isso?'
+      },
+      {
+        id: 'trabalho-ex-107',
+        correctSentence: 'Let\'s put this to a vote.',
+        words: ['Let\'s', 'put', 'this', 'to', 'a', 'vote.'],
+        translation: 'Vamos votar sobre isso.'
+      },
+      {
+        id: 'trabalho-ex-108',
+        correctSentence: 'I need to step out for a moment.',
+        words: ['I', 'need', 'to', 'step', 'out', 'for', 'a', 'moment.'],
+        translation: 'Preciso me ausentar por um momento.'
+      },
+      {
+        id: 'trabalho-ex-109',
+        correctSentence: 'Can we stick to the agenda?',
+        words: ['Can', 'we', 'stick', 'to', 'the', 'agenda?'],
+        translation: 'Podemos seguir a agenda?'
+      },
+      {
+        id: 'trabalho-ex-110',
+        correctSentence: 'Let\'s recap the action items.',
+        words: ['Let\'s', 'recap', 'the', 'action', 'items.'],
+        translation: 'Vamos recapitular os itens de ação.'
+      },
+      {
+        id: 'trabalho-ex-111',
+        correctSentence: 'Who\'s taking the minutes?',
+        words: ['Who\'s', 'taking', 'the', 'minutes?'],
+        translation: 'Quem está fazendo a ata?'
+      },
+      {
+        id: 'trabalho-ex-112',
+        correctSentence: 'Can we schedule a follow-up?',
+        words: ['Can', 'we', 'schedule', 'a', 'follow-up?'],
+        translation: 'Podemos agendar um acompanhamento?'
+      },
+      {
+        id: 'trabalho-ex-113',
+        correctSentence: 'I\'m going to play devil\'s advocate here.',
+        words: ['I\'m', 'going', 'to', 'play', 'devil\'s', 'advocate', 'here.'],
+        translation: 'Vou fazer o papel do advogado do diabo aqui.'
+      },
+      {
+        id: 'trabalho-ex-114',
+        correctSentence: 'Let\'s move on to the next item.',
+        words: ['Let\'s', 'move', 'on', 'to', 'the', 'next', 'item.'],
+        translation: 'Vamos para o próximo item.'
+      },
+      {
+        id: 'trabalho-ex-115',
+        correctSentence: 'Can we get some buy-in from the team?',
+        words: ['Can', 'we', 'get', 'some', 'buy-in', 'from', 'the', 'team?'],
+        translation: 'Podemos conseguir o apoio da equipe?'
+      },
+      {
+        id: 'trabalho-ex-116',
+        correctSentence: 'I\'d like to push back on that idea.',
+        words: ['I\'d', 'like', 'to', 'push', 'back', 'on', 'that', 'idea.'],
+        translation: 'Gostaria de questionar essa ideia.'
+      },
+      {
+        id: 'trabalho-ex-117',
+        correctSentence: 'Let\'s table this for now.',
+        words: ['Let\'s', 'table', 'this', 'for', 'now.'],
+        translation: 'Vamos deixar isso de lado por enquanto.'
+      },
+      {
+        id: 'trabalho-ex-118',
+        correctSentence: 'Can we get alignment on the timeline?',
+        words: ['Can', 'we', 'get', 'alignment', 'on', 'the', 'timeline?'],
+        translation: 'Podemos nos alinhar sobre o cronograma?'
+      },
+      {
+        id: 'trabalho-ex-119',
+        correctSentence: 'I want to level-set expectations.',
+        words: ['I', 'want', 'to', 'level-set', 'expectations.'],
+        translation: 'Quero alinhar as expectativas.'
+      },
+      {
+        id: 'trabalho-ex-120',
+        correctSentence: 'Let\'s brainstorm some solutions.',
+        words: ['Let\'s', 'brainstorm', 'some', 'solutions.'],
+        translation: 'Vamos fazer um brainstorm de soluções.'
+      },
+      {
+        id: 'trabalho-ex-121',
+        correctSentence: 'Can we do a quick temperature check?',
+        words: ['Can', 'we', 'do', 'a', 'quick', 'temperature', 'check?'],
+        translation: 'Podemos fazer uma verificação rápida?'
+      },
+      {
+        id: 'trabalho-ex-122',
+        correctSentence: 'I need to jump on another call.',
+        words: ['I', 'need', 'to', 'jump', 'on', 'another', 'call.'],
+        translation: 'Preciso entrar em outra chamada.'
+      },
+      {
+        id: 'trabalho-ex-123',
+        correctSentence: 'Let\'s wrap this up.',
+        words: ['Let\'s', 'wrap', 'this', 'up.'],
+        translation: 'Vamos finalizar isso.'
+      },
+      {
+        id: 'trabalho-ex-124',
+        correctSentence: 'Can we get some concrete next steps?',
+        words: ['Can', 'we', 'get', 'some', 'concrete', 'next', 'steps?'],
+        translation: 'Podemos definir próximos passos concretos?'
+      },
+      {
+        id: 'trabalho-ex-125',
+        correctSentence: 'I\'d like to challenge that assumption.',
+        words: ['I\'d', 'like', 'to', 'challenge', 'that', 'assumption.'],
+        translation: 'Gostaria de questionar essa suposição.'
+      },
+      {
+        id: 'trabalho-ex-126',
+        correctSentence: 'Let\'s sync up offline about this.',
+        words: ['Let\'s', 'sync', 'up', 'offline', 'about', 'this.'],
+        translation: 'Vamos nos alinhar sobre isso separadamente.'
+      },
+      {
+        id: 'trabalho-ex-127',
+        correctSentence: 'Can we establish some ground rules?',
+        words: ['Can', 'we', 'establish', 'some', 'ground', 'rules?'],
+        translation: 'Podemos estabelecer algumas regras básicas?'
+      },
+      {
+        id: 'trabalho-ex-128',
+        correctSentence: 'I want to bring everyone up to speed.',
+        words: ['I', 'want', 'to', 'bring', 'everyone', 'up', 'to', 'speed.'],
+        translation: 'Quero colocar todos a par da situação.'
+      },
+      {
+        id: 'trabalho-ex-129',
+        correctSentence: 'Let\'s do a post-mortem on this project.',
+        words: ['Let\'s', 'do', 'a', 'post-mortem', 'on', 'this', 'project.'],
+        translation: 'Vamos fazer uma análise pós-projeto.'
+      },
+      {
+        id: 'trabalho-ex-130',
+        correctSentence: 'Can we get some visibility into the process?',
+        words: ['Can', 'we', 'get', 'some', 'visibility', 'into', 'the', 'process?'],
+        translation: 'Podemos ter mais visibilidade do processo?'
+      },
+      {
+        id: 'trabalho-ex-131',
+        correctSentence: 'I\'d like to propose an alternative approach.',
+        words: ['I\'d', 'like', 'to', 'propose', 'an', 'alternative', 'approach.'],
+        translation: 'Gostaria de propor uma abordagem alternativa.'
+      },
+      {
+        id: 'trabalho-ex-132',
+        correctSentence: 'Let\'s put a pin in this and come back to it.',
+        words: ['Let\'s', 'put', 'a', 'pin', 'in', 'this', 'and', 'come', 'back', 'to', 'it.'],
+        translation: 'Vamos marcar isso e voltar depois.'
+      },
+      {
+        id: 'trabalho-ex-133',
+        correctSentence: 'Can we get ownership assigned for each task?',
+        words: ['Can', 'we', 'get', 'ownership', 'assigned', 'for', 'each', 'task?'],
+        translation: 'Podemos definir responsáveis para cada tarefa?'
+      },
+      {
+        id: 'trabalho-ex-134',
+        correctSentence: 'I\'m writing to follow up on our conversation.',
+        words: ['I\'m', 'writing', 'to', 'follow', 'up', 'on', 'our', 'conversation.'],
+        translation: 'Estou escrevendo para dar seguimento à nossa conversa.'
+      },
+      {
+        id: 'trabalho-ex-135',
+        correctSentence: 'I\'m cc\'ing John on this email.',
+        words: ['I\'m', 'cc\'ing', 'John', 'on', 'this', 'email.'],
+        translation: 'Estou colocando o John em cópia neste email.'
+      },
+      {
+        id: 'trabalho-ex-136',
+        correctSentence: 'I wanted to reach out regarding the project.',
+        words: ['I', 'wanted', 'to', 'reach', 'out', 'regarding', 'the', 'project.'],
+        translation: 'Queria entrar em contato sobre o projeto.'
+      },
+      {
+        id: 'trabalho-ex-137',
+        correctSentence: 'Moving you to BCC to reduce inbox clutter.',
+        words: ['Moving', 'you', 'to', 'BCC', 'to', 'reduce', 'inbox', 'clutter.'],
+        translation: 'Movendo você para CCO para reduzir spam na caixa.'
+      },
+      {
+        id: 'trabalho-ex-138',
+        correctSentence: 'Per our conversation, here are the next steps.',
+        words: ['Per', 'our', 'conversation,', 'here', 'are', 'the', 'next', 'steps.'],
+        translation: 'Conforme nossa conversa, seguem os próximos passos.'
+      },
+      {
+        id: 'trabalho-ex-139',
+        correctSentence: 'I\'m bumping this to the top of your inbox.',
+        words: ['I\'m', 'bumping', 'this', 'to', 'the', 'top', 'of', 'your', 'inbox.'],
+        translation: 'Estou priorizando isso na sua caixa de entrada.'
+      },
+      {
+        id: 'trabalho-ex-140',
+        correctSentence: 'Thanks for your quick turnaround on this.',
+        words: ['Thanks', 'for', 'your', 'quick', 'turnaround', 'on', 'this.'],
+        translation: 'Obrigado pela resposta rápida sobre isso.'
+      },
+      {
+        id: 'trabalho-ex-141',
+        correctSentence: 'I\'m following up on the action items from yesterday.',
+        words: ['I\'m', 'following', 'up', 'on', 'the', 'action', 'items', 'from', 'yesterday.'],
+        translation: 'Estou acompanhando os itens de ação de ontem.'
+      },
+      {
+        id: 'trabalho-ex-142',
+        correctSentence: 'Could you please confirm receipt?',
+        words: ['Could', 'you', 'please', 'confirm', 'receipt?'],
+        translation: 'Você poderia confirmar o recebimento?'
+      },
+      {
+        id: 'trabalho-ex-143',
+        correctSentence: 'I\'m forwarding this for your awareness.',
+        words: ['I\'m', 'forwarding', 'this', 'for', 'your', 'awareness.'],
+        translation: 'Estou encaminhando isso para seu conhecimento.'
+      },
+      {
+        id: 'trabalho-ex-144',
+        correctSentence: 'Please reply all so everyone stays in the loop.',
+        words: ['Please', 'reply', 'all', 'so', 'everyone', 'stays', 'in', 'the', 'loop.'],
+        translation: 'Por favor, responda a todos para manter todos informados.'
+      },
+      {
+        id: 'trabalho-ex-145',
+        correctSentence: 'I\'d like to see more initiative from you.',
+        words: ['I\'d', 'like', 'to', 'see', 'more', 'initiative', 'from', 'you.'],
+        translation: 'Gostaria de ver mais iniciativa de você.'
+      },
+      {
+        id: 'trabalho-ex-146',
+        correctSentence: 'Your communication skills have really improved.',
+        words: ['Your', 'communication', 'skills', 'have', 'really', 'improved.'],
+        translation: 'Suas habilidades de comunicação realmente melhoraram.'
+      },
+      {
+        id: 'trabalho-ex-147',
+        correctSentence: 'Let\'s work on making your presentations more engaging.',
+        words: ['Let\'s', 'work', 'on', 'making', 'your', 'presentations', 'more', 'engaging.'],
+        translation: 'Vamos trabalhar para tornar suas apresentações mais envolventes.'
+      },
+      {
+        id: 'trabalho-ex-148',
+        correctSentence: 'You have great potential for leadership.',
+        words: ['You', 'have', 'great', 'potential', 'for', 'leadership.'],
+        translation: 'Você tem grande potencial para liderança.'
+      },
+      {
+        id: 'trabalho-ex-149',
+        correctSentence: 'I\'d like you to take ownership of this process.',
+        words: ['I\'d', 'like', 'you', 'to', 'take', 'ownership', 'of', 'this', 'process.'],
+        translation: 'Gostaria que você assumisse a responsabilidade por este processo.'
+      },
+      {
+        id: 'trabalho-ex-150',
+        correctSentence: 'Your proactive approach is commendable.',
+        words: ['Your', 'proactive', 'approach', 'is', 'commendable.'],
+        translation: 'Sua abordagem proativa é louvável.'
+      },
+      {
+        id: 'trabalho-ex-151',
+        correctSentence: 'Let\'s discuss areas for professional development.',
+        words: ['Let\'s', 'discuss', 'areas', 'for', 'professional', 'development.'],
+        translation: 'Vamos discutir áreas para desenvolvimento profissional.'
+      },
+      {
+        id: 'trabalho-ex-152',
+        correctSentence: 'You\'re really hitting your stride now.',
+        words: ['You\'re', 'really', 'hitting', 'your', 'stride', 'now.'],
+        translation: 'Você está realmente no seu melhor agora.'
+      },
+      {
+        id: 'trabalho-ex-153',
+        correctSentence: 'I\'d like to see more collaboration with the team.',
+        words: ['I\'d', 'like', 'to', 'see', 'more', 'collaboration', 'with', 'the', 'team.'],
+        translation: 'Gostaria de ver mais colaboração com a equipe.'
+      },
+      {
+        id: 'trabalho-ex-154',
+        correctSentence: 'Your work quality is consistently high.',
+        words: ['Your', 'work', 'quality', 'is', 'consistently', 'high.'],
+        translation: 'A qualidade do seu trabalho é consistentemente alta.'
+      },
+      {
+        id: 'trabalho-ex-155',
+        correctSentence: 'You need to work on your time management.',
+        words: ['You', 'need', 'to', 'work', 'on', 'your', 'time', 'management.'],
+        translation: 'Você precisa trabalhar na gestão do seu tempo.'
+      },
+      {
+        id: 'trabalho-ex-156',
+        correctSentence: 'I\'m impressed with your problem-solving skills.',
+        words: ['I\'m', 'impressed', 'with', 'your', 'problem-solving', 'skills.'],
+        translation: 'Estou impressionado com suas habilidades de resolução de problemas.'
+      },
+      {
+        id: 'trabalho-ex-157',
+        correctSentence: 'Let\'s set some SMART goals for next quarter.',
+        words: ['Let\'s', 'set', 'some', 'SMART', 'goals', 'for', 'next', 'quarter.'],
+        translation: 'Vamos definir algumas metas SMART para o próximo trimestre.'
+      },
+      {
+        id: 'trabalho-ex-158',
+        correctSentence: 'You\'re a valuable asset to the team.',
+        words: ['You\'re', 'a', 'valuable', 'asset', 'to', 'the', 'team.'],
+        translation: 'Você é um recurso valioso para a equipe.'
+      },
+      {
+        id: 'trabalho-ex-159',
+        correctSentence: 'I\'d like to see you stretch yourself more.',
+        words: ['I\'d', 'like', 'to', 'see', 'you', 'stretch', 'yourself', 'more.'],
+        translation: 'Gostaria de ver você se desafiar mais.'
+      },
+      {
+        id: 'trabalho-ex-160',
+        correctSentence: 'Your growth mindset is really showing.',
+        words: ['Your', 'growth', 'mindset', 'is', 'really', 'showing.'],
+        translation: 'Sua mentalidade de crescimento está realmente aparecendo.'
+      },
+      {
+        id: 'trabalho-ex-161',
+        correctSentence: 'Let\'s work on building your confidence.',
+        words: ['Let\'s', 'work', 'on', 'building', 'your', 'confidence.'],
+        translation: 'Vamos trabalhar para construir sua confiança.'
+      },
+      {
+        id: 'trabalho-ex-162',
+        correctSentence: 'You\'re demonstrating real leadership potential.',
+        words: ['You\'re', 'demonstrating', 'real', 'leadership', 'potential.'],
+        translation: 'Você está demonstrando real potencial de liderança.'
+      },
+      {
+        id: 'trabalho-ex-163',
+        correctSentence: 'I need to see the ROI on this.',
+        words: ['I', 'need', 'to', 'see', 'the', 'ROI', 'on', 'this.'],
+        translation: 'Preciso ver o ROI disso.'
+      },
+      {
+        id: 'trabalho-ex-164',
+        correctSentence: 'What\'s our burn rate?',
+        words: ['What\'s', 'our', 'burn', 'rate?'],
+        translation: 'Qual é nossa taxa de queima?'
+      },
+      {
+        id: 'trabalho-ex-165',
+        correctSentence: 'We need to scale this operation.',
+        words: ['We', 'need', 'to', 'scale', 'this', 'operation.'],
+        translation: 'Precisamos escalar esta operação.'
+      },
+      {
+        id: 'trabalho-ex-166',
+        correctSentence: 'Let\'s optimize our workflow.',
+        words: ['Let\'s', 'optimize', 'our', 'workflow.'],
+        translation: 'Vamos otimizar nosso fluxo de trabalho.'
+      },
+      {
+        id: 'trabalho-ex-167',
+        correctSentence: 'We\'re pivoting our strategy.',
+        words: ['We\'re', 'pivoting', 'our', 'strategy.'],
+        translation: 'Estamos mudando nossa estratégia.'
+      },
+      {
+        id: 'trabalho-ex-168',
+        correctSentence: 'I\'m authorized to offer you a discount.',
+        words: ['I\'m', 'authorized', 'to', 'offer', 'you', 'a', 'discount.'],
+        translation: 'Estou autorizado a oferecer um desconto.'
+      },
+      {
+        id: 'trabalho-ex-169',
+        correctSentence: 'Let\'s table that for now.',
+        words: ['Let\'s', 'table', 'that', 'for', 'now.'],
+        translation: 'Vamos deixar isso para depois.'
+      },
+      {
+        id: 'trabalho-ex-170',
+        correctSentence: 'We need to implement a quality control system.',
+        words: ['We', 'need', 'to', 'implement', 'a', 'quality', 'control', 'system.'],
+        translation: 'Precisamos implementar um sistema de controle de qualidade.'
+      },
+      {
+        id: 'trabalho-ex-171',
+        correctSentence: 'Can we get a ballpark estimate?',
+        words: ['Can', 'we', 'get', 'a', 'ballpark', 'estimate?'],
+        translation: 'Podemos ter uma estimativa aproximada?'
+      },
+      {
+        id: 'trabalho-ex-172',
+        correctSentence: 'Let\'s circle the wagons on this issue.',
+        words: ['Let\'s', 'circle', 'the', 'wagons', 'on', 'this', 'issue.'],
+        translation: 'Vamos nos unir sobre esta questão.'
+      },
+      {
+        id: 'trabalho-ex-173',
+        correctSentence: 'We need to be more data-driven.',
+        words: ['We', 'need', 'to', 'be', 'more', 'data-driven.'],
+        translation: 'Precisamos ser mais orientados por dados.'
+      },
+      {
+        id: 'trabalho-ex-174',
+        correctSentence: 'This is a time-sensitive matter.',
+        words: ['This', 'is', 'a', 'time-sensitive', 'matter.'],
+        translation: 'Esta é uma questão sensível ao tempo.'
+      },
+      {
+        id: 'trabalho-ex-175',
+        correctSentence: 'We need to leverage our competitive advantage.',
+        words: ['We', 'need', 'to', 'leverage', 'our', 'competitive', 'advantage.'],
+        translation: 'Precisamos aproveitar nossa vantagem competitiva.'
+      },
+      {
+        id: 'trabalho-ex-176',
+        correctSentence: 'Let\'s touch base tomorrow.',
+        words: ['Let\'s', 'touch', 'base', 'tomorrow.'],
+        translation: 'Vamos conversar amanhã.'
+      },
+      {
+        id: 'trabalho-ex-177',
+        correctSentence: 'I\'ll keep you posted on developments.',
+        words: ['I\'ll', 'keep', 'you', 'posted', 'on', 'developments.'],
+        translation: 'Vou mantê-lo informado sobre os desenvolvimentos.'
+      },
+      {
+        id: 'trabalho-ex-178',
+        correctSentence: 'We need to think strategically about this.',
+        words: ['We', 'need', 'to', 'think', 'strategically', 'about', 'this.'],
+        translation: 'Precisamos pensar estrategicamente sobre isso.'
+      },
+      {
+        id: 'trabalho-ex-179',
+        correctSentence: 'Can we fast-track this project?',
+        words: ['Can', 'we', 'fast-track', 'this', 'project?'],
+        translation: 'Podemos acelerar este projeto?'
+      },
+      {
+        id: 'trabalho-ex-180',
+        correctSentence: 'Let\'s get everyone on the same page.',
+        words: ['Let\'s', 'get', 'everyone', 'on', 'the', 'same', 'page.'],
+        translation: 'Vamos colocar todos na mesma página.'
+      },
+      {
+        id: 'trabalho-ex-181',
+        correctSentence: 'We need to manage stakeholder expectations.',
+        words: ['We', 'need', 'to', 'manage', 'stakeholder', 'expectations.'],
+        translation: 'Precisamos gerenciar as expectativas dos stakeholders.'
+      },
+      {
+        id: 'trabalho-ex-182',
+        correctSentence: 'This is a win-win for everyone.',
+        words: ['This', 'is', 'a', 'win-win', 'for', 'everyone.'],
+        translation: 'Isso é vantajoso para todos.'
+      },
+      {
+        id: 'trabalho-ex-183',
+        correctSentence: 'Let\'s hit the ground running.',
+        words: ['Let\'s', 'hit', 'the', 'ground', 'running.'],
+        translation: 'Vamos começar com tudo.'
+      },
+      {
+        id: 'trabalho-ex-184',
+        correctSentence: 'We need to stay ahead of the curve.',
+        words: ['We', 'need', 'to', 'stay', 'ahead', 'of', 'the', 'curve.'],
+        translation: 'Precisamos nos manter à frente da curva.'
+      },
+      {
+        id: 'trabalho-ex-185',
+        correctSentence: 'Can we run this idea by the team?',
+        words: ['Can', 'we', 'run', 'this', 'idea', 'by', 'the', 'team?'],
+        translation: 'Podemos apresentar esta ideia para a equipe?'
+      },
+      {
+        id: 'trabalho-ex-186',
+        correctSentence: 'Let\'s keep our options open.',
+        words: ['Let\'s', 'keep', 'our', 'options', 'open.'],
+        translation: 'Vamos manter nossas opções em aberto.'
+      },
+      {
+        id: 'trabalho-ex-187',
+        correctSentence: 'We need to be more customer-centric.',
+        words: ['We', 'need', 'to', 'be', 'more', 'customer-centric.'],
+        translation: 'Precisamos ser mais centrados no cliente.'
+      },
+      {
+        id: 'trabalho-ex-188',
+        correctSentence: 'This will streamline our operations.',
+        words: ['This', 'will', 'streamline', 'our', 'operations.'],
+        translation: 'Isso vai simplificar nossas operações.'
+      },
+      {
+        id: 'trabalho-ex-189',
+        correctSentence: 'Let\'s schedule a deep dive session.',
+        words: ['Let\'s', 'schedule', 'a', 'deep', 'dive', 'session.'],
+        translation: 'Vamos agendar uma sessão de aprofundamento.'
+      },
+      {
+        id: 'trabalho-ex-190',
+        correctSentence: 'We need to eliminate redundancies.',
+        words: ['We', 'need', 'to', 'eliminate', 'redundancies.'],
+        translation: 'Precisamos eliminar redundâncias.'
+      },
+      {
+        id: 'trabalho-ex-191',
+        correctSentence: 'Can we get more granular with the data?',
+        words: ['Can', 'we', 'get', 'more', 'granular', 'with', 'the', 'data?'],
+        translation: 'Podemos ser mais detalhados com os dados?'
+      },
+      {
+        id: 'trabalho-ex-192',
+        correctSentence: 'Let\'s take a holistic approach.',
+        words: ['Let\'s', 'take', 'a', 'holistic', 'approach.'],
+        translation: 'Vamos adotar uma abordagem holística.'
+      },
+      {
+        id: 'trabalho-ex-193',
+        correctSentence: 'We need to future-proof this solution.',
+        words: ['We', 'need', 'to', 'future-proof', 'this', 'solution.'],
+        translation: 'Precisamos deixar esta solução à prova do futuro.'
+      },
+      {
+        id: 'trabalho-ex-194',
+        correctSentence: 'This is a critical path item.',
+        words: ['This', 'is', 'a', 'critical', 'path', 'item.'],
+        translation: 'Este é um item de caminho crítico.'
+      },
+      {
+        id: 'trabalho-ex-195',
+        correctSentence: 'Let\'s work backwards from the deadline.',
+        words: ['Let\'s', 'work', 'backwards', 'from', 'the', 'deadline.'],
+        translation: 'Vamos trabalhar de trás para frente a partir do prazo.'
+      },
+      {
+        id: 'trabalho-ex-196',
+        correctSentence: 'We need to maximize our ROI.',
+        words: ['We', 'need', 'to', 'maximize', 'our', 'ROI.'],
+        translation: 'Precisamos maximizar nosso ROI.'
+      },
+      {
+        id: 'trabalho-ex-197',
+        correctSentence: 'Can we identify potential bottlenecks?',
+        words: ['Can', 'we', 'identify', 'potential', 'bottlenecks?'],
+        translation: 'Podemos identificar possíveis gargalos?'
+      },
+      {
+        id: 'trabalho-ex-198',
+        correctSentence: 'Let\'s maintain our competitive edge.',
+        words: ['Let\'s', 'maintain', 'our', 'competitive', 'edge.'],
+        translation: 'Vamos manter nossa vantagem competitiva.'
+      },
+      {
+        id: 'trabalho-ex-199',
+        correctSentence: 'We need to work on eliminating time wasters.',
+        words: ['We', 'need', 'to', 'work', 'on', 'eliminating', 'time', 'wasters.'],
+        translation: 'Precisamos trabalhar na eliminação de desperdiçadores de tempo.'
+      },
+      {
+        id: 'trabalho-ex-200',
+        correctSentence: 'Let\'s ensure we have proper documentation.',
+        words: ['Let\'s', 'ensure', 'we', 'have', 'proper', 'documentation.'],
+        translation: 'Vamos garantir que tenhamos documentação adequada.'
+      },
+      {
+        id: 'trabalho-ex-201',
+        correctSentence: 'We need to stay within budget.',
+        words: ['We', 'need', 'to', 'stay', 'within', 'budget.'],
+        translation: 'Precisamos nos manter dentro do orçamento.'
+      },
+      {
+        id: 'trabalho-ex-202',
+        correctSentence: 'Can we get executive buy-in on this?',
+        words: ['Can', 'we', 'get', 'executive', 'buy-in', 'on', 'this?'],
+        translation: 'Podemos conseguir a aprovação da diretoria sobre isso?'
+      },
+      {
+        id: 'trabalho-ex-203',
+        correctSentence: 'Let\'s establish clear KPIs.',
+        words: ['Let\'s', 'establish', 'clear', 'KPIs.'],
+        translation: 'Vamos estabelecer KPIs claros.'
+      },
+      {
+        id: 'trabalho-ex-204',
+        correctSentence: 'We need to standardize our processes.',
+        words: ['We', 'need', 'to', 'standardize', 'our', 'processes.'],
+        translation: 'Precisamos padronizar nossos processos.'
+      },
+      {
+        id: 'trabalho-ex-205',
+        correctSentence: 'This will enhance our productivity.',
+        words: ['This', 'will', 'enhance', 'our', 'productivity.'],
+        translation: 'Isso vai melhorar nossa produtividade.'
+      },
+      {
+        id: 'trabalho-ex-206',
+        correctSentence: 'Let\'s maintain quality standards.',
+        words: ['Let\'s', 'maintain', 'quality', 'standards.'],
+        translation: 'Vamos manter os padrões de qualidade.'
+      },
+      {
+        id: 'trabalho-ex-207',
+        correctSentence: 'We need to focus on core competencies.',
+        words: ['We', 'need', 'to', 'focus', 'on', 'core', 'competencies.'],
+        translation: 'Precisamos focar nas competências centrais.'
+      },
+      {
+        id: 'trabalho-ex-208',
+        correctSentence: 'Can we drive innovation in this area?',
+        words: ['Can', 'we', 'drive', 'innovation', 'in', 'this', 'area?'],
+        translation: 'Podemos impulsionar a inovação nesta área?'
+      },
+      {
+        id: 'trabalho-ex-209',
+        correctSentence: 'Let\'s ensure regulatory compliance.',
+        words: ['Let\'s', 'ensure', 'regulatory', 'compliance.'],
+        translation: 'Vamos garantir conformidade regulatória.'
+      },
+      {
+        id: 'trabalho-ex-210',
+        correctSentence: 'This aligns with our company values.',
+        words: ['This', 'aligns', 'with', 'our', 'company', 'values.'],
+        translation: 'Isso se alinha com os valores da nossa empresa.'
       }
     ],
     phrases: [
