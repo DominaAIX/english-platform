@@ -103,6 +103,282 @@ const trailsData: { [key: string]: Trail } = {
         correctSentence: 'The deadline is next Friday.',
         words: ['The', 'deadline', 'is', 'next', 'Friday.'],
         translation: 'O prazo é na próxima sexta-feira.'
+      },
+      {
+        id: 'trabalho-ex-5',
+        correctSentence: 'I appreciate your feedback on this proposal.',
+        words: ['I', 'appreciate', 'your', 'feedback', 'on', 'this', 'proposal.'],
+        translation: 'Agradeço seu feedback sobre esta proposta.'
+      },
+      {
+        id: 'trabalho-ex-6',
+        correctSentence: 'Let\'s circle back on this issue tomorrow.',
+        words: ['Let\'s', 'circle', 'back', 'on', 'this', 'issue', 'tomorrow.'],
+        translation: 'Vamos retomar esta questão amanhã.'
+      },
+      {
+        id: 'trabalho-ex-7',
+        correctSentence: 'Can we touch base about the project status?',
+        words: ['Can', 'we', 'touch', 'base', 'about', 'the', 'project', 'status?'],
+        translation: 'Podemos conversar sobre o status do projeto?'
+      },
+      {
+        id: 'trabalho-ex-8',
+        correctSentence: 'I\'ll keep you in the loop on any updates.',
+        words: ['I\'ll', 'keep', 'you', 'in', 'the', 'loop', 'on', 'any', 'updates.'],
+        translation: 'Vou te manter informado sobre qualquer atualização.'
+      },
+      {
+        id: 'trabalho-ex-9',
+        correctSentence: 'We need to think outside the box.',
+        words: ['We', 'need', 'to', 'think', 'outside', 'the', 'box.'],
+        translation: 'Precisamos pensar fora da caixa.'
+      },
+      {
+        id: 'trabalho-ex-10',
+        correctSentence: 'Can you walk me through the process?',
+        words: ['Can', 'you', 'walk', 'me', 'through', 'the', 'process?'],
+        translation: 'Você pode me explicar o processo passo a passo?'
+      },
+      {
+        id: 'trabalho-ex-11',
+        correctSentence: 'Let\'s kick off this meeting.',
+        words: ['Let\'s', 'kick', 'off', 'this', 'meeting.'],
+        translation: 'Vamos começar esta reunião.'
+      },
+      {
+        id: 'trabalho-ex-12',
+        correctSentence: 'Can everyone see my screen?',
+        words: ['Can', 'everyone', 'see', 'my', 'screen?'],
+        translation: 'Todos conseguem ver minha tela?'
+      },
+      {
+        id: 'trabalho-ex-13',
+        correctSentence: 'You\'re on mute.',
+        words: ['You\'re', 'on', 'mute.'],
+        translation: 'Você está no mudo.'
+      },
+      {
+        id: 'trabalho-ex-14',
+        correctSentence: 'Can you speak up? You\'re breaking up.',
+        words: ['Can', 'you', 'speak', 'up?', 'You\'re', 'breaking', 'up.'],
+        translation: 'Você pode falar mais alto? Está cortando.'
+      },
+      {
+        id: 'trabalho-ex-15',
+        correctSentence: 'Let\'s go around the room for introductions.',
+        words: ['Let\'s', 'go', 'around', 'the', 'room', 'for', 'introductions.'],
+        translation: 'Vamos fazer uma rodada de apresentações.'
+      },
+      {
+        id: 'trabalho-ex-16',
+        correctSentence: 'I\'d like to add something to the agenda.',
+        words: ['I\'d', 'like', 'to', 'add', 'something', 'to', 'the', 'agenda.'],
+        translation: 'Gostaria de acrescentar algo à agenda.'
+      },
+      {
+        id: 'trabalho-ex-17',
+        correctSentence: 'Can we park that discussion for later?',
+        words: ['Can', 'we', 'park', 'that', 'discussion', 'for', 'later?'],
+        translation: 'Podemos deixar essa discussão para depois?'
+      },
+      {
+        id: 'trabalho-ex-18',
+        correctSentence: 'Let\'s dive deeper into this topic.',
+        words: ['Let\'s', 'dive', 'deeper', 'into', 'this', 'topic.'],
+        translation: 'Vamos nos aprofundar neste tópico.'
+      },
+      {
+        id: 'trabalho-ex-19',
+        correctSentence: 'I have a hard stop at 3 PM.',
+        words: ['I', 'have', 'a', 'hard', 'stop', 'at', '3', 'PM.'],
+        translation: 'Tenho que sair às 15h em ponto.'
+      },
+      {
+        id: 'trabalho-ex-20',
+        correctSentence: 'Can we take this offline?',
+        words: ['Can', 'we', 'take', 'this', 'offline?'],
+        translation: 'Podemos discutir isso separadamente?'
+      },
+      {
+        id: 'trabalho-ex-21',
+        correctSentence: 'I hope this email finds you well.',
+        words: ['I', 'hope', 'this', 'email', 'finds', 'you', 'well.'],
+        translation: 'Espero que este email o encontre bem.'
+      },
+      {
+        id: 'trabalho-ex-22',
+        correctSentence: 'Please find the attached document.',
+        words: ['Please', 'find', 'the', 'attached', 'document.'],
+        translation: 'Segue em anexo o documento.'
+      },
+      {
+        id: 'trabalho-ex-23',
+        correctSentence: 'Thanks for looping me in.',
+        words: ['Thanks', 'for', 'looping', 'me', 'in.'],
+        translation: 'Obrigado por me incluir.'
+      },
+      {
+        id: 'trabalho-ex-24',
+        correctSentence: 'I\'ll circle back with more details.',
+        words: ['I\'ll', 'circle', 'back', 'with', 'more', 'details.'],
+        translation: 'Retornarei com mais detalhes.'
+      },
+      {
+        id: 'trabalho-ex-25',
+        correctSentence: 'Please let me know if you have any questions.',
+        words: ['Please', 'let', 'me', 'know', 'if', 'you', 'have', 'any', 'questions.'],
+        translation: 'Por favor, me avise se tiver alguma dúvida.'
+      },
+      {
+        id: 'trabalho-ex-26',
+        correctSentence: 'I\'d like to give you some constructive feedback.',
+        words: ['I\'d', 'like', 'to', 'give', 'you', 'some', 'constructive', 'feedback.'],
+        translation: 'Gostaria de dar um feedback construtivo.'
+      },
+      {
+        id: 'trabalho-ex-27',
+        correctSentence: 'You did an excellent job on this project.',
+        words: ['You', 'did', 'an', 'excellent', 'job', 'on', 'this', 'project.'],
+        translation: 'Você fez um excelente trabalho neste projeto.'
+      },
+      {
+        id: 'trabalho-ex-28',
+        correctSentence: 'There\'s room for improvement in this area.',
+        words: ['There\'s', 'room', 'for', 'improvement', 'in', 'this', 'area.'],
+        translation: 'Há espaço para melhoria nesta área.'
+      },
+      {
+        id: 'trabalho-ex-29',
+        correctSentence: 'I appreciate your attention to detail.',
+        words: ['I', 'appreciate', 'your', 'attention', 'to', 'detail.'],
+        translation: 'Agradeço sua atenção aos detalhes.'
+      },
+      {
+        id: 'trabalho-ex-30',
+        correctSentence: 'You exceeded expectations on this deliverable.',
+        words: ['You', 'exceeded', 'expectations', 'on', 'this', 'deliverable.'],
+        translation: 'Você superou as expectativas nesta entrega.'
+      },
+      {
+        id: 'trabalho-ex-31',
+        correctSentence: 'What\'s your budget for this project?',
+        words: ['What\'s', 'your', 'budget', 'for', 'this', 'project?'],
+        translation: 'Qual é seu orçamento para este projeto?'
+      },
+      {
+        id: 'trabalho-ex-32',
+        correctSentence: 'I think we can work something out.',
+        words: ['I', 'think', 'we', 'can', 'work', 'something', 'out.'],
+        translation: 'Acho que podemos chegar a um acordo.'
+      },
+      {
+        id: 'trabalho-ex-33',
+        correctSentence: 'Let\'s find a win-win solution.',
+        words: ['Let\'s', 'find', 'a', 'win-win', 'solution.'],
+        translation: 'Vamos encontrar uma solução que beneficie ambos.'
+      },
+      {
+        id: 'trabalho-ex-34',
+        correctSentence: 'That\'s our best and final offer.',
+        words: ['That\'s', 'our', 'best', 'and', 'final', 'offer.'],
+        translation: 'Essa é nossa melhor e última oferta.'
+      },
+      {
+        id: 'trabalho-ex-35',
+        correctSentence: 'Can we split the difference?',
+        words: ['Can', 'we', 'split', 'the', 'difference?'],
+        translation: 'Podemos dividir a diferença?'
+      },
+      {
+        id: 'trabalho-ex-36',
+        correctSentence: 'How can I help you today?',
+        words: ['How', 'can', 'I', 'help', 'you', 'today?'],
+        translation: 'Como posso ajudá-lo hoje?'
+      },
+      {
+        id: 'trabalho-ex-37',
+        correctSentence: 'I apologize for the inconvenience.',
+        words: ['I', 'apologize', 'for', 'the', 'inconvenience.'],
+        translation: 'Peço desculpas pelo inconveniente.'
+      },
+      {
+        id: 'trabalho-ex-38',
+        correctSentence: 'Let me look into that for you.',
+        words: ['Let', 'me', 'look', 'into', 'that', 'for', 'you.'],
+        translation: 'Deixe-me verificar isso para você.'
+      },
+      {
+        id: 'trabalho-ex-39',
+        correctSentence: 'I understand your frustration.',
+        words: ['I', 'understand', 'your', 'frustration.'],
+        translation: 'Entendo sua frustração.'
+      },
+      {
+        id: 'trabalho-ex-40',
+        correctSentence: 'We\'ll make this right.',
+        words: ['We\'ll', 'make', 'this', 'right.'],
+        translation: 'Vamos resolver isso.'
+      },
+      {
+        id: 'trabalho-ex-41',
+        correctSentence: 'Good morning everyone, thank you for joining us.',
+        words: ['Good', 'morning', 'everyone,', 'thank', 'you', 'for', 'joining', 'us.'],
+        translation: 'Bom dia pessoal, obrigado por se juntarem a nós.'
+      },
+      {
+        id: 'trabalho-ex-42',
+        correctSentence: 'Let me walk you through the agenda.',
+        words: ['Let', 'me', 'walk', 'you', 'through', 'the', 'agenda.'],
+        translation: 'Deixem-me apresentar a agenda.'
+      },
+      {
+        id: 'trabalho-ex-43',
+        correctSentence: 'As you can see on this slide...',
+        words: ['As', 'you', 'can', 'see', 'on', 'this', 'slide...'],
+        translation: 'Como vocês podem ver neste slide...'
+      },
+      {
+        id: 'trabalho-ex-44',
+        correctSentence: 'Let\'s dive into the key findings.',
+        words: ['Let\'s', 'dive', 'into', 'the', 'key', 'findings.'],
+        translation: 'Vamos nos aprofundar nas principais descobertas.'
+      },
+      {
+        id: 'trabalho-ex-45',
+        correctSentence: 'I\'d like to highlight three main points.',
+        words: ['I\'d', 'like', 'to', 'highlight', 'three', 'main', 'points.'],
+        translation: 'Gostaria de destacar três pontos principais.'
+      },
+      {
+        id: 'trabalho-ex-46',
+        correctSentence: 'Moving on to the next section...',
+        words: ['Moving', 'on', 'to', 'the', 'next', 'section...'],
+        translation: 'Passando para a próxima seção...'
+      },
+      {
+        id: 'trabalho-ex-47',
+        correctSentence: 'This brings us to our recommendation.',
+        words: ['This', 'brings', 'us', 'to', 'our', 'recommendation.'],
+        translation: 'Isso nos leva à nossa recomendação.'
+      },
+      {
+        id: 'trabalho-ex-48',
+        correctSentence: 'Let me break this down for you.',
+        words: ['Let', 'me', 'break', 'this', 'down', 'for', 'you.'],
+        translation: 'Deixem-me detalhar isso para vocês.'
+      },
+      {
+        id: 'trabalho-ex-49',
+        correctSentence: 'The data clearly shows...',
+        words: ['The', 'data', 'clearly', 'shows...'],
+        translation: 'Os dados mostram claramente...'
+      },
+      {
+        id: 'trabalho-ex-50',
+        correctSentence: 'I\'ll pause here for questions.',
+        words: ['I\'ll', 'pause', 'here', 'for', 'questions.'],
+        translation: 'Vou pausar aqui para perguntas.'
       }
     ],
     phrases: [
